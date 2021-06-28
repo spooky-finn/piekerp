@@ -44,6 +44,7 @@ export default class Store {
             this.setUser({});
         } catch (e) {
             console.log(e.response?.data?.message);
+            
         }
     }
 

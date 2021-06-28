@@ -3,7 +3,7 @@ import { Context } from './index';
 import LoginForm from './components/LoginForm/LoginForm';
 import {observer} from 'mobx-react-lite';
 import UserService from './services/UserService';
-
+import BaseLayout from './components/BaseLayout';
 function App() {
   const {store} = useContext(Context);
   const [users, setUsers] = useState();
@@ -38,20 +38,27 @@ function App() {
   }
 
   return (
+    <>
     <div className="App">
+    
           <h1>{store.isAuth ? `Пользователь авторизован ${store.user?.Email}` : 'Авторизуйтесь'}</h1>
           <button onClick={() => store.logout()}>Выйти</button>
 
-          <div>
+          {/* <div>
             <button onClick={getUsers}>Get USers</button>
           </div>
           <div>
           {users?.map((user, index) => (
             <div key={index}>{user.Email} -  {user.FirstName} {user.LastName}</div>
           ))}
-        </div>
+        </div> */}
+      <BaseLayout>
+      
+      </BaseLayout>
+      
       
     </div>
+    </>
   );
 }
 
