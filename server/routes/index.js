@@ -6,7 +6,6 @@ var {gql} = require('graphql-tag');
 var {useQuery} = require('apollo-client');
 
 const userController = require('../controllers/user-controller');
-const orderController = require('../controllers/order-controller');
 
 const {body} = require('express-validator');
 const authMiddleware = require('../middlewares/auth-middleware');
@@ -39,8 +38,5 @@ router.post('/login', body('email').isEmail(), userController.login);
 router.post('/logout', userController.logout);
 router.get('/refresh', userController.refresh);
 router.get('/users', authMiddleware, userController.getUsers);
-
-// router.get('/fulfillment', orderController.fulfillment);
-// router.get('/newest', orderController.newest);
 
 module.exports = router;
