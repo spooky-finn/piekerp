@@ -1,0 +1,11 @@
+:root{
+    --primaryTextColor: white;
+}
+
+
+
+@media (prefers-color-scheme: dark){
+    :root {
+    --primaryTextColor: black;
+    }
+   }
