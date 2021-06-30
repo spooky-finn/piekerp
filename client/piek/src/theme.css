@@ -1,11 +1,25 @@
 :root{
-    --primaryTextColor: white;
+    --bg: #F6F6FB;
+    --text1: rgb(22, 22, 22);
+    --text2: #8F8F8F;
+    --textInvert: rgba(233, 233, 233);
+    --accent: #3763FE;
+    --border: rgba(0,0,0,.1)
+   
 }
+
+
 
 
 
 @media (prefers-color-scheme: dark){
     :root {
-    --primaryTextColor: black;
+    --text1: rgb(233, 233, 233);
+    --text2: #d1d1d1;
+    --textInvert: rgb(0, 0, 0);
+    --bg: #000;
+    --accent: #987bff;
+    --border: rgba(255,255,255,.2)
     }
    }
+

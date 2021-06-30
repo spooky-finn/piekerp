@@ -3,7 +3,14 @@ import { Context } from './index';
 import LoginForm from './components/LoginForm/LoginForm';
 import {observer} from 'mobx-react-lite';
 import UserService from './services/UserService';
-import BaseLayout from './components/BaseLayout';
+import PriorityLayout from './components/PriorityLayout/PriorityLayout';
+import Sidebar from './components/Sidebar/Sidebar';
+
+import { Spinner, Pane } from 'evergreen-ui';
+
+import './theme.css';
+import './index.sass';
+
 function App() {
   const {store} = useContext(Context);
   const [users, setUsers] = useState();
@@ -27,10 +34,9 @@ function App() {
   }
 
   if (store.isLoading){
-    return(
-      <div>Загрузка</div>
-    )
+    return(<Pane><Spinner marginX="auto" marginY="45vh" /></Pane>)
   }
+  
   if (!store.isAuth) {
     return (
       <LoginForm/>
@@ -41,9 +47,7 @@ function App() {
     <>
     <div className="App">
     
-          <h1>{store.isAuth ? `Пользователь авторизован ${store.user?.Email}` : 'Авторизуйтесь'}</h1>
-          <button onClick={() => store.logout()}>Выйти</button>
-
+      <Sidebar/>
           {/* <div>
             <button onClick={getUsers}>Get USers</button>
           </div>
@@ -52,9 +56,12 @@ function App() {
             <div key={index}>{user.Email} -  {user.FirstName} {user.LastName}</div>
           ))}
         </div> */}
-      <BaseLayout>
-      
-      </BaseLayout>
+
+   
+
+          <PriorityLayout>
+          </PriorityLayout>
+     
       
       
     </div>
