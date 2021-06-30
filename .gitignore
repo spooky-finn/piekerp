@@ -4,3 +4,5 @@ client/piek/node_modules/
 # Ignore Mac DS_Store files
 .DS_Store
 **/.DS_Store
+client/piek/package-lock.json
+client/piek/package-lock.json
