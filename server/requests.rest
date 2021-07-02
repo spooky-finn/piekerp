@@ -4,8 +4,8 @@ POST http://localhost:9000/api/login
 Content-Type: application/json
 
 {
-    "email": "loseev5@gmail.com",
-    "password": "loseev02"
+    "email": "l@gmail.com",
+    "password": "l"
 }
 
 ###
