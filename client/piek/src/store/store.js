@@ -28,9 +28,8 @@ export default class Store {
         try {
             const response = await AuthService.login(email, password);
             localStorage.setItem('token', response.data.accessToken);
-            this.setAuth(true);
             this.setUser(response.data.user);
-            console.log(response.data.accessToken);
+            this.setAuth(true);
         } catch (e) {
             console.log(e.response?.data?.message);
         }
@@ -53,8 +52,8 @@ export default class Store {
         try {
             const response = await axios.get(`${API_URL}/refresh`, {withCredentials: true});
             localStorage.setItem('token', response.data.accessToken);
-            this.setAuth(true);
             this.setUser(response.data.user);
+            this.setAuth(true);
         } catch (e) {
             console.log(e.response?.data?.message);
         } finally {

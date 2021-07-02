@@ -1,5 +1,7 @@
 import React, { useContext, useEffect, useState} from 'react';
 import { Context } from './index';
+import ReactTooltip from 'react-tooltip';
+
 import LoginForm from './components/LoginForm/LoginForm';
 import {observer} from 'mobx-react-lite';
 import UserService from './services/UserService';
@@ -62,7 +64,7 @@ function App() {
           <PriorityLayout>
           </PriorityLayout>
      
-      
+          <ReactTooltip id='global' type="light" place="bottom" delayShow="300" className='tooltip'/>
       
     </div>
     </>

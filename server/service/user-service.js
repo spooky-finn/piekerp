@@ -27,7 +27,7 @@ class UserService {
 
         const tokens = tokenService.generateTokens(this.jwtPayload(user));
         hasuraQuery.updateToken(user.UserID, tokens.refreshToken);
-        return {...tokens, user};
+        return {...tokens, 'user': this.jwtPayload(user)};
     }
 
     async logout(refreshToken) {

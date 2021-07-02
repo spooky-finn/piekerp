@@ -15,13 +15,13 @@ const Sidebar = () => {
     return(
         <>
         <Pane className='Sidebar'>
-            <div className="action-icon"> <Unicons.UilSortAmountDown/></div>
-            <div className="action-icon"> <Unicons.UilEnvelopeInfo/></div>
-            <div className="action-icon"> <Unicons.UilWrench/></div>
+            <div data-for='global' data-tip="Очередность выполнения" className="action-icon"> <Unicons.UilSortAmountDown/></div>
+            <div data-for='global' data-tip="Новые заказы" className="action-icon"> <Unicons.UilEnvelopeInfo/></div>
+            <div data-for='global' data-tip="Рекламация" className="action-icon"> <Unicons.UilWrench/></div>
 
             
-            <div className="action-icon"> <Unicons.UilUserCircle/></div>
-            <div className="action-icon" onClick={() => store.logout()}><Unicons.UilSignInAlt/></div>
+            <div data-for='global' data-tip="Аккаунт" className="action-icon"> <Unicons.UilUserCircle/></div>
+            <div data-for='global' data-tip="Выйти" className="action-icon" onClick={() => store.logout()}><Unicons.UilSignInAlt/></div>
         </Pane>
         </>
     );

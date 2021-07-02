@@ -38,10 +38,8 @@ const LoginForm = () => {
                 width='300px'
                 size="large"
                 onClick={() => {
-                  authResponse = store.login(email, password);
-                  authResponse.data != undefined 
-                  ? store.login(email, password)
-                  : setNotification() }}
+                  authResponse =  store.login(email, password);
+                }}
                >Войти</Button>
           </Pane>
      
@@ -51,3 +49,7 @@ const LoginForm = () => {
 }
 
 export default observer(LoginForm);
+
+// authResponse.data != undefined 
+// ? store.login(email, password)
+// : setNotification() 
