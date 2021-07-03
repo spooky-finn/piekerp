@@ -1,9 +1,10 @@
 
 // import { observer } from 'mobx-react-lite';
 import React, { useState, useContext } from 'react';
+import {useSubscription} from '@apollo/client';
 import { Context } from '../../index';
-
-import { Pane, Heading, SearchInput, minorScale } from 'evergreen-ui';
+import { GetOrdersSubscription } from '../../hasura-queries/getOrders';
+import { Pane, Heading, SearchInput, minorScale, Spinner } from 'evergreen-ui';
 import './PriorityLayout.sass';
 
 import * as Unicons from '@iconscout/react-unicons';
@@ -11,58 +12,13 @@ import * as Unicons from '@iconscout/react-unicons';
 const PriorityLayout = (props) => {
     const {store} = useContext(Context);
 
-    const data = [
-        {
-          "Entity": "БКЗ",
-          "InvoiceNumber": 210,
-          "OrderItems": [
-            {
-              "Quantity": 11,
-              "OrderItemID": 1,
-              "Name": "МЭОФ-400/63-0,25У-БКП380-ПСТ4 У2 F10 IP67",
-              "OrderID": 1
-            },
-            {
-              "Quantity": 7,
-              "OrderItemID": 2,
-              "Name": "МЭОФ-16/30-0,25М-98 У2 F05 кв.9П",
-              "OrderID": 1
-            }
-          ],
-          "City": "Чебоксары",
-          "ShippingDate": "2021-06-30"
-        },
-        {
-          "Entity": "Арматек",
-          "InvoiceNumber": 220,
-          "OrderItems": [
-            {
-              "Quantity": 3,
-              "OrderItemID": 4,
-              "Name": "АШК-3-380-БУШ-БСПО-СВ-ПВТ4 У1",
-              "OrderID": 2
-            }
-          ],
-          "City": "Москва",
-          "ShippingDate": "2021-05-30",
-        }
-      ];
+    const {error, loading, data = []} = useSubscription(GetOrdersSubscription)
 
-
-    const orders = data.map((el) =>
-        <tr>
-            <td>{el.OrderItems.map((item) => 
-                <div>{item.Name}</div>
-            )}</td>
-            <td>{el.OrderItems.map((item) => 
-                <div>{item.Quantity}</div>
-            )}</td>
-             <td>{el.ShippingDate}</td>
-            <td>{el.City}</td>
-            <td>{el.InvoiceNumber}</td>
-            <td>{el.Entity}</td>
-        </tr>
-    );
+    if (loading) {
+      return (
+        <Spinner/>
+      );
+    }  
 
     return(
         <>
@@ -85,7 +41,24 @@ const PriorityLayout = (props) => {
 
 
             <table className="priority-table">
-            {orders}
+            {data.erp_Orders!=undefined
+
+            ? data.erp_Orders.map((el) =>
+              <tr key={el.OrderID}>
+                  <td>{el.OrderItems.map((item) => 
+                      <div>{item.Name}</div>
+                  )}</td>
+                  <td>{el.OrderItems.map((item) => 
+                      <div>{item.Quantity}</div>
+                  )}</td>
+                  <td>{el.ShippingDate}</td>
+                  <td>{el.City}</td>
+                  <td>{el.InvoiceNumber}</td>
+                  <td>{el.Entity}</td>
+              </tr>)
+            : null
+            
+            }
             </table>
 
 
