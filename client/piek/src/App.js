@@ -1,22 +1,26 @@
 import React, { useContext, useEffect, useState} from 'react';
 import { Context } from './index';
 import ReactTooltip from 'react-tooltip';
-
+import BaseLayout from './components/BaseLayout';
 import LoginForm from './components/LoginForm/LoginForm';
 import {observer} from 'mobx-react-lite';
 import UserService from './services/UserService';
-import PriorityLayout from './components/PriorityLayout/PriorityLayout';
 import Sidebar from './components/Sidebar/Sidebar';
 
-import { Spinner, Pane } from 'evergreen-ui';
+
+import { Spinner, Pane, PropertiesIcon } from 'evergreen-ui';
 
 import './theme.css';
 import './index.sass';
 
-function App() {
+
+
+function App({sessionData}) {
   const {store} = useContext(Context);
   const [users, setUsers] = useState();
   // const usersList = ;
+
+ 
   
   
 
@@ -47,8 +51,9 @@ function App() {
 
   return (
     <>
+ 
     <div className="App">
-    
+      
       <Sidebar/>
           {/* <div>
             <button onClick={getUsers}>Get USers</button>
@@ -59,14 +64,12 @@ function App() {
           ))}
         </div> */}
 
-   
-
-          <PriorityLayout>
-          </PriorityLayout>
+        <BaseLayout/>
      
           <ReactTooltip id='global' type="light" place="bottom" delayShow="300" className='tooltip'/>
-      
+           
     </div>
+    
     </>
   );
 }

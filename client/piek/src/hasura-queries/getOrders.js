@@ -1,49 +1,20 @@
-// import React, { useEffect, Fragment, useState } from "react";
+import gql from 'graphql-tag'; 
 
-// import { useMutation, useSubscription, gql } from "@apollo/client";
+export const GetOrdersSubscription = gql`
 
-// import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
-// import { WebSocketLink } from "@apollo/client/link/ws";
+subscription GetOrders {
+    erp_Orders {
+      Entity
+      InvoiceNumber
+      OrderItems {
+        Quantity
+        OrderItemID
+        Name
+        OrderID
+      }
+      City
+      ShippingDate
+    }
+  }
 
-// const { loading, error, data } = getOrders(
-//     gql`
-//       subscription erp_Orders {
-//         Entity
-//         InvoiceNumber
-//         City
-//         OrderItems {
-//           Quantity
-//           OrderItemID
-//           Name
-//           OrderID
-//         }
-//       }
-//     `
-//   );
-
-//   if (loading) {
-//     return <span>Loading...</span>;
-//   }
-//   if (error) {
-//     console.error(error);
-//     return <span>Error!</span>;
-//   }
-//   if (data) {
-//     onlineUsersList = data.online_users.map(u => (
-//       <OnlineUser key={u.id} user={u.user} />
-//     ));
-//   }
-
-//   return (
-//     <div className="onlineUsersWrapper">
-//       <Fragment>
-//         <div className="sliderHeader">
-//           Online users - {onlineUsersList.length}
-//         </div>
-//         {onlineUsersList}
-//       </Fragment>
-//     </div>
-//   );
-// };
-
-// export default getOrders;
+`
