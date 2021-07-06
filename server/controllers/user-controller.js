@@ -13,7 +13,6 @@ class UserController {
             if (!errors.isEmpty()){
                 return next(ApiError.BadRequest('Ошибка валидации email', errors.array()))
             }
-            
             const userData= await userService.login(req);
             res.cookie('refreshToken', userData.refreshToken, {maxAge: 30*24*60*60*1000, httpOnly: true});
             return res.json(userData);
@@ -26,9 +25,9 @@ class UserController {
     async logout(req, res, next){
         try {
             const {refreshToken} = req.cookies;
-            const token = await userService.logout(refreshToken);
+            const userID = await userService.logout(refreshToken);
             res.clearCookie('refreshToken');
-            return res.json(token);
+            return res.json(userID);
         } catch (e) {
             next(e);
         }
