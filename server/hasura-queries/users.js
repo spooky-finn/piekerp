@@ -16,7 +16,6 @@ class HasuraQuery {
                   LastName
                   Email
                   Password
-                  RefreshToken
                   AccessLevel {
                     Name
                   }
@@ -29,20 +28,100 @@ class HasuraQuery {
           
         })
         .then(data=> {
-          // let d = data.find(el => el.FirstName === "Иван");
-        //   console.log("data returned:\n", data);
         return data;
         });
     return responseData.data.erp_Users;
 }
 
+async getTokens() {
+  let responseData = await fetch("http://45.10.110.168:8080/v1/graphql", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+          query: `{
+            erp_Tokens {
+              ID
+              RefreshToken
+              User {
+                UserID
+                FirstName
+                LastName
+                Email
+              }
+            }
+             }`
+      })
+    })
+      .then(result => {
+        return result.json();
+        
+      })
+      .then(data=> {
+      return data;
+      });
+  return responseData.data.erp_Tokens;
+}
 
-async updateToken(UserID, refreshToken) {
-    var query = `mutation myMytation($UserID: Int!, $refreshToken: String!){
-      update_erp_Users(where: {UserID: {_eq: $UserID}}, _set: {RefreshToken: $refreshToken}) {
-          returning {
-            UserID
-          }
+
+
+async createToken(UserID, refreshToken) {
+  var query = `mutation myMytation($UserID: Int!, $refreshToken: String!){
+    insert_erp_Tokens(objects: {UserID: $UserID, RefreshToken: $refreshToken}) {
+      returning {
+        UserID
+      }
+    }
+    }`;
+
+  let responseData = await fetch("http://45.10.110.168:8080/v1/graphql", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      body: JSON.stringify({
+          query: query, 
+          variables: {UserID, refreshToken},
+      })
+    })
+      .then(result => result.json())
+      .then(data=> data);
+  return responseData.data.insert_erp_Tokens;
+}
+
+async deleteToken(refreshToken) {
+  var query = `mutation myMytation($refreshToken: String!){
+    delete_erp_Tokens(where: {RefreshToken: {_eq: $refreshToken}}) {
+      returning {
+        UserID
+      }
+    }
+   }`;
+
+  let responseData = await fetch("http://45.10.110.168:8080/v1/graphql", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      body: JSON.stringify({
+          query: query, 
+          variables: {refreshToken},
+      })
+    })
+      .then(result => result.json())
+      .then(data=> data);
+  return responseData.data.delete_erp_Tokens;
+}
+
+
+async updateToken(tokenID, refreshToken) {
+    var query = `mutation myMytation($tokenID: Int!, $refreshToken: String!){
+        update_erp_Tokens_by_pk(pk_columns: {ID: $tokenID}, _set: {RefreshToken: $refreshToken}) {
+          ID
+          UserID
         }
      }`;
 
@@ -54,12 +133,13 @@ async updateToken(UserID, refreshToken) {
         },
         body: JSON.stringify({
             query: query, 
-            variables: {UserID, refreshToken},
+            variables: {tokenID, refreshToken},
         })
       })
         .then(result => result.json())
         .then(data=> data);
     return responseData;
 }
+
 }
 module.exports = new HasuraQuery();

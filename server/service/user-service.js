@@ -24,31 +24,32 @@ class UserService {
         if (password !== user["Password"]) {
             throw ApiError.BadRequest('Упс.. Похоже вы ошиблись паролем');
         }
-
+        ///проверить есть ли просроченные токены у этого юзера
         const tokens = tokenService.generateTokens(this.jwtPayload(user));
-        hasuraQuery.updateToken(user.UserID, tokens.refreshToken);
-        return {...tokens, 'user': this.jwtPayload(user)};
+        hasuraQuery.createToken(user.UserID, tokens.refreshToken);
+        return {...tokens, user};
     }
 
     async logout(refreshToken) {
-        const token = await tokenService.removeToken(refreshToken);
-        return token;
+        const userID = await hasuraQuery.deleteToken(refreshToken);
+        return userID;
     }
 
     async refresh(refreshToken){
         if (!refreshToken){
             throw ApiError.UnauthorizedError();
         }
-        const userData = tokenService.validateRefreshToken(refreshToken);
-        const userFromDb = await tokenService.findToken(refreshToken);
-     
-        if (!userData || !userFromDb){
+        const responce = tokenService.validateRefreshToken(refreshToken); //responce: User or null
+        const tokenFromDb = await tokenService.findToken(refreshToken);
+
+        if (!responce || !tokenFromDb){
             throw ApiError.UnauthorizedError();
         }
+        const user = this.jwtPayload(tokenFromDb.User);
 
-        const tokens = tokenService.generateTokens(this.jwtPayload(userFromDb));
-        hasuraQuery.updateToken(userFromDb.UserID, tokens.refreshToken);
-        return {...tokens, 'user': this.jwtPayload(userFromDb)};
+        const newTokens = tokenService.generateTokens(this.jwtPayload(user));
+        await hasuraQuery.updateToken(tokenFromDb.ID, newTokens.refreshToken);
+        return {...newTokens, 'user': this.jwtPayload(user)};
         
     }
 
