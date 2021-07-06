@@ -3,10 +3,11 @@ import AuthService from '../services/AuthService';
 import axios from 'axios';
 import { API_URL } from '../http';
 
+import { history } from '../routers/Router';
+
 export default class Store {
     user = {};
     isAuth = false;
-    isLoading = false;
 
     constructor(){
         makeAutoObservable(this);
@@ -30,6 +31,7 @@ export default class Store {
             localStorage.setItem('token', response.data.accessToken);
             this.setUser(response.data.user);
             this.setAuth(true);
+            history.push('/');
         } catch (e) {
             console.log(e.response?.data?.message);
         }
@@ -37,10 +39,11 @@ export default class Store {
 
     async logout(){
         try {
-            const response = await AuthService.logout();
+            await AuthService.logout();
             localStorage.removeItem('token');
             this.setAuth(false);
             this.setUser({});
+            history.push('/login');
         } catch (e) {
             console.log(e.response?.data?.message);
             
@@ -54,10 +57,21 @@ export default class Store {
             localStorage.setItem('token', response.data.accessToken);
             this.setUser(response.data.user);
             this.setAuth(true);
+
+            return {
+                'isLoaded': true,
+                 'isAuth': this.isAuth
+                }
         } catch (e) {
             console.log(e.response?.data?.message);
+            return {
+                'isLoaded': true,
+                'isAuth': this.isAuth
+            }
+
         } finally {
             this.setLoading(false);
         }
+        
     }
 }
