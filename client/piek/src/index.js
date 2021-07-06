@@ -6,7 +6,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Store from './store/store';
 import 'react-notifications/lib/notifications.css';
-import { PropertiesIcon } from 'evergreen-ui';
 
 import {
   ApolloClient,
@@ -43,12 +42,12 @@ ReactDOM.render(
   
   
   <ApolloProvider client={createApolloClient()}>
-    <App sessionData={root.dataset.session}>
+  <App sessionData={root.dataset.session}>
     <Context.Provider value={store}>
-    
-    
+     
     </Context.Provider>
     </App>
+   
     </ApolloProvider>
 ,
   root
