@@ -9,7 +9,7 @@ import './index.sass'
 const RecentlyLayout = (props) => {
 
     const [index, setIndex] = useState(1);
-        
+    var counter = 0
     const {error, loading, data = []} = useSubscription(GetOrdersSubscription);
 
     if (!data.erp_Orders){
@@ -68,23 +68,28 @@ const RecentlyLayout = (props) => {
                         <table className="priority-table">
                             <tbody>
 
-                            { day.objs.map( (el, i) =>
-                                    <tr key={i}>
-                                        <td>{i+1}</td>
+                            { day.objs.map( (el) => {
+                                    counter++;
+                                        return (
+                                            <tr key={counter}>
+                                                <td>{counter}</td>
 
-                                        <td>{el.OrderItems.map((item) => 
-                                            <div key={item.OrderItemID}>{item.Name}</div>
-                                        )}</td>
-                                        <td>{el.OrderItems.map((item) => 
-                                            <div key={item.OrderItemID} >{item.Quantity}</div>
-                                        )}</td>
-                                        <td>{el.ShippingDate.split("-")[2] }.{el.ShippingDate.split("-")[1]}.{el.ShippingDate.split("-")[0].slice(2)}</td>
-                                        <td> №   {el.InvoiceNumber}{setPaidPercent(el.TotalAmount, el.PaidAmount)}</td>
-                                        <td>{el.Entity}</td>
-                                        <td>{el.City}</td>
-                                        <td>{el.ShippingDate}</td>
-                                    </tr>
-                                    )
+                                                <td>{el.OrderItems.map((item) => 
+                                                    <div key={item.OrderItemID}>{item.Name}</div>
+                                                )}</td>
+                                                <td>{el.OrderItems.map((item) => 
+                                                    <div key={item.OrderItemID} >{item.Quantity}</div>
+                                                )}</td>
+                                                <td>{el.ShippingDate.split("-")[2] }.{el.ShippingDate.split("-")[1]}.{el.ShippingDate.split("-")[0].slice(2)}</td>
+                                                <td> №   {el.InvoiceNumber}{setPaidPercent(el.TotalAmount, el.PaidAmount)}</td>
+                                                <td>{el.Entity}</td>
+                                                <td>{el.City}</td>
+                                                <td>{el.ShippingDate}</td>
+
+                                                
+                                            </tr>
+                                            )
+                                        })
                                 }
 
                             </tbody>
