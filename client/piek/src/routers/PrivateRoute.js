@@ -7,7 +7,6 @@ const PrivateRoute = ({component: Component, ...rest}) => {
     const [isLoaded, setisLoaded] = useState(undefined);
     const [isAuth, setisAuth] = useState(undefined);
 
-
     async function checkAuth() {
         const res = await rest.store.checkAuth();
         setisAuth(res.isAuth);
@@ -15,10 +14,10 @@ const PrivateRoute = ({component: Component, ...rest}) => {
     }
 
     useEffect(() => {
-        checkAuth();
+        if (localStorage.getItem('token')){
+              checkAuth();
+            }
     }, [])
-
-  
 
   return(
     <Route
@@ -29,7 +28,6 @@ const PrivateRoute = ({component: Component, ...rest}) => {
                 console.log('PrivateRoute: return a component')
                 return <Component {...props} />
             } else {
-                rest.store.prevPath = props.history.location.pathname;
                return <Redirect to='/login'/>;
             }
            

@@ -1,12 +1,13 @@
 import {WebSocketLink} from 'apollo-link-ws';
 import React, { createContext } from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './theme.css';
+import './index.sass';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Store from './store/store';
 import 'react-notifications/lib/notifications.css';
-
+import { BrowserRouter } from 'react-router-dom';
 import {
   ApolloClient,
   InMemoryCache,
@@ -42,12 +43,14 @@ ReactDOM.render(
   
   
   <ApolloProvider client={createApolloClient()}>
-  <App sessionData={root.dataset.session}>
-    <Context.Provider value={store}>
-     
-    </Context.Provider>
+    <BrowserRouter>
+      <App sessionData={root.dataset.session}>
+        <Context.Provider value={store}>
+        
+        </Context.Provider>
+      
     </App>
-   
+    </BrowserRouter>
     </ApolloProvider>
 ,
   root
