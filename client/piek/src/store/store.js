@@ -3,14 +3,21 @@ import AuthService from '../services/AuthService';
 import axios from 'axios';
 import { API_URL } from '../http';
 
-import { history } from '../routers/Router';
+import * as Unicons from '@iconscout/react-unicons';
+
+
 
 export default class Store {
     user = {};
     isAuth = false;
+    isLoading = false;
+
+    params = {"pageTitle" : {'icon': <Unicons.UilSortAmountDown/>,
+                                'title':  "Очередность выполнения"}};
 
     constructor(){
         makeAutoObservable(this);
+        
     }
 
     setAuth(bool){
@@ -24,6 +31,10 @@ export default class Store {
     setLoading(bool){
         this.isLoading = bool;
     }
+    setParams(key, value){
+        this.params[key] = value;
+
+    }
 
     async login(email, password){
         try {
@@ -31,7 +42,7 @@ export default class Store {
             localStorage.setItem('token', response.data.accessToken);
             this.setUser(response.data.user);
             this.setAuth(true);
-            history.push('/');
+            window.location.href='/';
         } catch (e) {
             console.log(e.response?.data?.message);
         }
@@ -43,7 +54,6 @@ export default class Store {
             localStorage.removeItem('token');
             this.setAuth(false);
             this.setUser({});
-            history.push('/login');
         } catch (e) {
             console.log(e.response?.data?.message);
             

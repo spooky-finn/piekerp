@@ -20,7 +20,7 @@ const LoginForm = (props) => {
     return(
         <>
           <Pane className='loginCard'>
-                <Heading marginBottom={24} size={20} fontWeight={900} >Войти</Heading>
+                <Heading marginBottom={24} size={20} fontWeight={900} color='var(--text1) '>Войти</Heading>
                 <TextInputField
                 className='LoginInput'
                 width='300px'
