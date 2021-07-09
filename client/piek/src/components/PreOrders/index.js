@@ -25,8 +25,6 @@ const PreOrders = (props) => {
         accessor: data => 
         <div onClick={() => {
           changeStatus({ variables: { OrderID: data.OrderID, OrderStatus: 1 } })
-          props.preOrders.slice(props.preOrders.indexOf(data), 1)
-          console.log(props.preOrders)
         }} className="acceptOrderButton"><UilPlus/></div>
         ,
       })
