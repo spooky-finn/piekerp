@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
 
 
-:root{
+html{
     --bg: #F6F6FB;
     --text1: rgb(22, 22, 22);
     --text2: #8F8F8F;
@@ -18,14 +18,12 @@
 
 
 
-@media (prefers-color-scheme: dark){
-    :root {
+    html.dark {
     --text1: rgb(233, 233, 233);
     --text2: #919191;
     --textInvert: rgb(0, 0, 0);
     --bg: #000;
     --accent: #987bff;
+    --accentLight: #35363b;
     --border: rgba(255,255,255,.15  )
     }
-   }
-

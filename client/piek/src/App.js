@@ -5,9 +5,10 @@ import ReactTooltip from 'react-tooltip';
 import {observer} from 'mobx-react-lite';
 
 import BaseLayout from './components/BaseLayout';
-import Sidebar from './components/Sidebar/Sidebar';
+import Sidebar from './components/Sidebar/sidebar';
 
 import BaseHeader from './components/BaseHeader';
+
 
 function App() {  
   const {store} = useContext(Context);

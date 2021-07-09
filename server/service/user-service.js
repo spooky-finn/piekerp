@@ -47,9 +47,9 @@ class UserService {
         }
         const user = this.jwtPayload(tokenFromDb.User);
 
-        const newTokens = tokenService.generateTokens(this.jwtPayload(user));
+        const newTokens = tokenService.generateTokens(user);
         await hasuraQuery.updateToken(tokenFromDb.ID, newTokens.refreshToken);
-        return {...newTokens, 'user': this.jwtPayload(user)};
+        return {...newTokens, user};
         
     }
 
