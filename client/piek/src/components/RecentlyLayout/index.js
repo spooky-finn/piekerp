@@ -1,113 +1,62 @@
-import { useState } from 'react';
+import { useState, useMemo, useContext } from 'react';
+import { Context } from '../..';
 import {useSubscription} from '@apollo/client';
+import PreOrders from '../PreOrders'
 import { GetOrdersSubscription } from '../../hasura-queries/getOrders';
 import { Pane, Heading, SearchInput, minorScale, Spinner } from 'evergreen-ui';
 import * as Unicons from '@iconscout/react-unicons';
-import moment from 'moment';
 import './index.sass'
 
+import Table, { columnsList } from '../PriorityLayout/tableLogic';
+import  {groupOrders} from './tableLogic'
+
+
+const preOrderID = 3
+
 const RecentlyLayout = (props) => {
+    let preOrders = [];
+    let orders = [];
+    const {store} = useContext(Context);
+    var groupedData = null;
 
-    const [index, setIndex] = useState(1);
-    var counter = 0
-    const {error, loading, data = []} = useSubscription(GetOrdersSubscription);
+    const {error, loading, data = {} } = useSubscription(GetOrdersSubscription);
 
-    if (!data.erp_Orders){
-        return <Pane display="flex" alignItems="center" justifyContent="center" height='75vh'><Spinner /></Pane>
-    }
-    if (data.erp_Orders){  
-        data.erp_Orders.sort((a, b) => b.ShippingDate < a.ShippingDate ? 1: -1);    
-    }
+        if (data.erp_Orders){  
+            data.erp_Orders.sort((a, b) => b.ShippingDate < a.ShippingDate ? 1: -1);  
 
-    const groupOrders = (data) => {
-            let days = [{
-                'name': 'Сегодня',
-                'date': moment().subtract(0, "day").format("YYYY-MM-DD"),
-                'objs': []}, 
-                { 'name': 'Вчера',
-                'date': moment().subtract(1, "day").format("YYYY-MM-DD"),
-                'objs': []}, 
-                { 'name': '',
-                'objs': [] },
-                ]
-                
-            if (data.erp_Orders){
-                
-                for (const order of data.erp_Orders){
-                    let isAdded = false;
+            //отбираем предзаказы
+            data.erp_Orders.forEach((order)=> {
 
-                    days.forEach( (day) => {
-                        if (order.ShippingDate === day.date){
-                            day.objs.push(order);
-                            isAdded = true;
-                        } else if(day.name === '' && !isAdded) day.objs.push(order)
-                    })}
-            }
-            
-        return days;
-    }
+                if (order.OrderStatus.ID == 3) {
+                    preOrders.push(order);
 
+                }else if (order.OrderStatus.ID == 1) {
+                    orders.push(order);
+                }
+            });
 
-    const setPaidPercent = (total, paid) => {
-        if (!total || !paid){
-            return ' '    
+            groupedData = groupOrders(orders);
         }
-        return ' - ' + ((paid/total) * 100).toFixed(0) + '%'
-    }
-
-
-    const renderTable = (nameOfGroup) => {
-        for (let day of groupOrders(data)){
-            if (day['name'] === nameOfGroup){
-                
-                return (
-                    <>
-                    { day.objs== '' ? (null) : 
-                        <>
-                        <Heading className='group-heading'>{day['name']}</Heading>
-                        <table className="priority-table">
-                            <tbody>
-
-                            { day.objs.map( (el) => {
-                                    counter++;
-                                        return (
-                                            <tr key={counter}>
-                                                <td>{counter}</td>
-
-                                                <td>{el.OrderItems.map((item) => 
-                                                    <div key={item.OrderItemID}>{item.Name}</div>
-                                                )}</td>
-                                                <td>{el.OrderItems.map((item) => 
-                                                    <div key={item.OrderItemID} >{item.Quantity}</div>
-                                                )}</td>
-                                                <td>{el.ShippingDate.split("-")[2] }.{el.ShippingDate.split("-")[1]}.{el.ShippingDate.split("-")[0].slice(2)}</td>
-                                                <td> №   {el.InvoiceNumber}{setPaidPercent(el.TotalAmount, el.PaidAmount)}</td>
-                                                <td>{el.Entity}</td>
-                                                <td>{el.City}</td>
-                                                <td>{el.ShippingDate}</td>
-
-                                                
-                                            </tr>
-                                            )
-                                        })
-                                }
-
-                            </tbody>
-                        </table> 
-                        </>
-                    }
-                    </>
-                )
-            } 
-        }
-    }
+        
+    const columns = useMemo(
+        () => columnsList,
+        []
+      )
 
 
     return(
-        <>
-        {renderTable('Сегодня')}
-        {renderTable('Вчера')}
-        {renderTable('')}
+
+         <>
+        {groupedData
+         ? (
+            <>
+            <PreOrders preOrders={preOrders}/>
+            
+            <Table columns={columns} data={groupedData[0].objs} heading="Сегодня"/>
+            <Table columns={columns} data={groupedData[1].objs} heading="Вчера"/>
+            <Table columns={columns} data={groupedData[2].objs} />
+            </> 
+        ) : store.preloader }
 
         {props.children}
         </>

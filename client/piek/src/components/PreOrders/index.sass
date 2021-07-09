@@ -1,0 +1,45 @@
+.preorders-container
+    #grow
+        height: 0
+        overflow: hidden !important
+        transition: height 200ms ease-out
+        margin-bottom: 20px
+
+.preorders-container.active
+    #grow
+        overflow: visible
+    svg
+        transform: rotate(90deg)
+
+.preorders-heading
+    color: var(--accent) !important
+    width: fit-content
+    span
+        margin: 0 5px
+        svg
+            opacity: .8
+            width: 21px
+            height: 21px
+            margin-bottom: -6px
+            padding-bottom: 0
+            transition-duration: .3s
+            transform: rotate(0deg)
+
+.acceptOrderButton
+    width: 30px
+    height: 30px
+    background: var(--accentLight)
+    border: 2px solid transparent
+    border-radius: 7px
+    display: flex
+    justify-content: center
+    align-items: center
+    margin: 0 auto
+    &:hover
+        border: 2px solid var(--accent)
+    svg
+        width: 20px
+        &:hover  
+            color: var(--accent)
+            
+

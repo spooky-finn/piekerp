@@ -1,4 +1,5 @@
 import {makeAutoObservable} from 'mobx';
+import {Pane, Spinner} from 'evergreen-ui';
 import AuthService from '../services/AuthService';
 import axios from 'axios';
 import { API_URL } from '../http';
@@ -84,4 +85,6 @@ export default class Store {
         }
         
     }
+
+    preloader = <Pane display="flex" alignItems="center" justifyContent="center" height='75vh'><Spinner /></Pane>
 }

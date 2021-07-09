@@ -19,7 +19,7 @@ code
 
 
 .action-icon
-    color: var(--text2)
+    color: #a5a5a5
     width: 23px
     height: 23px
     &:hover
@@ -29,6 +29,7 @@ code
         svg
             width: 20px
             height: 20px 
+           
 
 
 
@@ -76,14 +77,21 @@ code
         padding: 10px
         color: var(--text2)
         font-size: 11px
-        font-weight: 500
+        font-weight: 400
+        transition: color .1s ease
         border-bottom: 1px solid var(--border)
+        text-align: left
+        opacity: .5
+        &:hover
+            opacity: 1
+            color: var(--text1)
 
     tbody td
         padding: 10px
         border-bottom: 1px solid var(--border)
         color: var(--text2)
         font-size: 12px
+        
 
     tbody td:nth-of-type(2),
     tbody td:nth-of-type(3)
