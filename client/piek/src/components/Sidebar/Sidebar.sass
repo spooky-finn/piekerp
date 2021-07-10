@@ -10,11 +10,15 @@
     .action-icon
         display: flex
         justify-content: center
+        box-shadow: inset 10px 0px 0px transparent
         align-self: center
-        padding: 15px 8px
+        padding: 15px 5px 
         width: 100%
         &:nth-last-of-type(3)
             margin-top: auto 
+    .sidebar-active 
+        box-shadow: inset 8px 0px 0px var(--accent) !important
+        color: var(--accent) !important
   
     // @media (max-width: 1000px)
     //     border-top: 1px solid var(--border)

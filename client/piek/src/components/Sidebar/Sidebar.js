@@ -1,6 +1,6 @@
 // import { observer } from 'mobx-react-lite';
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Context } from '../../index';
 
 import { Pane } from 'evergreen-ui';
@@ -15,13 +15,13 @@ const Sidebar = () => {
         <>
         <Pane className='Sidebar'>
 
-            <Link  className="action-icon" to='/'><UilSortAmountDown/></Link>
-            <Link  className="action-icon" to='/recently'><UilEnvelopeInfo/></Link>
-            <Link  className="action-icon" to='/reclamation'><UilWrench/></Link>
+            <NavLink  exact  to='/' activeClassName='sidebar-active' className="action-icon"><UilSortAmountDown/></NavLink>
+            <NavLink  to='/recently' activeClassName='sidebar-active' className="action-icon"><UilEnvelopeInfo/></NavLink>
+            <NavLink  to='/reclamation' activeClassName='sidebar-active' className="action-icon"><UilWrench/></NavLink>
 
            <a className="action-icon" ><DarkToggle/></a> 
-            <Link  className="action-icon" to='/account'><UilUserCircle/></Link>
-            <Link  className="action-icon" to='/login' onClick={() => store.logout()}><UilSignInAlt/></Link>
+            <NavLink  className="action-icon" to='/account'><UilUserCircle/></NavLink>
+            <NavLink  className="action-icon" to='/login' onClick={() => store.logout()}><UilSignInAlt/></NavLink>
 
 
 

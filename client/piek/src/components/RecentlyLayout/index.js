@@ -3,8 +3,7 @@ import { Context } from '../..';
 import {useSubscription} from '@apollo/client';
 import PreOrders from '../PreOrders'
 import { GetOrdersSubscription } from '../../hasura-queries/getOrders';
-import { Pane, Heading, SearchInput, minorScale, Spinner } from 'evergreen-ui';
-import * as Unicons from '@iconscout/react-unicons';
+import BaseHeader from '../BaseHeader';
 import './index.sass'
 
 import Table, { columnsList } from '../PriorityLayout/tableLogic';
@@ -42,11 +41,14 @@ const RecentlyLayout = (props) => {
         () => columnsList,
         []
       )
-
+    
 
     return(
-
          <>
+
+        <BaseHeader pageParams={store.getPageParams(window.location.pathname)} />
+
+
         {groupedData
          ? (
             <>

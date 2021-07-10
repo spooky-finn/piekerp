@@ -4,7 +4,8 @@ import AuthService from '../services/AuthService';
 import axios from 'axios';
 import { API_URL } from '../http';
 
-import * as Unicons from '@iconscout/react-unicons';
+import { UilSortAmountDown, UilEnvelopeInfo, UilWrench} from '@iconscout/react-unicons';
+
 
 
 
@@ -12,9 +13,6 @@ export default class Store {
     user = {};
     isAuth = false;
     isLoading = false;
-
-    params = {"pageTitle" : {'icon': <Unicons.UilSortAmountDown/>,
-                                'title':  "Очередность выполнения"}};
 
     constructor(){
         makeAutoObservable(this);
@@ -32,10 +30,7 @@ export default class Store {
     setLoading(bool){
         this.isLoading = bool;
     }
-    setParams(key, value){
-        this.params[key] = value;
 
-    }
 
     async login(email, password){
         try {
@@ -84,6 +79,30 @@ export default class Store {
             this.setLoading(false);
         }
         
+    }
+
+
+    pageParams = [
+        {
+            'url' : '/',
+            'icon': <UilSortAmountDown/>,
+            'title': 'Очередность выполнения',
+        },
+        {
+            'url' : '/recently',
+            'icon': <UilEnvelopeInfo/>,
+            'title': 'Новые заказы',
+        },
+        {
+            'url' : '/reclamation',
+            'icon': <UilWrench/>,
+            'title': 'Рекламация',
+        },
+    ];
+
+    getPageParams(url){
+        const page = this.pageParams.find((el) => el.url === url)
+        return page
     }
 
     preloader = <Pane display="flex" alignItems="center" justifyContent="center" height='75vh'><Spinner /></Pane>
