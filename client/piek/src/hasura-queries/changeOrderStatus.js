@@ -6,7 +6,7 @@ import {gql} from 'graphql-tag';
 //     4- Выпущен и отгружен
 // 
 
-export const ChangeOrderStatus = gql`
+export const CHANGE_ORDER_STATUS = gql`
     mutation MyMutation($OrderID: Int!, $OrderStatus: Int!){
     update_erp_Orders_by_pk(pk_columns: {OrderID: $OrderID}, _set: {OrderStatusID: $OrderStatus}) {
         OrderID

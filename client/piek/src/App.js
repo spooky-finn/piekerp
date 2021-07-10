@@ -18,10 +18,6 @@ function App() {
     <>
       <div className="App">
         
-      {store.isAuth
-        ? <BaseHeader/>
-        : null}
-        
         {store.isAuth
         ? <Sidebar/>
         : null}

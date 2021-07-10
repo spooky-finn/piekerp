@@ -7,7 +7,7 @@ import { GetOrdersSubscription } from '../../hasura-queries/getOrders'
 import './PriorityLayout.sass'
 import Table, {columnsList} from './tableLogic'
 import PreOrders from '../PreOrders'
-
+import BaseHeader from '../BaseHeader'
 
 
 const PriorityLayout = (props) => {
@@ -32,9 +32,10 @@ const PriorityLayout = (props) => {
         []
       )
     
-
+    
     return (
         <>
+        <BaseHeader pageParams={store.getPageParams(window.location.pathname)} />
         {data.erp_Orders && preOrders
          ? (
             <>

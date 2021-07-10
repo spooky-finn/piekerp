@@ -19,9 +19,13 @@ code
 
 
 .action-icon
-    color: #a5a5a5
+    color: var(--text2)
     width: 23px
     height: 23px
+    path
+        // уменьшение толщины линий иконок
+        stroke-width: .8
+        stroke: var(--bg) 
     &:hover
         color: var(--accent)
 
