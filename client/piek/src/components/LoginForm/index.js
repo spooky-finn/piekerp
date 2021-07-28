@@ -19,29 +19,29 @@ const LoginForm = (props) => {
 
     return(
         <>
-          <Pane className='loginCard'>
-                <Heading marginBottom={24} size={20} fontWeight={900} color='var(--text1) '>Войти</Heading>
-                <TextInputField
-                className='LoginInput'
-                width='300px'
-                inputHeight={minorScale(10)}
-                label="Email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-              />
-              <TextInputField
-                label="Пароль"
-                className='LoginInput'
-                inputHeight={minorScale(10)}
-                value={password}
-                onChange={e => setPassword(e.target.value) }
-              />
-               <Button className="Button"
-                width='300px'
-                size="large"
-                onClick={() => store.login(email, password) }
-               >Войти</Button>
-          </Pane>
+              <Pane className='loginCard'>
+                    <Heading marginBottom={24} size={20} fontWeight={900} color='var(--text1) '>Войти</Heading>
+                    <TextInputField
+                    className='LoginInput'
+                    width='300px'
+                    inputHeight={minorScale(10)}
+                    label="Email"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                  />
+                  <TextInputField
+                    label="Пароль"
+                    className='LoginInput'
+                    inputHeight={minorScale(10)}
+                    value={password}
+                    onChange={e => setPassword(e.target.value) }
+                  />
+                  <Button className="Button"
+                    width='300px'
+                    size="large"
+                    onClick={() => store.login(email, password) }
+                  >Войти</Button>
+              </Pane>
      
         {/* <NotificationContainer/> */}
         </>

@@ -1,0 +1,76 @@
+.base-container section
+    background: var(--section) 
+    padding: 0
+    border-radius: var(--br)
+    min-height: 100vh 
+    color: var(--text1)
+
+
+.OrderLayout
+    display: grid
+    grid-template-columns: 2.5fr 1fr
+
+    
+  
+  
+    .Main
+        .Composition
+            padding: 3rem
+            line-height: 2
+            border-bottom: 1px solid var(--border)
+
+            .Unit
+                display: grid
+                grid-template-columns: 4fr repeat(3, 1fr)
+                
+            .Name, .Quantity
+                font-family: 'IBM Plex Mono'
+                font-size: 20px
+
+            .Quantity
+                color: var(--accent)
+                font-weight: 600
+
+        .WrapperTwoCol
+            display: grid
+            grid-template-columns: 1fr 1fr
+            border-bottom: 1px solid var(--border)
+            .CheckList
+                padding: 2rem
+
+                .CheckListUnit
+                    position: relative
+                    padding:  .4rem 3rem
+                    font-size: 1rem
+                    width: fit-content
+                    &:hover
+                        background: var(--accentLight)
+                        border-radius: 5px
+                    &::after
+                        content: ''
+                        top: 50%
+                        transform: translateY(-50%)
+                        left: 10px
+                        position: absolute
+                        width: 15px 
+                        height: 15px
+                        border-radius: 100%
+                        opacity: .6
+                        border: 1px solid var(--accent)
+
+                .CheckListUnit.complited
+                    text-decoration: line-through 
+                    color: var(--text2)
+                    &::after
+                        background: var(--accent)
+                       
+
+
+
+
+            .Docs
+                border-left: 1px solid var(--border)
+
+ 
+        
+            

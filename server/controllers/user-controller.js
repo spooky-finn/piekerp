@@ -5,8 +5,11 @@ const ApiError = require("../exceptions/api-error");
 
 
 
-class UserController {
 
+
+
+class UserController {
+    
     async login(req, res, next){
         try{
             const errors = validationResult(req);

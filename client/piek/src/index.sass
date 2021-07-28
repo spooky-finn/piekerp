@@ -1,17 +1,24 @@
+html
+    background: var(--bg) !important
+    @media (max-width: 1000px)
+        font-size: .9rem
+    
 body
   margin: 0
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',sans-serif
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
 
-code 
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace
 
 
 .base-container
-    max-width: 1200px
+    max-width: 1416px
     margin: 0 auto
     // padding: 0 10px 0 60px
+    
+.Container-1200
+    max-width: 1200px
+    margin: 0 auto
 
 .tooltip
     font-size: 12px !important
@@ -97,9 +104,10 @@ code
         font-size: 12px
         
 
-    tbody td:nth-of-type(2),
+    tbody td:nth-of-type(2) a,
     tbody td:nth-of-type(3)
         font-family: 'IBM Plex Mono'
+        text-decoration: none
         color: var(--text1)
         font-size: 15px
 

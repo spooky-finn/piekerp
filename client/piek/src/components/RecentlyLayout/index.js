@@ -4,16 +4,16 @@ import {useSubscription} from '@apollo/client';
 import PreOrders from '../PreOrders'
 import { GetOrdersSubscription } from '../../hasura-queries/getOrders';
 import BaseHeader from '../BaseHeader';
+import ActionsHeader from '../BaseHeader/ActionsHeader';
 import './index.sass'
 
-import Table, { columnsList } from '../PriorityLayout/tableLogic';
+import Table, {columnsList} from '../PriorityLayout/tableLogic';
 import  {groupOrders} from './tableLogic'
 
-
-const preOrderID = 3
+// поменять сортировку на день первой оплаты
 
 const RecentlyLayout = (props) => {
-    let preOrders = [];
+    let preOrders = []; 
     let orders = [];
     const {store} = useContext(Context);
     var groupedData = null;
@@ -45,21 +45,23 @@ const RecentlyLayout = (props) => {
 
     return(
          <>
-
-        <BaseHeader pageParams={store.getPageParams(window.location.pathname)} />
-
-
-        {groupedData
-         ? (
-            <>
-            <PreOrders preOrders={preOrders}/>
+        <ActionsHeader/>
+        <div className="Container-1200">
+            <BaseHeader pageParams={store.getPageParams(window.location.pathname)} />
             
-            <Table columns={columns} data={groupedData[0].objs} heading="Сегодня"/>
-            <Table columns={columns} data={groupedData[1].objs} heading="Вчера"/>
-            <Table columns={columns} data={groupedData[2].objs} />
-            </> 
-        ) : store.preloader }
+            {groupedData
+            ? (
+                <>
+                <PreOrders preOrders={preOrders}/>
+                {console.log(groupedData)}
+                <Table columns={columns} data={groupedData[0].objs} heading="Сегодня"/>
+                <Table columns={columns} data={groupedData[1].objs} heading="Вчера"/>
+                <Table columns={columnsList} data={groupedData[2].objs} />
+                </> 
+            ) : store.preloader }
 
+        </div>
+       
         {props.children}
         </>
     );

@@ -7,6 +7,7 @@ class HasuraQuery {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
         },
         body: JSON.stringify({
             query: `{
@@ -38,6 +39,7 @@ async getTokens() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
       },
       body: JSON.stringify({
           query: `{
@@ -80,6 +82,8 @@ async createToken(UserID, refreshToken) {
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",
+        'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
+
       },
       body: JSON.stringify({
           query: query, 
@@ -105,6 +109,8 @@ async deleteToken(refreshToken) {
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",
+        'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
+
       },
       body: JSON.stringify({
           query: query, 
@@ -130,6 +136,7 @@ async updateToken(tokenID, refreshToken) {
         headers: {
           "Content-Type": "application/json",
           "Accept": "application/json",
+          'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
         },
         body: JSON.stringify({
             query: query, 

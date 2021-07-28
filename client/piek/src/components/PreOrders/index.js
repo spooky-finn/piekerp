@@ -3,18 +3,14 @@ import {  Heading} from 'evergreen-ui';
 import {UilAngleRight, UilPlus} from '@iconscout/react-unicons';
 import './index.sass'
 import Table, { columnsList } from '../PriorityLayout/tableLogic';
-import { CHANGE_ORDER_STATUS } from "../../hasura-queries/changeOrderStatus";
+import { MUTATE_ORDER_STATUS } from "../../hasura-queries/MutationOrderStatus";
 import { useMutation } from '@apollo/client';
 
 const PreOrders = (props) => {
     const [showPreOrders, setShowPreOrders] = useState(false);
 
-    const [mutationOrderStatus, { data }] = useMutation(CHANGE_ORDER_STATUS);
+    const [mutationOrderStatus, { data }] = useMutation(MUTATE_ORDER_STATUS);
 
-
-    if (data){
-      console.log(data)
-    }
 
     let dt = props.preOrders
     

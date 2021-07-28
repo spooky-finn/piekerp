@@ -1,13 +1,17 @@
 import { useTable } from 'react-table'
-import { useMemo } from 'react'
 import {Heading} from 'evergreen-ui';
+import { Link } from 'react-router-dom'
 
 
-const setPaidPercent = (total, paid) => {
+export const setPaidPercent = (total, paid) => {
     if (!total || !paid){
         return ' '    
     }
     return ' - ' + ((paid/total) * 100).toFixed(0) + '%'
+}
+
+export const getShippingDate = (SD) => {
+  return SD.split("-")[2] + '.' + SD.split("-")[1] + '.' + SD.split("-")[0].slice(2)
 }
 
 export const columnsList = [
@@ -20,11 +24,13 @@ export const columnsList = [
       Header: 'Наим.',
       id: "orderItems",
       accessor: data =>
-      data.OrderItems.map(item => (
-      <div key={item.OrderItemID} >
-        <span>{item.Name}</span>
-      </div>
-    ))
+      <Link to={`/order/${data.OrderID}`}>
+          {data.OrderItems.map(item => (
+            <div key={item.OrderItemID} >
+              <span>{item.Name}</span>
+            </div>
+          ))}
+        </Link>
     },
     {
       Header: 'Кол-во',
@@ -37,8 +43,8 @@ export const columnsList = [
     },
     {
       Header: 'Отгрузка',
-      accessor: order =>
-      order.ShippingDate.split("-")[2] + '.' + order.ShippingDate.split("-")[1] + '.' + order.ShippingDate.split("-")[0].slice(2),
+      accessor: order => getShippingDate(order.ShippingDate)
+     ,
     },
     {
       Header: 'Счет- оплата',
@@ -92,11 +98,11 @@ export default function Table({columns, data, id, heading}){
         {rows.map((row, i) => {
           prepareRow(row)
           return (
-            <tr {...row.getRowProps()}>
+               <tr {...row.getRowProps()}>
               {row.cells.map((cell, i) => {
                 return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
               })}
-            </tr>
+              </tr>
           )
         })}
       </tbody>

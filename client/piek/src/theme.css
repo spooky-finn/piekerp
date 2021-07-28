@@ -4,7 +4,8 @@
 
 html{
     --bg: #F6F6FB;
-    --text1: rgb(22, 22, 22);
+    --section: rgba(255, 255, 255, .6);
+    --text1: rgba(22, 22, 22, 0.87);
     --text2: #8F8F8F;
     --textInvert: rgba(233, 233, 233);
     --accent: #3763FE;
@@ -15,15 +16,14 @@ html{
 }
 
 
-
-
-
+    
     html.dark {
     --text1: rgb(233, 233, 233);
     --text2: #919191;
     --textInvert: rgb(0, 0, 0);
     --bg: #000;
-    --accent: #987bff;
+    --section: #1c1d1fb6;
+    --accent: #6989fc;
     --accentLight: #35363b;
     --border: rgba(255,255,255,.15  )
     }
