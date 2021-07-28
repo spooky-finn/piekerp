@@ -81,6 +81,15 @@ export default class Store {
         
     }
 
+    async uploadFile(formData){
+        const response = await axios.post(`http://localhost:9000/api/s3-upload`, formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            }
+          });
+        console.log(response)
+    }
+
 
     pageParams = [
         {

@@ -24,14 +24,14 @@ const createApolloClient = () => {
   return new ApolloClient({
     link: new WebSocketLink({
       uri: 'ws://45.10.110.168:8080/v1/graphql',
-      // options: {
-      //   reconnect: true,
-      //   connectionParams: {
-      //     headers: {
-      //       'x-hasura-admin-secret': ''
-      //     }
-      //   }
-      // }
+      options: {
+        reconnect: true,
+        connectionParams: {
+          headers: {
+            'x-hasura-admin-secret': '44UL1UoEAr'
+          }
+        }
+      }
     }),
     cache: new InMemoryCache()
   });

@@ -1,6 +1,5 @@
 import moment from 'moment' 
-import { useTable } from 'react-table'
-import { useMemo } from 'react'
+import setPaidPercent from '../PriorityLayout/tableLogic'
 
 
 export const groupOrders = (orders) => {
@@ -29,4 +28,4 @@ export const groupOrders = (orders) => {
     }
     
     return days;
-}
+};
