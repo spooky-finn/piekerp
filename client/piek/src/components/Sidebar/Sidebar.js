@@ -5,7 +5,7 @@ import { Context } from '../../index';
 
 import { Pane } from 'evergreen-ui';
 import './sidebar.sass';
-import { UilSortAmountDown, UilEnvelopeInfo, UilWrench, UilUserCircle, UilSignInAlt} from '@iconscout/react-unicons';
+import { UilSortAmountDown, UilEnvelopeInfo, UilWrench, UilUserCircle, UilSignInAlt, UilConstructor} from '@iconscout/react-unicons';
 import { DarkToggle } from './DarkToggle';
 
 const Sidebar = () => {
@@ -18,6 +18,8 @@ const Sidebar = () => {
             <NavLink  exact  to='/' activeClassName='sidebar-active' className="action-icon"><UilSortAmountDown/></NavLink>
             <NavLink  to='/recently' activeClassName='sidebar-active' className="action-icon"><UilEnvelopeInfo/></NavLink>
             <NavLink  to='/reclamation' activeClassName='sidebar-active' className="action-icon"><UilWrench/></NavLink>
+            <NavLink  to='/attendance' activeClassName='sidebar-active' className="action-icon"><UilConstructor/></NavLink>
+
 
            <a className="action-icon" ><DarkToggle/></a> 
             <NavLink  className="action-icon" to='/account'><UilUserCircle/></NavLink>
