@@ -26,11 +26,10 @@ const PriorityLayout = (props) => {
             else if (order.OrderStatus.ID == 1) orders.push(order)
         });
     }
-
+    
     const columns = useMemo(
         () => columnsList, []
     )
-
 
     return ( 
         <>

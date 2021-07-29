@@ -4,7 +4,7 @@ import AuthService from '../services/AuthService';
 import axios from 'axios';
 import { API_URL } from '../http';
 
-import { UilSortAmountDown, UilEnvelopeInfo, UilWrench} from '@iconscout/react-unicons';
+import { UilSortAmountDown, UilEnvelopeInfo, UilWrench, UilConstructor} from '@iconscout/react-unicons';
 
 
 
@@ -106,6 +106,11 @@ export default class Store {
             'url' : '/reclamation',
             'icon': <UilWrench/>,
             'title': 'Рекламация',
+        },
+        {
+            'url' : '/attendance',
+            'icon': <UilConstructor/>,
+            'title': 'Рабочее время',
         },
     ];
 
