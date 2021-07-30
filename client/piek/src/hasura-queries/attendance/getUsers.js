@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 export const GET_USERS = gql`
 query MyQuery {
-    attendance_users(limit: 2) {
+    attendance_users {
       id
       card
       firstname

@@ -11,7 +11,7 @@ const Attendance = props => {
     const { store } = useContext(Context);
     const {loading, error, data = [] } = useQuery(GET_USERS);
 
-    console.log(data.attendance_users)
+    console.log(data.attendance_users, "DATAAA")
    
 
     // useEffect((columnsList) => {
