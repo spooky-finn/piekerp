@@ -31,10 +31,23 @@ export let columnsList = [
 
 function getEntrance(day, intervals){
 
+  // console.log(intervals)
+
   const entrance = intervals.map(event => {
 
-    const date = new Date(event.entrance)
-    if (date.getDate() == day ) return date.getDate()
+    const entrance = new Date(event.entrance)
+    const exit = new Date(event.exit)
+    if (entrance.getDate() == day ) return (
+
+    <>
+      <div>{entrance.getHours()+':'+entrance.getMinutes()}</div> 
+      -
+      <div>{exit.getHours()+':'+exit.getMinutes()}</div>
+      <div>{event.interval}</div>
+    </>
+  
+    
+    )
 
   })
   // const entrance = intervals.find(event => event?.entrance.split('-')[2].split('T')[0] == day)
@@ -50,15 +63,16 @@ export function months(columnsList){
     columnsList.push({
       Header: day.toString(),
       Cell: row => {
-        console.log(row)
-        const day = row.column.Header
+        // console.log(row, "ROW")
+        const day1 = row.column.Header
         return (
-          <div>{getEntrance(day, row.row.original.intervalsPools)}</div>
+          <div>{getEntrance(day1, row.row.original.intervalsPools)}</div>
         )
       }
     })
   }
-  console.log(columnsList)
+
+  // console.log(columnsList)
   return columnsList
 }
 
