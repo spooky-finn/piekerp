@@ -4,7 +4,7 @@
 
 html{
     --bg: #F6F6FB;
-    --section: rgba(255, 255, 255, .6);
+    --section: rgba(255, 255, 255, 1);
     --text1: rgba(22, 22, 22, 0.87);
     --text2: #8F8F8F;
     --textInvert: rgba(233, 233, 233);
@@ -21,8 +21,12 @@ html{
     --text1: rgb(233, 233, 233);
     --text2: #919191;
     --textInvert: rgb(0, 0, 0);
-    --bg: #000;
-    --section: #1c1d1fb6;
+    /* --bg: #000; */
+    --bg: rgb(24, 23, 29);
+
+    /* --section: #1c1d1fb6; */
+    --section: rgb(35, 34, 43);
+
     --accent: #6989fc;
     --accentLight: #35363b;
     --border: rgba(255,255,255,.15  )

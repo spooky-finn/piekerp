@@ -1,0 +1,72 @@
+.reportConfigurator
+    $br1: 7px
+    display: flex
+    background: var(--section)
+    border-radius: 15px
+    margin-bottom: 1rem 
+    font-size: .9em
+    .chooseMonth
+        padding: 15px
+        display: flex
+        div
+            padding: 7px 10px 
+            border-radius: $br1
+            color: var(--text2)
+            width: fit-content
+            transition: color .2s ease
+            &:hover
+                color: var(--accent)
+        .active
+            background: var(--accentLight)
+            color: var(--accent)
+
+
+    .argument
+        border-left: 1px solid var(--border)
+        border-right: 1px solid var(--border)
+        border-radius: 0
+        padding: 15px 1rem 
+        span
+            color: var(--text2)
+        input 
+            margin: 0 7px
+            box-sizing: border-box
+            background: var(--section)
+            border: none
+            font-weight: 600
+            color: var(--accent)
+            height: 100%
+            width: 25px
+            outline: none !important
+    
+
+p
+    font-size: .8em
+    color: var(--text2)
+    text-align: right
+
+.attendance-table
+    border: 1px solid var(--border)
+    padding: 10px
+    border-radius: var(--br) !important
+    font-size: .8em
+    color: var(--text2)
+    border-collapse: collapse
+    overflow-x: auto !important
+    width: 100%
+
+    thead th
+        position: sticky
+        top: -3px
+        background: var(--bg)
+        border-bottom: 1px solid var(--border) 
+        padding: 13px 0
+        color: var(--text1)
+        font-weight: normal
+
+    tbody td
+        border: 1px solid var(--border) !important
+        padding: 3px
+
+        .interval
+            color: var(--text1)
