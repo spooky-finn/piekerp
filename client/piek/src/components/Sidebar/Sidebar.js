@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { Context } from '../../index';
 
 import { Pane } from 'evergreen-ui';
-import './Sidebar.sass';
+import './sidebar.sass';
 import { UilSortAmountDown, UilEnvelopeInfo, UilWrench, UilUserCircle, UilSignInAlt, UilConstructor} from '@iconscout/react-unicons';
 import { DarkToggle } from './DarkToggle';
 
