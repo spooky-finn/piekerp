@@ -4,31 +4,32 @@ import { UilMoon, UilSun} from '@iconscout/react-unicons';
 
   const DARK_CLASS = "dark";
 
-    export const DarkToggle = () => {
-      const systemPrefersDark = useMediaQuery(
+export const DarkToggle = (props) => {
+
+    const systemPrefersDark = useMediaQuery(
         {
-          query: "(prefers-color-scheme: dark)"
+            query: "(prefers-color-scheme: dark)"
         },
         undefined,
         prefersDark => {
-          setIsDark(prefersDark);
+        setIsDark(prefersDark);
         }
-      );
+    );
 
-      const [isDark, setIsDark] = useState(systemPrefersDark);
+    const [isDark, setIsDark] = useState(systemPrefersDark);
 
-     useEffect(() => {
-       if (isDark) {
-         document.documentElement.classList.add(DARK_CLASS)
-       } else {
-         document.documentElement.classList.remove(DARK_CLASS)
-       }
-     }, [isDark]);
 
-      return (
-          <>
+    useEffect(() => {
+        if (isDark) document.documentElement.classList.add(DARK_CLASS)
+        else document.documentElement.classList.remove(DARK_CLASS)
+        
+    }, [isDark]);
+
+
+    if (props.display == 'none') return null
+    return (<>
+
         <div  className="DarkToggle " onClick={() => setIsDark(!isDark)} >{isDark? < UilSun/> : <UilMoon/>}</div>
-        </>
-
-      );
-    };
+        
+        </>);
+};

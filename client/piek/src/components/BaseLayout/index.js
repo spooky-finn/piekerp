@@ -5,6 +5,7 @@ import { Pane } from 'evergreen-ui';
 
 import AppRouter from '../../routers/Router';
 
+
 const BaseLayout = (props) => {
     const {store} = useContext(Context);
     
@@ -14,7 +15,6 @@ const BaseLayout = (props) => {
             <Pane className="base-container">
                 
                     <AppRouter store={store} /> 
-
                     {props.children}
             </Pane>
         </>

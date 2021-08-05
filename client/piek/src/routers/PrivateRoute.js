@@ -14,10 +14,9 @@ const PrivateRoute = ({component: Component, ...rest}) => {
     }
 
     useEffect(() => {
-        if (localStorage.getItem('token')){
-              checkAuth();
-            }
-    }, [])
+        if (localStorage.getItem('token')) checkAuth()
+        else window.location.href='/login'
+      }, [])
 
   return(
     <Route
