@@ -1,4 +1,4 @@
-import {BrowserRouter, Switch, Route} from "react-router-dom";
+import {BrowserRouter, Switch, Route, Redirect} from "react-router-dom";
 
 import LoginForm from '../components/LoginForm';
 import PriorityLayout from "../components/PriorityLayout";
@@ -21,10 +21,10 @@ const AppRouter = (props) => {
 
             <PrivateRoute path='/order/:id' component={OrderLayout} store={props.store}/>
 
+            #if required route was not found
+            <Redirect to="/" />
 
             {/* <PrivateRoute path='/recently' component={() => <PriorityLayout props={isRecently}/>} store={props.store}/> */}
-
-            
         </Switch>
     )
     

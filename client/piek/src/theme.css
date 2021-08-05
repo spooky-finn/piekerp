@@ -17,7 +17,7 @@ html{
 
 
     
-    html.dark {
+html.dark {
     --text1: rgb(233, 233, 233);
     --text2: #919191;
     --textInvert: rgb(0, 0, 0);
