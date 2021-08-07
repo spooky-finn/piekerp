@@ -11,7 +11,7 @@ services:
       - "9000:9000"
     # env_file: ./server/.env # TODO - uncomment this to auto-load your .env file!
     environment:
-      - API_URL="http://localhost:9000/api"
+      - API_URL=http://localhost:9000/api
       - CLIENT_URL=http://localhost:3000
       - NODE_ENV=development
       - CHOKIDAR_USEPOLLING=true
