@@ -18,6 +18,7 @@ COPY --from=client /app/client/build/ ./client/build/
 
 WORKDIR /app/server/
 COPY server/package*.json ./
+RUN npm install --production
 RUN npm install 
 COPY server/ ./
 
