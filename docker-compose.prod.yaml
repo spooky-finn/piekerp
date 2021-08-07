@@ -10,5 +10,5 @@ services:
     # env_file: ./server/.env # TODO - uncomment this to auto-load your .env file!
     environment:
       - CLIENT_URL=http://localhost:9000
-      NODE_ENV: production
-      PORT: 9000
+      # NODE_ENV: production
+      # PORT: 9000
