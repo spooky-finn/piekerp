@@ -3,6 +3,7 @@ version: '3'
 
 services:
   web:
+    container_name: 'piek-erp-prod'
     build: .
     ports:
       - "9000:9000"
