@@ -1,6 +1,6 @@
 # Setup and build the client
 
-FROM node:16-alpine3.11 as client
+FROM node:16-buster as client
 
 WORKDIR /app/client/
 COPY client/piek/package*.json ./
@@ -12,7 +12,7 @@ RUN npm run build
 
 # Setup the server
 
-FROM node:16-alpine3.11
+FROM node:16-buster
 
 WORKDIR /app/
 COPY --from=client /app/client/build/ ./client/build/
