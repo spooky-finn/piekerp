@@ -4,7 +4,7 @@ FROM node:16-alpine3.11 as client
 
 WORKDIR /app/client/
 COPY client/piek/package*.json ./
-RUN npm install npm@latest -g
+RUN npm install -g npm@7.20.5
 RUN npm install 
 COPY client/piek ./
 RUN npm run build
@@ -19,7 +19,7 @@ COPY --from=client /app/client/build/ ./client/build/
 
 WORKDIR /app/server/
 COPY server/package*.json ./
-RUN npm install npm@latest -g
+RUN npm install -g npm@7.20.5
 RUN npm install 
 COPY server/ ./
 
