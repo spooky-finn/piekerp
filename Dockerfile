@@ -18,7 +18,7 @@ COPY --from=client /app/client/build/ ./client/build/
 
 WORKDIR /app/server/
 COPY server/package*.json ./
-RUN npm install --production
+RUN npm -g install npm@7.19.1
 RUN npm install 
 COPY server/ ./
 
