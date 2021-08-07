@@ -4,6 +4,7 @@ FROM node:16-alpine3.11 as client
 
 WORKDIR /app/client/
 COPY client/piek/package*.json ./
+RUN npm install npm@latest -g
 RUN npm install 
 COPY client/piek ./
 RUN npm run build
