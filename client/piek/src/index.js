@@ -23,7 +23,7 @@ export const Context = createContext({
 const createApolloClient = () => {
   return new ApolloClient({
     link: new WebSocketLink({
-      uri: 'ws://45.10.110.168:8080/v1/graphql',
+      uri: 'wss://45.10.110.168:8080/v1/graphql',
       options: {
         reconnect: true,
         connectionParams: {
