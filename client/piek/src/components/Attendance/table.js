@@ -35,7 +35,6 @@ export function generateColumns(selectedMonth, timeDeduction){
         const day1 = row.column.Header
 
         const [entrance, exit, interval, status] = getIntervalData(day1, row.row.original.intervalsPools, timeDeduction)
-        console.log(entrance, exit, interval, status)
         return (
           <div className={"status-"+ status}> 
             <div className="eventTime">{ entrance }</div> 

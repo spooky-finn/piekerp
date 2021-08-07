@@ -18,6 +18,8 @@ const ReportConfigurator = (props) => {
     const months = ["янв", "фев", "мар", "апр", "май", "июн", "июл", "авг", "сен", "окт", "ноя", "дек"];
 
 
+    console.log('рендер ребенка')
+
     const handleToggle = (e) => {
         const d = new Date(e.target.attributes.date.value)
         props.setSelectedMonth([d.getMonth(), d.getFullYear()])
@@ -44,7 +46,7 @@ const ReportConfigurator = (props) => {
         <div className="arguments">
             <div className="wrap">
                 <span>обед</span>
-                <input type='text' defaultValue={props.timeDeduction} onChange={(e) => props.setTimeDeduction(e.target.value)}/>
+                <input type='text' defaultValue={props.timeDeduction} onMouseLeave={e => props.setTimeDeduction(e.target.value)}/>
                 <span>мин</span>
             </div>
             

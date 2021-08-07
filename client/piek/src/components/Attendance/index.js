@@ -1,4 +1,4 @@
-import { useContext, useMemo, useState } from 'react'
+import { useContext, useMemo, useState, useRef, useEffect } from 'react'
 import { Context } from '../../index'
 import { useSubscription } from '@apollo/client'
 
@@ -22,16 +22,24 @@ const Attendance = props => {
     const [search, setSearch] = useState('');
 
 
+    console.log(timeDeduction, 'рендер основного компонента')
+
     const {gte, lte} = getVarsForSubscription(selectedMonth)
 
     const {loading, error, data = [] } = useSubscription(GET_USERS, { variables: { gte, lte, search: '%'+search+'%' } });
 
-   
+
+
+    // useEffect(() => {
+    //     setColumns(generateColumns(selectedMonth, timeDeduction))
+    // }, [timeDeduction]);
 
     const columns = useMemo(
-        () => generateColumns(selectedMonth, timeDeduction), [selectedMonth]
+        () => generateColumns(selectedMonth, timeDeduction)
+      , [timeDeduction]
     )
     
+
     const onChangeSearch = (e) => {
         const req = e.target.value.replace(/\s/g, '')
         setSearch(req)
@@ -40,12 +48,12 @@ const Attendance = props => {
    
     return(
         <>
-            <BaseHeader pageParams = { store.getPageParams(window.location.pathname)} search={onChangeSearch} /> 
+            <BaseHeader pageParams = { store.getPageParams(window.location.pathname) } search={onChangeSearch} /> 
             <ReportConfigurator 
                 setSelectedMonth={setSelectedMonth}
                 selectedMonth={selectedMonth}
                 timeDeduction={timeDeduction}
-                setTimeDeduction={setTimeDeduction}/>
+                setTimeDeduction={setTimeDeduction} />
 
             {/* условное обозначение */}
             <div className="legend">
@@ -53,7 +61,7 @@ const Attendance = props => {
                 <div className="status-102">Не отмечен конец смены</div>
             </div>
 
-            { !loading && (
+            { !loading && columns &&(
                 <>
                     <Table columns = { columns } data = { data.attendance_users_aggregate.nodes }/> 
                     <span className="reportMeta">Отчет за {selectedMonth[0] + 1} месяц {selectedMonth[1]} года </span>
