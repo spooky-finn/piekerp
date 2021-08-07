@@ -18,7 +18,7 @@ COPY --from=client /app/client/build/ ./client/build/
 
 WORKDIR /app/server/
 COPY server/package*.json ./
-RUN npm -g install npm@7.11.2
+RUN npm install npm@latest -g
 RUN npm install 
 COPY server/ ./
 
