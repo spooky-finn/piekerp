@@ -8,6 +8,7 @@ var cors = require("cors");
 
 const errorMiddleware = require('./middlewares/error-middleware');
 
+//prod
 const CLIENT_BUILD_PATH = '/app/client/build';
 
 var indexRouter = require('./routes/index');
@@ -34,8 +35,9 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
   credentials: true,
-  origin: process.env.CLIENT_URL
+  origin: process.env.CORS_CLIENT_URL
 }));
+
 app.use('/api', indexRouter);
 app.use(errorMiddleware);
 

@@ -9,8 +9,4 @@ services:
       - "9000:9000"
     restart: always
     # env_file: ./server/.env # TODO - uncomment this to auto-load your .env file!
-    environment:
-      - API_URL=http://45.10.110.58:9000/api
-      - CLIENT_URL=http://45.10.110.58:9000
-      # NODE_ENV: production
-      # PORT: 9000
+    env_file: server/.prod.env
