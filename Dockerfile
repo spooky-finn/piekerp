@@ -6,7 +6,9 @@ WORKDIR /app/client/
 COPY client/piek/package*.json ./
 RUN npm install 
 COPY client/piek ./
-RUN npm run build
+
+#recomended build on local machine
+# RUN npm run build
 
 
 # Setup the server
