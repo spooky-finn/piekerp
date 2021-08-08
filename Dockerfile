@@ -2,6 +2,16 @@
 
 FROM node:13.12.0-alpine as client
 
+# Build args
+ARG CORS_CLIENT_URL
+ARG REACT_APP_API_URL
+ARG REACT_APP_HASURA_WS
+
+# Environment vars
+ENV CORS_CLIENT_URL=$CORS_CLIENT_URL
+ENV REACT_APP_API_URL=$REACT_APP_API_URL
+ENV REACT_APP_HASURA_WS=$REACT_APP_HASURA_WS
+
 WORKDIR /app/client/
 COPY client/piek/package*.json ./
 RUN npm install 
