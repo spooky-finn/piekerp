@@ -9,12 +9,8 @@ services:
       - /usr/app/node_modules
     ports:
       - "9000:9000"
-    # env_file: ./server/.env # TODO - uncomment this to auto-load your .env file!
-    environment:
-      - API_URL=http://localhost:9000/api
-      - CLIENT_URL=http://localhost:3000
-      - NODE_ENV=development
-      - CHOKIDAR_USEPOLLING=true
+    env_file: server/.env
+
   client:
     build:
       context: ./client/piek/
@@ -22,6 +18,9 @@ services:
     volumes:
       - ./client/piek/:/app/client
       - /app/node_modules
+    environment: 
+      - REACT_APP_API_URL=http://localhost:9000/api
+      - REACT_APP_HASURA_WS=ws://45.10.110.58:8080/v1/graphql 
     depends_on:
       - server
     ports:
