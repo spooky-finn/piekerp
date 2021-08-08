@@ -8,7 +8,7 @@ RUN npm install
 COPY client/piek ./
 
 #recomended build on local machine
-# RUN npm run build
+RUN npm run build
 
 
 # Setup the server
