@@ -26,6 +26,8 @@ const createApolloClient = () => {
       uri: process.env.REACT_APP_HASURA_WS,
       options: {
         reconnect: true,
+        lazy: true,
+        inactivityTimeout: 30000,
         connectionParams: {
           headers: {
             'x-hasura-admin-secret': '44UL1UoEAr'
