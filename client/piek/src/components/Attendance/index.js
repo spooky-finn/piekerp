@@ -1,6 +1,6 @@
 import { useContext, useMemo, useState, useRef, useEffect } from 'react'
 import { Context } from '../../index'
-import { useSubscription } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 
 import { GET_USERS } from '../../hasura-queries/attendance/getUsers' 
 
@@ -21,25 +21,9 @@ const Attendance = props => {
     const [timeDeduction, setTimeDeduction] = useState(30)    
     const [search, setSearch] = useState('');
 
-
-    console.log(timeDeduction, 'рендер основного компонента')
-
-    const {gte, lte} = getVarsForSubscription(selectedMonth)
-
-    const {loading, error, data = [] } = useSubscription(GET_USERS, { variables: { gte, lte, search: '%'+search+'%' } });
-
-
-
-    // useEffect(() => {
-    //     setColumns(generateColumns(selectedMonth, timeDeduction))
-    // }, [timeDeduction]);
-
-    const columns = useMemo(
-        () => generateColumns(selectedMonth, timeDeduction)
-      , [timeDeduction]
-    )
+    const { gte, lte } = getVarsForSubscription(selectedMonth)
+    const {loading, error, data = [] } = useQuery(GET_USERS, { variables: { gte, lte, search: '%'+search+'%' } });
     
-
     const onChangeSearch = (e) => {
         const req = e.target.value.replace(/\s/g, '')
         setSearch(req)
@@ -61,14 +45,16 @@ const Attendance = props => {
                 <div className="status-102">Не отмечен конец смены</div>
             </div>
 
-            { !loading && columns &&(
+            {!loading &&(
                 <>
-                    <Table columns = { columns } data = { data.attendance_users_aggregate.nodes }/> 
-                    <span className="reportMeta">Отчет за {selectedMonth[0] + 1} месяц {selectedMonth[1]} года </span>
+                    <Table columns = { generateColumns(selectedMonth, timeDeduction) } data = { data.attendance_users_aggregate.nodes } className="attendance-table"/> 
 
                 </>)}
            
-
+            <span className="reportMeta">
+                Отчет за {selectedMonth[0] + 1} месяц {selectedMonth[1]} года 
+            </span>
+            
         </>
     )
 }

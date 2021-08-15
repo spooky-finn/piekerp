@@ -93,7 +93,7 @@ function getIntervalData(day, intervals, timeDeduction){
     }   else return [null, null, null, null]
 }
 
-export default function Table({columns, data, id, heading}){
+export default function Table({columns, data, id, heading, className}){
     const {
         getTableProps,
         getTableBodyProps,
@@ -110,7 +110,7 @@ export default function Table({columns, data, id, heading}){
 
    return (
      <>
-    <table id={id} className="attendance-table" {...getTableProps()}>
+    <table id={id} className={className} {...getTableProps()}>
       <thead>
         {headerGroups.map((headerGroup, i) => (
           <tr key={i} {...headerGroup.getHeaderGroupProps()}>

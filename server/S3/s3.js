@@ -2,7 +2,9 @@ var multer = require('multer');
 var multerS3 = require('multer-s3');
 const AWS = require('aws-sdk');
 const uuidv4 = require('uuid/v4');
+const { json } = require('express');
 
+const querystring = require('querystring')
 
 const s3 = new AWS.S3({
     accessKeyId: process.env.S3_ACCESS_KEY_ID,
@@ -11,24 +13,41 @@ const s3 = new AWS.S3({
     s3ForcePathStyle: true,
     signatureVersion: 'v4',
   });
+
+
+const download = (filename, res) => {
+
+  const getParams = {
+    Bucket: process.env.S3_BUCKET,
+    Key: filename
+  };
+
+  s3.getObject(getParams, function(err, data) {
+    if (err) return res.status(400).send({success:false,err:err})
+    
+    else{
+        data.Metadata.originalname = querystring.unescape(data.Metadata.originalname)
+      return res.send(data.Body);
+    }
+  });
+}
   
-  const upload = multer({
+const upload = multer({
     storage: multerS3({
         s3: s3,
         bucket: process.env.S3_BUCKET,
+        storageClass: 'COLD',
+        contentType: multerS3.AUTO_CONTENT_TYPE,
         metadata: (req, file, cb) => {
             cb(null, {
-                originalname: file.originalname,
+                originalname: querystring.escape(file.originalname),
             });
-        },
-        contentType: function(req, file, cb){
-            cb(null, file.mimetype);
         },
         key: function (req, file, cb){
             
             //generate unique file names to be saved on the server 
             const uuid = uuidv4();
-            const key = `${req.s3_key_prefix}${uuid}`;
+            const key = `${uuid}`;
 
             req.files.push({
                 originalname: file.originalname,
@@ -42,4 +61,6 @@ const s3 = new AWS.S3({
     })
 })
 
-module.exports = upload
+
+exports.upload = upload;
+exports.download = download;

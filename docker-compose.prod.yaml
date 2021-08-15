@@ -6,10 +6,6 @@ services:
     container_name: 'piek-erp-prod'
     build:
       context: .
-      args: 
-        # переменные для сборки бандла реакт
-        - REACT_APP_API_URL=https://45.10.110.58:9000/api
-        - REACT_APP_HASURA_WS=wss://45.10.110.58:8080/v1/graphql
     ports:
       - "9000:9000"
     restart: always

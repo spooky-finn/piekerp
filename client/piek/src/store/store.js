@@ -1,18 +1,16 @@
+
 import {makeAutoObservable} from 'mobx';
 import {Pane, Spinner} from 'evergreen-ui';
 import AuthService from '../services/AuthService';
 import axios from 'axios';
 import { API_URL } from '../http';
-
 import { UilSortAmountDown, UilEnvelopeInfo, UilWrench, UilConstructor} from '@iconscout/react-unicons';
-
-
-
 
 export default class Store {
     user = {};
     isAuth = false;
     isLoading = false;
+    inMemoryToken = undefined;
 
     constructor(){
         makeAutoObservable(this);
@@ -31,14 +29,20 @@ export default class Store {
         this.isLoading = bool;
     }
 
+    setInMemoryToken(token){
+        this.inMemoryToken = token
+    }
 
     async login(email, password){
         try {
             const response = await AuthService.login(email, password);
-            localStorage.setItem('token', response.data.accessToken);
+            // localStorage.setItem('token', response.data.accessToken);
+
+            this.setInMemoryToken(response.data.accessToken)
             this.setUser(response.data.user);
             this.setAuth(true);
-            window.location.href='/';
+            // window.location.href='/';
+            console.log('store', this.inMemoryToken)
         } catch (e) {
             console.log(e.response?.data?.message);
         }
@@ -59,14 +63,16 @@ export default class Store {
     async checkAuth() {
         this.setLoading(true);
         try {
+            console.log('check auth request')
             const response = await axios.get(`${API_URL}/refresh`, {withCredentials: true});
-            localStorage.setItem('token', response.data.accessToken);
+            this.setInMemoryToken(response.data.accessToken)
+
             this.setUser(response.data.user);
             this.setAuth(true);
 
             return {
                 'isLoaded': true,
-                 'isAuth': this.isAuth
+                'isAuth': this.isAuth
                 }
         } catch (e) {
             console.log(e.response?.data?.message);
@@ -81,16 +87,31 @@ export default class Store {
         
     }
 
-    async uploadFile(formData){
-        const response = await axios.post(`http://localhost:9000/api/s3-upload`, formData, {
+    async uploadFile(acceptedFiles){
+        const formData = new FormData()
+        acceptedFiles.map(file => formData.append('files', file))
+        const res = await axios.post(`http://localhost:9000/api/s3/upload`, formData, {
             headers: {
               "Content-Type": "multipart/form-data",
             }
           });
-        console.log(response)
+        return res
     }
 
+    async downloadFile(file){
+        const res = await fetch(`http://localhost:9000/api/s3/get/${file.Key}`)
 
+        if (res.status == 200 ){
+            const blob = await res.blob()
+            const downloadURL = window.URL.createObjectURL(blob)
+            const link = document.createElement('a')
+            link.href = downloadURL
+            link.download = file.FileName
+            document.body.appendChild(link)
+            link.click()
+            link.remove()
+        }
+    }
     pageParams = [
         {
             'url' : '/',
@@ -100,7 +121,7 @@ export default class Store {
         {
             'url' : '/recently',
             'icon': <UilEnvelopeInfo/>,
-            'title': 'Новые заказы',
+            'title': 'Недавние',
         },
         {
             'url' : '/reclamation',

@@ -1,31 +1,50 @@
 .base-container section
-    background: var(--section) 
+    // background: var(--section)  
     padding: 0
+
+    border: 1px solid var(--border)
+
     border-radius: var(--br)
     min-height: 100vh 
     color: var(--text1)
 
 
+.inCloudconIcon
+    position: fixed
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+
+    width: 200px
+    height: 200px
+    color: var(--accent)
+    z-index: -20
+    
+.isDragAccept
+    opacity: .1
+  
+
+
+        
+
+
 .OrderLayout
     display: grid
     grid-template-columns: 2.5fr 1fr
-
-    
-  
-  
     .Main
         .Composition
-            padding: 3rem
-            line-height: 2
+            padding: 2rem 1rem
+            line-height: 1
             border-bottom: 1px solid var(--border)
 
             .Unit
                 display: grid
-                grid-template-columns: 4fr repeat(3, 1fr)
+                grid-template-columns: 5fr repeat(3, 1fr)
+                padding: .6em
                 
             .Name, .Quantity
                 font-family: 'IBM Plex Mono'
-                font-size: 20px
+                font-size: 1.3rem
 
             .Quantity
                 color: var(--accent)
@@ -36,12 +55,13 @@
             grid-template-columns: 1fr 1fr
             border-bottom: 1px solid var(--border)
             .CheckList
-                padding: 2rem
+                padding: 1rem
+                font-size: 1rem
+
 
                 .CheckListUnit
                     position: relative
                     padding:  .4rem 3rem
-                    font-size: 1rem
                     width: fit-content
                     &:hover
                         background: var(--accentLight)
@@ -69,7 +89,38 @@
 
 
             .Docs
+                padding: 1rem
                 border-left: 1px solid var(--border)
+                div
+                    font-family: 'IBM Plex Mono'
+                    font-size: .9rem
+                    line-height: 1
+                    padding: 5px 0
+                    &:hover
+                        color: var(--accent)
+
+
+                .MuiCircularProgress-root
+                    position: absolute
+                    left: 50%
+                    width: 50px !important
+                    height: 50px !important
+                    margin-right: .5rem
+                    color: var(--accent)
+                .onUploadFiles
+                    position: relative
+                    div
+                        opacity: .7 
+                        color: var(--text2)
+
+                    img 
+                        width: 150px !important
+                        height: 150px
+                        top: 50%
+                        left: 50% 
+                        transform: translate(-50%, -50%)
+                        position: absolute
+               
 
  
         

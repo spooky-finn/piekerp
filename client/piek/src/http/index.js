@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:9000/api'
-export const S3_URL = 'http://localhost:9000/upload'
+export const S3_URL = process.env.REACT_APP_API_URL || 'http://localhost:9000/s3/upload'
 
 const $api = axios.create({
     withCredentials: true,

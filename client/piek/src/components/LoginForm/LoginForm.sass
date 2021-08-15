@@ -1,16 +1,27 @@
 .loginCard
-    position: absolute
+    display: flex
+    flex-direction: column
+    position: fixed
     left: 50%
     top: 50%
     transform: translate(-50%, -50%)
-    input
-        background: inherit !important
+    min-width: 300px
+    color: var(--text1)
+   
+    .loginInput
+        margin: .5rem 0
+        
+        input 
+            color: var(--text1) !important
 
-    label
-        color: var(--text1) !important
-        font-weight: 300
-        font-size: 12px
+        label
+            color: var(--text2) !important
+
+
     .Button
-        background-color: var(--text1) !important
-        color: var(--textInvert) !important
-
+        margin-left: auto
+        margin-top: 2rem 
+        color: var(--accent) !important
+        font-weight: 600
+        background: var(--accentLight)
+        border: none
