@@ -21,9 +21,11 @@ const Sidebar = () => {
             <NavLink  to='/attendance' activeClassName='sidebar-active' className="action-icon"><UilConstructor/></NavLink>
 
 
-           <a className="action-icon" ><DarkToggle/></a> 
-            <NavLink  className="action-icon" to='/account'><UilUserCircle/></NavLink>
-            <NavLink  className="action-icon" to='/login' onClick={() => store.logout()}><UilSignInAlt/></NavLink>
+            <a className="action-icon hidden" ><DarkToggle/></a> 
+            <NavLink  className="action-icon hidden" to='/account'><UilUserCircle/></NavLink>
+            <NavLink  className="action-icon hidden" to='/login' onClick={() => store.logout()}><UilSignInAlt/></NavLink>
+           
+            
 
 
 

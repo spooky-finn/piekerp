@@ -1,11 +1,11 @@
-$status-101: #c60bff3b
-$status-102: #15ff0034
+$status-101: #6989fc
+$status-102: #72c900
 
 .reportMeta
     display: flex
     justify-content: flex-end
     font-size: .8em
-    color: var(--text1)
+    color: var(--text2)
     margin: 20px 0
 
 .legend
@@ -19,13 +19,15 @@ $status-102: #15ff0034
         padding-left: 40px
         position: relative
         margin: 0 1rem
+        
     .status-101::before,
     .status-102::before
         position: absolute
         top: 0
         left: 0
         content: ''
-        width: 30px
+        width: 20px
+        border-radius: 5px
         height: 20px
 
     .status-101::before
@@ -71,7 +73,7 @@ $status-102: #15ff0034
             input 
                 margin: 0 7px
                 box-sizing: border-box
-                background: var(--section)
+                background: inherit
                 border: none
                 font-weight: 600
                 color: var(--accent)
@@ -82,18 +84,17 @@ $status-102: #15ff0034
 .attendance-table
     border: 1px solid var(--border)
     padding: 10px
-    border-radius: var(--br) !important
+    // border-radius: var(--br) !important
     font-size: .8em
     color: var(--text2)
     border-collapse: collapse
-    overflow-x: auto !important
     width: 100%
 
     thead th
         position: sticky
         top: -3px
+        z-index: 1000
         background: var(--bg)
-        border-bottom: 1px solid var(--border) 
         padding: 13px 0
         color: var(--text1)
         font-weight: normal
@@ -101,10 +102,11 @@ $status-102: #15ff0034
     tbody td
         border: 1px solid var(--border) !important
         padding: 0
+        position: relative
         div
             padding: 2px
         .status-101
-            background: $status-101
+            color: $status-101 !important
         // .status-102
         //     background: $status-102
 

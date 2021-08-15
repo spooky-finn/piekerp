@@ -17,9 +17,6 @@ const ReportConfigurator = (props) => {
     const date = new Date()
     const months = ["янв", "фев", "мар", "апр", "май", "июн", "июл", "авг", "сен", "окт", "ноя", "дек"];
 
-
-    console.log('рендер ребенка')
-
     const handleToggle = (e) => {
         const d = new Date(e.target.attributes.date.value)
         props.setSelectedMonth([d.getMonth(), d.getFullYear()])

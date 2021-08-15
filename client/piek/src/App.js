@@ -9,7 +9,7 @@ import Sidebar from './components/Sidebar/Sidebar';
 import { DarkToggle } from './components/Sidebar/DarkToggle';
 
 function App() {  
-  const {store} = useContext(Context);
+  const { store } = useContext(Context);
 
 
   return (

@@ -1,37 +1,27 @@
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import { Context } from '../../index'
 
 
-
-
-const Docs = (props) => {
+const Docs = ({data, onUpload}) => {
     const {store} = useContext(Context)
-    const [file, setFile] = useState(' ');
-    
-    const submit = async (e) => {
-        e.preventDefault()
-        const formData = new FormData()
-        formData.append('file', file)
-        store.uploadFile(formData)
 
-    }
+    const onUploadFiles = () => {
+        if (onUpload.length == 0) return null
+        const files = onUpload.map(file => <div key={file.path}>{file.path}</div> )
 
-    const fileSelected = (e) => {
-        const file = e.target.files[0]
-        setFile(file)
-        console.log('sets file', file)
-    }
+        return <div className="onUploadFiles">{files}</div>
+    } 
+
+    const attachedFiles = data.map(
+        file => <div onClick={ () => store.downloadFile(file)} 
+                    key={file.Key}> {file.FileName} </div>)
 
     return (
-        <>
-        <div>
-            <form onSubmit={submit} method="post" encType="multipart/form-data">
-                <input  onChange={fileSelected} type="file" name='file'/>
-                <button type='submit'>Submit</button>
-            </form>
-            
+        <div className="Docs">
+            {attachedFiles}
+
+            {onUploadFiles()}
         </div>
-        </>
     )
 
 }

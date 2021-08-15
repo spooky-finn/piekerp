@@ -1,51 +1,54 @@
-import { observer } from 'mobx-react-lite';
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 // import {NotificationContainer, NotificationManager} from 'react-notifications';
 import { Context } from '../../index';
 
-import {Heading, TextInputField, Pane, minorScale, Button } from 'evergreen-ui';
+import {TextField, Button} from '@material-ui/core';
 import './LoginForm.sass'
 import '../../theme.css'
 
+import { useHistory } from "react-router-dom";
 
 const LoginForm = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    
     const {store} = useContext(Context);
+    const history = useHistory();
 
     // const setNotification = () => {
     //     NotificationManager.error('Похоже вы ошиблись', '	(ಥ﹏ಥ)', 3000);
     // }
 
+    const login = (e) => {
+      store.login(email, password).then( () =>  history.push("/") )
+
+    }
     return(
         <>
-              <Pane className='loginCard'>
-                    <Heading marginBottom={24} size={20} fontWeight={900} color='var(--text1) '>Войти</Heading>
-                    <TextInputField
-                    className='LoginInput'
-                    width='300px'
-                    inputHeight={minorScale(10)}
+              <div className='loginCard'>
+
+                    <TextField
+                    className='loginInput'
                     label="Email"
-                    value={email}
                     onChange={e => setEmail(e.target.value)}
                   />
-                  <TextInputField
-                    label="Пароль"
-                    className='LoginInput'
-                    inputHeight={minorScale(10)}
-                    value={password}
+                  <TextField
+                    label="Password"
+                    type="password"
+                    className='loginInput'
                     onChange={e => setPassword(e.target.value) }
                   />
-                  <Button className="Button"
+                  <Button
+                    className="Button"
+                    variant="outlined"
                     width='300px'
-                    size="large"
-                    onClick={() => store.login(email, password) }
+                    onClick={login}
                   >Войти</Button>
-              </Pane>
+              </div>
      
         {/* <NotificationContainer/> */}
         </>
     );
 }
 
-export default observer(LoginForm);
+export default LoginForm

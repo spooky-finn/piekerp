@@ -19,7 +19,13 @@
     .sidebar-active 
         box-shadow: inset 8px 0px 0px var(--accent) !important
         color: var(--accent) !important
-  
+
+    .action-icon.hidden
+        opacity: 0
+        transition: opacity .09s ease
+    &:hover
+        .action-icon.hidden
+            opacity: 1
     // @media (max-width: 1000px)
     //     border-top: 1px solid var(--border)
     //     position: fixed

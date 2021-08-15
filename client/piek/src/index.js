@@ -14,37 +14,44 @@ import {
   ApolloProvider,
 } from "@apollo/client";
 
+
 const store = new Store();
 
 export const Context = createContext({
   store,
 });
 
-const createApolloClient = () => {
-  return new ApolloClient({
-    link: new WebSocketLink({
-      uri: process.env.REACT_APP_HASURA_WS,
-      options: {
-        reconnect: true,
-        lazy: true,
-        inactivityTimeout: 30000,
-        connectionParams: {
-          headers: {
-            'x-hasura-admin-secret': '44UL1UoEAr'
-          }
-        }
+
+const webSocketLink = new WebSocketLink({
+  uri: process.env.REACT_APP_HASURA_WS,
+  options: {
+    reconnect: true,
+    lazy: true,
+    minTimeout: 1000,
+    inactivityTimeout: 30000,
+    connectionCallback: async () => {
+        console.log('gql error. Request new access token');
+        await store.checkAuth()
+    },
+    connectionParams: () => ({
+      headers: {
+        'Authorization' : `Bearer ${store.inMemoryToken}`
       }
     }),
-    cache: new InMemoryCache()
-  });
-};
+    
+  }
+})
+
+
+const apolloClient = new ApolloClient({
+  link: webSocketLink,
+  cache: new InMemoryCache()
+})
 
 const root = document.getElementById('root');
 
 ReactDOM.render(
-  
-  
-  <ApolloProvider client={createApolloClient()}>
+  <ApolloProvider client={apolloClient}>
     <BrowserRouter>
       <App sessionData={root.dataset.session}>
         <Context.Provider value={store}>

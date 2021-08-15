@@ -3,6 +3,7 @@ import { UilHistoryAlt } from "@iconscout/react-unicons";
 import "./order-meta.sass";
 
 const OrderMeta = (props) => {
+
   const FormatShippingDate =
     props.data.ShippingDate.split("-")[2] +
     "." +
@@ -11,7 +12,8 @@ const OrderMeta = (props) => {
     props.data.ShippingDate.split("-")[0].slice(2);
 
   return (
-    <>
+    <div className="Meta">
+
       <div className="SignificantInfo">
             <div>
                 <pre>План. отгрузка</pre>
@@ -60,8 +62,9 @@ const OrderMeta = (props) => {
             <pre>Комментарий</pre>
             {props.data.Comment}
       </div>
-    </>
-  );
-};
+    </div>
 
-export default OrderMeta;
+  )
+}
+
+export default OrderMeta

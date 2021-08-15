@@ -3,7 +3,7 @@ const fetch = require("node-fetch");
 class HasuraQuery {
 
   async getUsers() {
-    let responseData = await fetch("http://45.10.110.168:8080/v1/graphql", {
+    let responseData = await fetch("http://45.10.110.58:8080/v1/graphql", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -35,7 +35,7 @@ class HasuraQuery {
 }
 
 async getTokens() {
-  let responseData = await fetch("http://45.10.110.168:8080/v1/graphql", {
+  let responseData = await fetch("http://45.10.110.58:8080/v1/graphql", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -77,7 +77,7 @@ async createToken(UserID, refreshToken) {
     }
     }`;
 
-  let responseData = await fetch("http://45.10.110.168:8080/v1/graphql", {
+  let responseData = await fetch("http://45.10.110.58:8080/v1/graphql", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -104,7 +104,7 @@ async deleteToken(refreshToken) {
     }
    }`;
 
-  let responseData = await fetch("http://45.10.110.168:8080/v1/graphql", {
+  let responseData = await fetch("http://45.10.110.58:8080/v1/graphql", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -131,7 +131,7 @@ async updateToken(tokenID, refreshToken) {
         }
      }`;
 
-    let responseData = await fetch("http://45.10.110.168:8080/v1/graphql", {
+    let responseData = await fetch("http://45.10.110.58:8080/v1/graphql", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

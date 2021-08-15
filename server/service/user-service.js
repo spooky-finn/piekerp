@@ -6,6 +6,14 @@ class UserService {
 
     jwtPayload(o) {
         return {
+            // "https://hasura.io/jwt/claims": {
+            //     "x-hasura-default-role": "admin",
+            //     "x-hasura-allowed-roles": ["admin"],
+            // },
+            "https://hasura.io/jwt/claims": {
+            "x-hasura-allowed-roles": ["admin"],
+            "x-hasura-default-role": "admin",
+        },
             'UserID': o.UserID,
             'FirstName': o.FirstName,
             'LastName': o.LastName,
