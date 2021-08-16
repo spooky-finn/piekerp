@@ -1,5 +1,6 @@
 import { getShippingDate, setPaidPercent } from "../PriorityLayout/tableLogic";
 import { UilHistoryAlt } from "@iconscout/react-unicons";
+import EditField from "../editField";
 import "./order-meta.sass";
 
 const OrderMeta = (props) => {
@@ -17,7 +18,9 @@ const OrderMeta = (props) => {
       <div className="SignificantInfo">
             <div>
                 <pre>План. отгрузка</pre>
-                {getShippingDate(props.data.ShippingDate)}
+                <EditField editState = {props.editState} text = {getShippingDate(props.data.ShippingDate)} />
+
+                {/* {getShippingDate(props.data.ShippingDate)} */}
             </div>
             <div>
                 <pre>Счет / оплата</pre>

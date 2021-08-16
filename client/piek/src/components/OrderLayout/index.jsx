@@ -28,7 +28,7 @@ import './index.sass'
 const OrderLayout = (props) => {
     const {store} = useContext(Context);
     const [onUploadFiles, setOnUploadFiles] = useState([])
-
+    const [editState, setEditState] = useState(false)
     const [pushDocs] = useMutation(PUSH_DOCS_ARRAY);
     const orderID = useParams().id
 
@@ -61,11 +61,10 @@ const OrderLayout = (props) => {
       const {getRootProps, isDragActive} = useDropzone({className: 'dropzone', onDrop: S3Upload });
   
 
-
     return(
     <>
         {isFileOnDropzone(isDragActive)}
-         <ActionsHeader/>
+         <ActionsHeader accessLevel = {2}  setEditState = {setEditState} editState = {editState}/>
 
         {!loading ? (<>
 
@@ -85,7 +84,7 @@ const OrderLayout = (props) => {
                         <Comments/>
                     </div>
                     
-                    <OrderMeta data={data.erp_Orders[0]}/>
+                    <OrderMeta data={data.erp_Orders[0]} editState = {editState}/>
                    
 
        
