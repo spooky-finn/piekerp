@@ -20,7 +20,7 @@ export const groupOrders = (orders) => {
             let isAdded = false;
 
             days.forEach( (day) => {
-                if (order.ShippingDate === day.date){
+                if (order.CreatingDate.split('T')[0] === day.date){
                     day.objs.push(order);
                     isAdded = true;
                 } else if(day.name === '' && !isAdded) day.objs.push(order)

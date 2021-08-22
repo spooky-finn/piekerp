@@ -90,7 +90,7 @@ export default class Store {
     async uploadFile(acceptedFiles){
         const formData = new FormData()
         acceptedFiles.map(file => formData.append('files', file))
-        const res = await axios.post(`http://localhost:9000/api/s3/upload`, formData, {
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/s3/upload`, formData, {
             headers: {
               "Content-Type": "multipart/form-data",
             }
@@ -99,7 +99,7 @@ export default class Store {
     }
 
     async downloadFile(file){
-        const res = await fetch(`http://localhost:9000/api/s3/get/${file.Key}`)
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/s3/get/${file.Key}`)
 
         if (res.status == 200 ){
             const blob = await res.blob()
@@ -112,6 +112,19 @@ export default class Store {
             link.remove()
         }
     }
+
+    async deleteFile(key, deleteFileMutation){
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/s3/delete/${key}`);
+
+        if (res.status == 200){
+            const hasuraRes = await deleteFileMutation({variables: {
+                'key': key,
+            }})
+            console.log(hasuraRes.data)
+        }
+        // if (res.status != 200) console.log('error during deleting file from S3', res)
+    }
+
     pageParams = [
         {
             'url' : '/',

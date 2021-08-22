@@ -1,10 +1,15 @@
-import { useState, useEffect } from "react";
-import {  Heading} from 'evergreen-ui';
-import {UilAngleRight, UilPlus} from '@iconscout/react-unicons';
-import './index.sass'
-import Table, { columnsList } from '../PriorityLayout/tableLogic';
+import { useState } from "react";
+
+import Table, { columnsList } from '../PriorityLayout/tableLogic'
+
+//apollo
 import { MUTATE_ORDER_STATUS } from "../../hasura-queries/MutationOrderStatus";
 import { useMutation } from '@apollo/client';
+
+//UI
+import { Heading} from 'evergreen-ui';
+import {UilAngleRight, UilPlus} from '@iconscout/react-unicons';
+import './index.sass'
 
 const PreOrders = (props) => {
     const [showPreOrders, setShowPreOrders] = useState(false);
@@ -34,7 +39,7 @@ const PreOrders = (props) => {
     newColumnList.push({
         Header: ' ',
         accessor: data => 
-        <div onClick={() => onClickTransfer(data)} className="acceptOrderButton"><UilPlus/></div>
+        <div onClick={() => onClickTransfer(data)} className="square-button"><UilPlus/></div>
         ,
       })
 

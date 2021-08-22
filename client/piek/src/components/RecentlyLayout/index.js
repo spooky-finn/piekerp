@@ -1,4 +1,4 @@
-import { useState, useMemo, useContext } from 'react';
+import {  useMemo, useContext } from 'react';
 import { Context } from '../..';
 import {useSubscription} from '@apollo/client';
 import PreOrders from '../PreOrders'
@@ -18,7 +18,7 @@ const RecentlyLayout = (props) => {
     const {store} = useContext(Context);
     var groupedData = null;
 
-    const {error, loading, data = {} } = useSubscription(GetOrdersSubscription);
+    const { data = {} } = useSubscription(GetOrdersSubscription);
 
         if (data.erp_Orders){  
             data.erp_Orders.sort((a, b) => b.ShippingDate < a.ShippingDate ? 1: -1);  

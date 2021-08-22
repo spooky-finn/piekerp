@@ -43,8 +43,7 @@ export const columnsList = [
     },
     {
       Header: 'Отгрузка',
-      accessor: order => getShippingDate(order.ShippingDate)
-     ,
+      accessor: 'ShippingDate',
     },
     {
       Header: 'Счет- оплата',
@@ -59,10 +58,10 @@ export const columnsList = [
       Header: 'Гор.',
       accessor: 'City',
     },
-    {
-      Header: 'Перв. платеж',
-      accessor: 'ShippingDate',
-    },
+    // {
+    //   Header: 'Перв. платеж',
+    //   accessor: 'ShippingDate',
+    // },
   ]
   
 export default function Table({columns, data, id, heading}){

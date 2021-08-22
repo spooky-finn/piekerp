@@ -19,6 +19,7 @@ subscription GetOrders {
       ShippingDate
       PaidAmount
       TotalAmount
+      CreatingDate
       OrderStatus {
         Name
         ID

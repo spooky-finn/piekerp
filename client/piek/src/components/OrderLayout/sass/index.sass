@@ -1,17 +1,9 @@
-
-input
-    background: red    
-    
-    
 .base-container section
     // background: var(--section)  
-    padding: 0
-
     border: 1px solid var(--border)
-
     border-radius: var(--br)
-    min-height: 100vh 
     color: var(--text1)
+    padding: 1em
 
 
 .inCloudconIcon
@@ -29,16 +21,26 @@ input
     opacity: .1
   
 
+.MuiPaper-root
+    background: var(--bg) !important
+    input
+        color: var(--text1) !important
+    .MuiTypography-root
+        color: var(--text2) !important
+        span
+            color: var(--text1)
+    .dialog-danger-btn
+        color: var(--danger)
+        text-transform: initial !important
 
         
-
-
 .OrderLayout
     display: grid
     grid-template-columns: 2.5fr 1fr
+
     .Main
         .Composition
-            padding: 2rem 1rem
+            padding: 2rem 0
             line-height: 1
             border-bottom: 1px solid var(--border)
 
@@ -47,11 +49,11 @@ input
                 grid-template-columns: 5fr repeat(3, 1fr)
                 padding: .6em
                 
-            .Name, .Quantity
+            .Name, .Quantity, input
                 font-family: 'IBM Plex Mono'
                 font-size: 1.3rem
 
-            .Quantity
+            .Quantity, input
                 color: var(--accent)
                 font-weight: 600
 
@@ -60,7 +62,7 @@ input
             grid-template-columns: 1fr 1fr
             border-bottom: 1px solid var(--border)
             .CheckList
-                padding: 1rem
+                padding: 1rem 0
                 font-size: 1rem
 
 
@@ -97,23 +99,26 @@ input
                 padding: 1rem
                 border-left: 1px solid var(--border)
                 div
+                    display: flex
+
+                .file-name
                     font-family: 'IBM Plex Mono'
-                    font-size: .9rem
                     line-height: 1
+
                     padding: 5px 0
+                    width: fit-content
                     &:hover
                         color: var(--accent)
 
+                .delete-file 
+                    &:hover
+                        color: var(--danger)
+                        text-decoration: line-through
 
-                .MuiCircularProgress-root
-                    position: absolute
-                    left: 50%
-                    width: 50px !important
-                    height: 50px !important
-                    margin-right: .5rem
-                    color: var(--accent)
-                .onUploadFiles
+                .onUploadIcon
                     position: relative
+                    display: flex
+                    flex-direction: column
                     div
                         opacity: .7 
                         color: var(--text2)
