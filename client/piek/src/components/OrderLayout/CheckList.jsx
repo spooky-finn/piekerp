@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client"
-import { MUTATE_CHECKLIST_UNIT } from '../../hasura-queries/MutationCheckListUnit'
+import { MUTATE_CHECKLIST_UNIT } from './queries/MutationCheckListUnit'
 
 const CheckList = ({data}) => {
 

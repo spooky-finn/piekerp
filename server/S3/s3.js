@@ -15,11 +15,11 @@ const s3 = new AWS.S3({
   });
 
 
-const download = (filename, res) => {
+const download = (key, res) => {
 
   const getParams = {
     Bucket: process.env.S3_BUCKET,
-    Key: filename
+    Key: key
   };
 
   s3.getObject(getParams, function(err, data) {
@@ -61,6 +61,16 @@ const upload = multer({
     })
 })
 
+const deleteObject = (key) => {
+  const params = { Bucket: process.env.S3_BUCKET, Key: key };
+  
+  s3.deleteObject(params, function(err, data){
+    if (err) console.log(err, err.stack)
+    else     console.log(data);   
 
+  })
+}
+
+exports.deleteObject = deleteObject;
 exports.upload = upload;
 exports.download = download;

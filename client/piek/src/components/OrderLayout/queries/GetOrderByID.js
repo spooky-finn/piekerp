@@ -36,7 +36,7 @@ query MyQuery($OrderID: Int!) {
       Point
       CheckListUnitID
     }
-    Docs(order_by: {FileName: asc}) {
+    Docs {
       Key
       FileName
     }

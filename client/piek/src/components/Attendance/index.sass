@@ -46,17 +46,19 @@ $status-102: #72c900
     .chooseMonth
         padding: 15px
         display: flex
+        border-bottom: 2px solid transparent
         div
             padding: 7px 10px 
-            border-radius: $br1
             color: var(--text2)
             width: fit-content
             transition: color .2s ease
             &:hover
                 color: var(--accent)
         .active
-            background: var(--accentLight)
+            // background: var(--accentLight)
             color: var(--accent)
+            border-bottom: 2px solid var(--accent)
+
 
 
     .arguments

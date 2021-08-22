@@ -28,6 +28,8 @@ body
     padding: 5px !important
 
 
+.action-icon.active
+    color: var(--accent)
 .action-icon
     color: var(--text2)
     width: 23px
@@ -48,14 +50,11 @@ body
 
 
 .page-header
-    position: relative
     display: flex
-    padding-top: 20px
-    padding-bottom: 30px
+    padding: 10px 0
     align-items: center
     color: var(--text1)
-    font-size: 16px
-    font-weight: bold
+    height: 40px
     h2
        color: var(--text1)
     span
@@ -76,14 +75,17 @@ body
             border-color: var(--accent) 
             
 .action-block
-    margin-top: 10px
+    // margin-top: 10px
     display: flex
-    position: absolute
-    top: 0
-    right: 10px
+    margin-left: auto
+    z-index: 100
     div
         padding: 10px
 
+
+.PriorityLayout,
+.OrderLayout
+    padding-top: 1em
 
 
 .priority-table
@@ -123,3 +125,28 @@ body
 
     tbody tr:last-of-type td
         border-bottom: none
+
+
+
+.square-button
+    width: 30px
+    height: 30px
+    background: var(--accentLight)
+    border-radius: 7px
+    display: flex
+    justify-content: center
+    align-items: center
+    margin: 0 auto
+    svg
+        width: 20px
+        color: var(--text2)
+        &:hover  
+            color: var(--accent)
+            
+//Material UI TextInput 
+.MuiInputBase-root
+    &:hover 
+        &::before
+            border-bottom: 1px solid var(--border) !important
+    &::before
+        border-color: var(--border) !important

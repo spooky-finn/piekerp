@@ -1,10 +1,13 @@
-import { useMemo, useEffect, useContext } from 'react'
+import { useMemo, useContext } from 'react'
 import { Context } from '../../index'
 
+//apollo
 import { useSubscription } from '@apollo/client'
 import { GetOrdersSubscription } from '../../hasura-queries/getOrders'
 
 import Table, { columnsList } from './tableLogic'
+
+//components
 import PreOrders from '../PreOrders'
 import BaseHeader from '../BaseHeader'
 import ActionsHeader from '../BaseHeader/ActionsHeader'
@@ -33,18 +36,21 @@ const PriorityLayout = (props) => {
 
     return ( 
         <>
-        <ActionsHeader />
+        {/* <ActionsHeader /> */}
         <div className="Container-1200">
-            <BaseHeader pageParams = { store.getPageParams(window.location.pathname) }/> 
+            <BaseHeader pageParams = { store.getPageParams(window.location.pathname) }>
+                <ActionsHeader/>
+            </BaseHeader>
         
-
-            {data.erp_Orders && preOrders ? ( 
-            <>
-                <PreOrders preOrders = { preOrders }/>
-                <Table columns = { columns } data = { orders }/>
-                </>
-            ) : store.preloader
-        } 
+            <div className='PriorityLayout'>
+                {data.erp_Orders && preOrders ? ( 
+                <>
+                    <PreOrders preOrders = { preOrders }/>
+                    <Table columns = { columns } data = { orders }/>
+                    </>
+                ) : store.preloader
+                } 
+            </div>           
         </div>
         </>
     )

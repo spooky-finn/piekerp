@@ -4,14 +4,15 @@ import {useDropzone} from 'react-dropzone'
 import { useParams } from "react-router-dom"
 
 //apollo
-import { GET_ORDER_BY_ID } from '../../hasura-queries/getOrderByID'
-import { PUSH_DOCS_ARRAY } from '../../hasura-queries/docs'
+import { GET_ORDER_BY_ID } from './queries/GetOrderByID'
+import { PUSH_DOCS_ARRAY } from './queries/MutationOrderDocs'
 import { useMutation, useQuery } from "@apollo/client";
 
 //components
 import ActionsHeader from "../BaseHeader/ActionsHeader";
 import OrderComposition from "./OrderComposition";
-import OrderMeta from "./OrderMeta";
+import Info from "./Info";
+import EditableInfo from "./EditableComponents/EditableInfo";
 import CheckList from './CheckList';
 import Docs from './Docs';
 import Comments from "./Comments";
@@ -19,10 +20,8 @@ import { isFileOnDropzone } from "./Dropzone";
 
 //ui
 import { Heading } from 'evergreen-ui';
-import './index.sass'
-
-
-
+import './sass/index.sass'
+import AddOrderItem from "./EditableComponents/AddOrderItem";
 
 
 const OrderLayout = (props) => {
@@ -64,27 +63,40 @@ const OrderLayout = (props) => {
     return(
     <>
         {isFileOnDropzone(isDragActive)}
-         <ActionsHeader accessLevel = {2}  setEditState = {setEditState} editState = {editState}/>
+        
 
         {!loading ? (<>
 
         <div className="page-header">
             <Heading>{data.erp_Orders[0].Entity} __  {data.erp_Orders[0].City}</Heading>
+
+            <ActionsHeader 
+            accessLevel = {2} 
+            setEditState = {setEditState} 
+            editState = {editState} />
+            
         </div>
 
-        <section className="OrderLayout"  {...getRootProps()} id='dropzone'>
+        <section className='OrderLayout' {...getRootProps()} id='dropzone'>
 
                     <div className="Main">
 
+                    <div className="Composition">  
                         <OrderComposition data={data.erp_Orders[0].OrderItems}/> 
+                        <AddOrderItem editState={editState} orderID={orderID} refetch={refetch}/>
+                    </div>
+                    
                         <div className="WrapperTwoCol">
                             <CheckList data={data.erp_Orders[0].CheckListUnits}/>
-                            <Docs data={data.erp_Orders[0].Docs} onUpload={onUploadFiles} />
+                            <Docs data={data.erp_Orders[0].Docs} 
+                                onUpload={onUploadFiles} 
+                                editState = {editState} 
+                                refetch={refetch}/>
                         </div>
                         <Comments/>
                     </div>
                     
-                    <OrderMeta data={data.erp_Orders[0]} editState = {editState}/>
+                    {editState ? <EditableInfo data={data.erp_Orders[0]} orderID={orderID} refetch={refetch}/> : <Info data={data.erp_Orders[0]} editState = {editState} /> }
                    
 
        

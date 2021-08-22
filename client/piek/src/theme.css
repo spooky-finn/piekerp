@@ -6,13 +6,13 @@ html{
     --bg: #f7f7fa;
     --section: #fff;
     --text1: rgba(22, 22, 22, 0.87);
-    --text2: #8F8F8F;
+    --text2: rgba(0, 0, 0, .5);
     --textInvert: rgba(233, 233, 233);
     --accent: #3763FE;
+    --danger: #e5534b;
     --accentLight: #E7E9FB;
     --border: rgba(0,0,0,.1);
     --br: 20px;
-   
 }
 
 
@@ -24,10 +24,10 @@ html.dark {
     /* --bg: #000; */
     --bg: rgb(24, 23, 29);
 
-    /* --section: #1c1d1fb6; */
+    /* --section: #121314; */
     --section: rgb(35, 34, 43);
 
     --accent: #6989fc;
     --accentLight: #35363b;
-    --border: rgba(255,255,255,.15  )
+    --border: rgba(255,255,255,.15);
     }
