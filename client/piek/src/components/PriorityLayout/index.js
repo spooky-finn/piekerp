@@ -1,5 +1,6 @@
-import { useMemo, useContext } from 'react'
+import { useMemo, useContext, useState } from 'react'
 import { Context } from '../../index'
+import { useHistory } from "react-router-dom";
 
 //apollo
 import { useSubscription } from '@apollo/client'
@@ -12,47 +13,54 @@ import PreOrders from '../PreOrders'
 import BaseHeader from '../BaseHeader'
 import ActionsHeader from '../BaseHeader/ActionsHeader'
 
+//UI
+import './index.sass'
+import { UilSearch } from '@iconscout/react-unicons'
 
-const PriorityLayout = (props) => {
-    let preOrders = [];
-    let orders = [];
+const PriorityLayout = () => {
+    const [orders, setOrders] = useState([]);
+    const [preOrders, setPreOrders] = useState([]);
+
+    const [search, setSearch] = useState('');
     const { store } = useContext(Context);
+    const history = useHistory();
 
-    const { error, loading, data = [] } = useSubscription(GetOrdersSubscription);
+    const onSubscriptionData = (options) => {
+        setPreOrders([]); setOrders([]);
+        const d = options.subscriptionData.data.erp_Orders
 
-    if (data.erp_Orders) {
-        data.erp_Orders.sort((a, b) => b.ShippingDate < a.ShippingDate ? 1 : -1);
-
-        //отбираем предзаказы
-        data.erp_Orders.forEach((order) => {
-            if (order.OrderStatus.ID == 3) preOrders.push(order)
-            else if (order.OrderStatus.ID == 1) orders.push(order)
-        });
+        d.sort((a, b) => b.ShippingDate < a.ShippingDate ? 1 : -1);
+        
+        d.forEach( (order) => {
+            if (order.OrderStatus.ID == 3) setPreOrders(oldArray => [...oldArray, order])
+            else if (order.OrderStatus.ID == 1) setOrders(oldArray => [...oldArray, order])
+        })
     }
-    
+
+    const { loading, data = [] } = useSubscription(GetOrdersSubscription, { onSubscriptionData, variables: { search: '%'+search+'%' } });
+
     const columns = useMemo(
         () => columnsList, []
     )
 
     return ( 
-        <>
-        {/* <ActionsHeader /> */}
         <div className="Container-1200">
             <BaseHeader pageParams = { store.getPageParams(window.location.pathname) }>
-                <ActionsHeader/>
+                <ActionsHeader createOrder={true} userID={store.user.UserID} history={history}/>
             </BaseHeader>
         
-            <div className='PriorityLayout'>
-                {data.erp_Orders && preOrders ? ( 
-                <>
                     <PreOrders preOrders = { preOrders }/>
-                    <Table columns = { columns } data = { orders }/>
-                    </>
-                ) : store.preloader
-                } 
-            </div>           
+
+                    <div className="tableWrap">
+
+                        <div className="tableSearchInput">
+                            <UilSearch className="action-icon"/>
+                            <input type='text' placeholder="поиск (номер счета или организация)" onChange={ (e) => setSearch(e.target.value.trim()) } autoFocus/>
+                        </div>
+                        <Table columns = { columns } data = { orders }/>
+                    </div>
+       
         </div>
-        </>
     )
 }
 export default PriorityLayout;

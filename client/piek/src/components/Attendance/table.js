@@ -1,6 +1,7 @@
 import { useTable } from 'react-table'
 import { daysInMonth } from './functions'
 
+
 export function generateColumns(selectedMonth, timeDeduction){
   let columnsList = [
       {
@@ -93,7 +94,7 @@ function getIntervalData(day, intervals, timeDeduction){
     }   else return [null, null, null, null]
 }
 
-export default function Table({columns, data, id, heading, className}){
+export default function Table({columns, data, className}){
     const {
         getTableProps,
         getTableBodyProps,
@@ -106,11 +107,9 @@ export default function Table({columns, data, id, heading, className}){
       })
 
 
-    if (data.length == 0) return null;
-
    return (
      <>
-    <table id={id} className={className} {...getTableProps()}>
+    <table className={className} {...getTableProps()}>
       <thead>
         {headerGroups.map((headerGroup, i) => (
           <tr key={i} {...headerGroup.getHeaderGroupProps()}>

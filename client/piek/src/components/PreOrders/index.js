@@ -14,7 +14,7 @@ import './index.sass'
 const PreOrders = (props) => {
     const [showPreOrders, setShowPreOrders] = useState(false);
 
-    const [mutationOrderStatus, { data }] = useMutation(MUTATE_ORDER_STATUS);
+    const [mutationOrderStatus] = useMutation(MUTATE_ORDER_STATUS);
 
 
     let dt = props.preOrders

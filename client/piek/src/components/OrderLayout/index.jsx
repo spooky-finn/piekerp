@@ -1,7 +1,7 @@
 import { useContext, useCallback, useState } from "react";
 import { Context } from "../..";
 import {useDropzone} from 'react-dropzone'
-import { useParams } from "react-router-dom"
+import { useParams, useLocation } from "react-router-dom"
 
 //apollo
 import { GET_ORDER_BY_ID } from './queries/GetOrderByID'
@@ -24,12 +24,18 @@ import './sass/index.sass'
 import AddOrderItem from "./EditableComponents/AddOrderItem";
 
 
+
+
 const OrderLayout = (props) => {
     const {store} = useContext(Context);
     const [onUploadFiles, setOnUploadFiles] = useState([])
-    const [editState, setEditState] = useState(false)
+
+    const editStateQueryArg = new URLSearchParams(useLocation().search).get('edit')
+    const [editState, setEditState] = useState(editStateQueryArg)
     const [pushDocs] = useMutation(PUSH_DOCS_ARRAY);
     const orderID = useParams().id
+
+
 
     const S3Upload = useCallback(acceptedFiles => {
         setOnUploadFiles(acceptedFiles)
@@ -59,6 +65,11 @@ const OrderLayout = (props) => {
 
       const {getRootProps, isDragActive} = useDropzone({className: 'dropzone', onDrop: S3Upload });
   
+    //   function useQuery() {
+    //     return new URLSearchParams(useLocation().search);
+    //   }
+      
+    console.log();
 
     return(
     <>

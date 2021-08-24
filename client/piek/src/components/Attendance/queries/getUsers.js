@@ -1,10 +1,9 @@
 import gql from 'graphql-tag'; 
 
 export const GET_USERS = gql`
-query MyQuery($gte: timestamp!, $lte: timestamp!, $search: String!) {
+query MyQuery($gte: timestamp!, $lte: timestamp!) {
   attendance_users_aggregate(
-    order_by: {lastname: asc},
-    where: {_or: [ {firstname: {_ilike: $search}}, {lastname: {_ilike: $search}} ] }
+    order_by: {lastname: asc}
     ){
     nodes {
       id

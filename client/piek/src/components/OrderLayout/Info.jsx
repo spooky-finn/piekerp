@@ -1,5 +1,6 @@
 import { setPaidPercent } from "../PriorityLayout/tableLogic";
 import { UilHistoryAlt } from "@iconscout/react-unicons";
+import  moment  from 'moment'
 import "./sass/order-meta.sass";
 
 const OrderMeta = (props) => {
@@ -10,9 +11,7 @@ const OrderMeta = (props) => {
       <div className="SignificantInfo">
             <div>
                 <pre>План. отгрузка</pre>
-                {props.data.ShippingDate}
-
-                {/* {getShippingDate(props.data.ShippingDate)} */}
+                {moment(props.data.ShippingDate).format('DD.MM.YY')}
             </div>
             <div>
                 <pre>Счет / оплата</pre>
