@@ -25,7 +25,7 @@ const ReportConfigurator = (props) => {
     const chooseMonth = () => {
         const m = []
         
-        for (var i=0; i< 9; i++) {
+        for (var i=0; i< 6; i++) {
             const suitable = monthAdd(date, -i)
             m.push(
                 <div onClick={handleToggle} 

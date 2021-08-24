@@ -1,0 +1,40 @@
+$theadHeight: 40px
+
+.priorityTable
+    border-top: 1px solid var(--border)
+    width: 100%
+    border-spacing: 0
+    thead th
+        color: var(--text2)
+        height: $theadHeight
+        font-size: .7rem
+        font-weight: 300
+        border-bottom: 1px solid var(--border)
+        text-align: left
+
+    tbody td:first-of-type
+        padding: 0 10px
+        text-align: center
+        font-size: .7rem
+
+    tbody td
+        padding: 10px 0
+        color: var(--text2)
+        border-bottom: 1px solid var(--border)
+        font-size: .8rem
+   
+    tbody td:nth-of-type(2) a,
+    tbody td:nth-of-type(3)
+        font-family: 'IBM Plex Mono'
+        text-decoration: none
+        color: var(--text1)
+        font-size: 1rem
+    
+    td:nth-of-type(4),
+    th:nth-of-type(4)
+        border-left: 1px solid var(--border)
+        padding-left: 15px
+
+    tbody tr:last-of-type td
+        border-bottom: none
+

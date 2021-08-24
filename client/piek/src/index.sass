@@ -32,8 +32,6 @@ body
     color: var(--accent)
 .action-icon
     color: var(--text2)
-    width: 23px
-    height: 23px
     path
         // уменьшение толщины линий иконок
         stroke-width: .8
@@ -61,18 +59,6 @@ body
         color: var(--accent)
         margin-bottom: -5px !important
         padding-right: 1em
-    .search-box
-        position: absolute
-        left: 50%
-        transform: translateX(-50%)
-    .search-input
-        color: var(--text1)
-        border-radius: 20px
-        border: 1px solid var(--border)
-        background: var(--bg)
-        box-shadow: none !important
-        &:active, &:focus
-            border-color: var(--accent) 
             
 .action-block
     // margin-top: 10px
@@ -83,49 +69,8 @@ body
         padding: 10px
 
 
-.PriorityLayout,
 .OrderLayout
     padding-top: 1em
-
-
-.priority-table
-    width: 100%
-    border: 1px solid var(--border)
-    border-radius: var(--br)
-    thead th
-        padding: 10px
-        color: var(--text2)
-        font-size: 11px
-        font-weight: 400
-        transition: color .1s ease
-        border-bottom: 1px solid var(--border)
-        text-align: left
-        opacity: .5
-        &:hover
-            opacity: 1
-            color: var(--text1)
-
-    tbody td
-        padding: 10px
-        border-bottom: 1px solid var(--border)
-        color: var(--text2)
-        font-size: 12px
-        
-
-    tbody td:nth-of-type(2) a,
-    tbody td:nth-of-type(3)
-        font-family: 'IBM Plex Mono'
-        text-decoration: none
-        color: var(--text1)
-        font-size: 15px
-
-    tbody td:nth-of-type(4)
-        color: var(--text1)
-        font-size: 14px
-
-    tbody tr:last-of-type td
-        border-bottom: none
-
 
 
 .square-button
@@ -150,3 +95,22 @@ body
             border-bottom: 1px solid var(--border) !important
     &::before
         border-color: var(--border) !important
+
+.tableWrap
+    border: 1px solid var(--border)
+    border-radius: var(--br)
+
+    .tableSearchInput
+        display: flex
+        height: 50px
+        align-items: center
+        .action-icon
+            padding: 0 10px
+            width: 20px
+        input
+            border: none
+            flex-grow: 1
+            background: transparent
+            color: var(--text1)
+            &:active, &:focus
+                outline: none !important

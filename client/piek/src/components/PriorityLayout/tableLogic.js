@@ -1,6 +1,7 @@
+
 import { useTable } from 'react-table'
-import {Heading} from 'evergreen-ui';
 import { Link } from 'react-router-dom'
+import  moment  from 'moment';
 
 
 export const setPaidPercent = (total, paid) => {
@@ -8,10 +9,6 @@ export const setPaidPercent = (total, paid) => {
         return ' '    
     }
     return ' - ' + ((paid/total) * 100).toFixed(0) + '%'
-}
-
-export const getShippingDate = (SD) => {
-  return SD.split("-")[2] + '.' + SD.split("-")[1] + '.' + SD.split("-")[0].slice(2)
 }
 
 export const columnsList = [
@@ -23,14 +20,18 @@ export const columnsList = [
     {
       Header: 'Наим.',
       id: "orderItems",
-      accessor: data =>
-      <Link to={`/order/${data.OrderID}`}>
-          {data.OrderItems.map(item => (
-            <div key={item.OrderItemID} >
-              <span>{item.Name}</span>
-            </div>
-          ))}
-        </Link>
+      accessor: data => {
+        if (data.OrderItems.length == 0) return <Link to={`/order/${data.OrderID}`}><div>пустота...</div></Link>
+
+        else return (<Link to={`/orders/${data.OrderID}`}>
+        {data.OrderItems.map(item => (
+          <div key={item.OrderItemID} >
+            <span>{item.Name}</span>
+          </div>
+        ))}
+        </Link>)
+      }
+      
     },
     {
       Header: 'Кол-во',
@@ -43,7 +44,8 @@ export const columnsList = [
     },
     {
       Header: 'Отгрузка',
-      accessor: 'ShippingDate',
+      accessor: (order) => 
+      <> { moment(order.ShippingDate).format('DD.MM.YY') } </>
     },
     {
       Header: 'Счет- оплата',
@@ -63,7 +65,7 @@ export const columnsList = [
     //   accessor: 'ShippingDate',
     // },
   ]
-  
+
 export default function Table({columns, data, id, heading}){
     const {
         getTableProps,
@@ -81,9 +83,7 @@ export default function Table({columns, data, id, heading}){
 
    return (
      <>
-
-    <Heading className='group-heading'>{heading}</Heading>
-    <table id={id} className="priority-table" {...getTableProps()}>
+    <table id={id} className="priorityTable" {...getTableProps()}>
       <thead>
         {headerGroups.map((headerGroup, i) => (
           <tr key={i} {...headerGroup.getHeaderGroupProps()}>

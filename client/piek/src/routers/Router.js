@@ -17,7 +17,7 @@ const AppRouter = (props) => {
             <PrivateRoute path='/attendance' component={Attendance}/>
 
 
-            <PrivateRoute path='/order/:id' component={OrderLayout}/>
+            <PrivateRoute path='/orders/:id' component={OrderLayout}/>
 
             #if required route was not found
             <Redirect to="/" />

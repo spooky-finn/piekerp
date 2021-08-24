@@ -14,7 +14,6 @@ export default class Store {
 
     constructor(){
         makeAutoObservable(this);
-        
     }
 
     setAuth(bool){
@@ -32,7 +31,6 @@ export default class Store {
     setInMemoryToken(token){
         this.inMemoryToken = token
     }
-
     async login(email, password){
         try {
             const response = await AuthService.login(email, password);
