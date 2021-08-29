@@ -16,7 +16,7 @@ const Sidebar = () => {
         <Pane className='Sidebar'>
 
             <NavLink  exact  to='/' activeClassName='sidebar-active' className="action-icon"><UilSortAmountDown/></NavLink>
-            <NavLink  to='/recently' activeClassName='sidebar-active' className="action-icon"><UilEnvelopeInfo/></NavLink>
+            {/* <NavLink  to='/recently' activeClassName='sidebar-active' className="action-icon"><UilEnvelopeInfo/></NavLink> */}
             <NavLink  to='/reclamation' activeClassName='sidebar-active' className="action-icon"><UilWrench/></NavLink>
             <NavLink  to='/attendance' activeClassName='sidebar-active' className="action-icon"><UilConstructor/></NavLink>
 

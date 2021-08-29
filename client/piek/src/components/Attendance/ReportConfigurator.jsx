@@ -12,14 +12,20 @@ function monthAdd(date, month) {
     return temp;    
   }
 
-const ReportConfigurator = (props) => {
-
+const ReportConfigurator = ({ state, dispatch }) => {
     const date = new Date()
     const months = ["янв", "фев", "мар", "апр", "май", "июн", "июл", "авг", "сен", "окт", "ноя", "дек"];
 
-    const handleToggle = (e) => {
+    const selectedMonthHandler = (e) => {
         const d = new Date(e.target.attributes.date.value)
-        props.setSelectedMonth([d.getMonth(), d.getFullYear()])
+        dispatch({type: 'selectedMonth', payload: [d.getMonth(), d.getFullYear()] })
+    }
+
+    const timeDeductionHandler = (e) => {
+        dispatch({
+            type: 'timeDeduction',
+            payload: parseInt(e.target.value.trim())
+        })
     }
 
     const chooseMonth = () => {
@@ -28,8 +34,8 @@ const ReportConfigurator = (props) => {
         for (var i=0; i< 6; i++) {
             const suitable = monthAdd(date, -i)
             m.push(
-                <div onClick={handleToggle} 
-                    className={suitable.getMonth() == props.selectedMonth[0] ? 'active' : ''}
+                <div onClick={selectedMonthHandler} 
+                    className={suitable.getMonth() == state.selectedMonth[0] ? 'active' : ''}
                     date={suitable}> {months[suitable.getMonth()]} </div>
                 )
         } 
@@ -43,15 +49,15 @@ const ReportConfigurator = (props) => {
         <div className="arguments">
             <div className="wrap">
                 <span>обед</span>
-                <input type='text' defaultValue={props.timeDeduction} onMouseLeave={e => props.setTimeDeduction(e.target.value)}/>
+                <input type='text' defaultValue={state.timeDeduction} onChange={timeDeductionHandler}/>
                 <span>мин</span>
             </div>
             
-            <div className="wrap">
+            {/* <div className="wrap">
                 <span>норма</span>
-                <input type='text' defaultValue={props.timeDeduction}/>
+                <input type='text' defaultValue={state.timeDeduction}/>
                 <span>ч</span>
-            </div>
+            </div> */}
         </div>
     </div>
     )

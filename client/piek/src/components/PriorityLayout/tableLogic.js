@@ -21,7 +21,7 @@ export const columnsList = [
       Header: 'Наим.',
       id: "orderItems",
       accessor: data => {
-        if (data.OrderItems.length == 0) return <Link to={`/order/${data.OrderID}`}><div>пустота...</div></Link>
+        if (data.OrderItems.length == 0) return <Link to={`/orders/${data.OrderID}`}><div>пустота...</div></Link>
 
         else return (<Link to={`/orders/${data.OrderID}`}>
         {data.OrderItems.map(item => (
@@ -49,8 +49,7 @@ export const columnsList = [
     },
     {
       Header: 'Счет- оплата',
-      accessor: data => 
-      '№ ' + data.InvoiceNumber + setPaidPercent(data.TotalAmount, data.PaidAmount),
+      accessor: data => data.InvoiceNumber + setPaidPercent(data.TotalAmount, data.PaidAmount),
     },
     {
       Header: 'Компания',
@@ -60,13 +59,13 @@ export const columnsList = [
       Header: 'Гор.',
       accessor: 'City',
     },
-    // {
-    //   Header: 'Перв. платеж',
-    //   accessor: 'ShippingDate',
-    // },
+    {
+      Header: 'Мдж.',
+      accessor: data => <div className='priorityTable-manager'>{data.User.FirstName[0]}</div>,
+    },
   ]
 
-export default function Table({columns, data, id, heading}){
+export default function Table({columns, data, id}){
     const {
         getTableProps,
         getTableBodyProps,

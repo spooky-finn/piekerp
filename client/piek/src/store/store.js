@@ -11,6 +11,7 @@ export default class Store {
     isAuth = false;
     isLoading = false;
     inMemoryToken = undefined;
+    priorityTab = 0;
 
     constructor(){
         makeAutoObservable(this);
@@ -30,6 +31,9 @@ export default class Store {
 
     setInMemoryToken(token){
         this.inMemoryToken = token
+    }
+    setPriorutyTab(number){
+        this.priorityTab = number
     }
     async login(email, password){
         try {

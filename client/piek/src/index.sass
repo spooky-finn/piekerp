@@ -19,9 +19,9 @@ body
     // padding: 0 50px
     // padding: 0 10px 0 60px
     
-.Container-1200
-    max-width: 1200px
-    margin: 0 auto
+// .Container-1200
+//     max-width: 1200px
+//     margin: 0 auto
 
 .tooltip
     font-size: 12px !important
@@ -31,13 +31,11 @@ body
 .action-icon.active
     color: var(--accent)
 .action-icon
-    color: var(--text2)
+    color: var(--text1)
     path
         // уменьшение толщины линий иконок
         stroke-width: .8
         stroke: var(--bg) 
-    &:hover
-        color: var(--accent)
 
     @media (max-width: 900px)
         svg
@@ -53,8 +51,11 @@ body
     align-items: center
     color: var(--text1)
     height: 40px
+    margin-bottom: 20px
     h2
-       color: var(--text1)
+        color: var(--text1)
+        font-size: .9rem
+
     span
         color: var(--accent)
         margin-bottom: -5px !important
@@ -82,11 +83,14 @@ body
     justify-content: center
     align-items: center
     margin: 0 auto
+    transition: background 50ms linear
     svg
         width: 20px
         color: var(--text2)
-        &:hover  
-            color: var(--accent)
+    &:hover  
+        background: var(--accent)   
+        svg 
+            color: var(--bg)
             
 //Material UI TextInput 
 .MuiInputBase-root
@@ -97,8 +101,11 @@ body
         border-color: var(--border) !important
 
 .tableWrap
+    display: table
+    width: 100%
     border: 1px solid var(--border)
     border-radius: var(--br)
+    margin-bottom: 2em
 
     .tableSearchInput
         display: flex
@@ -114,3 +121,16 @@ body
             color: var(--text1)
             &:active, &:focus
                 outline: none !important
+
+    .tableFooter
+        // background: var(--accentLight)
+        border-top: 1px dashed  var(--border)
+        padding: .7em
+    table thead
+        border-top: 1px solid var(--border)
+    table td:first-of-type
+        border-left: none !important
+    table td:last-of-type
+        border-right: none !important
+    table tr:last-of-type td
+        border-bottom: none !important

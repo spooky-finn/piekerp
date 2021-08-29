@@ -4,7 +4,8 @@
 
 html{
     --bg: #f7f7fa;
-    --section: #fff;
+    --section: #fcfcfc;
+    
     --text1: rgba(22, 22, 22, 0.87);
     --text2: rgba(0, 0, 0, .5);
     --textInvert: rgba(233, 233, 233);
@@ -12,6 +13,7 @@ html{
     --danger: #e5534b;
     --accentLight: #E7E9FB;
     --border: rgba(0,0,0,.1);
+    --br10: 10px;
     --br: 20px;
 }
 
@@ -24,7 +26,7 @@ html.dark {
     /* --bg: #000; */
     --bg: rgb(24, 23, 29);
 
-    /* --section: #121314; */
+    /* --section: #12121a; */
     --section: rgb(35, 34, 43);
 
     --accent: #6989fc;
