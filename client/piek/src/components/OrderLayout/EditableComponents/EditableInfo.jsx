@@ -125,6 +125,7 @@ const EditableInfo = ({ data, orderID, refetch }) => {
           label="Сумма заказа"
           name='TotalAmount'
           defaultValue={data.TotalAmount}
+          autoComplete="off"
           onChange={addField}
           InputProps={{
             inputComponent: MoneyFormatCustom
@@ -135,6 +136,7 @@ const EditableInfo = ({ data, orderID, refetch }) => {
           label="Оплачено"
           name='PaidAmount'
           defaultValue={data.PaidAmount}
+          autoComplete="off"
           onChange={addField}
           InputProps={{
             inputComponent: MoneyFormatCustom

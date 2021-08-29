@@ -9,11 +9,7 @@ import gql from 'graphql-tag';
 
 export const GetOrdersSubscription = gql`
 subscription GetOrders($search: String) {
-    erp_Orders(where: {OrderStatusID: {_neq: 4},
-      _or: [
-        {Entity: {_ilike: $search } },
-        {InvoiceNumber: {_ilike: $search} }
-        ] }) {
+    erp_Orders(where: {OrderStatusID: {_neq: 4} }) {
       OrderID
       Entity
       InvoiceNumber
@@ -22,6 +18,7 @@ subscription GetOrders($search: String) {
       PaidAmount
       TotalAmount
       CreatingDate
+      ManagerID
       OrderStatus {
         Name
         ID
@@ -31,9 +28,20 @@ subscription GetOrders($search: String) {
         OrderItemID
         Name
         OrderID
-        
+      } 
+      User {
+        FirstName
       }
-      
-    }
+
+    }  
   }
+`
+export const GET_USERS = gql`
+query getUsers {
+  erp_Users{
+    FirstName
+    LastName
+    UserID
+  }
+}
 `
