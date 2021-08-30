@@ -1,9 +1,10 @@
 .base-container section
-    // background: var(--section)  
-    border: 1px solid var(--border)
+    background: var(--section)  
+    // border: 1px solid var(--border)
     border-radius: var(--br)
     color: var(--text1)
     padding: 1em
+    padding-left: 2em
     min-height: 80vh
 
 
@@ -45,18 +46,26 @@
             line-height: 1
             border-bottom: 1px solid var(--border)
 
-            .Unit
-                display: grid
-                grid-template-columns: 5fr repeat(3, 1fr)
-                padding: .6em
-                
-            .Name, .Quantity, input
+            .Unit 
                 font-family: 'IBM Plex Mono'
-                font-size: 1.3rem
+                padding-bottom: 1.5em
+            .firstRow
+                display: grid
+                grid-template-columns: 5fr .8fr 1fr 1fr 
 
-            .Quantity, input
-                color: var(--accent)
-                font-weight: 600
+                .name, .quantity, input
+                    font-size: 1.3rem
+
+                .quantity, input
+                    color: var(--accent)
+                    font-weight: 600
+
+            .fullName
+                display: flex
+                font-family: 'IBM Plex Mono'
+                color: var(--text2) !important
+                padding-top: 5px
+                font-size: .9rem
 
         .WrapperTwoCol
             display: grid

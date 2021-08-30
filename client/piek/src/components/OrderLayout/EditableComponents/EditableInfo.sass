@@ -1,8 +1,5 @@
 .EditableInfo
     border-left: 1px dashed var(--accent) !important
-    label
-        color: var(--text2)
-        font-size: .9rem
     
     .MuiFormControl-root
         width: 100%
@@ -12,15 +9,28 @@
             color: var(--text1)
             font-weight: normal !important
 
-
-
 .Composition 
     .addOrderItem
+        display: grid
+        grid-template-columns: 8fr 1fr
+        margin-right: 2em 
+        // background: var(--accentLight)
+        // border-radius: var(--br)
+        padding: 1rem
         margin-top: 2em
-        label
-            color: var(--text2)
-        .Quantity
-            margin-left: 1em
+
+        input, textarea
+            font-family: 'IBM Plex Mono' !important
+
+        .MuiFormControl-root
+            padding: 0 1rem !important
+            label
+                padding-left: 1em
+
+
+        .fullName
+            margin-top: 1rem
+
         .push-order-item
             display: flex
             align-self: end

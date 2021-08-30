@@ -25,6 +25,7 @@ query MyQuery($OrderID: Int!) {
     OrderItems {
       Fitter
       Name
+      FullName
       OrderItemID
       OrderID
       Quantity
