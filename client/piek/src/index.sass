@@ -1,3 +1,5 @@
+@import 'materialUI.sass'
+    
 html
     background: var(--bg) !important
     @media (max-width: 1000px)
@@ -9,6 +11,14 @@ body
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button 
+  -webkit-appearance: none
+  margin: 0
+
+/* Firefox */
+input[type=number] 
+  -moz-appearance: textfield
 
 
 .base-container
@@ -92,13 +102,6 @@ body
         svg 
             color: var(--bg)
             
-//Material UI TextInput 
-.MuiInputBase-root
-    &:hover 
-        &::before
-            border-bottom: 1px solid var(--border) !important
-    &::before
-        border-color: var(--border) !important
 
 .tableWrap
     display: table

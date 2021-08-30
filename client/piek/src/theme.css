@@ -27,9 +27,9 @@ html.dark {
     --bg: rgb(24, 23, 29);
 
     /* --section: #12121a; */
-    --section: rgb(35, 34, 43);
+    --section: rgb(32, 31, 39);
 
     --accent: #6989fc;
-    --accentLight: #35363b;
+    --accentLight: #43435c;
     --border: rgba(255,255,255,.15);
     }

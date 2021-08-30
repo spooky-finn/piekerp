@@ -10,43 +10,68 @@ const AddOrderItem = ({editState, orderID, refetch}) => {
 
     const name = useRef(null)
     const quantity = useRef(null)
+    const fullName = useRef(null)
 
 
     const mutate = () => {
         if (quantity.current.value != ''){
-            inserdOrderItem({variables: { orderID, name: name.current.value, quantity: quantity.current.value}}).then( () => refetch() )
+            inserdOrderItem({variables: { 
+                orderID, name: name.current.value, 
+                quantity: quantity.current.value,
+                fullName: fullName.current.value, }}).then( () => refetch() )
         }
         
     
         name.current.value=null;
         quantity.current.value=null
+        fullName.current.value=null
     }
 
     const addOne = () => (
         <>
             <TextField
-                className="Name"
+                size="small" 
+                className="name"
                 label="Наименование"
                 autoComplete='off'
                 inputRef={name}
+                // InputProps={{ disableUnderline: true }}
               />
             <TextField
-                className="Quantity"
+                size="small" 
+                className="quantity"
                 label="Кол-во"
                 type="number"
                 inputRef={quantity}
                 autoComplete='off'
-               />
+                // InputProps={{ disableUnderline: true }}
 
-        <div className="square-button push-order-item"
-                onClick={mutate}><UilArrowUp/></div>
+               />
+           
+
+           <TextField
+                label="Полное наименование"
+                className="fullName"
+                multiline
+                autoComplete="off"
+                name='Comment'
+                // InputProps={{ disableUnderline: true }}
+                inputRef={fullName}
+                />
+
+            <div className="square-button push-order-item"
+                onClick={mutate}><UilArrowUp/>
+            </div>
+
+               
+
          </>
         )
 
     if (!editState) return null
 
     return(
-        <div className="Unit addOrderItem">{addOne()}</div>
+        <div className="addOrderItem">{addOne()}</div>
     )
 }
 export default AddOrderItem
