@@ -146,7 +146,7 @@ const PriorityLayout = () => {
                 <ActionsHeader createOrder={1} userID={store.user.UserID} history={history}/>
             </BaseHeader>
         
-                    <PreOrders preOrders = { preOrders }/>
+                    <PreOrders preOrders = { preOrders } />
 
                     <div  className='priorityTabs'>
                         <Tabs value={priorityTab} onChange={tabHandler} aria-label="simple tabs example"  indicatorColor="primary">

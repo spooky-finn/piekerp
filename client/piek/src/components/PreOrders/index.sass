@@ -1,24 +1,19 @@
 .preorders-container
     table 
         border: 1px dashed var(--border) !important
-
-    #grow
-        height: 0
-        overflow: hidden !important
-        transition: height 300ms ease
-        margin-bottom: 20px
-        table
-            border-radius: var(--br)
+        border-radius: var(--br)
+        margin-bottom: 50px !important
 
 .preorders-container.active
-    #grow
-        overflow: visible
     svg
         transform: rotate(90deg)
 
 .preorders-heading
+    display: flex
+    align-self: center
     color: var(--accent) !important
-    width: fit-content
+    padding: 10px 0  !important
+    margin-bottom: 10px
     span
         margin: 0 5px
         svg
