@@ -11,7 +11,9 @@ export default class Store {
     isAuth = false;
     isLoading = false;
     inMemoryToken = undefined;
+
     priorityTab = 0;
+    showPreOrders = false;
 
     constructor(){
         makeAutoObservable(this);
@@ -35,6 +37,11 @@ export default class Store {
     setPriorutyTab(number){
         this.priorityTab = number
     }
+
+    setShowPreOrders(bool){
+        this.showPreOrders = bool
+    }
+    
     async login(email, password){
         try {
             const response = await AuthService.login(email, password);

@@ -10,7 +10,6 @@ import moment  from 'moment'
 
 let fields = {}
 
-
 function DateFormatCustom(props) {
   const { inputRef, onChange, ...other } = props;
 
@@ -53,13 +52,16 @@ function MoneyFormatCustom(props) {
 }
 
 const EditableInfo = ({ data, orderID, refetch }) => {  
+  
 
     const addField = (e) => fields[e.target.name] = e.target.value
     const [updateOrderInfo] = useMutation(UPDATE_ORDER_INFO);
   
-    console.log(moment(data.ShippingDate).format('DD.MM.YY'))
     useEffect(() => {
+        fields = {};
+        
         return () => {
+            console.log('doing mutation for order', orderID, fields)
             updateOrderInfo({variables: {
             orderID,
             fields,
