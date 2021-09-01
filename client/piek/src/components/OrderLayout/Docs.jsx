@@ -49,9 +49,10 @@ const Docs = ({ data, onUpload, editState, refetch }) => {
                 </div>
             )
             else return (
-                <div onClick={ () => store.downloadFile(file)} 
+                <a href={`${process.env.REACT_APP_API_URL}/s3/get/${file.Key}`}
                     key={file.Key}
-                    className='file-name'> {file.FileName} </div>
+                    target='_blank'
+                    className='file-name'> {file.FileName} </a>
             )
         })
      

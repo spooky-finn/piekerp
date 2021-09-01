@@ -110,16 +110,16 @@ export default class Store {
     async downloadFile(file){
         const res = await fetch(`${process.env.REACT_APP_API_URL}/s3/get/${file.Key}`)
 
-        if (res.status == 200 ){
-            const blob = await res.blob()
-            const downloadURL = window.URL.createObjectURL(blob)
-            const link = document.createElement('a')
-            link.href = downloadURL
-            link.download = file.FileName
-            document.body.appendChild(link)
-            link.click()
-            link.remove()
-        }
+        // if (res.status == 200 ){
+        //     const blob = await res.blob()
+        //     const downloadURL = window.URL.createObjectURL(blob)
+        //     const link = document.createElement('a')
+        //     link.href = downloadURL
+        //     link.download = file.FileName
+        //     document.body.appendChild(link)
+        //     link.click()
+        //     link.remove()
+        // }
     }
 
     async deleteFile(key, deleteFileMutation){
