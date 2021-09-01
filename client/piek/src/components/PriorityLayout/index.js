@@ -18,6 +18,8 @@ import ManagerFilter, { managerFilterIndicator } from './ManagerFilter';
 import './index.sass'
 import { UilSearch } from '@iconscout/react-unicons'
 import {Tabs, Tab, Box, Typography} from '@material-ui/core';
+import { UilSortAmountDown, UilEnvelopeInfo, UilWrench, UilConstructor} from '@iconscout/react-unicons';
+
 
 var incomingOrders = undefined;
 
@@ -142,19 +144,23 @@ const PriorityLayout = () => {
 
     return ( 
         <div>
-            <BaseHeader pageParams = { store.getPageParams(window.location.pathname) }>
-                <ActionsHeader createOrder={1} userID={store.user.UserID} history={history}/>
-            </BaseHeader>
-        
-                    <PreOrders preOrders = { preOrders } />
+            {/* <BaseHeader pageParams = { store.getPageParams(window.location.pathname) }>
+              
+            </BaseHeader> */}
+
 
                     <div  className='priorityTabs'>
                         <Tabs value={priorityTab} onChange={tabHandler} aria-label="simple tabs example"  indicatorColor="primary">
                             <Tab label="Очередность" {...a11yProps(0)} />
                             <Tab label="Недавние" {...a11yProps(1)} />
                         </Tabs>
+
+                        <ActionsHeader createOrder={1} userID={store.user.UserID} history={history}/>
                     </div>
                     
+
+                    <PreOrders preOrders = { preOrders } />
+
 
                     <TabPanel value={priorityTab} index={0}>
                         <div className="tableWrap">

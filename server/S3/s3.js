@@ -21,12 +21,12 @@ const download = (key, res) => {
     Bucket: process.env.S3_BUCKET,
     Key: key
   };
-
   s3.getObject(getParams, function(err, data) {
     if (err) return res.status(400).send({success:false,err:err})
     
     else{
         data.Metadata.originalname = querystring.unescape(data.Metadata.originalname)
+        res.set('Content-Type', data.ContentType)
       return res.send(data.Body);
     }
   });
