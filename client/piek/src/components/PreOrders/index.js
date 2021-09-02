@@ -8,7 +8,7 @@ import { MUTATE_ORDER_STATUS } from "../../hasura-queries/MutationOrderStatus";
 import { useMutation } from '@apollo/client';
 
 //UI
-import {ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails } from '@material-ui/core';
+import {Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core';
 import { Heading} from 'evergreen-ui';
 import {UilAngleRight, UilPlus} from '@iconscout/react-unicons';
 import './index.sass'
@@ -48,16 +48,16 @@ const PreOrders = (props) => {
     return(
         <div className={expanded ? "preorders-container active" : "preorders-container"} >
     
-          <ExpansionPanel square expanded={expanded === true} onChange={handleChange(true)}>
-            <ExpansionPanelSummary aria-controls="panel1d-content" id="panel1d-header">
+          <Accordion square expanded={expanded === true} onChange={handleChange(true)}>
+            <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
             
             <Heading className='group-heading preorders-heading'> Предзаказы <span><UilAngleRight/></span></Heading>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
+            </AccordionSummary>
+            <AccordionDetails>
                 <Table id="measuringWrapper" columns={newColumnList} data={props.preOrders} />
-            </ExpansionPanelDetails>
+            </AccordionDetails>
 
-        </ExpansionPanel>
+        </Accordion>
 
 
         </div>
