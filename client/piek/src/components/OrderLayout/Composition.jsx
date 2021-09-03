@@ -1,12 +1,14 @@
 import { DELETE_ORDER_ITEM, INSERT_ORDER_ITEM } from "./queries/MutationOrderItem"
 import { useMutation } from "@apollo/client"
 
-import { useReducer } from 'react'
+import { useReducer, useEffect } from 'react'
 import {TextField} from '@material-ui/core'
 import { UilArrowUp } from '@iconscout/react-unicons'
 
 
 import { motion, AnimatePresence } from "framer-motion"
+
+import sass from './sass/composition.module.sass'
 
 const initialState = {
     name: '',
@@ -48,6 +50,15 @@ const OrderComposition = ({ data, editState, refetch, orderID }) => {
         refetch()    
     }
 
+    useEffect(() => {
+        console.log(editState)
+        if (!editState && state.name !== '' && state.quantity !== ''){
+            insertOrderItem()
+        }
+
+    }, [editState]);
+
+
     const editItem = (e, itemID) => {
         const itemData = data.find( el => el.OrderItemID == itemID)
         dispatch({ type: 'editItem', payload: [itemData.Name, itemData.FullName, itemData.Quantity] })
@@ -72,8 +83,7 @@ const OrderComposition = ({ data, editState, refetch, orderID }) => {
     const addNewOrderItem = () => (
         <>
             <TextField
-                size="small" 
-                className="name"
+                size='small' 
                 label="Наименование"
                 autoComplete='off'
                 value={state.name}
@@ -81,10 +91,10 @@ const OrderComposition = ({ data, editState, refetch, orderID }) => {
               />
             <TextField
                 size="small" 
-                className="quantity"
                 label="Кол-во"
                 type="number"
                 autoComplete='off'
+                className={sass.quantityInput}
                 value={state.quantity}
                 onChange={ (e) => dispatch({ type: 'quantity', payload: e.target.value }) }
 
@@ -92,9 +102,10 @@ const OrderComposition = ({ data, editState, refetch, orderID }) => {
            
            <TextField
                 label="Полное наименование"
-                className="fullName"
                 multiline
                 autoComplete="off"
+                size='small'
+                className={sass.fullNameInput}
                 value={state.fullName}
                 onChange= { (e) => dispatch({ type: 'fullName', payload: e.target.value }) }
                 />
@@ -102,7 +113,7 @@ const OrderComposition = ({ data, editState, refetch, orderID }) => {
             <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: .95 }}
-                className="square-button push-order-item"
+                className={`square-button ${sass.pushOrderItemButton}`}
                 onClick={insertOrderItem} >
                     <UilArrowUp/>
             </motion.button>
@@ -121,17 +132,17 @@ const OrderComposition = ({ data, editState, refetch, orderID }) => {
             key={el.OrderItemID} >
             
 
-                <div key={el.OrderItemID} className="Unit">
-                    <div className='firstRow'>
-                        <div className="name"> {el.Name} </div>
-                        <span  className="quantity"> {el.Quantity}</span>
+                <div key={el.OrderItemID} className={sass.Unit}>
+                    <div className={sass.firstRow}>
+                        <div className={sass.name}> {el.Name} </div>
+                        <span  className={sass.quantity}> {el.Quantity}</span>
                     </div>
                     
-                    <div  className="fullName"> { el.FullName }</div>
+                    <div  className={sass.fullName}> { el.FullName }</div>
 
 
                     {editState &&  
-                        <div className="orderItemAction">
+                        <div className={sass.orderItemActions}>
                             <a onClick={ (e) => editItem(e, el.OrderItemID) }>   Изменить</a>
                             <a onClick={ ()=> deleteItem(el.OrderItemID) } > Удалить </a>
                         </div>
@@ -143,7 +154,7 @@ const OrderComposition = ({ data, editState, refetch, orderID }) => {
             </motion.div>
             )}
             
-        {editState && <div className="addOrderItem">{addNewOrderItem()}</div> }
+        {editState && <div className={sass.addOrderItem}>{addNewOrderItem()}</div> }
 
     </AnimatePresence>
     </>)

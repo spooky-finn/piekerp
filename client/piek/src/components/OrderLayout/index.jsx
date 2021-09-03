@@ -20,9 +20,9 @@ import { isFileOnDropzone } from "./Dropzone";
 
 //ui
 import { Heading } from 'evergreen-ui';
-import './sass/index.sass'
-import { motion } from "framer-motion"
+import './sass/index.sass';
 
+import { motion } from "framer-motion"
 
 
 
@@ -56,19 +56,15 @@ const OrderLayout = (props) => {
                     pushDocs({ variables: {'objects': m} })
                 } 
                 setOnUploadFiles([])
-                refetch()
+                refetch();
                 }
             
         )
       }, [])
 
-      const {loading, error, data = [], refetch } = useQuery(GET_ORDER_BY_ID, {  fetchPolicy: "no-cache", variables: { OrderID: orderID}});
+    const {loading, error, data = [], refetch } = useQuery(GET_ORDER_BY_ID, {  fetchPolicy: "no-cache", variables: { OrderID: orderID}});
 
-      const {getRootProps, isDragActive} = useDropzone({className: 'dropzone', onDrop: S3Upload });
-  
-    //   function useQuery() {
-    //     return new URLSearchParams(useLocation().search);
-    //   }
+    const {getRootProps, isDragActive} = useDropzone({className: 'dropzone', onDrop: S3Upload });
       
     console.log();
 
@@ -78,8 +74,10 @@ const OrderLayout = (props) => {
     animate={{ scale: 1 }}
     transition={{ duration: 0.2 }}
     > 
-        {isFileOnDropzone(isDragActive)}
-        
+
+
+    
+            {isFileOnDropzone(isDragActive)}
 
         {!loading ? (<>
 

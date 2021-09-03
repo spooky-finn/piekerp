@@ -1,7 +1,10 @@
 const Comments = (props) => {
 
     return(
-        <div></div>
+        <div>
+            <div className='partitionHeading'>Комментарии</div>
+
+        </div>
     )
 }
 
