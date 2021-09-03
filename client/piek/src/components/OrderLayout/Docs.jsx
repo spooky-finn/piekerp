@@ -5,7 +5,7 @@ import { Context } from '../../index'
 import { useMutation } from '@apollo/client';
 import { DELETE_ORDER_FILE } from './queries/MutationOrderDocs';
 
-import { Dialog, Button, TextField, DialogActions, DialogContent, DialogContentText } from '@material-ui/core';
+import { Dialog, Button, TextField, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 
 const Docs = ({ data, onUpload, editState, refetch }) => {
     const { store } = useContext(Context)
@@ -58,20 +58,31 @@ const Docs = ({ data, onUpload, editState, refetch }) => {
      
     return (        
         <div className="Docs" >
-            {attachedFiles}
 
-            {onUploadFiles()}
+            <div className='partitionHeading'>Приложения</div>
+
+
+            <div className='filesContainer'>
+                {attachedFiles}
+                {onUploadFiles()}
+            </div>
+          
 
             <div>
                 <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" maxWidth='xs'>
-                    <DialogContent>
-                        <DialogContentText>
+                    <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+                        Удалить приложение?
+                    </DialogTitle>
+                    <DialogContent dividers>
+                        <DialogContentText gutterBottom>
                             Вы действительно хотите удалить <span>{fileOnDelete?.FileName}</span> ? <br/>
                             Это действие необратимо.
                             Пожалуйста, введите "Да" для подтверждения.
                         </DialogContentText>
                         <TextField
                             autoFocus
+                            size='small'
+                            variant='outlined'
                             margin="dense"
                             fullWidth
                             autoComplete='off'
