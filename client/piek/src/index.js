@@ -1,20 +1,18 @@
 import React, { createContext } from 'react';
 import ReactDOM from 'react-dom';
+import jwt from 'jsonwebtoken'
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Store from './store/store';
 // import 'react-notifications/lib/notifications.css';
 import { BrowserRouter } from 'react-router-dom';
-import jwt from 'jsonwebtoken'
 //UI
 import './theme.css';
 import './index.sass';
 
 //apollo 
 import { WebSocketLink} from 'apollo-link-ws';
-import { onError } from "@apollo/client/link/error";
-import { ApolloLink, Observable } from 'apollo-link';  // add Observable
 import { setContext } from "@apollo/client/link/context";
 
 import {

@@ -13,3 +13,11 @@ export const INSERT_ORDER_ITEM = gql`
   }
 }
 `;
+
+export const DELETE_ORDER_ITEM = gql`
+mutation MyMutation($orderItemID: Int!) {
+  delete_erp_OrderItems_by_pk(OrderItemID: $orderItemID) {
+		OrderItemID
+  }
+}
+`;

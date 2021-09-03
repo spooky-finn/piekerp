@@ -1,11 +1,11 @@
+@import 'composition'
+    
 .base-container section
-    background: var(--section)  
-    // border: 1px solid var(--border)
+    // background: var(--section)  
     border-radius: var(--br)
     color: var(--text1)
-    padding: 1em
-    padding-left: 2em
     min-height: 80vh
+    padding: 0
 
 
 .inCloudconIcon
@@ -39,33 +39,11 @@
 .OrderLayout
     display: grid
     grid-template-columns: 2.5fr 1fr
-
+    border-top: 1px solid var(--border)
+    border-radius: 0 !important
+    outline: none !important    
     .Main
-        .Composition
-            padding: 2rem 0
-            line-height: 1
-            border-bottom: 1px solid var(--border)
-
-            .Unit 
-                font-family: 'IBM Plex Mono'
-                padding-bottom: 1.5em
-            .firstRow
-                display: grid
-                grid-template-columns: 5fr .8fr 1fr 1fr 
-
-                .name, .quantity, input
-                    font-size: 1.3rem
-
-                .quantity, input
-                    color: var(--accent)
-                    font-weight: 600
-
-            .fullName
-                display: flex
-                font-family: 'IBM Plex Mono'
-                color: var(--text2) !important
-                padding-top: 5px
-                font-size: .9rem
+           
 
         .WrapperTwoCol
             display: grid
