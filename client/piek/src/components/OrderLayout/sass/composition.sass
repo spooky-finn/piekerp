@@ -1,0 +1,76 @@
+.OrderLayout
+     .Composition
+            padding: 1rem 0rem 0
+            line-height: 1
+            border-bottom: 1px solid var(--border)
+
+            .name, .quantity
+                font-family: 'IBM Plex Mono' !important
+                input
+                    font-family: 'IBM Plex Mono' !important
+
+            .addOrderItem
+                display: grid
+                grid-template-columns: 8fr 1fr
+                background: var(--section)
+                // box-shadow: 0 0 15px 0 var(--border)
+                padding: 2em 1em
+
+
+                .MuiFormControl-root
+                    padding: 0 1rem !important
+                    label
+                        padding-left: 1em
+
+
+                .fullName
+                    margin-top: 1rem
+                    input
+                        font-family: sans-serif
+
+                .push-order-item
+                    border: none !important
+                    display: flex
+                    align-self: end
+
+
+            .Unit 
+                position: relative
+                padding: 1em
+                padding-left: 2em
+
+
+                &:hover
+                    .orderItemAction
+                        opacity: 1
+                .orderItemAction
+                    margin-top: .5em
+                    opacity: 0
+                    color: var(--text2)
+                    bottom: 0
+                    left: 0
+                    font-size: .7rem
+                    font-family: none 
+                    text-decoration: underline 
+                    transition: opacity .5s ease !important
+                    a
+                        // margin: 10px
+                        margin-right: 1em
+                        &:hover
+                            color: var(--text1)
+
+
+            .firstRow
+                display: grid
+                grid-template-columns: 5fr .8fr 1fr 
+
+                .name, .quantity
+                    font-size: 1.3rem
+                .quantity
+                    color: var(--accent)
+                    font-weight: 600
+
+            .fullName
+                color: var(--text2) !important
+                padding-top: 5px
+                font-size: .9rem

@@ -19,6 +19,7 @@
     "evergreen-ui": "^6.0.1",
     "file-saver": "^2.0.5",
     "form-data": "^3.0.1",
+    "framer-motion": "^4.1.17",
     "graphql": "^15.5.1",
     "graphql-tag": "^2.12.5",
     "jsonwebtoken": "^8.5.1",

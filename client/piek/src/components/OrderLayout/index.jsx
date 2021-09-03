@@ -10,7 +10,7 @@ import { useMutation, useQuery } from "@apollo/client";
 
 //components
 import ActionsHeader from "../BaseHeader/ActionsHeader";
-import OrderComposition from "./OrderComposition";
+import Composition from "./Composition";
 import Info from "./Info";
 import EditableInfo from "./EditableComponents/EditableInfo";
 import CheckList from './CheckList';
@@ -21,7 +21,8 @@ import { isFileOnDropzone } from "./Dropzone";
 //ui
 import { Heading } from 'evergreen-ui';
 import './sass/index.sass'
-import AddOrderItem from "./EditableComponents/AddOrderItem";
+import { motion } from "framer-motion"
+
 
 
 
@@ -72,7 +73,11 @@ const OrderLayout = (props) => {
     console.log();
 
     return(
-    <>
+    <motion.div
+    initial={{ scale: .8 }} 
+    animate={{ scale: 1 }}
+    transition={{ duration: 0.2 }}
+    > 
         {isFileOnDropzone(isDragActive)}
         
 
@@ -93,8 +98,12 @@ const OrderLayout = (props) => {
                     <div className="Main">
 
                     <div className="Composition">  
-                        <OrderComposition data={data.erp_Orders[0].OrderItems}/> 
-                        <AddOrderItem editState={editState} orderID={orderID} refetch={refetch}/>
+                        <Composition 
+                            data={data.erp_Orders[0].OrderItems} 
+                            editState={editState}
+                            refetch={refetch}
+                            orderID= {orderID} /> 
+
                     </div>
                     
                         <div className="WrapperTwoCol">
@@ -102,7 +111,7 @@ const OrderLayout = (props) => {
                             <Docs data={data.erp_Orders[0].Docs} 
                                 onUpload={onUploadFiles} 
                                 editState = {editState} 
-                                refetch={refetch}/>
+                                refetch={refetch} />
                         </div>
                         <Comments/>
                     </div>
@@ -116,8 +125,7 @@ const OrderLayout = (props) => {
 
         </>): store.preloader}
 
-           
-    </>
+    </motion.div>
     )
 }
 
