@@ -1,6 +1,6 @@
 # Setup and build the client
 
-FROM node:14-alpine as client
+FROM node:12-alpine as client
 
 WORKDIR /app/client/
 COPY client/piek/package*.json ./
@@ -17,7 +17,7 @@ COPY client/piek ./
 
 # Setup the server
 
-FROM node:14-alpine
+FROM node:12-alpine
 
 WORKDIR /app/
 COPY --from=client /app/client/build/ ./client/build/
