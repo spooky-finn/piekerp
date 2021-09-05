@@ -31,11 +31,20 @@ input[type=number]
     font-size: 12px !important
     padding: 5px !important
 
+.action-block
+    display: flex
+    justify-content: flex-end
+    margin-left: auto
+    z-index: 100
+    div
+        padding: 10px
 
 .action-icon.active
     color: var(--accent)
 .action-icon
     color: var(--text1)
+    &:hover
+        color: var(--accent)
     path
         // уменьшение толщины линий иконок
         stroke-width: .8
@@ -65,14 +74,6 @@ input[type=number]
         margin-bottom: -5px !important
         padding-right: 1em
             
-.action-block
-    // margin-top: 10px
-    display: flex
-    justify-content: flex-end
-    margin-left: auto
-    z-index: 100
-    div
-        padding: 10px
 
 
 .OrderLayout
@@ -98,37 +99,37 @@ input[type=number]
             color: var(--accent)
             
 
-.tableWrap
-    display: table
-    width: 100%
-    border: 1px solid var(--border)
-    border-radius: var(--br)
-    margin-bottom: 2em
+// .tableWrap
+//     display: table
+//     width: 100%
+//     border: 1px solid var(--border)
+//     border-radius: var(--br)
+//     margin-bottom: 2em
 
-    .tableSearchInput
-        display: flex
-        height: 50px
-        align-items: center
-        .action-icon
-            padding: 0 10px
-            width: 20px
-        input
-            border: none
-            flex-grow: 1
-            background: transparent
-            color: var(--text1)
-            &:active, &:focus
-                outline: none !important
+//     .tableSearchInput
+//         display: flex
+//         height: 50px
+//         align-items: center
+//         .action-icon
+//             padding: 0 10px
+//             width: 20px
+//         input
+//             border: none
+//             flex-grow: 1
+//             background: transparent
+//             color: var(--text1)
+//             &:active, &:focus
+//                 outline: none !important
 
-    .tableFooter
-        // background: var(--accentLight)
-        border-top: 1px dashed  var(--border)
-        padding: .7em
-    table thead
-        border-top: 1px solid var(--border)
-    table td:first-of-type
-        border-left: none !important
-    table td:last-of-type
-        border-right: none !important
-    table tr:last-of-type td
-        border-bottom: none !important
+//     .tableFooter
+//         // background: var(--accentLight)
+//         border-top: 1px dashed  var(--border)
+//         padding: .7em
+//     table thead
+//         border-top: 1px solid var(--border)
+//     table td:first-of-type
+//         border-left: none !important
+//     table td:last-of-type
+//         border-right: none !important
+//     table tr:last-of-type td
+//         border-bottom: none !important

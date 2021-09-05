@@ -6,8 +6,11 @@ $theadHeight: 40px
 
 .priorityTabs
     display: flex
-    // background-color: var(--section) 
-    border-bottom: 1px solid var(--border)
+    background-color: var(--section) 
+    border-bottom-left-radius: var(--br10)
+    border-bottom-right-radius: var(--br10)
+    padding: 0 1em
+
     .MuiButtonBase-root 
         padding: 0 !important
     .MuiTab-wrapper
@@ -17,25 +20,23 @@ $theadHeight: 40px
         font-size: .9rem
     .Mui-selected span
         color: var(--text1) !important
-
-
  
 // Material UI Selet Dropdown
-.managerFilter-form
-    margin-left: auto
-    display: flex
-    align-items: center
-    margin-right: 1em
+// .managerFilter-form
+//     margin-left: auto
+//     display: flex
+//     align-items: center
+//     margin-right: 1em
   
-    .MuiFormHelperText-root, .MuiSelect-icon
-        color: var(--text2) !important
-        font-size: .9rem !important
-        background: transparent !important
+//     .MuiFormHelperText-root, .MuiSelect-icon
+//         color: var(--text2) !important
+//         font-size: .9rem !important
+//         background: transparent !important
 
-    .filterPlaceholder
-        color: var(--text2)
-        font-size: .8rem
-        padding: 0 8px 
+//     .filterPlaceholder
+//         color: var(--text2)
+//         font-size: .8rem
+//         padding: 0 8px 
 
 .MuiButtonBase-root
     font-size: .8rem !important
@@ -58,34 +59,6 @@ $theadHeight: 40px
     transform: translateY(-50%)
 
 
-.managerFilter-indicator
-    position: relative
-    font-size: .8rem
-    margin: 1rem
-    padding-left: 1rem
-    color: var(--accent)
-    p
-        margin-bottom: 0
-    .circle 
-        width: 7px
-        height: 7px
-        background-color: var(--accent)
-        border-radius: 50%
-        position: absolute
-        top: 50%
-        transform: translateY(-50%)
-        left: 0
-        animation: pulsate 1.5s ease-out
-        animation-iteration-count: infinite
-    
-    @keyframes pulsate 
-        0% 
-            opacity: 0.0
-        50% 
-            opacity: 1.0
-        100% 
-            opacity: 0.0
-    
 
 .priorityTable
     border-top: 1px solid var(--border)

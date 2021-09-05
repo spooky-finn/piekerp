@@ -4,16 +4,16 @@ import { useHistory } from "react-router-dom";
 
 //apollo
 import { useSubscription, useQuery } from '@apollo/client'
-import { GetOrdersSubscription, GET_USERS } from '../../hasura-queries/getOrders'
+import { GetOrdersSubscription, GET_USERS } from '../OrderListLayout/queries/getOrders'
 
-import Table, { columnsList } from './tableLogic'
+import Table, { columnsList } from '../OrderListLayout/Priority/columnList'
 
 //components
-import PreOrders from '../PreOrders'
+import PreOrders from '../OrderListLayout/PreOrders'
 import BaseHeader from '../BaseHeader'
 import ActionsHeader from '../BaseHeader/ActionsHeader'
 import RecentlyLayout from '../RecentlyLayout';
-import ManagerFilter, { managerFilterIndicator } from './ManagerFilter';
+import ManagerFilter, { managerFilterIndicator } from '../OrderListLayout/Search/ManagerFilter';
 //UI
 import './index.sass'
 import { UilSearch } from '@iconscout/react-unicons'
@@ -23,18 +23,7 @@ import { UilSortAmountDown, UilEnvelopeInfo, UilWrench, UilConstructor} from '@i
 
 var incomingOrders = undefined;
 
-function reducer(state, action) {
-    switch (action.type) {
-        case 'orders':
-        case 'preOrders': 
-        case 'priorityTab': 
-        case 'searchKeyword': 
-        case 'managerFilter': 
-        case 'filtredOrders':
-            return {...state, [action.type]: action.payload };
 
-    }
-}
 
 function filteringAlg(keyword, ...rest){
     var finded = false
@@ -78,16 +67,6 @@ function TabPanel(props) {
 const PriorityLayout = () => {
     const { store } = useContext(Context);
 
-    const [state, dispatch] = useReducer(reducer, {
-        orders: [],
-        preOrders: [],
-        priorityTab : store.priorityTab,
-        searchKeyword: '',
-        managerFilter: 0,
-        filtredOrders: [],
-    });
-
-    const {orders, preOrders, priorityTab} = state;
 
     const history = useHistory();
 
@@ -111,7 +90,7 @@ const PriorityLayout = () => {
     const tabHandler = (event, newValue) => {
         dispatch({ type: 'priorityTab', payload:newValue })
         store.setPriorutyTab(newValue)
-      };
+    };
 
     const getFiltredData = () => {
         const sword = state.searchKeyword;

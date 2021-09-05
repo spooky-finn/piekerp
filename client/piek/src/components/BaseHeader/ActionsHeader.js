@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client';
-import { INSERT_ORDER } from '../../hasura-queries/MutationOrder'
+import { INSERT_ORDER } from './MutationInsertOrder'
 
 import {UilPrint, UilPlus, UilBell, UilEditAlt} from '@iconscout/react-unicons';
 import { UserIcon } from 'evergreen-ui';
@@ -16,11 +16,7 @@ const ActionsHeader = (props) => {
     const createOrderHandler = () => {
         createNewOrder().then( (res) => {
             props.history.push(`/orders/${res.data.insert_erp_Orders.returning[0].OrderID}?edit=true`)
-        }
-
-
-        
-        )
+        })
     }
 
     const editOrderHandler = () => {
@@ -35,7 +31,6 @@ const ActionsHeader = (props) => {
     }
 
     const addOrder = () => {
-        // const createOrderMutation = useMutation()
         if (props.createOrder){
             return <div data-for='global' data-tip="Добавить" onClick={createOrderHandler} className="action-icon"><UilPlus/></div>
         }

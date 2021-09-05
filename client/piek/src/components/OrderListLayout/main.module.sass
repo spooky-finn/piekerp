@@ -1,0 +1,76 @@
+.tableWrapper 
+    display: table
+    width: 100%
+    border: 1px solid var(--border)
+    border-radius: var(--br)
+    margin-bottom: 2em
+
+    .tableSearchInput
+        display: flex
+        height: 50px
+        align-items: center
+        .action-icon
+            padding: 0 10px
+            width: 20px
+        input
+            border: none
+            flex-grow: 1
+            background: transparent
+            color: var(--text1)
+            &:active, &:focus
+                outline: none !important
+
+    .tableFooter
+        // background: var(--accentLight)
+        border-top: 1px dashed  var(--border)
+        padding: .7em
+    table thead
+        border-top: 1px solid var(--border)
+    table td:first-of-type
+        border-left: none !important
+    table td:last-of-type
+        border-right: none !important
+    table tr:last-of-type td
+        border-bottom: none !important
+    
+.tableMain
+    border-top: 1px solid var(--border)
+    width: 100%
+    border-spacing: 0
+    thead th
+        color: var(--text2)
+        height: 30px
+        font-size: .7rem
+        font-weight: 300
+        border-bottom: 1px solid var(--border)
+        text-align: left
+
+    tbody td:first-of-type
+        text-align: center
+        font-size: .7rem
+
+    tbody td
+        padding: 8px 5px
+        color: var(--text2)
+        border-bottom: 1px solid var(--border)
+        font-size: .86rem
+   
+    tbody td:nth-of-type(2) a,
+    tbody td:nth-of-type(3)
+        font-family: 'IBM Plex Mono'
+        text-decoration: none
+        color: var(--text1)
+        font-size: 1rem
+    
+    td:nth-of-type(4),
+    th:nth-of-type(4)
+        border-left: 1px solid var(--border)
+        padding-left: 15px
+
+    tbody tr:last-of-type td
+        border-bottom: none
+    
+    tbody td:nth-last-of-type(2),
+    tbody td:nth-last-of-type(3)
+        line-height: 1
+        max-width: 100px
