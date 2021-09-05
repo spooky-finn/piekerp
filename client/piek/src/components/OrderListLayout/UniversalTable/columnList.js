@@ -1,13 +1,9 @@
-
-import { useTable } from 'react-table'
 import { Link } from 'react-router-dom'
 import  moment  from 'moment';
 
 
-export const setPaidPercent = (total, paid) => {
-    if (!total || !paid){
-        return ' '    
-    }
+const setPaidPercent = (total, paid) => {
+    if (!total || !paid) return ''
     return ' - ' + ((paid/total) * 100).toFixed(0) + '%'
 }
 
@@ -64,49 +60,5 @@ export const columnsList = [
       accessor: data => <div className='priorityTable-manager'>{data.User.FirstName[0]}</div>,
     },
   ]
-
-export default function Table({columns, data, id}){
-    const {
-        getTableProps,
-        getTableBodyProps,
-        headerGroups,
-        rows,
-        prepareRow,
-      } = useTable({
-        columns,
-        data,
-      })
-
-
-    if (data.length == 0) return null;
-
-   return (
-     <>
-    <table id={id} className="priorityTable" {...getTableProps()}>
-      <thead>
-        {headerGroups.map((headerGroup, i) => (
-          <tr key={i} {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map((column, i) => (
-              <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-            ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map((row, i) => {
-          prepareRow(row)
-          return (
-               <tr {...row.getRowProps()}>
-              {row.cells.map((cell, i) => {
-                return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-              })}
-              </tr>
-          )
-        })}
-      </tbody>
-    </table>
-    </>
-  )
-}
 
 

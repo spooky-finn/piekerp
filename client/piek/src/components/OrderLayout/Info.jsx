@@ -1,10 +1,13 @@
-import { setPaidPercent } from "../PriorityLayout/tableLogic";
 import { UilHistoryAlt } from "@iconscout/react-unicons";
 import  moment  from 'moment'
 import "./sass/order-meta.sass";
 
 const OrderMeta = (props) => {
 
+    const setPaidPercent = (total, paid) => {
+        if (!total || !paid) return ''
+        return ' - ' + ((paid/total) * 100).toFixed(0) + '%'
+    }
   return (
     <div className="Meta">
 

@@ -1,13 +1,13 @@
 import {  useMemo, useContext } from 'react';
 import { Context } from '../..';
 import {useSubscription} from '@apollo/client';
-import PreOrders from '../PreOrders'
-import { GetOrdersSubscription } from '../../hasura-queries/getOrders';
+import PreOrders from '../OrderListLayout/PreOrders'
+import { GetOrdersSubscription } from '../OrderListLayout/queries/getOrders';
 import BaseHeader from '../BaseHeader';
 import ActionsHeader from '../BaseHeader/ActionsHeader';
 import './index.sass'
 
-import Table, {columnsList} from '../PriorityLayout/tableLogic';
+import Table, {columnsList} from '../OrderListLayout/Priority/columnList';
 import  {groupOrders} from './tableLogic'
 
 // поменять сортировку на день первой оплаты

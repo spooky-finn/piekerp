@@ -1,25 +1,22 @@
 import { useState, useContext } from "react";
-import { Context } from '../../index'
+import { Context } from '../../../index'
 
-import Table, { columnsList } from '../PriorityLayout/tableLogic'
+import { columnsList } from '../UniversalTable/columnList'
+import Table from "../UniversalTable/TableMarkup";
 
 //apollo
-import { MUTATE_ORDER_STATUS } from "../../hasura-queries/MutationOrderStatus";
+import { MUTATE_ORDER_STATUS } from "./MutationOrderStatus";
 import { useMutation } from '@apollo/client';
 
 //UI
 import {Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core';
-import { Heading} from 'evergreen-ui';
 import {UilAngleRight, UilPlus} from '@iconscout/react-unicons';
-import './index.sass'
+import sass from './preorders.module.sass'
 
 const PreOrders = (props) => {
     const { store } = useContext(Context);
-
     const [expanded, setExpanded] = useState(store.showPreOrders);
-    
     const [mutationOrderStatus] = useMutation(MUTATE_ORDER_STATUS);
-
 
     let dt = props.preOrders
     
@@ -29,12 +26,9 @@ const PreOrders = (props) => {
     };
 
     const onClickTransfer = (data) => {
-        mutationOrderStatus({ variables: { OrderID: data.OrderID, OrderStatus: 1 } })
         dt.splice(dt.indexOf(data), 1)
-        // if (dt.length == 0) handleToggle()
+        mutationOrderStatus({ variables: { OrderID: data.OrderID, OrderStatus: 1 } })
     }
-
-
     var newColumnList = [...columnsList];
 
     newColumnList.push({
@@ -46,22 +40,21 @@ const PreOrders = (props) => {
    
                
     return(
-        <div className={expanded ? "preorders-container active" : "preorders-container"} >
+        <div className={expanded ? `${sass.preordersContainer} ${sass.active}` : sass.preordersContainer }>
     
-          <Accordion square expanded={expanded === true} onChange={handleChange(true)}>
-            <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-            
-            <Heading className='group-heading preorders-heading'> Предзаказы <span><UilAngleRight/></span></Heading>
+          <Accordion expanded={expanded === true} onChange={handleChange(true)}>
+            <AccordionSummary>
+                <h6 className={sass.preordersHeading}>
+                    Предзаказы 
+                    <span><UilAngleRight/></span>
+                </h6>
             </AccordionSummary>
-            <AccordionDetails>
-                <Table id="measuringWrapper" columns={newColumnList} data={props.preOrders} />
+            <AccordionDetails >
+                <Table  columns={newColumnList} data={props.preOrders}/>
             </AccordionDetails>
 
         </Accordion>
-
-
         </div>
     )
 }
-
 export default PreOrders
