@@ -79,7 +79,7 @@ const OrderListLayout = () => {
     const tabHeight = '45px'
     const AntTabs = withStyles({
         root: {
-            borderBottom: '1px solid var(--border)',
+            borderBottom: '1px solid var(--borderLight)',
             minHeight: tabHeight,
             height: tabHeight,
         },

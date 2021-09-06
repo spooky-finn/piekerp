@@ -8,7 +8,7 @@ WORKDIR /app/client/
 # RUN npm install npm@latest -g
 # RUN npm install 
 
-COPY client ./
+COPY client/piek ./
 
 #recomended build on local machine
 # RUN npm run build

@@ -13,8 +13,9 @@ html{
     --danger: #e5534b;
     --accentLight: #E7E9FB;
     --border: rgba(0,0,0,.1);
-    --br10: 10px;
-    --br: 20px;
+    --borderLight: #e9ebf0;
+    --br10: 6px;
+    --br: 15px;
 }
 
 
@@ -32,4 +33,5 @@ html.dark {
     --accent: #6989fc;
     --accentLight: #43435c;
     --border: rgba(255,255,255,.15);
+    --borderLight: rgba(255,255,255,.09);
     }
