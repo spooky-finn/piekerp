@@ -38,8 +38,8 @@ $status-102: #72c900
 .reportConfigurator
     $br1: 7px
     display: flex
-    background: var(--section)
-    border-radius: 15px
+    border: 1px solid var(--borderLight)
+    border-radius: var(--br)
     margin-bottom: 1rem 
     font-size: .9em
     .chooseMonth
@@ -64,7 +64,7 @@ $status-102: #72c900
         font-size: .9em
   
         .wrap
-            border-left: 1px solid var(--border)
+            border-left: 1px solid var(--borderLight)
             border-radius: 0
             padding: 15px 1rem 
             span
@@ -80,44 +80,44 @@ $status-102: #72c900
                 width: 25px
                 outline: none !important
     
-.attendance-table
-    padding: 1em
-    font-size: .8em
-    color: var(--text2)
-    border-collapse: collapse
-    width: 100%
+// .attendance-table
+//     padding: 1em
+//     font-size: .8em
+//     color: var(--text2)
+//     border-collapse: collapse
+//     width: 100%
 
-    thead th
-        position: sticky
-        top: -3px
-        z-index: 1000
-        background: var(--bg)
-        padding: 13px 0
-        color: var(--text1)
-        font-weight: normal
+//     thead th
+//         position: sticky
+//         top: -3px
+//         z-index: 1000
+//         background: var(--bg)
+//         padding: 13px 0
+//         color: var(--text1)
+//         font-weight: normal
 
-    tbody td
-        border: 1px solid var(--border) !important
-        padding: 0
-        position: relative
-        div
-            padding: 2px
-        .status-101
-            color: $status-101 !important
-        // .status-102
-        //     background: $status-102
+//     tbody td
+//         border: 1px solid var(--border) !important
+//         padding: 0
+//         position: relative
+//         div
+//             padding: 2px
+//         .status-101
+//             color: $status-101 !important
+//         // .status-102
+//         //     background: $status-102
 
-        &:nth-of-type(1)
-            color: var(--text1)
-            padding-left: 6px
+//         &:nth-of-type(1)
+//             color: var(--text1)
+//             padding-left: 6px
             
-        &:nth-of-type(2)
-            color: var(--text1)
-            font-weight: 700
-            padding: 0 7px 
+//         &:nth-of-type(2)
+//             color: var(--text1)
+//             font-weight: 700
+//             padding: 0 7px 
         
-        .eventTime
-            opacity: 1
-            transition: opacity .1s ease 
-        .interval
-            color: var(--text1)
+//         .eventTime
+//             opacity: 1
+//             transition: opacity .1s ease 
+//         .interval
+//             color: var(--text1)

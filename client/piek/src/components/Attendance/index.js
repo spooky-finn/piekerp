@@ -16,7 +16,7 @@ import ReportConfigurator from './ReportConfigurator'
 import BaseHeader from '../BaseHeader'
 import { UilSearch } from '@iconscout/react-unicons'
 
-
+import sass from './attendance.module.sass'
 
 var attendanceData = null;
 // учет рабочего времени
@@ -84,17 +84,17 @@ const Attendance = props => {
             <BaseHeader pageParams = { store.getPageParams(window.location.pathname) } search={onChangeSearch} /> 
             <ReportConfigurator state={state} dispatch={dispatch} />
 
-        <div className="tableWrap">
+        <div className={sass.tableWrapper}>
 
-            <div className="tableSearchInput">
-                <UilSearch className="action-icon"/>
+            <div className={sass.tableSearchInput}>
+                <UilSearch/>
                 <input type='text' placeholder="поиск (номер счета или организация)" onChange={ (e) => onChangeSearch(e) } autoFocus/>
             </div>
             
-            {filtredData && columns && <Table columns = {columns} data = {filtredData} className="attendance-table" /> }
+            {filtredData && columns && <Table columns = {columns} data = {filtredData} className={sass.attendanceTable} /> }
 
              {/* условное обозначение */}
-             <div className="tableFooter legend">
+             <div className={`${sass.tableFooter} legend`}>
                 <div className="status-101">Прерванный рабочий день</div>
                 <div className="status-102">Не отмечен конец смены</div>
                 <span className="reportMeta">

@@ -1,5 +1,6 @@
 import { useTable } from 'react-table'
 import { daysInMonth } from './functions'
+import sass from './attendance.module.sass'
 
 
 export function generateColumns(selectedMonth, timeDeduction){
@@ -39,9 +40,9 @@ export function generateColumns(selectedMonth, timeDeduction){
         
         return (
           <div className={"status-"+ status}> 
-            <div className="eventTime">{ entrance }</div> 
-            <div className="eventTime">{ exit }</div>
-            <div className="interval">{ interval }</div>
+            <div>{ entrance }</div> 
+            <div>{ exit }</div>
+            <div className={sass.interval}>{ interval }</div>
           
           </div>
         )
