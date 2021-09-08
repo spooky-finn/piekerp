@@ -31,8 +31,11 @@ export default function Table({columns, data, className }){
       <tbody {...getTableBodyProps()}>
         {rows.map((row, i) => {
           prepareRow(row)
+          const awaitingDispatch = row.original.AwaitingDispatch
+          console.log(awaitingDispatch)
+
           return (
-               <tr {...row.getRowProps()}>
+               <tr className={awaitingDispatch ? mainsass.awaitingDispatch : ''} {...row.getRowProps()}>
               {row.cells.map((cell, i) => {
                 return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
               })}

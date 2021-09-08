@@ -2,14 +2,14 @@ import gql from 'graphql-tag';
 
 // Выбираем заказы находящиеся только в Прездаказах и в производстве 
 //   OrderStatusID 
-//     1 - В производстве
-//     3- Предзаказ
-//     4- Выпущен и отгружен
+//     1- Предзаказ
+//     2 - В производстве
+//     3- Выпущен и отгружен
 // 
 
 export const GetOrdersSubscription = gql`
 subscription GetOrders($search: String) {
-    erp_Orders(where: {OrderStatusID: {_neq: 4} }) {
+    erp_Orders(where: {OrderStatusID: {_neq: 3} }) {
       OrderID
       Entity
       InvoiceNumber
@@ -17,6 +17,7 @@ subscription GetOrders($search: String) {
       ShippingDate
       PaidAmount
       TotalAmount
+      AwaitingDispatch
       CreatingDate
       ManagerID
       OrderStatus {

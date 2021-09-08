@@ -27,7 +27,7 @@ const PreOrders = (props) => {
 
     const onClickTransfer = (data) => {
         dt.splice(dt.indexOf(data), 1)
-        mutationOrderStatus({ variables: { OrderID: data.OrderID, OrderStatus: 1 } })
+        mutationOrderStatus({ variables: { OrderID: data.OrderID} })
     }
     var newColumnList = [...columnsList];
 

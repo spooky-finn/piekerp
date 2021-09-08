@@ -36,8 +36,6 @@ const OrderLayout = (props) => {
     const [pushDocs] = useMutation(PUSH_DOCS_ARRAY);
     const orderID = useParams().id
 
-
-
     const S3Upload = useCallback(acceptedFiles => {
         setOnUploadFiles(acceptedFiles)
 
@@ -62,15 +60,13 @@ const OrderLayout = (props) => {
         )
       }, [])
 
-    const {loading, error, data = [], refetch } = useQuery(GET_ORDER_BY_ID, {  fetchPolicy: "no-cache", variables: { OrderID: orderID}});
+    const {loading, error, data = [], refetch } = useQuery(GET_ORDER_BY_ID, { variables: { OrderID: orderID}});
 
     const {getRootProps, isDragActive} = useDropzone({className: 'dropzone', onDrop: S3Upload });
-      
-    console.log();
-
+  
     return(
     <motion.div
-    initial={{ scale: .8 }} 
+    initial={{ scale: .85 }} 
     animate={{ scale: 1 }}
     transition={{ duration: 0.2 }}
     > 
@@ -114,14 +110,15 @@ const OrderLayout = (props) => {
                         <Comments/>
                     </div>
                     
-                    {editState ? <EditableInfo data={data.erp_Orders[0]} orderID={orderID} refetch={refetch}/> : <Info data={data.erp_Orders[0]} editState = {editState} /> }
+                    { editState ? <EditableInfo data={data.erp_Orders[0]} orderID={orderID} refetch={refetch}/> : (
+                                  <Info data={data.erp_Orders[0]} editState = {editState} orderID={orderID}/> )}
                    
 
        
 
         </section> 
 
-        </>): store.preloader}
+        </>): null }
 
     </motion.div>
     )

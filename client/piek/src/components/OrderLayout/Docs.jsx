@@ -33,7 +33,6 @@ const Docs = ({ data, onUpload, editState, refetch }) => {
     const deleteFile = async () => {
         //close modal window
         handleClose();
-        
         if (onFileDeleteInput.current.value == 'Да'){
             await store.deleteFile(fileOnDelete.Key, deleteFileMutation)
             refetch()
@@ -42,12 +41,14 @@ const Docs = ({ data, onUpload, editState, refetch }) => {
 
     const attachedFiles = data.map(
         file => {
+            // delite file
             if (editState) return(
                 <div key={file.Key}>
                     <div onClick={ () => handleClickOpen(file)} 
                         className='file-name delete-file'> {file.FileName} </div>
                 </div>
             )
+             // opne file
             else return (
                 <a href={`${process.env.REACT_APP_API_URL}/s3/get/${file.Key}`}
                     key={file.Key}
@@ -58,10 +59,7 @@ const Docs = ({ data, onUpload, editState, refetch }) => {
      
     return (        
         <div className="Docs" >
-
             <div className='partitionHeading'>Приложения</div>
-
-
             <div className='filesContainer'>
                 {attachedFiles}
                 {onUploadFiles()}

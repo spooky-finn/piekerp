@@ -36,7 +36,7 @@ let webSocketLink = new WebSocketLink({
     reconnect: true,
     lazy: true,
     reconnectionAttempts: 5,
-    inactivityTimeout: 1000,
+    inactivityTimeout: 10000000,
     connectionCallback: async (error) => { error && console.log(error) },
     connectionParams: () => ({
       headers: {
@@ -67,7 +67,15 @@ const asyncTokenValidation = setContext( async (_, {headers, ...context}) => {
 
 const apolloClient = new ApolloClient({
   link: from([ asyncTokenValidation, webSocketLink ]),
-  cache: new InMemoryCache()
+  cache: new InMemoryCache({
+    typePolicies: {
+        erp_Orders: {
+          keyFields: ["OrderID"],
+        },
+      
+
+    },
+  })
 })
 
 

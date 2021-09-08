@@ -29,14 +29,14 @@ const OrderListLayout = () => {
     const onSubscriptionData = (options) => {
         let orders = []; let preOrders = [];
         options.subscriptionData.data.erp_Orders.forEach( (order) => {
-            if (order.OrderStatus.ID == 3) preOrders.push(order)
-            else if (order.OrderStatus.ID == 1) orders.push(order)
+            if (order.OrderStatus.ID == 1) preOrders.push(order)
+            else if (order.OrderStatus.ID == 2) orders.push(order)
         })
         incomingOrders = orders
         dispatch({ type: 'preOrders', payload: preOrders });
         dispatch({ type: 'orders', payload: orders })
     }
-    const { loading, error, data = [] } = useSubscription(GetOrdersSubscription, { onSubscriptionData, fetchPolicy: "cache-and-network", nextFetchPolicy: "cache-first" });
+    const { loading, error, data = [] } = useSubscription(GetOrdersSubscription, { onSubscriptionData, fetchPolicy: "cache-first", nextFetchPolicy: "cache-first" });
     const { data: users = []} = useQuery(GET_USERS);
 
     const tabHandler = (event, newValue) => {
@@ -79,7 +79,7 @@ const OrderListLayout = () => {
     const tabHeight = '45px'
     const AntTabs = withStyles({
         root: {
-            borderBottom: '1px solid var(--borderLight)',
+            borderBottom: '1px solid var(--border)',
             minHeight: tabHeight,
             height: tabHeight,
         },
