@@ -2,13 +2,14 @@ import gql from 'graphql-tag'
 
 export const GET_ORDER_BY_ID = gql`
 query MyQuery($OrderID: Int!) {
-  erp_Orders(where: {OrderID: {_eq: $OrderID}}) {
+  erp_Orders(
+    where: {OrderID: {_eq: $OrderID}}
+    ){
     City
     CreatingDate
     Comment
     Entity
     InvoiceNumber
-    IsReclamation
     ManagerID
     OrderID
     OrderNumber
@@ -17,6 +18,8 @@ query MyQuery($OrderID: Int!) {
     ShipmentComment
     ShippingDate
     TotalAmount
+    IsReclamation
+    AwaitingDispatch
     User {
       FirstName
       LastName

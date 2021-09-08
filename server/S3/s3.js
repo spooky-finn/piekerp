@@ -26,8 +26,10 @@ const download = (key, res) => {
     
     else{
         data.Metadata.originalname = querystring.unescape(data.Metadata.originalname)
-        res.set('Content-Type', data.ContentType)
-      return res.send(data.Body);
+        const fileName = encodeURI(data.Metadata.originalname)
+        res.set('Content-Type', data.ContentType); 
+        res.set('Content-Disposition', `inline;filename*=utf-8''${fileName}`)
+      return res.send(data.Body );
     }
   });
 }
