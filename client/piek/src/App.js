@@ -30,6 +30,7 @@ darkTheme.overrides = {
   MuiInputBase: {
     root: {
       borderBottom: 'none',
+      color: 'var(--text1)',
       '&::before': {
         borderColor: 'var(--borderLight) !important',
       }
@@ -41,8 +42,8 @@ darkTheme.overrides = {
       border: '1px solid var(--borderLight)',
     },
     listbox: {
-      color: theme.palette.text.secondary,
-      fontSize: '.9rem',
+      color: 'var(--text1)',
+      fontSize: '.8rem',
     },
   },
 }
