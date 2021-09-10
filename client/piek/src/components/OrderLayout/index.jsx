@@ -4,6 +4,7 @@ import {useDropzone} from 'react-dropzone'
 import { useParams, useLocation } from "react-router-dom"
 
 //apollo
+import { GET_USERS } from '../../hasura-queries/getUsers';
 import { GET_ORDER_BY_ID } from './queries/GetOrderByID'
 import { PUSH_DOCS_ARRAY } from './queries/MutationOrderDocs'
 import { useMutation, useQuery } from "@apollo/client";
@@ -60,10 +61,9 @@ const OrderLayout = (props) => {
         )
       }, [])
 
-    const {loading, error, data = [], refetch } = useQuery(GET_ORDER_BY_ID, { variables: { OrderID: orderID}});
-
+    const {loading, error, data = [], refetch } = useQuery(GET_ORDER_BY_ID, { variables: { OrderID: orderID}, fetchPolicy:'cache-and-network' });
+    const { data: users = []} = useQuery(GET_USERS);
     const {getRootProps, isDragActive} = useDropzone({className: 'dropzone', onDrop: S3Upload });
-  
     return(
     <motion.div
     initial={{ scale: .85 }} 
@@ -110,7 +110,7 @@ const OrderLayout = (props) => {
                         <Comments/>
                     </div>
                     
-                    { editState ? <EditableInfo data={data.erp_Orders[0]} orderID={orderID} refetch={refetch}/> : (
+                    { editState ? <EditableInfo data={data.erp_Orders[0]} orderID={orderID} refetch={refetch} users={users.erp_Users} /> : (
                                   <Info data={data.erp_Orders[0]} editState = {editState} orderID={orderID}/> )}
                    
 

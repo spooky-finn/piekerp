@@ -3,9 +3,8 @@ import {TextField} from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import './EditableInfo.sass'
 
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { UPDATE_ORDER_INFO } from '../queries/MutationOrderInfo'
-import { GET_USERS } from '../../../hasura-queries/getUsers';
 
 import NumberFormat from 'react-number-format';
 import moment  from 'moment'
@@ -52,29 +51,8 @@ function MoneyFormatCustom(props) {
   );
 }
 
-const EditableInfo = ({ data, orderID, refetch }) => {  
-  const { data: users = []} = useQuery(GET_USERS);
+const EditableInfo = ({ data, orderID, refetch, users }) => {  
   
-  console.log(users.erp_Users)
-
-    const top100Films = [
-      { title: 'The Shawshank Redemption', year: 1994 },
-      { title: 'The Godfather', year: 1972 },
-      { title: 'The Godfather: Part II', year: 1974 },
-      { title: 'The Dark Knight', year: 2008 },
-      { title: 'Dangal', year: 2016 },
-      { title: 'The Sting', year: 1973 },
-      { title: '2001: A Space Odyssey', year: 1968 },
-      { title: "Singin' in the Rain", year: 1952 },
-      { title: 'Toy Story', year: 1995 },
-      { title: 'Bicycle Thieves', year: 1948 },
-      { title: 'The Kid', year: 1921 },
-      { title: 'Inglourious Basterds', year: 2009 },
-      { title: 'Snatch', year: 2000 },
-      { title: '3 Idiots', year: 2009 },
-      { title: 'Monty Python and the Holy Grail', year: 1975 },
-    ];
-
     const addField = (e) => fields[e.target.name] = e.target.value
     const [updateOrderInfo] = useMutation(UPDATE_ORDER_INFO);
   
@@ -91,10 +69,14 @@ const EditableInfo = ({ data, orderID, refetch }) => {
         };
     }, []);
 
+    function findSelectedManeger(users, managerID){
+      if (!users) return null
+      const index = users.indexOf(users.find(user => user.UserID == managerID))
+      return users[index]
+    }
+
   return(
-    <form className="Meta EditableInfo">
-      
-        
+    <form className="Meta EditableInfo">  
         <TextField
           label="План. отгрузка"
           name='ShippingDate'
@@ -130,9 +112,13 @@ const EditableInfo = ({ data, orderID, refetch }) => {
 
         <Autocomplete
           id="combo-box-demo"
-          options={users.erp_Users}
+          options={users}
           getOptionLabel={(option) => `${option.FirstName} ${option.LastName}`}
-          renderInput={(params) => <TextField {...params} label="Менеджер"  />}
+          renderInput={(params) => <TextField {...params} label="Менеджер"/>}
+          defaultValue={() => findSelectedManeger(users, data.ManagerID)}
+          onChange={(event, newValue) => {
+            fields['ManagerID'] = (newValue?.UserID || null)
+          }}
         />
 
          <TextField

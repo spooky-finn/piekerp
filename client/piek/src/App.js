@@ -36,6 +36,12 @@ darkTheme.overrides = {
       }
     },
   },
+  MuiIconButton:{
+    root: {
+      color: 'var(--text2)',
+      opacity: .5
+    }
+  },
   MuiAutocomplete: {
     paper: {
       background: 'var(--section) !important',

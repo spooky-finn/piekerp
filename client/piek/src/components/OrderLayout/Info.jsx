@@ -80,7 +80,7 @@ const OrderMeta = ({ data, orderID }) => {
                     </div>
                     <div>
                         <pre>Менеджер</pre>
-                        {data.User.FirstName} {data.User.LastName}
+                        {data.User?.FirstName} {data.User?.LastName || 'undefined'}
                     </div>
             </div>
 
