@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import  moment  from 'moment';
-
+import sass from '../main.module.sass'
 
 const setPaidPercent = (total, paid) => {
     if (!total || !paid) return ''
@@ -57,7 +57,7 @@ export const columnsList = [
     },
     {
       Header: 'Мдж.',
-      accessor: data => <div className='priorityTable-manager'>{data.User.FirstName[0]}</div>,
+      accessor: data => <> {data.User?.FirstName[0] || ''} </>
     },
   ]
 
