@@ -1,9 +1,9 @@
 .tableWrapper 
     display: table
     width: 100%
-    border: 1px solid var(--borderLight)
-    background: var(--section)
+    border: 1px solid var(--border)
     border-radius: var(--br)
+    padding-bottom: 1em
     margin-bottom: 2em
 
     .tableSearchInput
@@ -76,4 +76,5 @@
         max-width: 100px
 
 .awaitingDispatch
-    background: var(--borderLight) !important
+    td:first-of-type
+        background: var(--awaitingDispatch) !important

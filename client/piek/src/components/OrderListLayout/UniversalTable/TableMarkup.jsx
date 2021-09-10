@@ -32,8 +32,6 @@ export default function Table({columns, data, className }){
         {rows.map((row, i) => {
           prepareRow(row)
           const awaitingDispatch = row.original.AwaitingDispatch
-          console.log(awaitingDispatch)
-
           return (
                <tr className={awaitingDispatch ? mainsass.awaitingDispatch : ''} {...row.getRowProps()}>
               {row.cells.map((cell, i) => {

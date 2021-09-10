@@ -27,14 +27,13 @@ const CustomCheckbox = withStyles({
       opacity: .2,
       transition: 'none !important',
       '&$checked': {
-        color: 'var(--text1)',
+        color: 'var(--text2)',
         opacity: 1,
       }
     },
     checked: {},
   })((props) => 
     <Checkbox 
-    defaultChecked
     color="default"
     size="small"
     {...props} />);

@@ -12,8 +12,9 @@ export default class Store {
     isLoading = false;
     inMemoryToken = undefined;
 
-    priorityTab = 0;
-    showPreOrders = false;
+    priorityTab = 1;
+
+    orders = [];
 
     constructor(){
         makeAutoObservable(this);
@@ -38,10 +39,9 @@ export default class Store {
         this.priorityTab = number
     }
 
-    setShowPreOrders(bool){
-        this.showPreOrders = bool
+    setCachedOrders(array){
+        this.orders = array
     }
-    
     async login(email, password){
         try {
             const response = await AuthService.login(email, password);
@@ -51,7 +51,6 @@ export default class Store {
             this.setUser(response.data.user);
             this.setAuth(true);
             // window.location.href='/';
-            console.log('store', this.inMemoryToken)
         } catch (e) {
             console.log(e.response?.data?.message);
         }
@@ -133,16 +132,6 @@ export default class Store {
     }
 
     pageParams = [
-        {
-            'url' : '/',
-            'icon': <UilSortAmountDown/>,
-            'title': 'Очередность выполнения',
-        },
-        {
-            'url' : '/recently',
-            'icon': <UilEnvelopeInfo/>,
-            'title': 'Недавние',
-        },
         {
             'url' : '/reclamation',
             'icon': <UilWrench/>,

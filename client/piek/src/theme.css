@@ -16,6 +16,8 @@ html{
     --borderLight: #e9ebf0;
     --br10: 6px;
     --br: 15px;
+
+    --awaitingDispatch: lightgreen;
 }
 
 
@@ -24,14 +26,13 @@ html.dark {
     --text1: rgb(233, 233, 233);
     --text2: #919191;
     --textInvert: rgb(0, 0, 0);
-    /* --bg: #000; */
-    --bg: rgb(24, 23, 29);
-
-    /* --section: #12121a; */
-    --section: rgb(32, 31, 39);
+    --bg: rgb(7, 7, 8);
+    --section: rgb(21, 21, 26);
 
     --accent: #6989fc;
     --accentLight: #43435c;
     --border: rgba(255,255,255,.10);
     --borderLight: rgba(255,255,255,.09);
+
+    --awaitingDispatch: mediumaquamarine;
     }

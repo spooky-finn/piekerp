@@ -1,36 +1,31 @@
-import { useState, useContext } from "react";
-import { Context } from '../../../index'
-
 import { columnsList } from '../UniversalTable/columnList'
 import Table from "../UniversalTable/TableMarkup";
+
+import Search from '../Search';
+import { filter } from '../Search/filter'
+
 
 //apollo
 import { MUTATE_ORDER_STATUS } from "./MutationOrderStatus";
 import { useMutation } from '@apollo/client';
 
 //UI
-import {Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core';
-import {UilAngleRight, UilPlus} from '@iconscout/react-unicons';
+import { UilPlus} from '@iconscout/react-unicons';
 import sass from './preorders.module.sass'
+import mainsass from '../main.module.sass'
 
-const PreOrders = (props) => {
-    const { store } = useContext(Context);
-    const [expanded, setExpanded] = useState(store.showPreOrders);
+const PreOrders = ({ state, dispatch }) => {
+    const data = state.preOrders
     const [mutationOrderStatus] = useMutation(MUTATE_ORDER_STATUS);
 
-    let dt = props.preOrders
-    
-    const handleChange = panel => (event, newExpanded) => {
-        store.setShowPreOrders(newExpanded);
-        setExpanded(newExpanded ? panel : false);
-    };
-
     const onClickTransfer = (data) => {
-        dt.splice(dt.indexOf(data), 1)
+        // data.splice(data.indexOf(data), 1)
         mutationOrderStatus({ variables: { OrderID: data.OrderID} })
     }
-    var newColumnList = [...columnsList];
 
+    var newColumnList = [...columnsList];
+    const filtredData = filter(data, state.searchKeyword)
+    
     newColumnList.push({
         Header: ' ',
         accessor: data => 
@@ -38,23 +33,11 @@ const PreOrders = (props) => {
         ,
       })
    
-               
     return(
-        <div className={expanded ? `${sass.preordersContainer} ${sass.active}` : sass.preordersContainer }>
-    
-          <Accordion expanded={expanded === true} onChange={handleChange(true)}>
-            <AccordionSummary>
-                <h6 className={sass.preordersHeading}>
-                    Предзаказы 
-                    <span><UilAngleRight/></span>
-                </h6>
-            </AccordionSummary>
-            <AccordionDetails >
-                <Table  columns={newColumnList} data={props.preOrders}/>
-            </AccordionDetails>
-
-        </Accordion>
-        </div>
+    <div className={`${mainsass.tableWrapper} ${sass.preOrdersTableWrapper}`}>
+        <Search state={state} dispatch={dispatch} />
+        {filtredData && <Table columns = {newColumnList} data = {filtredData} />}
+    </div>
     )
 }
 export default PreOrders

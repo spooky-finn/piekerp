@@ -2,9 +2,9 @@ export const initialState = (selectedTab) => ({
     orders: [],
     preOrders: [],
     selectedTab : selectedTab,
+
     searchKeyword: '',
     managerFilter: 0,
-    filtredOrders: [],
 })
 
 export function reducer(state, action) {
@@ -14,8 +14,9 @@ export function reducer(state, action) {
         case 'selectedTab': 
         case 'searchKeyword': 
         case 'managerFilter': 
-        case 'filtredOrders':
             return {...state, [action.type]: action.payload };
 
+        case 'resetFilters': 
+            return {...state, searchKeyword: '', managerFilter: 0}
     }
 }
