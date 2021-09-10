@@ -24,11 +24,6 @@ const Sidebar = () => {
             <a className="action-icon hidden" ><DarkToggle/></a> 
             <NavLink  className="action-icon hidden" to='/account'><UilUserCircle/></NavLink>
             <NavLink  className="action-icon hidden" to='/login' onClick={() => store.logout()}><UilSignInAlt/></NavLink>
-           
-            
-
-
-
         </Pane>
         </>
     );

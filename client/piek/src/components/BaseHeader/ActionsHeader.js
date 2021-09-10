@@ -9,7 +9,7 @@ import { UserIcon } from 'evergreen-ui';
 const ActionsHeader = (props) => {
     const [ createNewOrder] = useMutation(INSERT_ORDER, {variables: {
         'managerID':     props.userID,
-        'orderStatusID': 3,
+        'orderStatusID': 1,
         'isReclamation':  false,
     }})
 

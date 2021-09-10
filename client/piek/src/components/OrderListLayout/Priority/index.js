@@ -10,11 +10,8 @@ import { columnsList } from '../UniversalTable/columnList'
 import Table from '../UniversalTable/TableMarkup'
 
 
-const Priority = ({ data, users, incomingOrders, state, dispatch }) => {
-
-    const searchHandler = (e) => {
-        dispatch({ type: 'searchKeyword', payload: e.target.value.trim() }) 
-    }
+const Priority = ({ users, state, dispatch }) => {
+    const data = state.orders 
     const columns = useMemo(
         () => columnsList, []
     )
@@ -23,7 +20,7 @@ const Priority = ({ data, users, incomingOrders, state, dispatch }) => {
 
     return(
         <div className={mainsass.tableWrapper}>
-            <Search state={state} dispatch={dispatch} users={users} incomingOrders={data} />
+            <Search state={state} dispatch={dispatch} users={users}/>
             {filtredData && <Table columns = {columns} data = {filtredData} />}
         </div>
     )

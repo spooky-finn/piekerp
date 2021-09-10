@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
 import {TextField} from '@material-ui/core';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import './EditableInfo.sass'
 
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { UPDATE_ORDER_INFO } from '../queries/MutationOrderInfo'
+import { GET_USERS } from '../../../hasura-queries/getUsers';
 
 import NumberFormat from 'react-number-format';
 import moment  from 'moment'
@@ -12,7 +14,6 @@ let fields = {}
 
 function DateFormatCustom(props) {
   const { inputRef, onChange, ...other } = props;
-
   return (
     <NumberFormat
       {...other}
@@ -52,7 +53,27 @@ function MoneyFormatCustom(props) {
 }
 
 const EditableInfo = ({ data, orderID, refetch }) => {  
+  const { data: users = []} = useQuery(GET_USERS);
   
+  console.log(users.erp_Users)
+
+    const top100Films = [
+      { title: 'The Shawshank Redemption', year: 1994 },
+      { title: 'The Godfather', year: 1972 },
+      { title: 'The Godfather: Part II', year: 1974 },
+      { title: 'The Dark Knight', year: 2008 },
+      { title: 'Dangal', year: 2016 },
+      { title: 'The Sting', year: 1973 },
+      { title: '2001: A Space Odyssey', year: 1968 },
+      { title: "Singin' in the Rain", year: 1952 },
+      { title: 'Toy Story', year: 1995 },
+      { title: 'Bicycle Thieves', year: 1948 },
+      { title: 'The Kid', year: 1921 },
+      { title: 'Inglourious Basterds', year: 2009 },
+      { title: 'Snatch', year: 2000 },
+      { title: '3 Idiots', year: 2009 },
+      { title: 'Monty Python and the Holy Grail', year: 1975 },
+    ];
 
     const addField = (e) => fields[e.target.name] = e.target.value
     const [updateOrderInfo] = useMutation(UPDATE_ORDER_INFO);
@@ -63,8 +84,8 @@ const EditableInfo = ({ data, orderID, refetch }) => {
         return () => {
             console.log('doing mutation for order', orderID, fields)
             updateOrderInfo({variables: {
-            orderID,
-            fields,
+              orderID,
+              fields,
             }})
             refetch()
         };
@@ -105,6 +126,13 @@ const EditableInfo = ({ data, orderID, refetch }) => {
           name='OrderNumber'
           defaultValue={data.OrderNumber}
           onChange={addField}
+        />
+
+        <Autocomplete
+          id="combo-box-demo"
+          options={users.erp_Users}
+          getOptionLabel={(option) => `${option.FirstName} ${option.LastName}`}
+          renderInput={(params) => <TextField {...params} label="Менеджер"  />}
         />
 
          <TextField

@@ -8,7 +8,7 @@ import gql from 'graphql-tag';
 // 
 
 export const GetOrdersSubscription = gql`
-subscription GetOrders($search: String) {
+subscription{
     erp_Orders(where: {OrderStatusID: {_neq: 3} }) {
       OrderID
       Entity
@@ -36,13 +36,4 @@ subscription GetOrders($search: String) {
 
     }  
   }
-`
-export const GET_USERS = gql`
-query getUsers {
-  erp_Users{
-    FirstName
-    LastName
-    UserID
-  }
-}
 `

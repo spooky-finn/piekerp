@@ -11,8 +11,8 @@ import { spread } from './spreadOrders';
 import mainsass from '../main.module.sass'
 import sass from './recently.module.sass'
 
-const Recently = ({ data, state, dispatch, incomingOrders }) => {
-
+const Recently = ({ state, dispatch }) => {
+    const data = state.orders
     data.sort((a, b) => b.ShippingDate > a.ShippingDate ? 1: -1);  
 
     const spreadData = spread(data);
@@ -35,7 +35,7 @@ const Recently = ({ data, state, dispatch, incomingOrders }) => {
 
             <div className={sass.heading}>Остальные</div>
             <div className={mainsass.tableWrapper}>
-                <Search state={state} dispatch={dispatch} incomingOrders={filtredData} />
+                <Search state={state} dispatch={dispatch} incomingOrders={data} />
                 { <Table columns = { columns } data = { filtredData } />}
             </div>
 

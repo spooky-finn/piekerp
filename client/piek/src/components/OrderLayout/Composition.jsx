@@ -32,7 +32,6 @@ function reducer(state, action){
                 fullName: action.payload[1],
                 quantity: action.payload[2]
             }
-
     }
 
 }
@@ -51,7 +50,6 @@ const OrderComposition = ({ data, editState, refetch, orderID }) => {
     }
 
     useEffect(() => {
-        console.log(editState)
         if (!editState && state.name !== '' && state.quantity !== ''){
             insertOrderItem()
         }

@@ -8,7 +8,8 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 // apollo
 import { useSubscription, useQuery } from '@apollo/client'
-import { GetOrdersSubscription, GET_USERS } from './queries/getOrders'
+import { GetOrdersSubscription } from './queries/getOrders'
+import { GET_USERS } from '../../hasura-queries/getUsers'
 
 // ui 
 import {Tabs, Tab, Box} from '@material-ui/core';
@@ -18,12 +19,11 @@ import Priority from './Priority';
 import Recently from './Recently/index.jsx';
 import ActionsHeader from '../BaseHeader/ActionsHeader'
 
-var incomingOrders = undefined;
-
-
-const OrderListLayout = () => {
+const OrderListLayout = (props) => {
     const { store } = useContext(Context);
     const [state, dispatch] = useReducer(reducer, initialState(store.priorityTab));
+    const { selectedTab } = state; 
+
     const history = useHistory();
 
     const onSubscriptionData = (options) => {
@@ -32,15 +32,16 @@ const OrderListLayout = () => {
             if (order.OrderStatus.ID == 1) preOrders.push(order)
             else if (order.OrderStatus.ID == 2) orders.push(order)
         })
-        incomingOrders = orders
         dispatch({ type: 'preOrders', payload: preOrders });
         dispatch({ type: 'orders', payload: orders })
     }
-    const { loading, error, data = [] } = useSubscription(GetOrdersSubscription, { onSubscriptionData, fetchPolicy: "cache-first", nextFetchPolicy: "cache-first" });
+    
+    useSubscription(GetOrdersSubscription, { onSubscriptionData,  fetchPolicy: "cache-first", nextFetchPolicy: "cache-first" });
     const { data: users = []} = useQuery(GET_USERS);
 
     const tabHandler = (event, newValue) => {
         dispatch({ type: 'selectedTab', payload: newValue })
+        dispatch({ type: 'resetFilters'})
         store.setPriorutyTab(newValue)
     };
 
@@ -115,7 +116,8 @@ const OrderListLayout = () => {
     const useStyles = makeStyles((theme) => ({
         root: {
             flexGrow: 1,
-            minHeight: '50px'
+            minHeight: '50px',
+            marginBottom: '1.5em',
         }
     }));
 
@@ -124,31 +126,27 @@ const OrderListLayout = () => {
         <div >
             
             <div className={classes.root}>
-            <AntTabs value={state.selectedTab} onChange={tabHandler} aria-label="simple tabs example">
-                <AntTab label="Очередость" {...a11yProps(0)} />
-                <AntTab label="Недавние" {...a11yProps(1)} />
+            <AntTabs value={selectedTab} onChange={tabHandler} aria-label="simple tabs example">
+                <AntTab label="Предзаказы" {...a11yProps(0)} />
+                <AntTab label="Очередость" {...a11yProps(1)} />
+                <AntTab label="Недавние" {...a11yProps(2)} />
 
                 <ActionsHeader createOrder={1} userID={store.user.UserID} history={history}/>
-
             </AntTabs>
             </div>
 
 
-        <PreOrders preOrders = {state.preOrders} />
 
-        <TabPanel value={state.selectedTab} index={0} >
-            <Priority data={state.orders}
-                    state={state}
-                    dispatch={dispatch}
-                    users={users.erp_Users}
-                    incomingOrders={incomingOrders} />
+        <TabPanel value={selectedTab} index={0}>
+            <PreOrders state={state} dispatch={dispatch}/>
         </TabPanel>
 
-        <TabPanel value={state.selectedTab} index={1}>
-            <Recently data={state.orders}
-                    state={state}
-                    dispatch={dispatch}
-                    incomingOrders={incomingOrders} />
+        <TabPanel value={selectedTab} index={1} >
+            <Priority state={state} dispatch={dispatch} users={users.erp_Users} />
+        </TabPanel>
+
+        <TabPanel value={selectedTab} index={2}>
+            <Recently state={state} dispatch={dispatch} />
         </TabPanel>
       </div>
     )
