@@ -26,7 +26,7 @@ const CheckList = ({data}) => {
     return(
         <div className="CheckList">
 
-            <div className='partitionHeading'>Чеклист</div>
+            <div className='sectionHeading'>Чеклист</div>
 
             {units}
         </div>

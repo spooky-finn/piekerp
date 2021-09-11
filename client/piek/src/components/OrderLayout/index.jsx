@@ -25,7 +25,10 @@ import './sass/index.sass';
 
 import { motion } from "framer-motion"
 
-
+function isPreorder(data){
+    // add a note to the title if this is a pre-order
+    if (data.OrderStatusID == 1) return true;
+}
 
 
 const OrderLayout = (props) => {
@@ -61,24 +64,26 @@ const OrderLayout = (props) => {
         )
       }, [])
 
-    const {loading, error, data = [], refetch } = useQuery(GET_ORDER_BY_ID, { variables: { OrderID: orderID}, fetchPolicy:'cache-and-network' });
+    const {loading, error, data = [], refetch } = useQuery(GET_ORDER_BY_ID, { variables: { OrderID: orderID} });
     const { data: users = []} = useQuery(GET_USERS);
     const {getRootProps, isDragActive} = useDropzone({className: 'dropzone', onDrop: S3Upload });
+
     return(
     <motion.div
-    initial={{ scale: .85 }} 
+    initial={{ scale: .92 }} 
     animate={{ scale: 1 }}
     transition={{ duration: 0.2 }}
     > 
 
-
-    
             {isFileOnDropzone(isDragActive)}
 
         {!loading ? (<>
 
         <div className="page-header">
-            <Heading>{data.erp_Orders[0].Entity} __  {data.erp_Orders[0].City}</Heading>
+            <Heading>
+                {data.erp_Orders[0].Entity} __ {data.erp_Orders[0].City} 
+                {isPreorder(data.erp_Orders[0]) &&<span className="preorderTitle"> | Предзаказ</span>} 
+            </Heading>
 
             <ActionsHeader 
             accessLevel = {2} 
@@ -89,33 +94,27 @@ const OrderLayout = (props) => {
 
         <section className='OrderLayout' {...getRootProps()} id='dropzone'>
 
-                    <div className="Main">
-
-                    <div className="Composition">  
-                        <Composition 
-                            data={data.erp_Orders[0].OrderItems} 
-                            editState={editState}
-                            refetch={refetch}
-                            orderID= {orderID} /> 
-
-                    </div>
+            <div className="Main">
+                <div className="Composition">  
+                    <Composition 
+                        data={data.erp_Orders[0].OrderItems} 
+                        editState={editState}
+                        refetch={refetch}
+                        orderID= {orderID} /> 
+                </div>
+            
+                <div className="WrapperTwoCol">
+                    <CheckList data={data.erp_Orders[0].CheckListUnits}/>
+                    <Docs data={data.erp_Orders[0].Docs} 
+                        onUpload={onUploadFiles} 
+                        editState = {editState} 
+                        refetch={refetch} />
+                </div>
+                <Comments/>
+        </div>
                     
-                        <div className="WrapperTwoCol">
-                            <CheckList data={data.erp_Orders[0].CheckListUnits}/>
-                            <Docs data={data.erp_Orders[0].Docs} 
-                                onUpload={onUploadFiles} 
-                                editState = {editState} 
-                                refetch={refetch} />
-                        </div>
-                        <Comments/>
-                    </div>
-                    
-                    { editState ? <EditableInfo data={data.erp_Orders[0]} orderID={orderID} refetch={refetch} users={users.erp_Users} /> : (
-                                  <Info data={data.erp_Orders[0]} editState = {editState} orderID={orderID}/> )}
-                   
-
-       
-
+            {editState? <EditableInfo data={data.erp_Orders[0]} orderID={orderID} refetch={refetch} users={users.erp_Users} /> : (
+                            <Info data={data.erp_Orders[0]} editState = {editState} orderID={orderID} />)}
         </section> 
 
         </>): null }

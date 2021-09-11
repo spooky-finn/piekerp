@@ -1,8 +1,8 @@
 .base-container section
-    // background: var(--section)  
+    background: var(--L1) !important  
     border-radius: var(--br)
-    color: var(--text1)
-    min-height: 80vh
+    color: var(--highContrast)
+    min-height: 90vh
     padding: 0
 
     
@@ -20,16 +20,18 @@
 .isDragAccept
     opacity: .1
   
-
+.preorderTitle
+    color: var(--accent)
+    
 .MuiPaper-root
-    background: var(--bg) !important
+    background: var(--L0) !important
     input
-        color: var(--text1) !important
+        color: var(--highContrast) !important
     .MuiTypography-root
-        color: var(--text2) 
+        color: var(--lowContrast) 
         span
             font-weight: 500 
-            color: var(--text1) !important
+            color: var(--highContrast) !important
 
     .dialog-danger-btn
         text-transform: initial !important
@@ -37,9 +39,9 @@
         span
             color: var(--danger)
 
-.partitionHeading
-    color: var(--text2)
-    border-bottom: 1px dashed var(--borderLight)
+.sectionHeading
+    color: var(--lowContrast)
+    border-bottom: 1px dashed var(--border)
     padding: .2em 1em 
     font-weight: 300
     font-size: .8rem
@@ -50,12 +52,10 @@
 .OrderLayout
     display: grid
     grid-template-columns: 2.5fr 1fr
-    border: 1px solid var(--borderLight)
-    border-radius: var(--br10)
+    border: 1px solid var(--border)
+    border-radius: var(--br)
     outline: none !important    
     .Main
-           
-
         .WrapperTwoCol
             display: grid
             grid-template-columns: 1fr 1fr
@@ -85,7 +85,7 @@
 
                 .CheckListUnit.complited
                     text-decoration: line-through 
-                    color: var(--text2)
+                    color: var(--lowContrast)
                     &::after
                         background: var(--accent)
                        
@@ -99,7 +99,7 @@
                     padding: 1em
                 a
                     display: flex
-                    color: var(--text1)
+                    color: var(--highContrast)
                     text-decoration: none
 
                 .file-name
@@ -121,7 +121,7 @@
                     flex-direction: column
                     div
                         opacity: .7 
-                        color: var(--text2)
+                        color: var(--lowContrast)
 
                     img 
                         width: 150px !important

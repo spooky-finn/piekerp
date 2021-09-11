@@ -15,7 +15,7 @@ const useStyles = makeStyles({
         height: 35,
         '& > span': {
             fontSize: '.8rem',
-            color: 'var(--text2)',
+            color: 'var(--lowContrast)',
         }
     },
 })
@@ -23,11 +23,11 @@ const useStyles = makeStyles({
 const CustomCheckbox = withStyles({
     root: {
       margin: '0 10px',
-      color: 'var(--text2)',
+      color: 'var(--lowContrast)',
       opacity: .2,
       transition: 'none !important',
       '&$checked': {
-        color: 'var(--text2)',
+        color: 'var(--lowContrast)',
         opacity: 1,
       }
     },
@@ -76,7 +76,7 @@ const OrderMeta = ({ data, orderID }) => {
                     </div>
                     <div>
                         <pre>Создан</pre>
-                        {data.ShippingDate}
+                        {data.CreatingDate.split('T')[0]}
                     </div>
                     <div>
                         <pre>Менеджер</pre>

@@ -1,6 +1,6 @@
-export const initialState = (selectedTab) => ({
-    orders: [],
-    preOrders: [],
+export const initialState = (selectedTab, cachedOrders, cachedPreOrders) => ({
+    orders: cachedOrders || [],
+    preOrders: cachedPreOrders || [],
     selectedTab : selectedTab,
 
     searchKeyword: '',

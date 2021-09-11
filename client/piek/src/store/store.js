@@ -14,7 +14,8 @@ export default class Store {
 
     priorityTab = 1;
 
-    orders = [];
+    cachedOrders = [];
+    cachedPreOrders = [];
 
     constructor(){
         makeAutoObservable(this);
@@ -40,8 +41,12 @@ export default class Store {
     }
 
     setCachedOrders(array){
-        this.orders = array
+        this.cachedOrders = array
     }
+    setCachedPreOrders(array){
+        this.cachedPreOrders = array
+    }
+
     async login(email, password){
         try {
             const response = await AuthService.login(email, password);

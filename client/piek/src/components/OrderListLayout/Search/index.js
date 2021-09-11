@@ -14,11 +14,11 @@ const useStyles = makeStyles((theme) => ({
     },
     select: {
         fontSize: '.8rem',
-        color: 'var(--text1)',
+        color: 'var(--highContrast)',
     },
     menuItem: {
         fontSize: '.8rem',
-        color: 'var(--text2)',
+        color: 'var(--lowContrast)',
         fontSize: '.8rem',
     },
   }));
@@ -27,7 +27,7 @@ const Search = ({state, dispatch, users }) => {
     const classes = useStyles();
 
     const searchHandler = (e) => {
-        dispatch({ type: 'searchKeyword', payload: e.target.value.trim() }) 
+        dispatch({ type: 'searchKeyword', payload: e.target.value }) 
     }
 
     const managerHandler = (e) => {
@@ -47,7 +47,7 @@ const Search = ({state, dispatch, users }) => {
         <>
         <div className={sass.tableSearchInput}>
             <UilSearch/>
-            <input type='text' placeholder="поиск (номер счета или организация)" onChange={searchHandler} autoFocus defaultValue={state.searchKeyword}/>
+            <input type='text' placeholder="Номер счета или организация" onChange={searchHandler} autoFocus defaultValue={state.searchKeyword}/>
 
             {/* filter data by manager */}
             { users && (<div className={sass.filter}>
