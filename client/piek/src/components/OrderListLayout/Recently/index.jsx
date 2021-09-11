@@ -13,7 +13,7 @@ import sass from './recently.module.sass'
 
 const Recently = ({ state, dispatch }) => {
     const data = state.orders
-    data.sort((a, b) => b.ShippingDate > a.ShippingDate ? 1: -1);  
+    data.sort((a, b) => b.CreatingDate > a.CreatingDate ? 1: -1);  
 
     const spreadData = spread(data);
 
@@ -26,12 +26,15 @@ const Recently = ({ state, dispatch }) => {
 
     return(
         <div>
+            { spreadData[0].objs.length ? ( <>
             <div className={sass.heading}>Сегодня</div>
             <Table columns={columns} data={spreadData[0].objs} className={sass.recentlyTable} />
+            </>): null}
 
+            { spreadData[1].objs.length ? ( <>
             <div className={sass.heading}>Вчера</div>
             <Table columns={columns} data={spreadData[1].objs} className={sass.recentlyTable} />
-
+            </>): null}
 
             <div className={sass.heading}>Остальные</div>
             <div className={mainsass.tableWrapper}>

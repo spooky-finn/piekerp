@@ -59,7 +59,7 @@ const Docs = ({ data, onUpload, editState, refetch }) => {
      
     return (        
         <div className="Docs" >
-            <div className='partitionHeading'>Приложения</div>
+            <div className='sectionHeading'>Приложения</div>
             <div className='filesContainer'>
                 {attachedFiles}
                 {onUploadFiles()}

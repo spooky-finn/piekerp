@@ -21,7 +21,7 @@ import ActionsHeader from '../BaseHeader/ActionsHeader'
 
 const OrderListLayout = (props) => {
     const { store } = useContext(Context);
-    const [state, dispatch] = useReducer(reducer, initialState(store.priorityTab));
+    const [state, dispatch] = useReducer(reducer, initialState( store.priorityTab, store.cachedOrders, store.cachedPreOrders ));
     const { selectedTab } = state; 
 
     const history = useHistory();
@@ -32,6 +32,9 @@ const OrderListLayout = (props) => {
             if (order.OrderStatus.ID == 1) preOrders.push(order)
             else if (order.OrderStatus.ID == 2) orders.push(order)
         })
+        store.setCachedOrders(orders)
+        store.setCachedPreOrders(preOrders)
+
         dispatch({ type: 'preOrders', payload: preOrders });
         dispatch({ type: 'orders', payload: orders })
     }
@@ -44,8 +47,6 @@ const OrderListLayout = (props) => {
         dispatch({ type: 'resetFilters'})
         store.setPriorutyTab(newValue)
     };
-
-
 
     function TabPanel(props) {
         const { children, value, index, ...other } = props;
@@ -80,7 +81,9 @@ const OrderListLayout = (props) => {
     const tabHeight = '45px'
     const AntTabs = withStyles({
         root: {
-            borderBottom: '1px solid var(--border)',
+            borderLeft: '1px solid var(--border)',
+            borderRight: '1px solid var(--border)',
+            background: 'var(--L2)',
             minHeight: tabHeight,
             height: tabHeight,
         },
@@ -93,10 +96,10 @@ const OrderListLayout = (props) => {
       
       const AntTab = withStyles((theme) => ({
         root: {
-          textTransform: 'none',
           minWidth: '10%',
-          fontSize: '.9rem',
-          color: 'var(--text1)',
+          fontSize: '.7rem',
+          letterSpacing: '1px',
+          color: 'var(--highContrast)',
           padding: 0,
           opacity: .5,
           minHeight: tabHeight,
@@ -113,28 +116,15 @@ const OrderListLayout = (props) => {
         selected: {},
       }))((props) => <Tab disableRipple {...props} />);
 
-    const useStyles = makeStyles((theme) => ({
-        root: {
-            flexGrow: 1,
-            minHeight: '50px',
-            marginBottom: '1.5em',
-        }
-    }));
-
-  const classes = useStyles();
     return(
         <div >
-            
-            <div className={classes.root}>
-            <AntTabs value={selectedTab} onChange={tabHandler} aria-label="simple tabs example">
-                <AntTab label="Предзаказы" {...a11yProps(0)} />
-                <AntTab label="Очередость" {...a11yProps(1)} />
-                <AntTab label="Недавние" {...a11yProps(2)} />
+        <AntTabs value={selectedTab} onChange={tabHandler} aria-label="simple tabs example">
+            <AntTab label="Предзаказы" {...a11yProps(0)} />
+            <AntTab label="Очередость" {...a11yProps(1)} />
+            <AntTab label="Недавние" {...a11yProps(2)} />
 
-                <ActionsHeader createOrder={1} userID={store.user.UserID} history={history}/>
-            </AntTabs>
-            </div>
-
+            <ActionsHeader createOrder={1} userID={store.user.UserID} history={history}/>
+        </AntTabs>
 
 
         <TabPanel value={selectedTab} index={0}>

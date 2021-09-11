@@ -23,32 +23,32 @@ const theme = darkTheme
 darkTheme.overrides = {
   MuiInputLabel: {
     root: {
-      color: 'var(--text2)',
+      color: 'var(--lowContrast)',
       fontSize: '.8rem',
     },
   },
   MuiInputBase: {
     root: {
       borderBottom: 'none',
-      color: 'var(--text1)',
+      color: 'var(--highContrast)',
       '&::before': {
-        borderColor: 'var(--borderLight) !important',
+        borderColor: 'var(--border) !important',
       }
     },
   },
   MuiIconButton:{
     root: {
-      color: 'var(--text2)',
+      color: 'var(--lowContrast)',
       opacity: .5
     }
   },
   MuiAutocomplete: {
     paper: {
-      background: 'var(--section) !important',
-      border: '1px solid var(--borderLight)',
+      background: 'var(--L1) !important',
+      border: '1px solid var(--border)',
     },
     listbox: {
-      color: 'var(--text1)',
+      color: 'var(--highContrast)',
       fontSize: '.8rem',
     },
   },

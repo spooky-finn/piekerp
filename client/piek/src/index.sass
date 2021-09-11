@@ -1,5 +1,5 @@
 html
-    background: var(--bg) !important
+    background: var(--L0) !important
     @media (max-width: 1000px)
         font-size: .9rem
     
@@ -40,13 +40,13 @@ input[type=number]
 .action-icon.active
     color: var(--accent)
 .action-icon
-    color: var(--text1)
+    color: var(--highContrast)
     &:hover
         color: var(--accent)
     path
         // уменьшение толщины линий иконок
         stroke-width: .8
-        stroke: var(--bg) 
+        stroke: var(--L0) 
 
     @media (max-width: 900px)
         svg
@@ -60,11 +60,10 @@ input[type=number]
     display: flex
     padding: 10px 0
     align-items: center
-    color: var(--text1)
+    color: var(--highContrast)
     height: 40px
-    margin-bottom: 20px
     h2
-        color: var(--text1)
+        color: var(--highContrast)
         font-size: .9rem
 
     span
@@ -90,7 +89,7 @@ input[type=number]
     transition: background 50ms linear
     svg
         width: 20px
-        color: var(--text2)
+        color: var(--lowContrast)
     &:hover  
         svg 
             color: var(--accent)
