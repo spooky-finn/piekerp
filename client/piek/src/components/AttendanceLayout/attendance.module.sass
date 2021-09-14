@@ -1,0 +1,69 @@
+$status-101: #6989fc
+$status-102: #72c900
+
+.tableWrapper
+    display: inline-block
+    border: 1px solid var(--border)
+    border-radius: var(--br) 
+    background: var(--L1)
+    min-width: 100%
+    margin-bottom: 2em
+.attendanceTable
+    padding: 1em
+    font-size: .8em
+    color: var(--lowContrast)
+    border-collapse: collapse
+    width: 100%
+
+    thead th
+        position: sticky
+        top: -3px
+        z-index: 1000
+        background: var(--L1)
+        padding: 13px 0
+        color: var(--highContrast)
+        font-weight: normal
+
+    .interval
+            color: var(--highContrast) !important
+    tbody td
+        border: 1px solid var(--border) !important
+        padding: 0
+        position: relative
+        
+        div
+            padding: 2px
+        .status-101
+            color: $status-101 !important
+        &:nth-of-type(1)
+            color: var(--highContrast)
+            padding-left: 6px
+            border-left: none !important
+        &:nth-last-of-type(1)
+            border-right: none !important
+            
+        &:nth-of-type(2)
+            color: var(--highContrast)
+            font-weight: 700
+            padding: 0 7px 
+   
+.tableSearchInput
+    display: flex
+    height: 50px
+    align-items: center
+    border-bottom: 1px solid var(--border)
+    svg
+        padding: 0 10px !important
+        width: 20px
+        opacity: .5
+        color: var(--highContrast)
+    input
+        border: none
+        flex-grow: 1
+        background: transparent
+        color: var(--highContrast)
+        &:active, &:focus
+            outline: none !important
+.tableFooter
+    padding: .7em
+    background: var(--L0)

@@ -4,7 +4,7 @@ import PrivateRoute from "./PrivateRoute";
 import LoginForm from '../components/LoginForm';
 import OrderListLayout from "../components/OrderListLayout";
 import OrderLayout from "../components/OrderLayout";
-import Attendance from '../components/Attendance'
+import Attendance from '../components/AttendanceLayout'
 import Reclamation from "../components/ReclamationLayout";
 
 const AppRouter = () => {

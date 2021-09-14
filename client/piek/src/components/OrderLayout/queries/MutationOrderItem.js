@@ -21,3 +21,14 @@ mutation MyMutation($orderItemID: Int!) {
   }
 }
 `;
+
+export const UPDATE_ORDER_ITEM_METADATA = gql`
+mutation($OrderItemID: Int!, $Fitter: String!, $SerialNumber: String!) {
+  update_erp_OrderItems_by_pk(
+    pk_columns: {OrderItemID: $OrderItemID},
+     _set: {Fitter: $Fitter, SerialNumber: $SerialNumber}
+  ){
+    OrderItemID
+  }
+}
+`

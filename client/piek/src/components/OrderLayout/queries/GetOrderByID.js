@@ -5,20 +5,18 @@ query MyQuery($OrderID: Int!) {
   erp_Orders(
     where: {OrderID: {_eq: $OrderID}}
     ){
+    OrderID
+    ManagerID
+    OrderStatusID
     City
+    ShippingDate
     CreatingDate
     Comment
     Entity
     InvoiceNumber
-    ManagerID
-    OrderID
     OrderNumber
-    OrderStatusID
     PaidAmount
-    ShipmentComment
-    ShippingDate
     TotalAmount
-    IsReclamation
     AwaitingDispatch
     User {
       FirstName
@@ -34,11 +32,11 @@ query MyQuery($OrderID: Int!) {
       Quantity
       SerialNumber
     }
-    CheckListUnits {
-      IsComplited
-      OrderID
-      Point
+    CheckListUnits(order_by: {CheckListUnitID: desc}) {
       CheckListUnitID
+      OrderID
+      IsComplited
+      Point
     }
     Docs {
       Key

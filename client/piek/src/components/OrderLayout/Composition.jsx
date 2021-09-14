@@ -1,14 +1,16 @@
-import { DELETE_ORDER_ITEM, INSERT_ORDER_ITEM } from "./queries/MutationOrderItem"
+import { useReducer, useEffect } from 'react'
+
+//apollo 
+import { DELETE_ORDER_ITEM, INSERT_ORDER_ITEM, UPDATE_ORDER_ITEM_METADATA } from "./queries/MutationOrderItem"
 import { useMutation } from "@apollo/client"
 
-import { useReducer, useEffect } from 'react'
+// ui 
 import {TextField} from '@material-ui/core'
 import { UilArrowUp } from '@iconscout/react-unicons'
-
-
 import { motion, AnimatePresence } from "framer-motion"
-
 import sass from './sass/composition.module.sass'
+
+import OrderItemActions from './OrderItemActions'
 
 const initialState = {
     name: '',
@@ -37,16 +39,20 @@ function reducer(state, action){
 }
 
 const OrderComposition = ({ data, editState, refetch, orderID }) => {
-    const [ deleteOrderItemMutation ] = useMutation(DELETE_ORDER_ITEM)
-    const [ insertOrderItemMutation ] = useMutation(INSERT_ORDER_ITEM);
+    const [ deleteOrderItemMutation ]         = useMutation(DELETE_ORDER_ITEM)
+    const [ insertOrderItemMutation ]         = useMutation(INSERT_ORDER_ITEM);
+    const [ updateOrderItemMetadataMutation ] = useMutation(UPDATE_ORDER_ITEM_METADATA);
+
 
     const [state, dispatch ] = useReducer(reducer, initialState)
-
+    
     const deleteItem = (itemID) => {
-        deleteOrderItemMutation(
-            { variables: { orderItemID: itemID} }
-        )
+        deleteOrderItemMutation({ variables: { orderItemID: itemID} })
         refetch()    
+    }
+    const editItem = (e, item) => {
+        dispatch({ type: 'editItem', payload: [item.Name, item.FullName, item.Quantity] })
+        deleteItem(item.OrderItemID)
     }
 
     useEffect(() => {
@@ -55,14 +61,6 @@ const OrderComposition = ({ data, editState, refetch, orderID }) => {
         }
 
     }, [editState]);
-
-
-    const editItem = (e, itemID) => {
-        const itemData = data.find( el => el.OrderItemID == itemID)
-        dispatch({ type: 'editItem', payload: [itemData.Name, itemData.FullName, itemData.Quantity] })
-        console.log(e)
-        deleteItem(itemID)
-    }
 
     const insertOrderItem = () => {
         if (state.quantity == '' || state.name == '') return null
@@ -95,7 +93,6 @@ const OrderComposition = ({ data, editState, refetch, orderID }) => {
                 className={sass.quantityInput}
                 value={state.quantity}
                 onChange={ (e) => dispatch({ type: 'quantity', payload: e.target.value }) }
-
                />
            
            <TextField
@@ -134,25 +131,25 @@ const OrderComposition = ({ data, editState, refetch, orderID }) => {
                     <div className={sass.firstRow}>
                         <div className={sass.name}> {el.Name} </div>
                         <span  className={sass.quantity}> {el.Quantity}</span>
+                        <OrderItemActions 
+                            editState={editState} 
+                            item={el}
+                            editItem={editItem}
+                            deleteItem={deleteItem}
+                            updateItem={updateOrderItemMetadataMutation}
+                        />
                     </div>
                     
                     <div  className={sass.fullName}> { el.FullName }</div>
-
-
-                    {editState &&  
-                        <div className={sass.orderItemActions}>
-                            <a onClick={ (e) => editItem(e, el.OrderItemID) }>   Изменить</a>
-                            <a onClick={ ()=> deleteItem(el.OrderItemID) } > Удалить </a>
-                        </div>
-                    }
-                   
 
                 </div>
 
             </motion.div>
             )}
             
-        {editState && <div className={sass.addOrderItem}>{addNewOrderItem()}</div> }
+        {editState && <div className={sass.addOrderItem}>
+            {addNewOrderItem()}
+        </div> }
 
     </AnimatePresence>
     </>)

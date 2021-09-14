@@ -14,7 +14,7 @@ import ActionsHeader from "../BaseHeader/ActionsHeader";
 import Composition from "./Composition";
 import Info from "./Info";
 import EditableInfo from "./EditableComponents/EditableInfo";
-import CheckList from './CheckList';
+import CheckList from './CheckList/CheckList';
 import Docs from './Docs';
 import Comments from "./Comments";
 import { isFileOnDropzone } from "./Dropzone";
@@ -67,7 +67,7 @@ const OrderLayout = (props) => {
     const {loading, error, data = [], refetch } = useQuery(GET_ORDER_BY_ID, { variables: { OrderID: orderID} });
     const { data: users = []} = useQuery(GET_USERS);
     const {getRootProps, isDragActive} = useDropzone({className: 'dropzone', onDrop: S3Upload });
-
+      
     return(
     <motion.div
     initial={{ scale: .92 }} 
@@ -77,7 +77,7 @@ const OrderLayout = (props) => {
 
             {isFileOnDropzone(isDragActive)}
 
-        {!loading ? (<>
+        { data.erp_Orders ? (<>
 
         <div className="page-header">
             <Heading>
@@ -104,7 +104,7 @@ const OrderLayout = (props) => {
                 </div>
             
                 <div className="WrapperTwoCol">
-                    <CheckList data={data.erp_Orders[0].CheckListUnits}/>
+                    <CheckList data={data.erp_Orders[0].CheckListUnits} OrderID={orderID} />
                     <Docs data={data.erp_Orders[0].Docs} 
                         onUpload={onUploadFiles} 
                         editState = {editState} 
