@@ -13,7 +13,7 @@ import sass from './recently.module.sass'
 
 const Recently = ({ state, dispatch }) => {
     const data = state.orders
-    data.sort((a, b) => b.CreatingDate > a.CreatingDate ? 1: -1);  
+    data.sort((a, b) => b.AcceptanceDate > a.AcceptanceDate ? 1: -1);  
 
     const spreadData = spread(data);
 

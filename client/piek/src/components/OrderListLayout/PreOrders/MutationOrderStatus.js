@@ -7,8 +7,14 @@ import {gql} from 'graphql-tag';
 // 
 
 export const MUTATE_ORDER_STATUS = gql`
-    mutation MyMutation($OrderID: Int!){
-    update_erp_Orders_by_pk(pk_columns: {OrderID: $OrderID}, _set: {OrderStatusID: 2}) {
+    mutation MyMutation($OrderID: Int!, $AcceptanceDate: timestamptz!){
+    update_erp_Orders_by_pk(
+      pk_columns: {OrderID: $OrderID},
+       _set: {
+         OrderStatusID: 2,
+         AcceptanceDate: $AcceptanceDate,
+         }
+      ) {
         OrderID
     }
   }

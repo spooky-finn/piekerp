@@ -1,0 +1,123 @@
+$status-101: #6989fc
+$status-102: #72c900
+
+.reportMeta
+    display: flex
+    justify-content: flex-end
+    flex-grow: 1
+    color: var(--lowContrast)
+
+.legend
+    display: flex
+    flex-direction: row
+    font-size: .8em
+    color: var(--lowContrast)
+    line-height: 1.8
+    padding-bottom: 10px
+    div
+        padding-left: 40px
+        position: relative
+        margin: 0 1rem
+        
+    .status-101::before,
+    .status-102::before
+        position: absolute
+        top: 0
+        left: 0
+        content: ''
+        width: 20px
+        border-radius: 5px
+        height: 20px
+
+    .status-101::before
+        background: $status-101
+    .status-102::before
+        background: $status-102
+
+    
+.reportConfigurator
+    $br1: 7px
+    display: flex
+    border: 1px solid var(--border)
+    border-radius: var(--br)
+    margin-bottom: 1rem 
+    font-size: .9em
+    .chooseMonth
+        padding: 15px
+        display: flex
+        border-bottom: 2px solid transparent
+        div
+            margin: 5px 7px 
+            padding-bottom: 4px
+            color: var(--lowContrast)
+            width: fit-content
+            &:hover
+                color: var(--accent)
+        .active
+            // background: var(--accentLight)
+            color: var(--accent)
+            border-bottom: 2px solid var(--accent)
+
+    .arguments
+        display: grid
+        grid-auto-flow: column
+        font-size: .9em
+  
+        .wrap
+            border-left: 1px solid var(--border)
+            border-radius: 0
+            padding: 15px 1rem 
+            span
+                color: var(--lowContrast)
+            input 
+                margin: 0 7px
+                box-sizing: border-box
+                background: inherit
+                border: none
+                font-weight: 600
+                color: var(--accent)
+                height: 100%
+                width: 25px
+                outline: none !important
+    
+// .attendance-table
+//     padding: 1em
+//     font-size: .8em
+//     color: var(--lowContrast)
+//     border-collapse: collapse
+//     width: 100%
+
+//     thead th
+//         position: sticky
+//         top: -3px
+//         z-index: 1000
+//         background: var(--L0)
+//         padding: 13px 0
+//         color: var(--highContrast)
+//         font-weight: normal
+
+//     tbody td
+//         border: 1px solid var(--border) !important
+//         padding: 0
+//         position: relative
+//         div
+//             padding: 2px
+//         .status-101
+//             color: $status-101 !important
+//         // .status-102
+//         //     background: $status-102
+
+//         &:nth-of-type(1)
+//             color: var(--highContrast)
+//             padding-left: 6px
+            
+//         &:nth-of-type(2)
+//             color: var(--highContrast)
+//             font-weight: 700
+//             padding: 0 7px 
+        
+//         .eventTime
+//             opacity: 1
+//             transition: opacity .1s ease 
+//         .interval
+//             color: var(--highContrast)

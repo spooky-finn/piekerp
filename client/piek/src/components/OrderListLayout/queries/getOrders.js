@@ -15,6 +15,7 @@ subscription{
       InvoiceNumber
       City
       ShippingDate
+      AcceptanceDate
       PaidAmount
       TotalAmount
       AwaitingDispatch

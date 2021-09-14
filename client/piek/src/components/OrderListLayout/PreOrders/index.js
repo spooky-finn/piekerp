@@ -4,7 +4,6 @@ import Table from "../UniversalTable/TableMarkup";
 import Search from '../Search';
 import { filter } from '../Search/filter'
 
-
 //apollo
 import { MUTATE_ORDER_STATUS } from "./MutationOrderStatus";
 import { useMutation } from '@apollo/client';
@@ -18,9 +17,14 @@ const PreOrders = ({ state, dispatch }) => {
     const data = state.preOrders
     const [mutationOrderStatus] = useMutation(MUTATE_ORDER_STATUS);
 
-    const onClickTransfer = (data) => {
-        // data.splice(data.indexOf(data), 1)
-        mutationOrderStatus({ variables: { OrderID: data.OrderID} })
+    const onClickTransfer = (order) => {
+        data.splice(data.indexOf(order), 1)
+        dispatch({ type: 'preOrders', payload: data })
+
+        mutationOrderStatus({ variables: { 
+            OrderID: order.OrderID, 
+            AcceptanceDate: new Date().toLocaleString("en-US", {timeZone: "Europe/Moscow"}) } 
+        })
     }
 
     var newColumnList = [...columnsList];

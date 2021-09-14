@@ -5,7 +5,7 @@
 .addOrderItem
     display: grid
     grid-template-columns: 8fr 1fr
-    padding: 2em 1em
+    padding: 2em 2em
     input
       font-family: 'IBM Plex Mono' !important
 
@@ -32,28 +32,13 @@
     position: relative
     padding: 1em
     padding-left: 2em
-    &:hover
-        .orderItemActions
-            opacity: 1
-    .orderItemActions
-        margin-top: .5em
-        opacity: 0
-        color: var(--lowContrast)
-        bottom: 0
-        left: 0
-        font-size: .7rem
-        font-family: none 
-        text-decoration: underline 
-        transition: opacity .5s ease !important
-        a
-            margin-right: 1em
-            &:hover
-                color: var(--highContrast)
-
+    border-bottom: 1px solid var(--border)
+    &:last-of-type
+        border-bottom: none
 
 .firstRow
     display: grid
-    grid-template-columns: 5fr .8fr 1fr 
+    grid-template-columns: 5fr .8fr .5fr 
 
     .name, .quantity
         font-size: 1.3rem

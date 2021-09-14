@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { Context } from '../../index'
 import { reducer, initialState } from './reducer';
 import PropTypes from 'prop-types';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 // apollo
 import { useSubscription, useQuery } from '@apollo/client'

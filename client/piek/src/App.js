@@ -10,13 +10,7 @@ import { DarkToggle } from './components/Sidebar/DarkToggle';
 
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 
-import { blue } from '@material-ui/core/colors/';
-
 const darkTheme = createTheme({
-  palette: {
-    type: "dark",
-    primary: blue,
-  }  
 });
 
 const theme = darkTheme
@@ -26,6 +20,14 @@ darkTheme.overrides = {
       color: 'var(--lowContrast)',
       fontSize: '.8rem',
     },
+  },
+  MuiOutlinedInput: {
+    notchedOutline: {
+      borderColor: 'var(--border)',
+    },
+    focused:{
+      borderColor: 'var(--border)'
+    }
   },
   MuiInputBase: {
     root: {
