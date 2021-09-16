@@ -108,7 +108,6 @@ const OrderComposition = ({ data, editState, refetch, orderID }) => {
             <Input
                 label="Наименование"
                 value={state.name}
-                autoFocus
                 onChange={ (e) => dispatch({ type: 'name', payload: e.target.value }) }
               />
            <Input

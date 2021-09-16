@@ -1,4 +1,4 @@
-import { UilHistoryAlt, UilBox} from "@iconscout/react-unicons";
+import { UilHistoryAlt} from "@iconscout/react-unicons";
 import  moment  from 'moment'
 import "./sass/order-meta.sass";
 
@@ -7,7 +7,6 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 import { useMutation } from "@apollo/client"
 import { UPDATE_AWAITING_DISPATCH } from './queries/MutationOrderInfo'
-import { GET_ORDER_BY_ID } from "./queries/GetOrderByID";
 
 const useStyles = makeStyles({
     formControlLabel: {
@@ -50,57 +49,49 @@ const OrderMeta = ({ data, orderID }) => {
     }
 
   return (
-    <div className="Meta">
+    <div className="Info">
+      <div className="wrap">
 
-        <div className="SignificantInfo">
-                <div>
-                    <pre>План. отгрузка</pre>
-                    {moment(data.ShippingDate).format('DD.MM.YY')}
-                </div>
-                <div>
-                    <pre>Счет / оплата</pre>
-                    {"№ " +
-                    data.InvoiceNumber +
-                    setPaidPercent(data.TotalAmount, data.PaidAmount)}
-                        <span className="PaymentHistory">
-                            <UilHistoryAlt />
-                        </span>
-                </div>
+          <div className='bold'>
+            <pre>План. отгрузка</pre>
+            {moment(data.ShippingDate).format('DD.MM.YY')}
+          </div>
+          <div className='bold'>
+            <pre>Счет / оплата</pre>
+            {"№ " +
+            data.InvoiceNumber +
+            setPaidPercent(data.TotalAmount, data.PaidAmount)}
+            <span className="PaymentHistory">
+              <UilHistoryAlt />
+            </span>
+          </div>
+
+          <div>
+            <pre>Номер заказа</pre>
+            {data.OrderNumber}
+          </div>
+          <div>
+            <pre>Создан</pre>
+            {data.CreatingDate.split('T')[0]}
+          </div>
+          <div>
+            <pre>Менеджер</pre>
+            {data.User?.FirstName} {data.User?.LastName || 'undefined'}
+          </div>
+          <div>
+            <pre>Юр Лицо</pre>
+            {data.Entity}
+          </div>
+          <div>
+            <pre>Гор</pre>
+            {data.City}
+          </div>
+
+          <div className="OrderComment">
+            <pre>Комментарий</pre>
+            {data.Comment}
+          </div>
         </div>
-
-        <div className="MetaWrapper">
-            <div className='Left'>
-                    <div>
-                        <pre>Номер заказа</pre>
-                        {data.OrderNumber}
-                    </div>
-                    <div>
-                        <pre>Создан</pre>
-                        {data.CreatingDate.split('T')[0]}
-                    </div>
-                    <div>
-                        <pre>Менеджер</pre>
-                        {data.User?.FirstName} {data.User?.LastName || 'undefined'}
-                    </div>
-            </div>
-
-            <div className='Right'>
-                        <div>
-                            <pre>Юр Лицо</pre>
-                            {data.Entity}
-                        </div>
-                        <div>
-                            <pre>Гор</pre>
-                            {data.City}
-                        </div>
-                </div>
-        </div>
-
-        <div className="OrderComment">
-                <pre>Комментарий</pre>
-                {data.Comment}
-        </div>
-
         <div className="actions">
             <FormControlLabel
             className={classes.formControlLabel}
@@ -145,9 +136,8 @@ const OrderMeta = ({ data, orderID }) => {
                 /> }
             label="Собран и ожидает отгрузки"
             />
-        </div>
-
-    </div>
+          </div>
+      </div>  
   )
 }
 

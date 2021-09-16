@@ -1,56 +1,47 @@
 .OrderLayout
-    .Meta
-        position: relative
-        border-left: 1px solid var(--border)
+    .Info
+      display: flex 
+      flex-direction: column
+      justify-content: space-between
+      height: 100%
+      border-left: 1px solid var(--border)
+      .wrap
+        display: grid
+        grid-template-columns: 1fr 1fr
+        grid-template-rows: 50px 
+        gap: 12px 8px
+        padding: 1rem 0
         padding: 1rem 1rem 
+        height: fit-content !important
+        position: relative
+        .bold
+          font-size: 1.2rem
+          font-weight: 700
+        .PaymentHistory
+          padding: 0 4px
+          svg
+            height: 18px
+            color: var(--accent)
+        div:hover
+          pre
+            opacity: 1
         pre
-            font-size: 11px
-            font-weight: 400
-            color: var(--highContrast)
-            margin: 0
-            opacity: .4
-            transition: opacity 300ms ease
-            user-select: none
-
-        .SignificantInfo
-            display: grid
-            grid-template-columns: 1fr 1fr
-            div, input
-                font-size: 1.2rem
-                font-weight: 700
-
-            .PaymentHistory
-                padding: 0 4px
-                svg
-                    height: 18px
-                    color: var(--accent)
-
-
-        .MetaWrapper
-            display: grid
-            grid-template-columns: 1fr 1fr
-            padding: 1rem 0
-            .Right, .Left
-                div
-                    padding: .6rem 0
-                    &:hover pre
-                        opacity: 1
-
-        .actions
-            // background: var(--accentLight)
-            position: absolute 
-            bottom: 0
-            right: 0
-            color: var(--highContrast)
-            width: 100%
-            font-size: .8rem
-            border-top: 1px solid var(--border)
-
+          font: 400 11px sans-serif
+          opacity: .5
+          color: var(--lowContrast)
+          margin: 0
+          user-select: none
         .OrderComment
-            color: var(--highContrast)
-            font-size: .9rem
-            line-height: 1.5
-            padding: 1rem 0
-            white-space: pre-wrap
-            pre
-                padding-bottom: .5rem
+          grid-column: 1 / -1
+          color: var(--highContrast)
+          font-size: .9rem
+          line-height: 1.5
+          padding: 1rem 0
+          white-space: pre-wrap
+          pre
+            padding-bottom: .5rem
+      .actions
+        color: var(--highContrast)
+        width: 100%
+        font-size: .8rem
+        border-top: 1px solid var(--border)
