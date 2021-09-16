@@ -27,8 +27,16 @@ const OrderListLayout = (props) => {
     const history = useHistory();
 
     const onSubscriptionData = (options) => {
+  
+        options.subscriptionData.data.erp_Orders.sort(function(a,b){
+            // Turn your strings into dates, and then subtract them
+            // to get a value that is either negative, positive, or zero.
+            return new Date(a.ShippingDate) - new Date(b.ShippingDate);
+          });
+
         let orders = []; let preOrders = [];
         options.subscriptionData.data.erp_Orders.forEach( (order) => {
+            console.log(order.ShippingDate)
             if (order.OrderStatus.ID == 1) preOrders.push(order)
             else if (order.OrderStatus.ID == 2) orders.push(order)
         })

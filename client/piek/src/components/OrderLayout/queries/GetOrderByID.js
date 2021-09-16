@@ -23,7 +23,7 @@ query MyQuery($OrderID: Int!) {
       LastName
       UserID
     }
-    OrderItems {
+    OrderItems(order_by: {OrderItemID: asc}) {
       Fitter
       Name
       FullName

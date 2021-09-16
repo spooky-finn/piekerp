@@ -12,10 +12,10 @@ import Table from '../UniversalTable/TableMarkup'
 
 const Priority = ({ users, state, dispatch }) => {
     const data = state.orders 
+
     const columns = useMemo(
         () => columnsList, []
     )
-  
     const filtredData = filter(data, state.searchKeyword, state.managerFilter)
 
     return(
