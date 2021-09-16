@@ -22,6 +22,20 @@ mutation MyMutation($orderItemID: Int!) {
 }
 `;
 
+
+export const UPDATE_ORDER_ITEM = gql`
+mutation($OrderItemID: Int!, $FullName: String!, $Name: String!, $Quantity: Int!) {
+  update_erp_OrderItems_by_pk(
+    pk_columns: {OrderItemID: $OrderItemID},
+    _set: {FullName: $FullName, Name: $Name, Quantity: $Quantity}) {
+    Name
+    FullName
+    OrderItemID
+    Quantity
+  }
+}
+
+`;
 export const UPDATE_ORDER_ITEM_METADATA = gql`
 mutation($OrderItemID: Int!, $Fitter: String!, $SerialNumber: String!) {
   update_erp_OrderItems_by_pk(

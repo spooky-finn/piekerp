@@ -28,7 +28,7 @@ const StyledMenuItem = withStyles((theme) => ({
   ));
 
   
-const OrderItemActions = ({ editState, item, editItem, deleteItem, updateItem }) => {
+const OrderItemActions = ({ editState, item, editItemHandler, deleteItemHandler, updateItem }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [state, setState] = useState({
     'serialNumber': item.SerialNumber,
@@ -69,6 +69,7 @@ const OrderItemActions = ({ editState, item, editItem, deleteItem, updateItem })
               <StyledInput 
                 type="number"
                 label="Серийный номер" 
+                multiline
                 onChange={(e) => setState(prevState => ({
                 ...prevState,
                 'serialNumber': e.target.value
@@ -93,14 +94,14 @@ const OrderItemActions = ({ editState, item, editItem, deleteItem, updateItem })
               <div className={sass.actionsWrapper}>
                 <StyledMenuItem onClick={ (e) => {
                     handleClose();
-                    editItem(e, item);
+                    editItemHandler(e, item);
                 }}>Изменить</StyledMenuItem>
 
                 <StyledMenuItem 
                   className={sass.deleteButton}
                   onClick={ ()=> {
                     handleClose();
-                    deleteItem(item.OrderItemID);
+                    deleteItemHandler(item.OrderItemID);
                 }}>Удалить</StyledMenuItem>
               </div>
             )}
@@ -113,8 +114,8 @@ const OrderItemActions = ({ editState, item, editItem, deleteItem, updateItem })
 OrderItemActions.propTypes = { 
     editState: PropTypes.bool,
     item:      PropTypes.object,
-    editItem:  PropTypes.func, 
-    deleteItem: PropTypes.func,
+    editItemHandler:  PropTypes.func, 
+    deleteItemHandler: PropTypes.func,
     updateItem: PropTypes.func
 }
 

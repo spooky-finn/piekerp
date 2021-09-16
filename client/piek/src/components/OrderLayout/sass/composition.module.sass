@@ -3,50 +3,53 @@
 
 
 .addOrderItem
-    display: grid
-    grid-template-columns: 8fr 1fr
-    padding: 2em 2em
-    input
-      font-family: 'IBM Plex Mono' !important
-
-    .MuiFormControl-root
-        padding: 0 1rem !important
-        label
-            padding-left: 1em
-
-    .fullNameInput
-      margin-top: 1rem
-      input
-        font-family: sans-serif
-
+    display: flex
+    flex-direction: column
+    padding: 1em 
+    background: var(--L0)
+    border: 1px solid var(--border)
+    border-radius: var(--br10)
+    margin: 2em
     .quantityInput
-      margin-left: 1em
+        width: 100px
 
     .pushOrderItemButton
-        border: none !important
+        border: 1px solid var(--border) !important
+        width: 100px
+        // border: none !important
         display: flex
-        align-self: end
+        text-transform: none !important
+        align-self: self-start
+        background: var(--accentLight)
+        color: var(--accent)
+        margin-top: 6px
+
 
 
 .Unit 
     position: relative
     padding: 1em
     padding-left: 2em
-    border-bottom: 1px solid var(--border)
-    &:last-of-type
-        border-bottom: none
-
-.firstRow
+    border-bottom: 1px solid var(--borderLight) !important
     display: grid
-    grid-template-columns: 5fr .8fr .5fr 
+    grid-template-columns: .3fr 15fr 1fr 1fr 
+    .index
+        font-size: .7rem
+        color: var(--lowContrast)
+        display: flex
+        align-self: center
+        padding-right: 10px
+
 
     .name, .quantity
-        font-size: 1.3rem
+        font-size: 1.2rem
     .quantity
         color: var(--accent)
         font-weight: 600
 
-.fullName
-    color: var(--lowContrast) !important
-    padding-top: 5px
-    font-size: .9rem
+    .fullName
+        grid-column-start: 2
+        grid-column-end: 4
+        color: var(--lowContrast) !important
+        padding-top: 5px
+        font-size: .9rem

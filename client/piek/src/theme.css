@@ -16,6 +16,8 @@ html{
     --danger: #e5534b;
     --accentLight: #E7E9FB;
     --border: #e0e2e7;
+    --borderLight: #e9ebf1de;
+
 
     --br10: 6px;
     --br: 15px;
@@ -38,6 +40,7 @@ html.dark {
     --accent: #6989fc;
     --accentLight: #43435c;
     --border: rgba(255,255,255,.1);
+    --borderLight: rgba(255,255,255,.08);
 
     --awaitingDispatch: rgba(0, 51, 0, 1);
     }
