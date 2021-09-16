@@ -17,8 +17,6 @@ import OrderItemActions from './OrderItemActions'
 
 const Input = withStyles({
   root: {
-    margin: '3px 0',
-    padding: '5px',
   }
 })((props) => 
   <TextField 
