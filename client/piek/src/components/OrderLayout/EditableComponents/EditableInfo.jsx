@@ -76,8 +76,9 @@ const EditableInfo = ({ data, orderID, refetch, users }) => {
     }
 
   return(
-    <form className="Meta EditableInfo">  
-        <TextField
+    <form className="Info EditableInfo">  
+      <div className="wrap">
+       <TextField
           label="План. отгрузка"
           name='ShippingDate'
           defaultValue={moment(data.ShippingDate).format('DD.MM.YY')}
@@ -167,6 +168,7 @@ const EditableInfo = ({ data, orderID, refetch, users }) => {
           defaultValue={data.Comment}
           onChange={addField}
         />
+       </div>
     </form>
   )
 }

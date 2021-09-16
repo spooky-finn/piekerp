@@ -18,6 +18,7 @@ import PreOrders from './PreOrders';
 import Priority from './Priority';
 import Recently from './Recently/index.jsx';
 import ActionsHeader from '../BaseHeader/ActionsHeader'
+import Archive from './Archive/Archive';
 
 const OrderListLayout = (props) => {
     const { store } = useContext(Context);
@@ -36,7 +37,6 @@ const OrderListLayout = (props) => {
 
         let orders = []; let preOrders = [];
         options.subscriptionData.data.erp_Orders.forEach( (order) => {
-            console.log(order.ShippingDate)
             if (order.OrderStatus.ID == 1) preOrders.push(order)
             else if (order.OrderStatus.ID == 2) orders.push(order)
         })
@@ -130,6 +130,8 @@ const OrderListLayout = (props) => {
             <AntTab label="Предзаказы" {...a11yProps(0)} />
             <AntTab label="Очередость" {...a11yProps(1)} />
             <AntTab label="Недавние" {...a11yProps(2)} />
+            <AntTab label="Архив" {...a11yProps(3)} />
+
 
             <ActionsHeader createOrder={1} userID={store.user.UserID} history={history}/>
         </AntTabs>
@@ -146,6 +148,11 @@ const OrderListLayout = (props) => {
         <TabPanel value={selectedTab} index={2}>
             <Recently state={state} dispatch={dispatch} />
         </TabPanel>
+
+        <TabPanel value={selectedTab} index={3}>
+            <Archive state={state} dispatch={dispatch} />
+        </TabPanel>
+
       </div>
     )
 }
