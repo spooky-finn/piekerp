@@ -25,7 +25,7 @@ subscription{
         Name
         ID
       }
-      OrderItems {
+      OrderItems(order_by: {OrderItemID: asc}){
         Quantity
         OrderItemID
         Name
@@ -33,6 +33,7 @@ subscription{
       } 
       User {
         FirstName
+        LastName
       }
 
     }  

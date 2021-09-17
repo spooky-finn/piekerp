@@ -9,7 +9,6 @@ import { Dialog, Button, TextField, DialogActions, DialogContent, DialogContentT
 
 const Docs = ({ data, onUpload, editState, refetch }) => {
     const { store } = useContext(Context)
-
     const [open, setOpen] = useState(false);
     const [fileOnDelete, setFileOnDelete] = useState();
     const [deleteFileMutation] = useMutation(DELETE_ORDER_FILE)
