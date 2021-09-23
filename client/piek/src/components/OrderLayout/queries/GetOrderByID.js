@@ -11,6 +11,7 @@ query MyQuery($OrderID: Int!) {
     City
     ShippingDate
     CreatingDate
+    AcceptanceDate
     Comment
     Entity
     InvoiceNumber

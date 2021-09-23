@@ -1,47 +1,57 @@
 .OrderLayout
-    .Info
-      display: flex 
-      flex-direction: column
-      justify-content: space-between
-      height: 100%
-      border-left: 1px solid var(--border)
-      .wrap
-        display: grid
-        grid-template-columns: 1fr 1fr
-        grid-template-rows: 50px 
-        gap: 12px 8px
-        padding: 1rem 0
-        padding: 1rem 1rem 
-        height: fit-content !important
-        position: relative
-        .bold
-          font-size: 1.2rem
-          font-weight: 700
-        .PaymentHistory
-          padding: 0 4px
-          svg
-            height: 18px
-            color: var(--accent)
-        div:hover
-          pre
-            opacity: 1
+  .posRel
+    // position: relative !important
+  .Info
+    width: 400px
+    background: var(--L1)
+    flex-direction: column
+    justify-content: space-between
+    height: 100%
+    border-left: 1px solid var(--border)
+    @media (max-width: 800px)
+      max-width: 250px
+    .wrap
+      display: grid
+      grid-template-columns: 1fr 1fr
+      grid-template-rows: 50px 
+      gap: 12px 8px
+      padding: 1rem 1rem 
+      height: fit-content !important
+      position: relative
+      .bold
+        font-size: 1.2rem
+        font-weight: 700
+      .PaymentHistory
+        padding: 0 4px
+        svg
+          height: 15px
+          color: var(--accent)
+      div:hover
         pre
-          font: 400 11px sans-serif
-          opacity: .5
-          color: var(--lowContrast)
-          margin: 0
-          user-select: none
-        .OrderComment
-          grid-column: 1 / -1
-          color: var(--highContrast)
-          font-size: .9rem
-          line-height: 1.5
-          padding: 1rem 0
-          white-space: pre-wrap
-          pre
-            padding-bottom: .5rem
-      .actions
+          opacity: 1
+      pre
+        font: 400 11px sans-serif
+        opacity: .5
+        color: var(--lowContrast)
+        margin: 0
+        user-select: none
+      .OrderComment
+        grid-column: 1 / -1
         color: var(--highContrast)
-        width: 100%
-        font-size: .8rem
-        border-top: 1px solid var(--border)
+        font-size: .9rem
+        line-height: 1.5
+        padding: 1rem 0
+        white-space: pre-wrap
+        pre
+          padding-bottom: .5rem
+    .date
+      font-size: .9rem
+    .actions
+      position: fixed
+      bottom: 0
+      background: var(--L1)
+      padding: 0 1em 1em
+      color: var(--highContrast)
+      width: 100%
+      font-size: .8rem
+      border-top: 1px solid var(--border)

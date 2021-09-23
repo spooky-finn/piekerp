@@ -80,7 +80,7 @@ const Attendance = props => {
     )
 
     return(
-        <>
+    <div className={sass.attendanceLayout}>
             <BaseHeader pageParams = { store.getPageParams(window.location.pathname) } search={onChangeSearch} /> 
             <ReportConfigurator state={state} dispatch={dispatch} />
 
@@ -104,7 +104,7 @@ const Attendance = props => {
             </div>
 
         </div>
-        </>
+    </div>
     )
 }
 

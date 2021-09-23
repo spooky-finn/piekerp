@@ -7,12 +7,9 @@ export const isFileOnDropzone = (isDragActive) => {
     if (isDragActive){
         el.classList.add('isDragAccept')
         return (
-            <motion.div 
-            initial={{ y: "70vh"  }}
-            animate={{ y: "50vh" }} >
-
+            <div >
              <UilCloudUpload className='inCloudconIcon'/>
-         </motion.div>
+         </div>
         )
     } else el?.classList?.remove('isDragAccept')
 }

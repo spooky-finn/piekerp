@@ -9,7 +9,7 @@ import { MUTATE_ORDER_STATUS } from "./MutationOrderStatus";
 import { useMutation } from '@apollo/client';
 
 //UI
-import { UilPlus} from '@iconscout/react-unicons';
+import { UilArrowFromRight} from '@iconscout/react-unicons';
 import sass from './preorders.module.sass'
 import mainsass from '../main.module.sass'
 
@@ -33,7 +33,7 @@ const PreOrders = ({ state, dispatch }) => {
     newColumnList.push({
         Header: ' ',
         accessor: data => 
-        <div onClick={() => onClickTransfer(data)} className="square-button"><UilPlus/></div>
+        <div onClick={() => onClickTransfer(data)} className="square-button"><UilArrowFromRight/></div>
         ,
       })
    
