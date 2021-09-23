@@ -1,15 +1,18 @@
 import { useReducer, useEffect } from 'react'
 
 //apollo 
-import { DELETE_ORDER_ITEM, INSERT_ORDER_ITEM, UPDATE_ORDER_ITEM, UPDATE_ORDER_ITEM_METADATA } from "./queries/MutationOrderItem"
 import { useMutation } from "@apollo/client"
+import { 
+DELETE_ORDER_ITEM, 
+INSERT_ORDER_ITEM, 
+UPDATE_ORDER_ITEM, 
+UPDATE_ORDER_ITEM_METADATA 
+} from "./queries/MutationOrderItem"
 
 // ui 
 import { TextField, Button } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles';
 
-import { UilArrowUp } from '@iconscout/react-unicons'
-import { motion, AnimatePresence } from "framer-motion"
 import sass from './sass/composition.module.sass'
 
 import OrderItemActions from './OrderItemActions'
@@ -133,16 +136,12 @@ const OrderComposition = ({ data, editState, refetch, orderID }) => {
       }
 
     return(<>     
-     <AnimatePresence>
         {data.map( (el, index) => 
         
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          key={el.OrderItemID} >
-          <div key={el.OrderItemID} className={sass.Unit}>
-
+        <div
+          key={el.OrderItemID}
+          className={sass.Unit} 
+        >
               <span className={sass.index}>{index+1}</span>
               <div className={sass.name}> {el.Name} </div>
               <span  className={sass.quantity}> {el.Quantity}</span>
@@ -156,12 +155,10 @@ const OrderComposition = ({ data, editState, refetch, orderID }) => {
 
               <div  className={sass.fullName}> { el.FullName }</div>
 
-          </div>
-        </motion.div>
+        </div>
         )}
         
       {addItemForm()}
-    </AnimatePresence>
     </>)
 }
 

@@ -91,7 +91,7 @@ const OrderListLayout = (props) => {
         root: {
             borderLeft: '1px solid var(--border)',
             borderRight: '1px solid var(--border)',
-            background: 'var(--L2)',
+            background: 'var(--L1)',
             minHeight: tabHeight,
             height: tabHeight,
         },
@@ -125,7 +125,7 @@ const OrderListLayout = (props) => {
       }))((props) => <Tab disableRipple {...props} />);
 
     return(
-        <div >
+        <div className='mr15'>
         <AntTabs value={selectedTab} onChange={tabHandler} aria-label="simple tabs example">
             <AntTab label="Предзаказы" {...a11yProps(0)} />
             <AntTab label="Очередость" {...a11yProps(1)} />

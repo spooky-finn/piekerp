@@ -2,142 +2,81 @@ import { UilHistoryAlt} from "@iconscout/react-unicons";
 import  moment  from 'moment'
 import "./sass/order-meta.sass";
 
-import {FormControlLabel, Checkbox} from '@material-ui/core';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import Shipment from "./Shipment/Shipment";
 
-import { useMutation } from "@apollo/client"
-import { UPDATE_AWAITING_DISPATCH } from './queries/MutationOrderInfo'
-
-const useStyles = makeStyles({
-    formControlLabel: {
-        width: '100%',
-        height: 35,
-        '& > span': {
-            fontSize: '.8rem',
-            color: 'var(--lowContrast)',
-        }
-    },
-})
-
-const CustomCheckbox = withStyles({
-    root: {
-      margin: '0 10px',
-      color: 'var(--lowContrast)',
-      opacity: .2,
-      transition: 'none !important',
-      '&$checked': {
-        color: 'var(--lowContrast)',
-        opacity: 1,
-      }
-    },
-    checked: {},
-  })((props) => 
-    <Checkbox 
-    color="default"
-    size="small"
-    {...props} />);
-
-
-const OrderMeta = ({ data, orderID }) => {
+const OrderMeta = (props) => {
+   const { data } = props;
     
-    const [mutateAwaitingDispatch] = useMutation(UPDATE_AWAITING_DISPATCH);
-
-    const classes = useStyles();
     const setPaidPercent = (total, paid) => {
         if (!total || !paid) return ''
         return ' - ' + ((paid/total) * 100).toFixed(0) + '%'
     }
+    const cells = [
+      {
+        'heading': "План. отгрузка",
+        'data': data.ShippingDate &&  moment(data.ShippingDate).format('DD.MM.YY'),
+        'className': 'bold',
+      },
+      {
+        'heading': "Счет / оплата",
+        'data': <div> {"№ "+ data.InvoiceNumber+setPaidPercent(data.TotalAmount, data.PaidAmount)}
+                  <span className="PaymentHistory">
+                    <UilHistoryAlt />
+                  </span> 
+              </div>,
+        'className': 'bold',
+      },
+      {
+        'heading': "Номер заказа",
+        'data': data.OrderNumber,
+      },
+      {
+        'heading': "Менеджер",
+        'data': `${data.User?.FirstName} ${data.User?.LastName || 'undefined'}`,
+      },
+      {
+        'heading': "Юр Лицо",
+        'data': data.Entity,
+      },
+      {
+        'heading': "Город",
+        'data': data.City,
+      },
+      {
+        'heading': "Создан",
+        'data': data.CreatingDate.split('T')[0],
+        'className': 'date',
+      },
+      {
+        'heading': "Производится с",
+        'data': data.AcceptanceDate?.split('T')[0],
+        'className': 'date',
+      },
+
+      {
+        'heading': "",
+        'data': data.Comment,
+        'className': 'OrderComment',
+      },      
+    ]
+
+    const orderInfo = cells.map( (el) =>  
+      <div className={el.className}>
+        <pre>{el.heading}</pre>
+        {el.data}
+      </div>
+    )
+   
 
   return (
-    <div className="Info">
+    <div className='posRel'>
       <div className="wrap">
-
-          <div className='bold'>
-            <pre>План. отгрузка</pre>
-            {moment(data.ShippingDate).format('DD.MM.YY')}
-          </div>
-          <div className='bold'>
-            <pre>Счет / оплата</pre>
-            {"№ " +
-            data.InvoiceNumber +
-            setPaidPercent(data.TotalAmount, data.PaidAmount)}
-            <span className="PaymentHistory">
-              <UilHistoryAlt />
-            </span>
-          </div>
-
-          <div>
-            <pre>Номер заказа</pre>
-            {data.OrderNumber}
-          </div>
-          <div>
-            <pre>Создан</pre>
-            {data.CreatingDate.split('T')[0]}
-          </div>
-          <div>
-            <pre>Менеджер</pre>
-            {data.User?.FirstName} {data.User?.LastName || 'undefined'}
-          </div>
-          <div>
-            <pre>Юр Лицо</pre>
-            {data.Entity}
-          </div>
-          <div>
-            <pre>Гор</pre>
-            {data.City}
-          </div>
-
-          <div className="OrderComment">
-            <pre>Комментарий</pre>
-            {data.Comment}
-          </div>
-        </div>
-        <div className="actions">
-            <FormControlLabel
-            className={classes.formControlLabel}
-            control={
-                <CustomCheckbox 
-                 checked={data.AwaitingDispatch}
-                 onChange={ () => {
-                    // const updateCache = (cache, {data}) => {
-                    //     const existing = cache.readQuery({
-                    //         query: GET_ORDER_BY_ID,
-                    //         variables: {
-                    //             OrderID: orderID
-                    //         }
-                    //     })
-                    //     cache.writeQuery({
-                    //         query: GET_ORDER_BY_ID,
-                    //         variables: {
-                    //             OrderID: orderID
-                    //         },
-                    //         data: { 
-                    //             erp_Orders: [existing.erp_Orders[0]]
-                                 
-                    //         }
-                    //     })
-                    //     console.log(cache.data.data.ROOT_QUERY, 'cahce')
-                    //     console.log(data, 'existing')
-
-                    // }
-
-                    mutateAwaitingDispatch({
-                        variables: {orderID, awaitingDispatch: !data.AwaitingDispatch },
-                        // update: updateCache,
-                        optimisticResponse: {
-                            erp_Orders: {
-                              __typename: 'erp_Orders',
-                              OrderID: orderID,
-                              AwaitingDispatch: !data.AwaitingDispatch
-                            }
-                          }
-                    })
-                 }}
-                /> }
-            label="Собран и ожидает отгрузки"
-            />
-          </div>
-      </div>  
+        {orderInfo}
+      </div>
+      <div className="actions">
+        <Shipment {...props} />
+      </div>
+    </div>  
   )
 }
 

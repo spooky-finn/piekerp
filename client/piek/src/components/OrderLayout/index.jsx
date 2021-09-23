@@ -15,7 +15,7 @@ import Composition from "./Composition";
 import Info from "./Info";
 import EditableInfo from "./EditableComponents/EditableInfo";
 import CheckList from './CheckList/CheckList';
-import Docs from './Docs';
+import Docs from './Docs/Docs';
 import Comments from "./Comments";
 import { isFileOnDropzone } from "./Dropzone";
 
@@ -70,51 +70,61 @@ const OrderLayout = (props) => {
       
     return(
     <motion.div
-    initial={{ scale: .92 }} 
-    animate={{ scale: 1 }}
-    transition={{ duration: 0.2 }}
+    initial={{ scale: .95, opacity: 0 }} 
+    animate={{ scale: 1, opacity: 1 }}
+    transition={{ duration: 0.3 }}
     > 
 
             {isFileOnDropzone(isDragActive)}
 
         { data.erp_Orders ? (<>
 
-        <div className="page-header">
-            <Heading>
-                {data.erp_Orders[0].Entity} __ {data.erp_Orders[0].City} 
-                {isPreorder(data.erp_Orders[0]) &&<span className="preorderTitle"> | Предзаказ</span>} 
-            </Heading>
-
-            <ActionsHeader 
-            accessLevel = {2} 
-            setEditState = {setEditState} 
-            editState = {editState} />
-            
-        </div>
+       
 
         <section className='OrderLayout' {...getRootProps()} id='dropzone'>
 
-            <div className="Main">
-                <div className="Composition">  
-                    <Composition 
-                        data={data.erp_Orders[0].OrderItems} 
-                        editState={editState}
-                        refetch={refetch}
-                        orderID= {orderID} /> 
+                <div className='LeftSideContent'>
+
+                    <div className="page-header">
+                        <Heading>
+                            {data.erp_Orders[0].Entity} __ {data.erp_Orders[0].City} 
+                            {isPreorder(data.erp_Orders[0]) &&<span className="preorderTitle"> | Предзаказ</span>} 
+                        </Heading>
+
+                        <ActionsHeader 
+                        accessLevel = {2} 
+                        setEditState = {setEditState} 
+                        editState = {editState} />
+                        
+                    </div>
+
+                    <div className="Composition">  
+                      <Composition 
+                          data={data.erp_Orders[0].OrderItems} 
+                          editState={editState}
+                          refetch={refetch}
+                          orderID= {orderID} /> 
+                    </div>
+                      <CheckList data={data.erp_Orders[0].CheckListUnits} OrderID={orderID} />
+
+                      <Docs data={data.erp_Orders[0].Docs} 
+                          onUpload={onUploadFiles} 
+                          editState = {editState} 
+                          refetch={refetch} 
+                      />
+
+                      <Comments/> 
                 </div>
+
+                
             
-                <div className="WrapperTwoCol">
-                    <CheckList data={data.erp_Orders[0].CheckListUnits} OrderID={orderID} />
-                    <Docs data={data.erp_Orders[0].Docs} 
-                        onUpload={onUploadFiles} 
-                        editState = {editState} 
-                        refetch={refetch} />
+                
+                <div className="Info">
+                  {editState? <EditableInfo data={data.erp_Orders[0]} orderID={orderID} refetch={refetch} users={users.erp_Users} /> : (
+                              <Info data={data.erp_Orders[0]} editState = {editState} orderID={orderID} />)}
                 </div>
-                <Comments/>
-        </div>
                     
-            {editState? <EditableInfo data={data.erp_Orders[0]} orderID={orderID} refetch={refetch} users={users.erp_Users} /> : (
-                            <Info data={data.erp_Orders[0]} editState = {editState} orderID={orderID} />)}
+            
         </section> 
 
         </>): null }

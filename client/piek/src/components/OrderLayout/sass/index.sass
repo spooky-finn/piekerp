@@ -1,19 +1,10 @@
-.base-container section
-    background: var(--L1) !important  
-    border-radius: var(--br)
-    color: var(--highContrast)
-    min-height: 90vh
-    padding: 0
-
-    
 .inCloudconIcon
     position: fixed
     top: 50%
     left: 50%
     transform: translate(-50%, -50%)
-
-    width: 200px
-    height: 200px
+    width: 100px
+    height: 100px
     color: var(--accent)
     z-index: -20
     
@@ -38,93 +29,82 @@
 
         span
             color: var(--danger)
-
-.Composition
-    border-bottom: 1px solid var(--border)
         
 .OrderLayout
-    display: grid
-    grid-template-columns: 2.5fr 1fr
-    border: 1px solid var(--border)
-    border-radius: var(--br)
-    outline: none !important    
-    .Main
-        .WrapperTwoCol
-            display: grid
-            grid-template-columns: 1fr 1fr
-            border-bottom: 1px solid var(--border)
-            min-height: 100px
-            .CheckList
-                font-size: .9rem
-                .CheckListUnit
-                    position: relative
-                    padding:  .4em 2em
-                    width: fit-content
-                    &:hover
-                        background: var(--accentLight)
-                        border-radius: 5px
-                    &::after
-                        content: ''
-                        top: 50%
-                        transform: translateY(-50%)
-                        left: 10px
-                        position: absolute
-                        width: 8px 
-                        height: 8px
-                        border-radius: 100%
-                        opacity: .6
-                        border: 1px solid var(--accent)
+  --window-padding: 0px
+  position: relative
+  min-height: 100vh
+  border-left: 1px solid var(--border)
+  // border-radius: var(--br)
+  outline: none !important  
+  // background: var(--L0)
+  position: relative
+  display: grid
+  grid-template-columns: 2fr auto
+  .page-header
+    grid-column-start: 1
+    grid-column-end: 3
+    border-bottom: 1px solid var(--border)
+    padding: 2px 15px
+  .Info
+    grid-column-start: 3
+    overflow-y: auto
+    overflow-x: hidden
+    height: 100vh
+    position: sticky
+    top: 0
+  .Composition
+    border-bottom: 1px solid var(--border)
+   
+.LeftSideContent
+  display: grid
+  grid-template-columns: 1fr 1fr
+  height: fit-content
+  width: 100%
 
-                .CheckListUnit.complited
-                    text-decoration: line-through 
-                    color: var(--lowContrast)
-                    &::after
-                        background: var(--accent)
-                       
+  @media ( min-width: 2000px)
+    margin: 0 auto
+    width: auto !important
+    max-width: 1700px 
+    
+
+  
+  .Composition, .Comments
+    grid-column-start: 1
+    grid-column-end: -1
+  .CheckList, .Docs
+    min-height: 300px
+
+      
+.CheckList
+  .CheckListUnit
+    position: relative
+    padding:  .4em 2em
+    width: fit-content
+    &:hover
+      background: var(--borderLight)
+      border-radius: 5px
+    &::after
+      content: ''
+      top: 50%
+      transform: translateY(-50%)
+      left: 10px
+      position: absolute
+      width: 8px 
+      height: 8px
+      border-radius: 100%
+      opacity: .6
+      border: 1px solid var(--accent)
+  .CheckListUnit.complited
+      text-decoration: line-through 
+      color: var(--lowContrast)
+      &::after
+          background: var(--accent)
+            
 
 
 
 
-            .Docs
-                border-left: 1px solid var(--border)
-                .filesContainer
-                    padding: 1em
-                a
-                    display: flex
-                    color: var(--highContrast)
-                    text-decoration: none
 
-                .file-name
-                    line-height: 1
-                    font-weight: 300
-                    padding: 5px 0
-                    font-size: .9rem
-                    width: fit-content
-                    &:hover
-                        color: var(--accent)
-
-                .delete-file 
-                    &:hover
-                        color: var(--danger)
-                        text-decoration: line-through
-
-                .onUploadIcon
-                    position: relative
-                    display: flex
-                    flex-direction: column
-                    div
-                        opacity: .7 
-                        color: var(--lowContrast)
-
-                    img 
-                        width: 150px !important
-                        height: 150px
-                        top: 50%
-                        left: 50% 
-                        transform: translate(-50%, -50%)
-                        position: absolute
-               
-
- 
         
             

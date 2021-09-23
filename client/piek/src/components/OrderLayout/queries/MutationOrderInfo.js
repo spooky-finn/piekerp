@@ -19,3 +19,12 @@ export const UPDATE_AWAITING_DISPATCH = gql`
   }
 }
 `;
+
+export const UPDATE_ORDER_STATUS = gql`
+  mutation MyMutation($OrderID: Int!) {
+    update_erp_Orders_by_pk(pk_columns: {OrderID: $OrderID}, _set: {OrderStatusID: 3, AwaitingDispatch: false}){
+      OrderID
+      OrderStatusID
+    }
+  }
+`;

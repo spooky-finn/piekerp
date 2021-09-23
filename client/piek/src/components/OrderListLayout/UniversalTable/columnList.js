@@ -17,7 +17,7 @@ export const columnsList = [
       Header: 'Наим.',
       id: "orderItems",
       accessor: data => {
-        if (data.OrderItems.length == 0) return <Link to={`/orders/${data.OrderID}`}><div>пустота...</div></Link>
+        if (data.OrderItems.length == 0) return <Link to={`/orders/${data.OrderID}`}><div>Нет содержимого</div></Link>
 
         else return (<Link to={`/orders/${data.OrderID}`}>
         {data.OrderItems.map(item => (
@@ -41,7 +41,7 @@ export const columnsList = [
     {
       Header: 'Отгрузка',
       accessor: (order) => 
-      <> { moment(order.ShippingDate).format('DD.MM.YY') } </>
+      <> { order.ShippingDate && moment(order.ShippingDate).format('DD.MM.YY') } </>
     },
     {
       Header: 'Счет- оплата',

@@ -46,7 +46,7 @@ darkTheme.overrides = {
   },
   MuiAutocomplete: {
     paper: {
-      background: 'var(--L1) !important',
+      background: 'var(--L0) !important',
       border: '1px solid var(--border)',
     },
     listbox: {
