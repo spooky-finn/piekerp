@@ -4,11 +4,10 @@ import {Pane, Spinner} from 'evergreen-ui';
 import AuthService from '../services/AuthService';
 import axios from 'axios';
 import { API_URL } from '../http';
-import { UilSortAmountDown, UilEnvelopeInfo, UilWrench, UilConstructor} from '@iconscout/react-unicons';
+import { UilWrench, UilConstructor} from '@iconscout/react-unicons';
 
 export default class Store {
     user = {};
-    isAuth = false;
     isLoading = false;
     inMemoryToken = undefined;
 
@@ -49,23 +48,22 @@ export default class Store {
 
     async login(email, password){
         try {
-            const response = await AuthService.login(email, password);
-            // localStorage.setItem('token', response.data.accessToken);
-
-            this.setInMemoryToken(response.data.accessToken)
-            this.setUser(response.data.user);
-            this.setAuth(true);
-            // window.location.href='/';
+            const res = await AuthService.login(email, password)
+            if (res.status === 200){
+              this.setInMemoryToken(res.data.accessToken)
+              this.setUser(res.data.user);
+              return res
+            }
+            
         } catch (e) {
-            console.log(e.response?.data?.message);
+            console.log(e);
         }
     }
 
     async logout(){
         try {
             await AuthService.logout();
-            localStorage.removeItem('token');
-            this.setAuth(false);
+            this.setInMemoryToken(null)
             this.setUser({});
         } catch (e) {
             console.log(e.response?.data?.message);
@@ -85,28 +83,22 @@ export default class Store {
     async checkAuth() {
         this.setLoading(true);
         try {
-            console.log('check auth request')
-            const response = await axios.get(`${API_URL}/refresh`, {withCredentials: true});
-            this.setInMemoryToken(response.data.accessToken)
-
-            this.setUser(response.data.user);
-            this.setAuth(true);
-
-            return {
-                'isLoaded': true,
-                'isAuth': this.isAuth, 
+            await axios.get(`${API_URL}/refresh`, {withCredentials: true}).then(
+              (res) => {
+                if (res.status === 200){
+                  console.log(res)
+                  this.setUser(res.data.user);
+                  this.setInMemoryToken(res.data.accessToken)      
+                  console.log('token validation complited')  
                 }
+              }
+            )
         } catch (e) {
-            console.log(e.response?.data?.message);
-            return {
-                'isLoaded': true,
-                'isAuth': this.isAuth
-            }
-
+            console.log(e)
         } finally {
             this.setLoading(false);
+            return this.inMemoryToken
         }
-        
     }
 
     async uploadFile(acceptedFiles){
@@ -121,13 +113,13 @@ export default class Store {
     }
 
     async downloadFile(file){
-        const res = await fetch(`${process.env.REACT_APP_API_URL}/s3/get/${file.Key}`)
+        await fetch(`${process.env.REACT_APP_API_URL}/s3/get/${file.Key}`)
     }
 
     async deleteFile(key, deleteFileMutation){
         const res = await axios.get(`${process.env.REACT_APP_API_URL}/s3/delete/${key}`);
 
-        if (res.status == 200){
+        if (res.status === 200){
             const hasuraRes = await deleteFileMutation({variables: {
                 'key': key,
             }})

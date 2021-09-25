@@ -18,10 +18,10 @@ export const filter = (array, keyword, managerFilter = 0) => {
     else result = array
 
      //применить поиск по фильру
-    if (managerFilter != 0){
+    if (managerFilter !== 0){
         var newOrders = []
         result.map( (ord) => {
-            if (ord.ManagerID == managerFilter) newOrders.push(ord)
+            if (ord.ManagerID === managerFilter) newOrders.push(ord)
         })
         return newOrders
     }

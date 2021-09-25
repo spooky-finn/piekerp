@@ -13,7 +13,6 @@ import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 const darkTheme = createTheme({
 });
 
-const theme = darkTheme
 darkTheme.overrides = {
   MuiInputLabel: {
     root: {
@@ -63,9 +62,7 @@ function App() {
     <ThemeProvider theme={darkTheme}>
       <div className="App">
         
-        {store.isAuth
-        ? <Sidebar/>
-        : null}
+        { store.inMemoryToken && <Sidebar/> }
 
           <DarkToggle display='none'/>
           <BaseLayout/>

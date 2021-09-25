@@ -13,7 +13,7 @@ export default function Table({columns, data, className }){
         data,
       })
 
-    if (data.length == 0) return null;
+    if (data.length === 0) return null;
    return (
      <>
     <table className={`${mainsass.tableMain} ${className}`} {...getTableProps()}>

@@ -48,7 +48,7 @@ const OrderMeta = (props) => {
         'className': 'date',
       },
       {
-        'heading': "Производится с",
+        'heading': "В очередности с",
         'data': data.AcceptanceDate?.split('T')[0],
         'className': 'date',
       },
@@ -61,7 +61,7 @@ const OrderMeta = (props) => {
     ]
 
     const orderInfo = cells.map( (el) =>  
-      <div className={el.className}>
+      <div key={el.heading} className={el.className}>
         <pre>{el.heading}</pre>
         {el.data}
       </div>

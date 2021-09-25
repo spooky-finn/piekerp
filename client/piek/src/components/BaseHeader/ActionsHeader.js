@@ -1,10 +1,7 @@
 import { useMutation } from '@apollo/client';
 import { INSERT_ORDER } from './MutationInsertOrder'
 
-import {UilPrint, UilPlus, UilBell, UilEditAlt} from '@iconscout/react-unicons';
-import { UserIcon } from 'evergreen-ui';
-
-
+import { UilPlus, UilEditAlt} from '@iconscout/react-unicons';
 
 const ActionsHeader = (props) => {
     const [ createNewOrder] = useMutation(INSERT_ORDER, {variables: {
@@ -24,7 +21,7 @@ const ActionsHeader = (props) => {
     }
 
     const editOrderBtn = () => {
-        if (props.accessLevel == 2){
+        if (props.accessLevel === 2){
             const editIconClass = () => props.editState ? 'action-icon active': 'action-icon'
             return <div data-for='global' data-tip="Добавить" className={editIconClass()} onClick={editOrderHandler}><UilEditAlt/></div>
         }

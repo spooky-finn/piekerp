@@ -26,7 +26,7 @@ export const DarkToggle = (props) => {
     }, [isDark]);
 
 
-    if (props.display == 'none') return null
+    if (props.display === 'none') return null
     return (<>
 
         <div  className="DarkToggle " onClick={() => setIsDark(!isDark)} >{isDark? < UilSun/> : <UilMoon/>}</div>

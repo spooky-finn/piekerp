@@ -13,7 +13,7 @@ import Table from '../UniversalTable/TableMarkup'
 
 const Archive = () => {
   const [search, setSearch] = useState('');
-  const { loading, data = [], refetch } = useQuery(GET_ARCHIVED_ORDERS);
+  const { data = [] } = useQuery(GET_ARCHIVED_ORDERS);
 
   const columns = useMemo(
     () => columnsList, []
@@ -32,7 +32,7 @@ const Archive = () => {
         placeholder='Счет, город или компания'/>
 
 
-      {search && data.erp_Orders &&  
+      {data.erp_Orders &&  
         <div className={mainsass.tableWrapper}>
         <Table columns = {columns} data = {data.erp_Orders} className={sass.archiveTable}/>
         </div>

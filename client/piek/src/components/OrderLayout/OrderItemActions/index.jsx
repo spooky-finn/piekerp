@@ -42,7 +42,7 @@ const OrderItemActions = ({ editState, item, editItemHandler, deleteItemHandler,
     const handleClose = () => {
       setAnchorEl(null);
 
-      if (item.SerialNumber != state.serialNumber || item.Fitter != state.fitter){
+      if (item.SerialNumber !== state.serialNumber || item.Fitter !== state.fitter){
         updateItem({ variables: {
           'OrderItemID': item.OrderItemID,
           'Fitter': state.fitter,
