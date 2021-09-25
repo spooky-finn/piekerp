@@ -19,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
     menuItem: {
         fontSize: '.8rem',
         color: 'var(--lowContrast)',
-        fontSize: '.8rem',
     },
   }));
 
@@ -35,7 +34,7 @@ const Search = ({state, dispatch, users }) => {
     }
 
     const managerFilterIndicator = () => {
-        if (state.managerFilter != 0) return (
+        if (state.managerFilter !== 0) return (
             <div className={sass.filterIndicator}>
                 <div className={sass.circle}></div>
                 <p>Выдача ограничена фильтром</p>

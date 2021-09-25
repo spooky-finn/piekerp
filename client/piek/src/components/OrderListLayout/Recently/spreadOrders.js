@@ -21,8 +21,8 @@ export const spread = (orders) => {
 
         const dateCreation = order.AcceptanceDate?.split('T')[0]
 
-        if (dateCreation == days[0].date) days[0].objs.push(order);
-        else if (dateCreation == days[1].date) days[1].objs.push(order);
+        if (dateCreation === days[0].date) days[0].objs.push(order);
+        else if (dateCreation === days[1].date) days[1].objs.push(order);
         else days[2].objs.push(order);    
     }
 

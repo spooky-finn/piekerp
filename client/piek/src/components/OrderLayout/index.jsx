@@ -23,13 +23,11 @@ import { isFileOnDropzone } from "./Dropzone";
 import { Heading } from 'evergreen-ui';
 import './sass/index.sass';
 
-import { motion } from "framer-motion"
-
-function isPreorder(data){
+function orderStatus(data){
     // add a note to the title if this is a pre-order
-    if (data.OrderStatusID == 1) return true;
+    if (data.OrderStatusID === 1) return ' | Предзаказ';
+    if (data.OrderStatusID === 3) return ' | В архиве';
 }
-
 
 const OrderLayout = (props) => {
     const {store} = useContext(Context);
@@ -45,7 +43,7 @@ const OrderLayout = (props) => {
 
         store.uploadFile(acceptedFiles).then(
             (res) => {
-                if (res.status != 200) console.log('S3 file upload error')
+                if (res.status !== 200) console.log('S3 file upload error')
                 else{
                     let m = []
                     for (var i=0;  i<res.data.length; i=i+2 ){
@@ -64,23 +62,14 @@ const OrderLayout = (props) => {
         )
       }, [])
 
-    const {loading, error, data = [], refetch } = useQuery(GET_ORDER_BY_ID, { variables: { OrderID: orderID} });
+    const { data = [], refetch } = useQuery(GET_ORDER_BY_ID, { variables: { OrderID: orderID} });
     const { data: users = []} = useQuery(GET_USERS);
     const {getRootProps, isDragActive} = useDropzone({className: 'dropzone', onDrop: S3Upload });
       
     return(
-    <motion.div
-    initial={{ scale: .95, opacity: 0 }} 
-    animate={{ scale: 1, opacity: 1 }}
-    transition={{ duration: 0.3 }}
-    > 
-
-            {isFileOnDropzone(isDragActive)}
-
+    <div> 
+        {isFileOnDropzone(isDragActive)}
         { data.erp_Orders ? (<>
-
-       
-
         <section className='OrderLayout' {...getRootProps()} id='dropzone'>
 
                 <div className='LeftSideContent'>
@@ -88,7 +77,7 @@ const OrderLayout = (props) => {
                     <div className="page-header">
                         <Heading>
                             {data.erp_Orders[0].Entity} __ {data.erp_Orders[0].City} 
-                            {isPreorder(data.erp_Orders[0]) &&<span className="preorderTitle"> | Предзаказ</span>} 
+                            <span className="preorderTitle">{orderStatus(data.erp_Orders[0])}</span>
                         </Heading>
 
                         <ActionsHeader 
@@ -115,21 +104,15 @@ const OrderLayout = (props) => {
 
                       <Comments/> 
                 </div>
-
-                
-            
-                
                 <div className="Info">
                   {editState? <EditableInfo data={data.erp_Orders[0]} orderID={orderID} refetch={refetch} users={users.erp_Users} /> : (
                               <Info data={data.erp_Orders[0]} editState = {editState} orderID={orderID} />)}
                 </div>
-                    
-            
         </section> 
 
         </>): null }
 
-    </motion.div>
+    </div>
     )
 }
 

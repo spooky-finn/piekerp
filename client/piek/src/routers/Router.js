@@ -8,7 +8,6 @@ import Attendance from '../components/AttendanceLayout'
 import Reclamation from "../components/ReclamationLayout";
 
 const AppRouter = () => {
-
     return(
         <Switch>
             <Route        path="/login" component={LoginForm}/>
@@ -22,7 +21,6 @@ const AppRouter = () => {
             {/* <PrivateRoute path='/recently' component={() => <PriorityLayout props={isRecently}/>} store={props.store}/> */}
         </Switch>
     )
-    
 };
 
 export default AppRouter;

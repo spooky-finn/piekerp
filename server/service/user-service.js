@@ -6,10 +6,6 @@ class UserService {
 
     jwtPayload(o) {
         return {
-            // "https://hasura.io/jwt/claims": {
-            //     "x-hasura-default-role": "admin",
-            //     "x-hasura-allowed-roles": ["admin"],
-            // },
             "https://hasura.io/jwt/claims": {
             "x-hasura-allowed-roles": ["admin"],
             "x-hasura-default-role": "admin",
@@ -22,17 +18,15 @@ class UserService {
     }
 
     async login(req){
-        const {email, password} = req.body;
+        const { email, password } = req.body;
         const users = await hasuraQuery.getUsers();
         const user = users.find(el => el.Email === email);
 
-        if (!user) {
-            throw ApiError.BadRequest('Нет пользователя с таким email)');
+        if (!user || password !== user["Password"]) {
+            throw ApiError.UnauthorizedError('Неверный логин или пароль');
         }
-        if (password !== user["Password"]) {
-            throw ApiError.BadRequest('Упс.. Похоже вы ошиблись паролем');
-        }
-        ///проверить есть ли просроченные токены у этого юзера
+        ///нужно проверить есть ли просроченные токены у этого юзера
+
         const tokens = tokenService.generateTokens(this.jwtPayload(user));
         hasuraQuery.createToken(user.UserID, tokens.refreshToken);
         return {...tokens, user};

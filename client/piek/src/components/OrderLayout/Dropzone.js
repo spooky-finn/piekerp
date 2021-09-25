@@ -1,5 +1,4 @@
 import { UilCloudUpload } from '@iconscout/react-unicons'
-import { motion } from "framer-motion"
 
 export const isFileOnDropzone = (isDragActive) => {
     var el = document.getElementById('dropzone')

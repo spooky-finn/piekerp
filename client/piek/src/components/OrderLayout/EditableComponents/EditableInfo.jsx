@@ -71,7 +71,7 @@ const EditableInfo = ({ data, orderID, refetch, users }) => {
 
     function findSelectedManeger(users, managerID){
       if (!users) return null
-      const index = users.indexOf(users.find(user => user.UserID == managerID))
+      const index = users.indexOf(users.find(user => user.UserID === managerID))
       return users[index]
     }
 

@@ -18,5 +18,7 @@ export function reducer(state, action) {
 
         case 'resetFilters': 
             return {...state, searchKeyword: '', managerFilter: 0}
+        default: 
+            return {...state}
     }
 }

@@ -53,6 +53,8 @@ function reducer(state, action){
                 fullName: action.payload[2],
                 quantity: action.payload[3]
             }
+        default: 
+            return {...state}
     }
 
 }
@@ -82,7 +84,7 @@ const OrderComposition = ({ data, editState, refetch, orderID }) => {
     }, [editState]);
 
     const insertOrderItem = () => {
-        if (state.quantity == '' || state.name == '') return null
+        if (state.quantity === '' || state.name === '') return null
 
         insertOrderItemMutation({variables: { 
             orderID,
@@ -96,7 +98,7 @@ const OrderComposition = ({ data, editState, refetch, orderID }) => {
     }
 
     const updateOrderItem = () => {
-      if (state.quantity == '' || state.name == '') return null
+      if (state.quantity === '' || state.name === '') return null
       updateOrderItemMutation({variables: { 
           OrderItemID: state.id,
           Name: state.name, 

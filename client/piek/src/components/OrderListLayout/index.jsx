@@ -13,6 +13,7 @@ import { GET_USERS } from '../../hasura-queries/getUsers'
 
 // ui 
 import {Tabs, Tab, Box} from '@material-ui/core';
+import mainsass from './main.module.sass'
 
 import PreOrders from './PreOrders';
 import Priority from './Priority';
@@ -37,8 +38,8 @@ const OrderListLayout = (props) => {
 
         let orders = []; let preOrders = [];
         options.subscriptionData.data.erp_Orders.forEach( (order) => {
-            if (order.OrderStatus.ID == 1) preOrders.push(order)
-            else if (order.OrderStatus.ID == 2) orders.push(order)
+            if (order.OrderStatus.ID === 1) preOrders.push(order)
+            else if (order.OrderStatus.ID === 2) orders.push(order)
         })
         store.setCachedOrders(orders)
         store.setCachedPreOrders(preOrders)
@@ -125,7 +126,7 @@ const OrderListLayout = (props) => {
       }))((props) => <Tab disableRipple {...props} />);
 
     return(
-        <div className='mr15'>
+        <div className={mainsass.OrderListLayout}>
         <AntTabs value={selectedTab} onChange={tabHandler} aria-label="simple tabs example">
             <AntTab label="Предзаказы" {...a11yProps(0)} />
             <AntTab label="Очередость" {...a11yProps(1)} />

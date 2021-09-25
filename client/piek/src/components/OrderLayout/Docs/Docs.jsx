@@ -1,19 +1,20 @@
-import { useContext, useState, useRef } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { Context } from '../../../index'
 
 //apollo
 import { useMutation } from '@apollo/client';
 import { DELETE_ORDER_FILE } from '../queries/MutationOrderDocs';
 
-import { Dialog, Button, TextField, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 import './docs.sass'
+
+import { CornerDialog } from 'evergreen-ui'
+
+
 const Docs = ({ data, onUpload, editState, refetch }) => {
     const { store } = useContext(Context)
     const [open, setOpen] = useState(false);
     const [fileOnDelete, setFileOnDelete] = useState();
     const [deleteFileMutation] = useMutation(DELETE_ORDER_FILE)
-
-    const onFileDeleteInput = useRef()
 
     const handleClickOpen = (file) => {
         setFileOnDelete(file)
@@ -23,19 +24,20 @@ const Docs = ({ data, onUpload, editState, refetch }) => {
     const handleClose = () => setOpen(false)
 
     const onUploadFiles = () => {
-        if (onUpload.length == 0) return null
+        if (onUpload.length === 0) return null
         const files = onUpload.map(file => <div key={file.path}>{file.path}</div> )
 
         return <div className="onUploadIcon">{files}</div>
     } 
+    useEffect(() => {
+        setOpen(false)
+    }, [editState]);
 
     const deleteFile = async () => {
         //close modal window
         handleClose();
-        if (onFileDeleteInput.current.value == 'Да'){
-            await store.deleteFile(fileOnDelete.Key, deleteFileMutation)
-            refetch()
-        }        
+        await store.deleteFile(fileOnDelete.Key, deleteFileMutation)
+        refetch()
     }
 
     const attachedFiles = data.map(
@@ -52,6 +54,7 @@ const Docs = ({ data, onUpload, editState, refetch }) => {
                 <a href={`${process.env.REACT_APP_API_URL}/s3/get/${file.Key}`}
                     key={file.Key}
                     target='_blank'
+                    rel="noreferrer"
                     className='file-name'> {file.FileName} </a>
             )
         })
@@ -65,32 +68,19 @@ const Docs = ({ data, onUpload, editState, refetch }) => {
           
 
             <div>
-                <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" maxWidth='xs'>
-                    <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-                        Удалить приложение?
-                    </DialogTitle>
-                    <DialogContent dividers>
-                        <DialogContentText gutterBottom>
-                            Вы действительно хотите удалить <span>{fileOnDelete?.FileName}</span> ? <br/>
-                            Это действие необратимо.
-                            Пожалуйста, введите "Да" для подтверждения.
-                        </DialogContentText>
-                        <TextField
-                            autoFocus
-                            size='small'
-                            variant='outlined'
-                            margin="dense"
-                            fullWidth
-                            autoComplete='off'
-                            inputRef={onFileDeleteInput}
-                        />
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={deleteFile} className='dialog-danger-btn'>
-                            Я понимаю последствия, удалить этот файл
-                        </Button>
-                    </DialogActions>
-                </Dialog>
+
+                    <CornerDialog
+                        title={fileOnDelete?.FileName}
+                        isShown={open}
+                        confirmLabel='Удалить навсегда'
+                        onConfirm={deleteFile}
+                        cancelLabel='Не нужно'
+                        intent='danger'
+                        onCloseComplete={handleClose}
+                        >
+                        Вы действительно хотите удалить этот файл? <br/>
+                        Это действие необратимо.
+                    </CornerDialog>
             </div>
 
         </div>

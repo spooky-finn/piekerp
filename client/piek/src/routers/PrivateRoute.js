@@ -4,24 +4,22 @@ import {Route, Redirect} from 'react-router-dom';
 import { Context } from '../index';
 
 const PrivateRoute = ({component: Component, ...rest}) => {
+  const { store } = useContext(Context)
+  const [isLoaded, setisLoaded] = useState(false);
+  const [token, setToken] = useState(store.inMemoryToken);
 
-    const [isLoaded, setisLoaded] = useState(undefined);
-    const [isAuth, setisAuth] = useState(undefined);
-
-    const { store } = useContext(Context)
-
-    async function checkAuth() {
-        const res = await store.checkAuth();
-        setisAuth(res.isAuth);
-        setisLoaded(res.isLoaded)
+    async function getToken() {
+      store.checkAuth().then(
+        (res) => {
+          setToken(res)
+          setisLoaded(true)
+        }
+      )
     }
 
     useEffect(() => {
-      if (store.inMemoryToken) {
-        setisAuth(true);
-        setisLoaded(true)
-      }
-      else checkAuth()
+      if (token) setisLoaded(true)
+      else getToken();
       }, [])
 
   return(
@@ -29,10 +27,9 @@ const PrivateRoute = ({component: Component, ...rest}) => {
       {...rest}
       render={props => {
         if (isLoaded){
-            if (isAuth) return <Component {...props} />
-            else return <Redirect to='/login'/>;
+          if (token) return <Component {...props} />
+          else return <Redirect to='/login'/>;
         }
-        
     }}
     />
   )

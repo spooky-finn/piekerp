@@ -3,13 +3,7 @@ const hasuraQuery = require("../hasura-queries/users")
 const {validationResult} = require('express-validator');
 const ApiError = require("../exceptions/api-error");
 
-
-
-
-
-
 class UserController {
-    
     async login(req, res, next){
         try{
             const errors = validationResult(req);

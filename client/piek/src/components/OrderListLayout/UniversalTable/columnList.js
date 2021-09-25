@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import  moment  from 'moment';
-import sass from '../main.module.sass'
 
 const setPaidPercent = (total, paid) => {
     if (!total || !paid) return ''
@@ -17,7 +16,7 @@ export const columnsList = [
       Header: 'Наим.',
       id: "orderItems",
       accessor: data => {
-        if (data.OrderItems.length == 0) return <Link to={`/orders/${data.OrderID}`}><div>Нет содержимого</div></Link>
+        if (data.OrderItems.length === 0) return <Link to={`/orders/${data.OrderID}`}><div>Нет содержимого</div></Link>
 
         else return (<Link to={`/orders/${data.OrderID}`}>
         {data.OrderItems.map(item => (
