@@ -9,7 +9,7 @@ class UserService {
             "https://hasura.io/jwt/claims": {
             "x-hasura-allowed-roles": ["admin"],
             "x-hasura-default-role": "admin",
-        },
+            },
             'UserID': o.UserID,
             'FirstName': o.FirstName,
             'LastName': o.LastName,

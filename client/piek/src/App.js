@@ -6,7 +6,6 @@ import {observer} from 'mobx-react-lite';
 
 import BaseLayout from './components/BaseLayout';
 import Sidebar from './components/Sidebar/Sidebar';
-import { DarkToggle } from './components/Sidebar/DarkToggle';
 
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 
@@ -64,7 +63,6 @@ function App() {
         
         { store.inMemoryToken && <Sidebar/> }
 
-          <DarkToggle display='none'/>
           <BaseLayout/>
         
       </div>
