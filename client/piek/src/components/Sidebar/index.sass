@@ -7,24 +7,22 @@
     left: 0
     height: 100vh
     width: 50px 
+   
     
     .action-icon
         display: flex
+        background: transparent
+        border: none !important
         justify-content: center
         box-shadow: inset 10px 0px 0px transparent
         align-self: center
         padding: 15px 5px 
         width: 100%
         color: var(--lowContrast)
-        &:nth-last-of-type(3)
-            margin-top: auto 
+    .settings
+        margin-top: auto
+
     .sidebar-active 
         box-shadow: inset 8px 0px 0px var(--accent) !important
         color: var(--accent) !important
 
-    .action-icon.hidden
-        opacity: 0
-        transition: opacity .09s ease
-    &:hover
-        .action-icon.hidden
-            opacity: 1
