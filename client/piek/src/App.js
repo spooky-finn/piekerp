@@ -24,7 +24,7 @@ darkTheme.overrides = {
       borderColor: 'var(--border)',
     },
     focused:{
-      borderColor: 'var(--border)'
+      borderColor: 'var(--border) !important',
     }
   },
   MuiInputBase: {

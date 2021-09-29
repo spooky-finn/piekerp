@@ -1,0 +1,70 @@
+.commentsListWrapper
+  // grid-column-start: 1
+  // grid-column-end: -1
+  height: 100%
+
+
+.commentInputForm
+  display: flex
+  align-items: center
+  border-bottom: 1px solid var(--border)
+  padding: 5px 10px
+  white-space: pre-wrap
+  div:first-of-type
+    width: 100% 
+    outline: none
+
+
+
+.saveButton
+  padding: 8px 8px
+  background: var(--accentLight)
+  width: fit-content
+  color: var(--accent)
+  height: 20px
+  border-radius: var(--br10)
+  font-size: .9rem
+  margin: 0 10px 
+
+.commentUnit
+  // padding: 12px 18px
+  margin: 10px
+  border-bottom: 1px solid var(--borderLight)
+  line-height: 1.4
+  white-space: pre-wrap
+  div:last-of-type
+    padding: 0px 8px 10px
+  &:hover
+    .actions
+      opacity: 1
+
+.commentContent
+  display: flex
+  align-items: end
+  padding-left: 5px
+  div:first-of-type
+    flex-grow: 1
+    
+.commentHeader
+  display: flex
+  .sender 
+    color: var(--accent)
+    font-weight: 500
+    font-size: .9rem
+  .time
+    color: var(--lowContrast)
+    font-size: .8rem
+
+  .actions
+    display: flex
+    opacity: 0
+    transition: opacity .1s ease
+    color: var(--lowContrast)
+    font-size: .8rem
+    div
+      &:hover
+        text-decoration: underline
+
+  div:nth-last-of-type(2)
+    margin-left: auto
+    

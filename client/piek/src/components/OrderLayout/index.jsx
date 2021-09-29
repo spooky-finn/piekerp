@@ -16,7 +16,7 @@ import Info from "./Info";
 import EditableInfo from "./EditableComponents/EditableInfo";
 import CheckList from './CheckList/CheckList';
 import Docs from './Docs/Docs';
-import Comments from "./Comments";
+import CommentsList from "./Comments/CommentsList";
 import { isFileOnDropzone } from "./Dropzone";
 
 //ui
@@ -94,15 +94,19 @@ const OrderLayout = (props) => {
                           refetch={refetch}
                           orderID= {orderID} /> 
                     </div>
-                      <CheckList data={data.erp_Orders[0].CheckListUnits} OrderID={orderID} />
 
-                      <Docs data={data.erp_Orders[0].Docs} 
-                          onUpload={onUploadFiles} 
-                          editState = {editState} 
-                          refetch={refetch} 
-                      />
+                    <CommentsList 
+                    orderID={orderID} 
+                    user={store.user} 
+                    data={data.erp_Orders[0].Comments}/> 
 
-                      <Comments/> 
+                    <Docs data={data.erp_Orders[0].Docs} 
+                    onUpload={onUploadFiles} 
+                    editState = {editState} 
+                    refetch={refetch} />
+
+                    <CheckList data={data.erp_Orders[0].CheckListUnits} OrderID={orderID} />
+                     
                 </div>
                 <div className="Info">
                   {editState? <EditableInfo data={data.erp_Orders[0]} orderID={orderID} refetch={refetch} users={users.erp_Users} /> : (

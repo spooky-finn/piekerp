@@ -55,6 +55,7 @@
     top: 0
   .Composition
     border-bottom: 1px solid var(--border)
+    padding-bottom: 2em
    
 .LeftSideContent
   display: grid
@@ -69,12 +70,13 @@
     
 
   
-  .Composition, .Comments
+  .Composition
     grid-column-start: 1
     grid-column-end: -1
   .CheckList, .Docs
-    min-height: 300px
-
+    min-height: 100px
+    grid-column-start: 2
+    grid-column-end: -1
       
 .CheckList
   .CheckListUnit

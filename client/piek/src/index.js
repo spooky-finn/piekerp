@@ -76,6 +76,9 @@ const apolloClient = new ApolloClient({
         },
         erp_CheckListUnits: {
           keyFields: ['CheckListUnitID']
+        },
+        erp_Comments: {
+          keyFields: ['CommentID']
         }
     },
   })

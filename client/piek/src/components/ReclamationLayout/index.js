@@ -4,7 +4,7 @@ import sass from './index.module.sass'
 const Reclamation = (props) => {
 
     return(
-        <Button>Создать</Button>
+        <div></div>
         
     )
 }
