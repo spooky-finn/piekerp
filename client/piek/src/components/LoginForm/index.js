@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import ReactNotification from 'react-notifications-component'
 import { TextField, Button } from '@material-ui/core';
 import './LoginForm.sass'
-import { notif } from '../core/notification'
+import { notif } from '../_core/notification'
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');

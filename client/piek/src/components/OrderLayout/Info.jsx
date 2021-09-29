@@ -45,12 +45,10 @@ const OrderMeta = (props) => {
       {
         'heading': "Создан",
         'data': data.CreatingDate.split('T')[0],
-        'className': 'date',
       },
       {
         'heading': "В очередности с",
         'data': data.AcceptanceDate?.split('T')[0],
-        'className': 'date',
       },
 
       {
@@ -67,7 +65,6 @@ const OrderMeta = (props) => {
       </div>
     )
    
-
   return (
     <div className='posRel'>
       <div className="wrap">
