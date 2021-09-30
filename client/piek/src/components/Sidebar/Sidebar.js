@@ -10,7 +10,7 @@ import SettingsDrawer from './SettingsDrawer/SettingsDrawer';
 const Sidebar = () => {
     const {store} = useContext(Context);
     return(
-        <div className='Sidebar'>
+        <div className='Sidebar noprint'>
 
             <NavLink  exact  to='/' activeClassName='sidebar-active' className="action-icon"><UilSortAmountDown/></NavLink>
             <NavLink  to='/reclamation' activeClassName='sidebar-active' className="action-icon"><UilWrench/></NavLink>

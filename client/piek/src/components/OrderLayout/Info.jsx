@@ -70,7 +70,7 @@ const OrderMeta = (props) => {
       <div className="wrap">
         {orderInfo}
       </div>
-      <div className="actions">
+      <div className="actions noprint">
         <Shipment {...props} />
       </div>
     </div>  

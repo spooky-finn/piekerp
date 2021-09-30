@@ -58,7 +58,7 @@ const CheckList = ({ data, OrderID }) => {
         )
 
     return(
-        <div className="CheckList">
+        <div className="CheckList noprint">
             <input 
             className={sass.unitInput} 
             type="text" 
