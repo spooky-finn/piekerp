@@ -33,7 +33,7 @@ const ActionsHeader = (props) => {
         }
     }
     return(
-        <div className="action-block">
+        <div className="action-block noprint">
             {/* <div data-for='global' data-tip="Распечатать" className="action-icon"><UilPrint/></div> */}
             {addOrder()}
             {editOrderBtn()}

@@ -52,7 +52,7 @@ const OrderItemActions = ({ editState, item, editItemHandler, deleteItemHandler,
     };
     
     return (
-        <div>
+        <div className='noprint'>
           <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} size='small'>
             <UilEllipsisV className={sass.moreVertIcon}/>
           </Button>
