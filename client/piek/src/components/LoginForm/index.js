@@ -25,7 +25,6 @@ const LoginForm = () => {
       else{
         console.error('Invalig email or password')
         notif('warning', 'Unauthorized error', 'Invalig email or password')
-       
       }
       
     }
@@ -36,13 +35,13 @@ const LoginForm = () => {
         <TextField
         className='loginInput'
         label="Email"
-        onChange={e => setEmail(e.target.value)}
+        onChange={e => setEmail(e.target.value.trim())}
         />
         <TextField
           label="Password"
           type="password"
           className='loginInput'
-          onChange={e => setPassword(e.target.value) }
+          onChange={e => setPassword(e.target.value.trim()) }
         />
         <Button
           className="Button"

@@ -2,9 +2,7 @@ var multer = require('multer');
 var multerS3 = require('multer-s3');
 const AWS = require('aws-sdk');
 const uuidv4 = require('uuid/v4');
-const { json } = require('express');
-
-const querystring = require('querystring')
+const querystring = require('querystring');
 
 const s3 = new AWS.S3({
     accessKeyId: process.env.S3_ACCESS_KEY_ID,
