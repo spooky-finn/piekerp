@@ -6,6 +6,7 @@ query getUsers {
     FirstName
     LastName
     UserID
+    AccessLevelID
   }
 }
 `

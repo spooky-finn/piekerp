@@ -30,3 +30,16 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOjE1LCJGa
     "password": "loseev02"
 
 }
+
+
+
+###
+POST https://hasura.piek.ru/v1alpha1/pg_dump
+Content-Type: application/json
+x-hasura-admin-secret: ABC9914AEED45EE8A9C755DB476D1
+X-Hasura-Role: admin
+
+{
+    "clean_output": true
+}
+

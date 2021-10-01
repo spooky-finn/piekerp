@@ -113,7 +113,7 @@ const EditableInfo = ({ data, orderID, refetch, users }) => {
 
         <Autocomplete
           id="combo-box-demo"
-          options={users}
+          options={users.filter( (user) => user.AccessLevelID != 3)}
           getOptionLabel={(option) => `${option.FirstName} ${option.LastName}`}
           renderInput={(params) => <TextField {...params} label="Менеджер"/>}
           defaultValue={() => findSelectedManeger(users, data.ManagerID)}
