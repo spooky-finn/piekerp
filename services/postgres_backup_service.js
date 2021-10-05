@@ -32,7 +32,7 @@ const deleteObject = (key) => {
   
   s3.deleteObject(params, function(err, data){
     if (err) console.log(err, err.stack)
-    else     console.log(data);   
+    else     console.log('object was deleted', data);   
 
   })
 }
@@ -46,8 +46,9 @@ function intervalFunc() {
         // to get a value that is either negative, positive, or zero.
         return new Date(a.LastModified) - new Date(b.LastModified);
       });
+      deleteObject(data.Contents[0].Key)
     }
-    deleteObject(data.Contents[0].Key)
+    
   })
 
 
