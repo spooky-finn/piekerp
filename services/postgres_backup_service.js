@@ -12,13 +12,11 @@ const s3 = new AWS.S3({
   signatureVersion: 'v4',
 });
 
-
 const uploadFile = (fileName) => {
-
   fs.readFile(fileName, (err, data) => {
      if (err) throw err;
      const params = {
-         Bucket: 'piek-factory-backup', // pass your bucket name
+         Bucket: process.env.S3_BUCKET,
          Key: 'pg-backup ' + new Date(),
          Body: JSON.stringify(data, null, 2)
      };
@@ -29,8 +27,33 @@ const uploadFile = (fileName) => {
   });
 };
 
+const deleteObject = (key) => {
+  const params = { Bucket: process.env.S3_BUCKET, Key: key };
+  
+  s3.deleteObject(params, function(err, data){
+    if (err) console.log(err, err.stack)
+    else     console.log(data);   
+
+  })
+}
+
 function intervalFunc() {
+  s3.listObjects( {Bucket: process.env.S3_BUCKET}, function(err, data){
+    if (err) throw err;
+    if (data.Contents.length > process.env.MAX_BACKUPS){
+      data.Contents.sort(function(a,b){
+        // Turn your strings into dates, and then subtract them
+        // to get a value that is either negative, positive, or zero.
+        return new Date(a.LastModified) - new Date(b.LastModified);
+      });
+    }
+    deleteObject(data.Contents[0].Key)
+  })
+
+
+
   const execCont = "docker exec hasura_postgres_1 pg_dump -U postgres -d postgres > dump.sql"
+
   exec(execCont, (err, stdout, stderr) => {
     if (err || stderr) console.log(err, stderr)
     else{
@@ -41,4 +64,4 @@ function intervalFunc() {
   })
 }
 
-setInterval(intervalFunc, 1000*5)
+setInterval(intervalFunc, 1000*10)
