@@ -40,6 +40,7 @@ x-hasura-admin-secret: ABC9914AEED45EE8A9C755DB476D1
 X-Hasura-Role: admin
 
 {
-    "clean_output": true
+  "opts": ["-O", "-x", "--schema-only", "--schema", "public"],
+  "clean_output": true,
+  "source": "dump.file"
 }
-
