@@ -1,16 +1,28 @@
 .inputWrapper
   display: flex
   justify-content: center
-  margin: 1em 0
+  margin: 0em 0 1rem
   width: 100%
   font-size: 1.3rem
   input
     max-width: 500px
     background: var(--L0)
     border: 1px solid var(--border)
-    padding: 10px 10px
-    border-radius: var(--br10)
+    // box-shadow: 0 0 5px 0 var(--border)
+    font-size: 1rem
+    padding: 10px 20px
+    border-radius: 20px
 
 .archiveTable
-  border-top: none !important
+  border-radius: var(--br)
+  border: 1px solid var(--border)
+  tbody tr:nth-of-type(2n)
+    background: var(--L1)
+  td
+    border: none !important
 
+.previewHeading
+  color: var(--highContarst)
+  font-family: "IBM PLEX MONO"
+  font-weight: 600
+  font-size: .9rem

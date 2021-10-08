@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import  moment  from 'moment';
 
 const setPaidPercent = (total, paid) => {
-    if (!total || !paid) return ''
+    if (!total || !paid) return ' - 0%'
     return ' - ' + ((paid/total) * 100).toFixed(0) + '%'
 }
 
