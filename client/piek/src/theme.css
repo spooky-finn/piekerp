@@ -2,7 +2,7 @@
 
 html{
     --L0: #f7f7fa;
-    --L1: #ececf1;
+    --L1: #f0f0f5;
     --L2: #c7c7d85d;
     
     --highContrast: rgba(0, 0, 0, 0.87);
@@ -27,7 +27,7 @@ html{
 
     
 html.dark {
-    --L0: rgb(30, 30, 37);
+    --L0: rgb(0, 0, 0);
     --L1: rgba(200, 200, 255, 0.05);
     --L2: rgba(200, 200, 255, .07);
 
@@ -38,8 +38,8 @@ html.dark {
 
     --accent: #6989fc;
     --accentLight: #43435c;
-    --border: rgba(255,255,255,.1);
+    --border: rgba(255,255,255,.13);
     --borderLight: rgba(255,255,255,.08);
 
-    --awaitingDispatch: rgba(0, 51, 0, 1);
+    --awaitingDispatch: #1db954;
     }

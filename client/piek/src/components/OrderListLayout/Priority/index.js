@@ -11,16 +11,19 @@ import Table from '../UniversalTable/TableMarkup'
 
 
 const Priority = ({ users, state, dispatch }) => {
-    const data = state.orders 
-
     const columns = useMemo(
         () => columnsList, []
     )
-    const filtredData = filter(data, state.searchKeyword, state.managerFilter)
+    
+    const sortedData = state.orders .sort(function(a,b){
+        return new Date(a.ShippingDate) - new Date(b.ShippingDate);
+    })
+
+    const filtredData = filter(sortedData, state.searchKeyword, state.managerFilter)
 
     return(
         <div className={mainsass.tableWrapper}>
-            <Search state={state} dispatch={dispatch} users={users}/>
+            {users && <Search state={state} dispatch={dispatch} users={users.filter(e => [1,2].includes(e?.AccessLevelID))}/>}
             {filtredData && <Table columns = {columns} data = {filtredData} />}
         </div>
     )

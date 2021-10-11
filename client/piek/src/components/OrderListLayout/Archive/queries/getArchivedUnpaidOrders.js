@@ -11,6 +11,7 @@ query MyQuery($unpaidIDs: [Int!]) {
       PaidAmount
       TotalAmount
       AwaitingDispatch
+      ActualShippingDate
       CreatingDate
       ManagerID
       OrderItems {

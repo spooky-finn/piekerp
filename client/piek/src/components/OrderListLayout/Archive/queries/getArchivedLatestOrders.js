@@ -6,6 +6,8 @@ query($limit: Int!){
     where: { OrderStatusID: {_eq: 3} } 
     limit: $limit
     ){
+    ActualShippingDate
+    AwaitingDispatch
     OrderID
     Entity
     InvoiceNumber
@@ -13,7 +15,6 @@ query($limit: Int!){
     ShippingDate
     PaidAmount
     TotalAmount
-    AwaitingDispatch
     CreatingDate
     ManagerID
     OrderItems {

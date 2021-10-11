@@ -19,13 +19,16 @@ const PreviewTable = (props) => {
 
   const { data : unpaidOrders = [] } = useQuery(GET_ARCHIVED_UNPAID_ORDERS, { variables: {unpaidIDs: state.unpaidIDs } })
 
-
   const previewData = () => {
     if (!unpaidOrders.erp_Orders || !latestOrders.erp_Orders) return []
     return ([
       ...unpaidOrders.erp_Orders.map(e => ({...e, unpaid: true})),
       // проверяем есть ли в последних заказах неоплаченный, если есть, то убираем из их заказ из latestOrders
-      ...latestOrders.erp_Orders.filter(e => !state.unpaidIDs.includes(e.OrderID))
+      ...latestOrders.erp_Orders
+      .filter(e => !state.unpaidIDs.includes(e.OrderID))
+      .sort(function(a,b){
+        return new Date(b.ActualShippingDate) - new Date(a.ActualShippingDate);
+      })
       ])
   }
 

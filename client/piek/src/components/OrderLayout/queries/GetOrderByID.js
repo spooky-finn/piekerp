@@ -5,20 +5,21 @@ query MyQuery($OrderID: Int!) {
   erp_Orders(
     where: {OrderID: {_eq: $OrderID}}
     ){
+    AwaitingDispatch
+    ActualShippingDate
+    AcceptanceDate
     OrderID
     ManagerID
     OrderStatusID
     City
     ShippingDate
     CreatingDate
-    AcceptanceDate
     Comment
     Entity
     InvoiceNumber
     OrderNumber
     PaidAmount
     TotalAmount
-    AwaitingDispatch
     User {
       FirstName
       LastName
@@ -42,6 +43,12 @@ query MyQuery($OrderID: Int!) {
     Docs {
       Key
       FileName
+    }
+    PaymentHistories(
+      where: {PaidAmount: {_neq: 0}}
+    ){
+      PaidAmount
+      Date
     }
   }
 }

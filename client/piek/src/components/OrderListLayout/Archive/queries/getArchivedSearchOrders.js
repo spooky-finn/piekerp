@@ -10,14 +10,15 @@ export const GET_ARCHIVED_SEARCH_ORDERS = gql`
       ],
     OrderStatusID: {_eq: 3}
     }) {
-    OrderID
+      ActualShippingDate
+      AwaitingDispatch
+      OrderID
       Entity
       InvoiceNumber
       City
       ShippingDate
       PaidAmount
       TotalAmount
-      AwaitingDispatch
       CreatingDate
       ManagerID
       OrderItems {
