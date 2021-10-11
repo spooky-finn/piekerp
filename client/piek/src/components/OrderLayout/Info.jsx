@@ -69,7 +69,7 @@ const OrderMeta = (props) => {
       if (data.PaymentHistories.length == 0) return null
 
       return (
-        <OrderInfoCard heading="Платежи" secondaryHeading={`${data.TotalAmount} ₽`}>
+        <OrderInfoCard className='noprint' heading="Платежи" secondaryHeading={`${data.TotalAmount} ₽`}>
            <table className='paidVisualization'>
             {data.PaymentHistories.map(e => (
               <tr>
@@ -89,12 +89,8 @@ const OrderMeta = (props) => {
           'data': `${data.User?.FirstName} ${data.User?.LastName || 'undefined'}`, 
         },
         {
-          'heading': "Номер заказа",
-          'data': data.OrderNumber, 
-        },
-        {
           'heading': "Создан",
-          'data': moment(data.CreatingDat).format('DD.MM.YY'),
+          'data': moment(data.CreatingDate).format('DD.MM.YY'),
         },
         {
           'heading': "В очередности",
@@ -125,17 +121,23 @@ const OrderMeta = (props) => {
   return (<>
       <div className="wrap">
 
-          <div className='row'>
+          <div className='significantInfo'>
             <div className='bold'>
               <pre>План. отгузка</pre>
               {data.ShippingDate &&  moment(data.ShippingDate).format('DD.MM.YY')}
+            </div>
+            <div className='bold'>
+              <pre>Номер заказа</pre>
+              {data.OrderNumber}
             </div>
             <div className='bold'>
               <pre>Счет / оплата</pre>
               {"№ "+ data.InvoiceNumber+setPaidPercent(data.TotalAmount, data.PaidAmount)}
             </div>
           </div>
+
           <div className='OrderComment'>
+              <pre>Комментарий</pre>
               {data.Comment}
           </div>
 

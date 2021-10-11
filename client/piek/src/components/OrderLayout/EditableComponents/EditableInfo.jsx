@@ -116,8 +116,6 @@ const EditableInfo = ({ data, orderID, refetch, users }) => {
 
         <TextField
           label="Номер заказа"
-          type="number"
-
           name='OrderNumber'
           defaultValue={data.OrderNumber}
           onChange={addField}
