@@ -17,7 +17,7 @@ const uploadFile = (fileName) => {
      if (err) throw err;
      const params = {
          Bucket: process.env.S3_BUCKET,
-         Key: 'pg-backup ' + new Date(),
+         Key: 'pg-backup ' + new Date().toISOString(),
          Body: JSON.stringify(data, null, 2)
      };
      s3.upload(params, function(s3Err, data) {
@@ -50,11 +50,7 @@ function intervalFunc() {
     }
     
   })
-
-
-
   const execCont = "docker exec hasura_postgres_1 pg_dump -U postgres -d postgres > dump.sql"
-
   exec(execCont, (err, stdout, stderr) => {
     if (err || stderr) console.log(err, stderr)
     else{
@@ -65,4 +61,4 @@ function intervalFunc() {
   })
 }
 
-setInterval(intervalFunc, 1000*10)
+setInterval(intervalFunc, 1000*60*60*3)
