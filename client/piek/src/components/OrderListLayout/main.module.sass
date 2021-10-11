@@ -60,10 +60,10 @@
         font-size: .7rem
 
     tbody td
-        padding: 8px 5px
+        padding: 5px 5px
         color: var(--lowContrast)
         border-bottom: 1px solid var(--border)
-        font-size: .86rem
+        font-size: .9rem
    
     tbody td:nth-of-type(2) a,
     tbody td:nth-of-type(3)
@@ -76,11 +76,14 @@
     th:nth-of-type(4)
         border-left: 1px solid var(--border)
         padding-left: 15px
+    td:nth-of-type(4)
+        color: var(--highContrast)
 
     tbody tr:last-of-type td
         border-bottom: none
+    tbody tr:hover
+        background: var(--L1)
     
-
 .awaitingDispatch
     td:first-of-type
         background: var(--awaitingDispatch) !important
@@ -89,3 +92,6 @@
      td:first-of-type
         background: #ffd000
   
+.customerTableInfo
+    div:first-of-type
+        color: var(--highContrast)
