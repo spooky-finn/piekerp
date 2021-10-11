@@ -19,7 +19,7 @@ import PreOrders from './PreOrders';
 import Priority from './Priority';
 import Recently from './Recently/index.jsx';
 import ActionsHeader from '../BaseHeader/ActionsHeader'
-import Archive from './Archive/Archive';
+import Archive from './Archive/';
 
 const OrderListLayout = (props) => {
     const { store } = useContext(Context);
@@ -87,39 +87,39 @@ const OrderListLayout = (props) => {
         'aria-controls': `simple-tabpanel-${index}`,
         };
     }
-    const tabHeight = '45px'
+    const tabHeight = '50px'
     const AntTabs = withStyles({
         root: {
-            borderLeft: '1px solid var(--border)',
-            borderRight: '1px solid var(--border)',
-            background: 'var(--L1)',
+            borderBottom: '1px solid var(--border)',
             minHeight: tabHeight,
             height: tabHeight,
+            marginBottom: '2rem',
+            backgroundColor: 'var(--L0)',
         },
         indicator: {  
-            borderTopLeftRadius: '20px',
-            borderTopRightRadius: '20px',
-            backgroundColor: 'var(--accent)',
+            display: 'none'
         },
       })(Tabs);
       
       const AntTab = withStyles((theme) => ({
         root: {
           minWidth: '10%',
-          fontSize: '.7rem',
-          letterSpacing: '1px',
-          color: 'var(--highContrast)',
+          fontSize: '.9rem',
+          textTransform: 'none',
+          color: 'var(--lowContrast)',
+          borderRight: '1px solid var(--border)',
           padding: 0,
-          opacity: .5,
+          opacity: 1,
+          fontWeight: 500,
           minHeight: tabHeight,
           height: tabHeight,
-          transition: 'opacity .3s ease',
+          transition: 'color .3s ease',
           '&:hover': {
-            opacity: 1,
+            color: 'var(--highContrast)',
           },
           '&$selected': {
-                color: 'var(--accent)',
-                backgroundColor: 'var(--accentLight)'
+                // color: 'var(--accent)',
+                backgroundColor: 'var(--L1)',
           }
         },
         selected: {},
@@ -127,11 +127,11 @@ const OrderListLayout = (props) => {
 
     return(
         <div className={mainsass.OrderListLayout}>
-        <AntTabs value={selectedTab} onChange={tabHandler} aria-label="simple tabs example">
+        <AntTabs value={selectedTab} onChange={tabHandler} aria-label="simple tabs example" className='orderListLayoutTabs'>
             <AntTab label="Предзаказы" {...a11yProps(0)} />
             <AntTab label="Очередость" {...a11yProps(1)} />
-            <AntTab label="Недавние" {...a11yProps(2)} />
-            <AntTab label="Архив" {...a11yProps(3)} />
+            <AntTab label="Недавние"   {...a11yProps(2)} />
+            <AntTab label='Архив'      {...a11yProps(3)} />
 
 
             <ActionsHeader createOrder={1} userID={store.user.UserID} history={history}/>

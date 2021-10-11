@@ -12,7 +12,6 @@ mutation($OrderID: Int!, $Text: String!, $UserID: Int!) {
     UserID
   }
 }
-
 `;
 
 export const DELETE_ORDER_COMMENT = gql`
