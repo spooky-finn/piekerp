@@ -5,6 +5,7 @@ import './EditableInfo.sass'
 
 import { useMutation } from '@apollo/client';
 import { UPDATE_ORDER_INFO } from '../queries/MutationOrderInfo'
+import { INSERT_PAYMENT } from '../queries/MutationPaymentHistory'
 
 import NumberFormat from 'react-number-format';
 import moment  from 'moment'
@@ -30,6 +31,7 @@ function DateFormatCustom(props) {
   );
 }
 
+console.log(fields)
 function MoneyFormatCustom(props) {
   const { inputRef, onChange, ...other } = props;
 
@@ -55,17 +57,27 @@ const EditableInfo = ({ data, orderID, refetch, users }) => {
   
     const addField = (e) => fields[e.target.name] = e.target.value
     const [updateOrderInfo] = useMutation(UPDATE_ORDER_INFO);
+    const [insertPayment] = useMutation(INSERT_PAYMENT)
   
+    function saveChanges(){
+      console.log('doing mutation for order', orderID, fields)
+      updateOrderInfo({variables: {
+        orderID,
+        fields,
+      }})
+
+      if (fields.PaidAmount) insertPayment({ variables: {
+          Date: new Date,
+          OrderID: orderID,
+          PaidAmount: fields.PaidAmount
+        }})
+      
+      refetch()
+    }
     useEffect(() => {
         fields = {};
-        
         return () => {
-            console.log('doing mutation for order', orderID, fields)
-            updateOrderInfo({variables: {
-              orderID,
-              fields,
-            }})
-            refetch()
+            saveChanges()
         };
     }, []);
 

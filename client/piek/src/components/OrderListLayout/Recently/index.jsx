@@ -12,21 +12,14 @@ import mainsass from '../main.module.sass'
 import sass from './recently.module.sass'
 
 const Recently = ({ state, dispatch }) => {
-    const data = state.orders
 
-    data.sort(function(a,b){
-        // Turn your strings into dates, and then subtract them
-        // to get a value that is either negative, positive, or zero.
+    const sortedData = state.orders.sort(function(a,b){
         return new Date(b.AcceptanceDate) - new Date(a.AcceptanceDate);
       });
 
+    const spreadData = spread(sortedData);
 
-    const spreadData = spread(data);
-
-    const columns = useMemo(
-        () => columnsList,
-        []
-    )
+    const columns = useMemo(() => columnsList, [] )
 
     const filtredData = filter(spreadData[2].objs, state.searchKeyword)
 
@@ -42,11 +35,11 @@ const Recently = ({ state, dispatch }) => {
             <Table columns={columns} data={spreadData[1].objs} className={sass.recentlyTable} />
             </>): null}
 
-            <div className={sass.heading}>Остальные</div>
+            {/* <div className={sass.heading}>Остальные</div>
             <div className={mainsass.tableWrapper}>
-                <Search state={state} dispatch={dispatch} incomingOrders={data} />
+                <Search state={state} dispatch={dispatch} incomingOrders={sortedData} />
                 { <Table columns = { columns } data = { filtredData } />}
-            </div>
+            </div> */}
 
         </div>
     )
