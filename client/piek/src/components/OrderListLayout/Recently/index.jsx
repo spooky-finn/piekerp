@@ -25,13 +25,16 @@ const Recently = ({ state, dispatch }) => {
 
     return(
         <div>
-            { spreadData[0].objs.length ? ( <>
             <div className={sass.heading}>Сегодня</div>
+            { spreadData[0].objs.length ? ( <>
+           
             <Table columns={columns} data={spreadData[0].objs} className={sass.recentlyTable} />
             </>): null}
 
-            { spreadData[1].objs.length ? ( <>
+
             <div className={sass.heading}>Вчера</div>
+            { spreadData[1].objs.length ? ( <>
+          
             <Table columns={columns} data={spreadData[1].objs} className={sass.recentlyTable} />
             </>): null}
 

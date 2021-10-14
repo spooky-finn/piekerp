@@ -54,7 +54,7 @@ const Shipment = (props) => {
   if (data.OrderStatusID === 3) return null
   if (data.OrderStatusID === 1) return (
     <div>
-        <Button onClick={deleteOrderHandler} className={sass.btn} appearance="minimal">Удалить предзаказ</Button>
+        <Button onClick={deleteOrderHandler} className={sass.deletePreOrderBtn} appearance="minimal">Удалить предзаказ</Button>
     </div>
   )
   return (
