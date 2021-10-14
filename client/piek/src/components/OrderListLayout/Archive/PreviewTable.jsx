@@ -6,18 +6,19 @@ import { GET_ARCHIVED_UNPAID_ORDERS } from './queries/getArchivedUnpaidOrders'
 
 import Table from './TableMarkup'
 import sass from './archive.module.sass'
+import { Pane, Spinner } from 'evergreen-ui'
 
 
 const PreviewTable = (props) => {
   const { state, dispatch, columns } = props
 
-  const { data : latestOrders = [] } = useQuery(GET_ARCHIVED_LATEST_ORDERS, {variables:{ limit: 10 }});
+  const { data : latestOrders = [], loading: latestOrdersloading } = useQuery(GET_ARCHIVED_LATEST_ORDERS, {variables:{ limit: 10 }});
 
-  useQuery(GET_ALL_ORDERS_AMOUNT, { onCompleted: (res) => {
+  const { loading } = useQuery(GET_ALL_ORDERS_AMOUNT, { onCompleted: (res) => {
     dispatch({ type: 'unpaidIDs', payload: res.erp_Orders.filter(e => e.PaidAmount / e.TotalAmount < .999).map(e => e.OrderID)})
   }})
 
-  const { data : unpaidOrders = [] } = useQuery(GET_ARCHIVED_UNPAID_ORDERS, { variables: {unpaidIDs: state.unpaidIDs } })
+  const { data : unpaidOrders = [], loading: unpaidOrdersLoading } = useQuery(GET_ARCHIVED_UNPAID_ORDERS, { variables: {unpaidIDs: state.unpaidIDs } })
 
   const previewData = () => {
     if (!unpaidOrders.erp_Orders || !latestOrders.erp_Orders) return []
@@ -31,6 +32,11 @@ const PreviewTable = (props) => {
       })
       ])
   }
+
+  if (latestOrdersloading || unpaidOrdersLoading || loading) return( 
+  <Pane display="flex" alignItems="center" justifyContent="center" height={400}>
+    <Spinner />
+  </Pane>)
 
   return (<>
       <p className={sass.previewHeading}>Недавно отгруженные</p>
