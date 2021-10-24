@@ -27,11 +27,11 @@ html{
 
     
 html.dark {
-    --L0: rgb(15, 15, 20);
+    --L0: rgb(16, 16, 20);
     --L1: rgba(200, 200, 255, 0.05);
     --L2: rgba(200, 200, 255, .07);
 
-    --highContrast: rgb(233, 233, 233);
+    --highContrast: rgba(233, 233, 233);
     --lowContrast: #8f8f8f;
     --textInvert: rgb(0, 0, 0);
 
@@ -39,7 +39,7 @@ html.dark {
     --accent: #6989fc;
     --accentLight: #43435c;
     --border: rgba(255,255,255,.08);
-    --borderLight: rgba(255,255,255,.08);
+    --borderLight: rgba(255,255,255,.05);
 
     --awaitingDispatch: #11b34a33;
     }

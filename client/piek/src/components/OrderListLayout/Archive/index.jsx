@@ -5,12 +5,14 @@ import { useQuery } from '@apollo/client'
 import { GET_ARCHIVED_SEARCH_ORDERS } from './queries/getArchivedSearchOrders'
 
 //ui
-import { InputBase } from '@material-ui/core';
 import sass from './archive.module.sass'
 import { columnsList } from '../UniversalTable/columnList'
 import Table from './TableMarkup'
+import { Typography, InputBase } from '@mui/material/';
 
 import PreviewTable from './PreviewTable';
+
+
 
 function reducer(state, action) {
   switch (action.type) {
@@ -54,7 +56,9 @@ const Archive = () => {
       {!state.searchKeyword && <PreviewTable state={state} dispatch={dispatch} columns={columns} /> }
 
       {state.searchKeyword &&  data.erp_Orders && <>
-          <p className={sass.previewHeading}>Результат поиска по архиву</p>
+          <Typography color='textSecondary' variant="subtitle1" m='10px 0'>
+            Результат поиска по архиву
+          </Typography>
           <Table columns = {columns} data = {data.erp_Orders} className={sass.archiveTable}/>
       </>}
 

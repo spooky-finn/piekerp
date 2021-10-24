@@ -20,8 +20,8 @@ import CommentsList from "./Comments/CommentsList";
 import { isFileOnDropzone } from "./Dropzone";
 
 //ui
-import { Heading } from 'evergreen-ui';
 import './sass/index.sass';
+import { Typography } from '@mui/material'
 
 function orderStatus(data){
     // add a note to the title if this is a pre-order
@@ -75,10 +75,10 @@ const OrderLayout = (props) => {
                 <div className='LeftSideContent'>
 
                     <div className="page-header">
-                        <Heading>
+                        <Typography sx={{ fontWeight: 500, fontSize: '1.1rem'}}>
                             {data.erp_Orders[0].Entity} __ {data.erp_Orders[0].City} 
                             <span className="preorderTitle">{orderStatus(data.erp_Orders[0])}</span>
-                        </Heading>
+                        </Typography>
 
                         <ActionsHeader 
                         accessLevel = {2} 

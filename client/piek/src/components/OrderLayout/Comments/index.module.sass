@@ -15,6 +15,30 @@
     outline: none
 
 
+.checklistUnit
+  position: relative
+  padding:  .4em 2em
+  width: fit-content
+  &:hover
+    background: var(--borderLight)
+    border-radius: 5px
+  &::after
+    content: ''
+    top: 50%
+    transform: translateY(-50%)
+    left: 10px
+    position: absolute
+    width: 10px 
+    height: 10px
+    border-radius: 100%
+    opacity: .6
+    border: 1px solid var(--accent)
+.checklistUnit_complited
+  text-decoration: line-through 
+  color: var(--lowContrast)
+  &::after
+      background: var(--accent)
+          
 
 .saveButton
   padding: 8px 8px

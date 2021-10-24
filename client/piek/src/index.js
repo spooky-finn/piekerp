@@ -10,7 +10,6 @@ import { BrowserRouter } from 'react-router-dom';
 //UI
 import './theme.css';
 import './index.sass';
-import './materialUI.sass';
 
 
 //apollo 
