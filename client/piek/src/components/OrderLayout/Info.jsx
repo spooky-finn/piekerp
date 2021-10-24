@@ -1,18 +1,19 @@
 import  moment  from 'moment'
-import { Card, Pane} from "evergreen-ui";
 import "./sass/order-meta.sass";
+import { Typography, Box } from '@mui/material/';
 
 import Shipment from "./Shipment/Shipment";
+import { styled } from '@mui/material/styles';
 
 const OrderInfoCard = (props) => {
   const { heading, secondaryHeading } = props;
   return (
-    <Card className="OrderInfoCard">
+    <Box className="OrderInfoCard" sx={{ color: 'text.primary' }}>
     <div className='row'>
       <div className='heading'>
         {heading}
       </div>
-      <div className='secondaryHeading'>
+      <div className='secondaryHeading noprint'>
         {secondaryHeading}
       </div>
     </div>
@@ -20,9 +21,15 @@ const OrderInfoCard = (props) => {
     <div className='body'>
       {props.children}
     </div>
-  </Card>
+  </Box>
   )
 }
+const Pre = styled((props) => <Typography {...props} />)(
+  ({ theme }) => ({
+    color: theme.palette.text.secondary,
+    fontSize: '.8rem'
+  }),
+  );
 
 const OrderMeta = (props) => {
    const { data } = props;
@@ -31,39 +38,6 @@ const OrderMeta = (props) => {
         if (!total || !paid) return ''
         return ' - ' + ((paid/total) * 100).toFixed(0) + '%'
     }
-    const cells = [
-      {
-        'heading': "План. отгрузка",
-        'data': data.ShippingDate &&  moment(data.ShippingDate).format('DD.MM.YY'),
-        'className': 'bold',
-      },
-      {
-        'heading': "Счет / оплата",
-        'data': <div> {"№ "+ data.InvoiceNumber+setPaidPercent(data.TotalAmount, data.PaidAmount)}
-              </div>,
-        'className': 'bold',
-      },
-      {
-        'heading': "Юр Лицо",
-        'data': data.Entity,
-      },
-      {
-        'heading': "Город",
-        'data': data.City,
-      },
-      {
-        'heading': "",
-        'data': data.Comment,
-        'className': 'OrderComment',
-      },      
-    ]
-
-    const orderInfo = cells.map( (el) =>  
-      <div key={el.heading} className={el.className}>
-        <pre>{el.heading}</pre>
-        {el.data}
-      </div>
-    )
    
     const paidVisualization = () => {
       if (data.PaymentHistories.length == 0) return null
@@ -71,12 +45,14 @@ const OrderMeta = (props) => {
       return (
         <OrderInfoCard className='noprint' heading="Платежи" secondaryHeading={`${data.TotalAmount} ₽`}>
            <table className='paidVisualization'>
+           <tbody>
             {data.PaymentHistories.map(e => (
-              <tr>
-                <td>{(e.PaidAmount / data.TotalAmount * 100).toFixed(0)} % </td>
-                <td>{moment(e.Date).format('DD.MM.YY')}</td>
+                <tr key={e.Date}>
+                  <td>{(e.PaidAmount / data.TotalAmount * 100).toFixed(0)} % </td>
+                  <td>{moment(e.Date).format('DD.MM.YY')}</td>
               </tr>
             ))}
+          </tbody>
           </table>
         </OrderInfoCard>
       )
@@ -101,19 +77,18 @@ const OrderMeta = (props) => {
           'data': moment(data.ActualShippingDate).format('DD.MM.YY'), 
         }
       ]
-
       return (
         <OrderInfoCard heading="О заказе">
-          <table>
+          <table><tbody>
              {columns.map(el => {
                 if (!el.data || el.data === 'Invalid date') return null
-                return <tr>
+                return <tr key={`${el.heading} ${el.data}`}>
                   <td>{el.heading}</td>
                   <td>{el.data}</td>
                 </tr>
                 }
               )}
-          </table>
+          </tbody></table>
         </OrderInfoCard>
       )
     }
@@ -121,23 +96,23 @@ const OrderMeta = (props) => {
   return (<>
       <div className="wrap">
 
-          <div className='significantInfo'>
+          <Box className='significantInfo' sx={{ color: 'text.primary' }}>
             <div className='bold'>
-              <pre>План. отгузка</pre>
+              <Pre>План. отгузка</Pre>
               {data.ShippingDate &&  moment(data.ShippingDate).format('DD.MM.YY')}
             </div>
             <div className='bold'>
-              <pre>Номер заказа</pre>
+              <Pre>Номер заказа</Pre>
               {data.OrderNumber}
             </div>
             <div className='bold'>
-              <pre>Счет / оплата</pre>
+              <Pre>Счет / оплата</Pre>
               {"№ "+ data.InvoiceNumber+setPaidPercent(data.TotalAmount, data.PaidAmount)}
             </div>
-          </div>
+          </Box>
 
           <div className='OrderComment'>
-              <pre>Комментарий</pre>
+              <Pre>Комментарий</Pre>
               {data.Comment}
           </div>
 

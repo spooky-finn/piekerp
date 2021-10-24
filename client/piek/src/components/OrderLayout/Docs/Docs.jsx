@@ -7,7 +7,7 @@ import { DELETE_ORDER_FILE } from '../queries/MutationOrderDocs';
 
 import './docs.sass'
 
-import { CornerDialog } from 'evergreen-ui'
+import ConfirmDialog from './ConfirmDialog';
 
 
 const Docs = ({ data, onUpload, editState, refetch }) => {
@@ -69,18 +69,11 @@ const Docs = ({ data, onUpload, editState, refetch }) => {
 
             <div>
 
-                    <CornerDialog
-                        title={fileOnDelete?.FileName}
-                        isShown={open}
-                        confirmLabel='Удалить навсегда'
-                        onConfirm={deleteFile}
-                        cancelLabel='Не нужно'
-                        intent='danger'
-                        onCloseComplete={handleClose}
-                        >
-                        Вы действительно хотите удалить этот файл? <br/>
-                        Это действие необратимо.
-                    </CornerDialog>
+            <ConfirmDialog 
+                filename={fileOnDelete?.FileName} 
+                open={open}  
+                handleClose={handleClose}
+                onConfirmF={deleteFile}/>
             </div>
 
         </div>

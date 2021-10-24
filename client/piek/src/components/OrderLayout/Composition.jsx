@@ -7,27 +7,12 @@ DELETE_ORDER_ITEM,
 INSERT_ORDER_ITEM, 
 UPDATE_ORDER_ITEM, 
 UPDATE_ORDER_ITEM_METADATA 
-} from "./queries/MutationOrderItem"
+} from "./queries/MutationOrderItem";
 
 // ui 
-import { TextField, Button } from '@material-ui/core'
-import { withStyles } from '@material-ui/core/styles';
-
+import { Button, TextField, Box, Typography } from '@mui/material';
 import sass from './sass/composition.module.sass'
-
 import OrderItemActions from './OrderItemActions'
-
-
-const Input = withStyles({
-  root: {
-  }
-})((props) => 
-  <TextField 
-    size='small' 
-    autoComplete='off'
-    InputProps={{ disableUnderline: true }}
-    {...props} 
-  />);
 
 const initialState = {
     name: '',
@@ -110,42 +95,47 @@ const OrderComposition = ({ data, editState, refetch, orderID }) => {
       if (!editState) return null
       return(
         <div className={sass.addOrderItem}>
-            <Input
+            <TextField
                 label="Наименование"
                 value={state.name}
+                variant='filled'
+                sx={{mb: '8px'}}
                 onChange={ (e) => dispatch({ type: 'name', payload: e.target.value }) }
               />
-           <Input
+           <TextField
                 label="Полное наименование"
                 multiline
+                variant='filled'
+                sx={{mb: '8px'}}
                 className={sass.fullNameInput}
                 value={state.fullName}
                 onChange= { (e) => dispatch({ type: 'fullName', payload: e.target.value }) }
                 />
-            <Input
+            <TextField
                 label="Кол-во"
                 type="number"
+                variant='filled'
+                sx={{mb: '8px'}}
                 className={sass.quantityInput}
                 value={state.quantity}
                 onChange={ (e) => dispatch({ type: 'quantity', payload: e.target.value }) }
                />
 
               {!state.id 
-              ? <Button className={sass.pushOrderItemButton} onClick={insertOrderItem}>Добавить</Button> 
-              : <Button className={sass.pushOrderItemButton} onClick={updateOrderItem}>Изменить</Button> }
+              ? <Box><Button variant='contained' onClick={insertOrderItem}>Добавить</Button> </Box>
+              : <Box><Button variant='contained' onClick={updateOrderItem}>Изменить</Button></Box> }
         </div>
         )
       }
 
     return(<>     
         {data.map( (el, index) => 
-        
         <div
           key={el.OrderItemID}
           className={sass.Unit} 
         >
               <span className={sass.index}>{index+1}</span>
-              <div className={sass.name}> {el.Name} </div>
+              <Typography color='textPrimary' className={sass.name}> {el.Name} </Typography>
               <span  className={sass.quantity}> {el.Quantity}</span>
               <OrderItemActions 
                   editState={editState} 

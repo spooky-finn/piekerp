@@ -27,7 +27,26 @@ const download = (key, res) => {
         const fileName = encodeURI(data.Metadata.originalname)
         res.set('Content-Type', data.ContentType); 
         res.set('Content-Disposition', `inline;filename*=utf-8''${fileName}`)
-      return res.send(data.Body );
+      return res.send(data.Body);
+    }
+  });
+}
+
+const getBackup = (key, res) => {
+  const getParams = {
+    Bucket: 'piek-factory-backup',
+    Key: key
+  };
+  s3.getObject(getParams, function(err, data) {
+    if (err) return res.status(400).send({success:false,err:err})
+    
+    else{
+        data.Metadata.originalname = querystring.unescape(data.Metadata.originalname)
+        const fileName = encodeURI(data.Metadata.originalname)
+        res.set('Content-Type', 'text/plain'); 
+        res.set('Content-Disposition', `attachment; filename="db_dump.sql"`)
+
+      return res.send(JSON.parse(data.Body));
     }
   });
 }
@@ -74,3 +93,4 @@ const deleteObject = (key) => {
 exports.deleteObject = deleteObject;
 exports.upload = upload;
 exports.download = download;
+exports.getBackup = getBackup;

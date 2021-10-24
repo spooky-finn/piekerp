@@ -3,7 +3,7 @@ import { Context } from '../../index';
 import { useHistory } from "react-router-dom";
 
 import ReactNotification from 'react-notifications-component'
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button } from '@mui/material';
 import './LoginForm.sass'
 import { notif } from '../_core/notification'
 

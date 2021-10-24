@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 import { Context } from '../../index'
 import { reducer, initialState } from './reducer';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 
 // apollo
 import { useSubscription, useQuery } from '@apollo/client'
@@ -12,7 +11,9 @@ import { GetOrdersSubscription } from './queries/getOrders'
 import { GET_USERS } from '../../hasura-queries/getUsers'
 
 // ui 
-import {Tabs, Tab, Box} from '@material-ui/core';
+import {Tabs, Tab, Box} from '@mui/material';
+import { styled } from '@mui/material/styles';
+
 import mainsass from './main.module.sass'
 
 import PreOrders from './PreOrders';
@@ -20,6 +21,53 @@ import Priority from './Priority';
 import Recently from './Recently/index.jsx';
 import ActionsHeader from '../BaseHeader/ActionsHeader'
 import Archive from './Archive/';
+
+
+// const StyledTabs = styled((props) => <Tabs {...props} />)(
+    
+//     ({
+//     root: {
+//         color: '#000',
+//         backgroundColor: '#fa0000 !important',
+//         borderBottom: '1px solid var(--border)',
+//         marginBottom: '2rem',
+//     },
+//     '& .MuiTabs-indicator': {
+//          display: 'none'
+//     },
+//     '& .MuiTabs-indicatorSpan': {
+//       maxWidth: 40,
+//       width: '100%',
+//       backgroundColor: '#635ee7',
+//     },
+//   });
+
+
+const StyledTabs = styled((props) => <Tabs {...props} />)(
+  ({ theme }) => ({
+    margin: '0 0 1rem',
+    '& .MuiTabs-indicator': {
+      display: 'none'
+    },
+  }),
+  );
+
+const StyledTab = styled((props) => <Tab {...props} />)(
+    ({ theme }) => ({
+      textTransform: 'none',
+      fontWeight: 500,
+      color: theme.palette.text.secondary,
+      fontSize: theme.typography.pxToRem(15),
+      marginRight: theme.spacing(1),
+      borderBottomRightRadius: '10px',
+      borderBottomLeftRadius: '10px',
+      '&.Mui-selected': {
+        backgroundColor: theme.palette.primary.light,
+        color: theme.palette.primary
+      }
+    }),
+  );
+
 
 const OrderListLayout = (props) => {
     const { store } = useContext(Context);
@@ -88,54 +136,55 @@ const OrderListLayout = (props) => {
         };
     }
     const tabHeight = '50px'
-    const AntTabs = withStyles({
-        root: {
-            borderBottom: '1px solid var(--border)',
-            minHeight: tabHeight,
-            height: tabHeight,
-            marginBottom: '2rem',
-            backgroundColor: 'var(--L0)',
-        },
-        indicator: {  
-            display: 'none'
-        },
-      })(Tabs);
+    
+
+
+    // const AntTabs = withStyles({
+    //     root: {
+    //         borderBottom: '1px solid var(--border)',
+    //         minHeight: tabHeight,
+    //         height: tabHeight,
+    //         marginBottom: '2rem',
+    //         backgroundColor: 'var(--L0)',
+    //     },
+    //     indicator: {  
+    //         display: 'none'
+    //     },
+    //   })(Tabs);
       
-      const AntTab = withStyles((theme) => ({
-        root: {
-          minWidth: '10%',
-          fontSize: '.9rem',
-          textTransform: 'none',
-          color: 'var(--lowContrast)',
-          borderRight: '1px solid var(--border)',
-          padding: 0,
-          opacity: 1,
-          fontWeight: 500,
-          minHeight: tabHeight,
-          height: tabHeight,
-          transition: 'color .3s ease',
-          '&:hover': {
-            color: 'var(--highContrast)',
-          },
-          '&$selected': {
-                // color: 'var(--accent)',
-                backgroundColor: 'var(--L1)',
-          }
-        },
-        selected: {},
-      }))((props) => <Tab disableRipple {...props} />);
+    //   const AntTab = withStyles((theme) => ({
+    //     root: {
+    //       minWidth: '10%',
+    //       fontSize: '.9rem',
+    //       textTransform: 'none',
+    //       color: 'var(--lowContrast)',
+    //       borderRight: '1px solid var(--border)',
+    //       padding: 0,
+    //       opacity: 1,
+    //       fontWeight: 500,
+    //       minHeight: tabHeight,
+    //       height: tabHeight,
+    //       transition: 'color .3s ease',
+    //       '&:hover': {
+    //         color: 'var(--highContrast)',
+    //       },
+    //       '&$selected': {
+    //             // color: 'var(--accent)',
+    //             backgroundColor: 'var(--L1)',
+    //       }
+    //     },
+    //     selected: {},
+    //   }))((props) => <Tab disableRipple {...props} />);
 
     return(
         <div className={mainsass.OrderListLayout}>
-        <AntTabs value={selectedTab} onChange={tabHandler} aria-label="simple tabs example" className='orderListLayoutTabs'>
-            <AntTab label="Предзаказы" {...a11yProps(0)} />
-            <AntTab label="Очередость" {...a11yProps(1)} />
-            <AntTab label="Недавние"   {...a11yProps(2)} />
-            <AntTab label='Архив'      {...a11yProps(3)} />
-
-
+        <StyledTabs value={selectedTab} onChange={tabHandler} aria-label="simple tabs example" className='orderListLayoutTabs'>
+            <StyledTab label="Предзаказы" {...a11yProps(0)} />
+            <StyledTab label="Очередость" {...a11yProps(1)} />
+            <StyledTab label="Недавние"   {...a11yProps(2)} />
+            <StyledTab label='Архив'      {...a11yProps(3)} />
             <ActionsHeader createOrder={1} userID={store.user.UserID} history={history}/>
-        </AntTabs>
+        </StyledTabs>
 
 
         <TabPanel value={selectedTab} index={0}>

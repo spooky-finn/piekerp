@@ -6,7 +6,7 @@ import { GET_ARCHIVED_UNPAID_ORDERS } from './queries/getArchivedUnpaidOrders'
 
 import Table from './TableMarkup'
 import sass from './archive.module.sass'
-import { Pane, Spinner } from 'evergreen-ui'
+import { Typography } from '@mui/material/';
 
 
 const PreviewTable = (props) => {
@@ -33,13 +33,16 @@ const PreviewTable = (props) => {
       ])
   }
 
-  if (latestOrdersloading || unpaidOrdersLoading || loading) return( 
-  <Pane display="flex" alignItems="center" justifyContent="center" height={400}>
-    <Spinner />
-  </Pane>)
+  // if (latestOrdersloading || unpaidOrdersLoading || loading) return( 
+  // <Pane display="flex" alignItems="center" justifyContent="center" height={400}>
+  //   <Spinner />
+  // </Pane>)
 
   return (<>
-      <p className={sass.previewHeading}>Недавно отгруженные</p>
+    <Typography color='textSecondary' variant="subtitle1" m='10px 0'>
+      Недавно отгруженные
+    </Typography>
+
       <Table columns = {columns} data = {previewData()} className={sass.archiveTable}/>
   </>)
 }
