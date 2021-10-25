@@ -27,7 +27,7 @@ html{
 
     
 html.dark {
-    --L0: rgb(16, 16, 20);
+    --L0: #1e1e1e;
     --L1: rgba(200, 200, 255, 0.05);
     --L2: rgba(200, 200, 255, .07);
 
@@ -36,10 +36,10 @@ html.dark {
     --textInvert: rgb(0, 0, 0);
 
 
-    --accent: #6989fc;
+    --accent: #99affc;
     --accentLight: #43435c;
-    --border: rgba(255,255,255,.08);
+    --border: rgba(255,255,255,.1);
     --borderLight: rgba(255,255,255,.05);
 
-    --awaitingDispatch: #11b34a33;
+    --awaitingDispatch: #32472b;
     }

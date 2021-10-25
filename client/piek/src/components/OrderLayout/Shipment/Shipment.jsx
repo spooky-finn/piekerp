@@ -13,7 +13,6 @@ import { Button, Checkbox, FormControlLabel } from '@mui/material';
 
 const Shipment = (props) => {
   const { data, orderID } = props
-  const [isShown, setIsShown] = useState(false)
   const history = useHistory();
   const [mutateAwaitingDispatch] = useMutation(UPDATE_AWAITING_DISPATCH);
   const [mutateOrderStatus] = useMutation(UPDATE_ORDER_STATUS);

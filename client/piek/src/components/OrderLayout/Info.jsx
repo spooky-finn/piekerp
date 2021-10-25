@@ -35,7 +35,7 @@ const OrderMeta = (props) => {
    const { data } = props;
     
     const setPaidPercent = (total, paid) => {
-        if (!total || !paid) return ''
+        if (!total || !paid) return ' '
         return ' - ' + ((paid/total) * 100).toFixed(0) + '%'
     }
    
@@ -107,7 +107,7 @@ const OrderMeta = (props) => {
             </div>
             <div className='bold'>
               <Pre>Счет / оплата</Pre>
-              {"№ "+ data.InvoiceNumber+setPaidPercent(data.TotalAmount, data.PaidAmount)}
+              {"№ "+ (data.InvoiceNumber || '')+setPaidPercent(data.TotalAmount, data.PaidAmount)}
             </div>
           </Box>
 

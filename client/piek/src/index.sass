@@ -19,7 +19,15 @@ input::-webkit-inner-spin-button
 input[type=number] 
   -moz-appearance: textfield
 
-
+[contenteditable]
+  outline: 0px solid transparent
+[contentEditable=true]:empty:not(:focus):before
+  content: attr(data-ph)
+  color: var(--lowContrast)
+  font-size: .9rem
+  opacity: .5
+  font-weight: 500
+  
 @media print
    .noprint
         display: none !important

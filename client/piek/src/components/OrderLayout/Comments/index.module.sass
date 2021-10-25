@@ -1,26 +1,29 @@
 .commentsListWrapper
-  // grid-column-start: 1
-  // grid-column-end: -1
   height: 100%
-
 
 .commentInputForm
   display: flex
   align-items: center
   border-bottom: 1px solid var(--border)
-  padding: 5px 10px
+  padding: 10px 15px
   white-space: pre-wrap
+  color: var(--highContrast)
   div:first-of-type
-    width: 100% 
+    flex-grow: 1
     outline: none
+    p, span, div, li, td
+      font-size: .9rem !important
+  .checklistUnit:hover
+    background: transparent !important
 
 
 .checklistUnit
   position: relative
-  padding:  .4em 2em
-  width: fit-content
+  padding:  .2em 2em
+  width: fit-content !important
+  text-decoration: none
   &:hover
-    background: var(--borderLight)
+    background: var(--borderLight) !important
     border-radius: 5px
   &::after
     content: ''
@@ -41,23 +44,25 @@
           
 
 .saveButton
-  padding: 8px 8px
-  background: var(--accentLight)
+  align-self: end
+  display: flex
+  justify-content: center
+  align-items: center
+  padding: 5px 8px
   width: fit-content
   color: var(--accent)
-  height: 20px
   border-radius: var(--br10)
-  font-size: .9rem
-  margin: 0 10px 
+  svg
+    width: 17px 
+  &:hover
+    background: var(--accentLight)
+    
 
 .commentUnit
-  // padding: 12px 18px
   margin: 10px
   border-bottom: 1px solid var(--borderLight)
   line-height: 1.4
   white-space: pre-wrap
-  // div:last-of-type
-    // padding: 0px 8px 10px
   &:hover
     .actions
       opacity: 1
@@ -67,7 +72,7 @@
   color: var(--highContrast) !important
   p,span, div
     background: var(--L0) !important
-    font-size: 1rem !important
+    font-size: .9rem !important
     color: var(--highContrast) !important
 
     

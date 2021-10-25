@@ -14,7 +14,6 @@ import ActionsHeader from "../BaseHeader/ActionsHeader";
 import Composition from "./Composition";
 import Info from "./Info";
 import EditableInfo from "./EditableComponents/EditableInfo";
-import CheckList from './CheckList/CheckList';
 import Docs from './Docs/Docs';
 import CommentsList from "./Comments/CommentsList";
 import { isFileOnDropzone } from "./Dropzone";
@@ -75,7 +74,7 @@ const OrderLayout = (props) => {
                 <div className='LeftSideContent'>
 
                     <div className="page-header">
-                        <Typography sx={{ fontWeight: 500, fontSize: '1.1rem'}}>
+                        <Typography sx={{ fontWeight: 600, fontSize: '1rem'}}>
                             {data.erp_Orders[0].Entity} __ {data.erp_Orders[0].City} 
                             <span className="preorderTitle">{orderStatus(data.erp_Orders[0])}</span>
                         </Typography>
@@ -104,8 +103,6 @@ const OrderLayout = (props) => {
                     onUpload={onUploadFiles} 
                     editState = {editState} 
                     refetch={refetch} />
-
-                    <CheckList data={data.erp_Orders[0].CheckListUnits} OrderID={orderID} />
                      
                 </div>
                 <div className="Info">

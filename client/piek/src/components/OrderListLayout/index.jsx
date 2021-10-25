@@ -22,27 +22,6 @@ import Recently from './Recently/index.jsx';
 import ActionsHeader from '../BaseHeader/ActionsHeader'
 import Archive from './Archive/';
 
-
-// const StyledTabs = styled((props) => <Tabs {...props} />)(
-    
-//     ({
-//     root: {
-//         color: '#000',
-//         backgroundColor: '#fa0000 !important',
-//         borderBottom: '1px solid var(--border)',
-//         marginBottom: '2rem',
-//     },
-//     '& .MuiTabs-indicator': {
-//          display: 'none'
-//     },
-//     '& .MuiTabs-indicatorSpan': {
-//       maxWidth: 40,
-//       width: '100%',
-//       backgroundColor: '#635ee7',
-//     },
-//   });
-
-
 const StyledTabs = styled((props) => <Tabs {...props} />)(
   ({ theme }) => ({
     margin: '0 0 1rem',
@@ -59,8 +38,8 @@ const StyledTab = styled((props) => <Tab {...props} />)(
       color: theme.palette.text.secondary,
       fontSize: theme.typography.pxToRem(15),
       marginRight: theme.spacing(1),
-      borderBottomRightRadius: '10px',
-      borderBottomLeftRadius: '10px',
+      borderBottomRightRadius: '8px',
+      borderBottomLeftRadius: '8px',
       '&.Mui-selected': {
         backgroundColor: theme.palette.primary.light,
         color: theme.palette.primary
@@ -135,47 +114,7 @@ const OrderListLayout = (props) => {
         'aria-controls': `simple-tabpanel-${index}`,
         };
     }
-    const tabHeight = '50px'
     
-
-
-    // const AntTabs = withStyles({
-    //     root: {
-    //         borderBottom: '1px solid var(--border)',
-    //         minHeight: tabHeight,
-    //         height: tabHeight,
-    //         marginBottom: '2rem',
-    //         backgroundColor: 'var(--L0)',
-    //     },
-    //     indicator: {  
-    //         display: 'none'
-    //     },
-    //   })(Tabs);
-      
-    //   const AntTab = withStyles((theme) => ({
-    //     root: {
-    //       minWidth: '10%',
-    //       fontSize: '.9rem',
-    //       textTransform: 'none',
-    //       color: 'var(--lowContrast)',
-    //       borderRight: '1px solid var(--border)',
-    //       padding: 0,
-    //       opacity: 1,
-    //       fontWeight: 500,
-    //       minHeight: tabHeight,
-    //       height: tabHeight,
-    //       transition: 'color .3s ease',
-    //       '&:hover': {
-    //         color: 'var(--highContrast)',
-    //       },
-    //       '&$selected': {
-    //             // color: 'var(--accent)',
-    //             backgroundColor: 'var(--L1)',
-    //       }
-    //     },
-    //     selected: {},
-    //   }))((props) => <Tab disableRipple {...props} />);
-
     return(
         <div className={mainsass.OrderListLayout}>
         <StyledTabs value={selectedTab} onChange={tabHandler} aria-label="simple tabs example" className='orderListLayoutTabs'>

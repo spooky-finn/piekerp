@@ -8,13 +8,16 @@ import { UilWrench, UilConstructor} from '@iconscout/react-unicons';
 export default class Store {
     user = {};
     isLoading = false;
+    UItheme = {
+        state: null,
+        dispatch: null
+    };
     inMemoryToken = undefined;
 
     priorityTab = 1;
-
     cachedOrders = [];
     cachedPreOrders = [];
-
+    
     constructor(){
         makeAutoObservable(this);
     }
@@ -44,7 +47,9 @@ export default class Store {
     setCachedPreOrders(array){
         this.cachedPreOrders = array
     }
-
+    setUItheme(state, dispatch){
+        this.UItheme = { state, dispatch }
+    }
     async login(email, password){
         try {
             const res = await AuthService.login(email, password)
@@ -124,7 +129,6 @@ export default class Store {
             }})
             console.log(hasuraRes.data)
         }
-        // if (res.status != 200) console.log('error during deleting file from S3', res)
     }
 
     pageParams = [
