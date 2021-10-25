@@ -1,14 +1,11 @@
 // import { observer } from 'mobx-react-lite';
-import { useContext } from 'react';
 import { NavLink} from 'react-router-dom';
-import { Context } from '../../index';
 import './index.sass';
 
 import { UilSortAmountDown, UilWrench, UilConstructor} from '@iconscout/react-unicons';
 import SettingsDrawer from './SettingsDrawer/SettingsDrawer';
 
 const Sidebar = () => {
-    const {store} = useContext(Context);
     return(
         <div className='Sidebar noprint'>
 

@@ -1,22 +1,22 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useMutation, useSubscription } from '@apollo/client';
 import { INSERT_ORDER_COMMENT, UPDATE_ORDER_COMMENT, DELETE_ORDER_COMMENT } from '../queries/MutationOrderCommnets'
 import { SUBSCRIBTION_ORDER_COMMENT } from '../queries/SubscriptionComments'
 import sass from './index.module.sass'
 
-import { TextField, Menu, MenuItem, Box } from '@mui/material/';
+import { Box } from '@mui/material/';
 import Comment from './Comment'
-import ReactDOM from 'react-dom';
+import { UilMessage } from '@iconscout/react-unicons'
+import СommandsPopover from './СommandsPopover'
 
 const CommentsList = (props) => {
   const { orderID, user } = props
   const [ insertOrderCommentMutation ] = useMutation(INSERT_ORDER_COMMENT);
   const [ updateOrderCommentMutation ] = useMutation(UPDATE_ORDER_COMMENT);
   const [ deleteOrderCommentMutation ] = useMutation(DELETE_ORDER_COMMENT);
-  const [state, setState]           = useState('');
   var inputRef = useRef();
   const [nowEditing, setNowEditing] = useState();
-  const { data = [], loading } = useSubscription(SUBSCRIBTION_ORDER_COMMENT, { variables: { OrderID: orderID }});
+  const { data: comments = [], loading } = useSubscription(SUBSCRIBTION_ORDER_COMMENT, { variables: { OrderID: orderID }});
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -30,7 +30,7 @@ const CommentsList = (props) => {
       Text: text
       }
     })
-    setState('')
+    inputRef.current.innerHTML = ''
   }
 
   function updateComment(id, newText){
@@ -48,106 +48,56 @@ const CommentsList = (props) => {
   })
   }
   
-  function inputHandler(e){
-    if (e.target.innerHTML == '/') setAnchorEl(e.target)
-    // setState(e.target.innerHTML)
-    // inputRef.current.innerHTML = `<div>hehehe</div>`
-    // console.log(inputRef.current.innerHTML)
+  function switchTodo(e) {
+    e.target.classList.toggle(sass.checklistUnit_complited)
+  }
 
-    let elements = [...document.querySelectorAll('div.Comments_checklistUnit__2rS_e')].forEach(item => { 
-      item.removeEventListener('click', ()=>{
-        console.log('1');
-        }, false);
-      item.addEventListener('click', ()=>{
-        console.log('1');
-        }, false);
-    });
-    console.log(document.querySelectorAll('div.Comments_checklistUnit__2rS_e'))
+  function inputHandler(e){
+    if (e.target.innerText.trim() === '/') setAnchorEl(e.target)
   }
   
- 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
   const handleClose = () => {
     setAnchorEl(null);
   };
   
-  function switchTodo() {
-    console.log('switch func')
-    // e.target.classList.toggle(sass.checklistUnit_complited)
+  function switchTodo(e) {
+    e.target.classList.toggle(sass.checklistUnit_complited)
   }
+
+  useEffect(() => {
+    const els = [...document.querySelectorAll(`div.${sass.commentUnit} div.${sass.checklistUnit}`)]
+    els.forEach( el => {
+      el.addEventListener('click', switchTodo, false);
+    }, {once : true})
+    return () => {
+      els.forEach( el => {
+        el.removeEventListener('click', switchTodo, false);
+      })
+    }
+  }, [comments])
+
   return(
     <div className={sass.commentsListWrapper}>
      <div className={sass.commentInputForm}>
-      <Menu
-        id="demo-positioned-menu"
-        aria-labelledby="demo-positioned-button"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        
-        sx={{
-          '.MuiList-root':{
-            padding: '10px'
-          }
-        }}
-      >
-        <MenuItem onClick={() => {
-          handleClose();
-          const s = <div className={sass.checklistUnit} data-id={Math.random().toString(36).substr(2, 5)} >type smth</div>
-          
-          ReactDOM.render(s, inputRef.current)
-          // const unit = <div class={sass.checklistUnit}>type smth</div>
-          // console.log(unit)
-          // inputRef.current.children[1] = [unit]
-        }}>Чеклист</MenuItem>
-        <MenuItem onClick={handleClose}>Упомянуть</MenuItem>
-      </Menu>
+      
+      <СommandsPopover anchorEl={anchorEl} open={open} handleClose={handleClose} inputRef={inputRef}/>
 
-      <Box id="demo-positioned-button"
-          aria-controls="demo-positioned-menu"
-          aria-haspopup="true">
-        
-
-        <div 
-        // dangerouslySetInnerHTML={{__html: }
-        id='inputField'
+      <Box id="Comments__commandMenu__button inputField"
+        aria-controls="Comments__commandMenu"
+        aria-haspopup="true"
         contentEditable='true'
         ref={inputRef}
-        className={sass.commentInput}
-        onInput={inputHandler}
-        >
-        </div>
-
-        {/* <TextField
-          variant='standard'
-          placeholder='Введите комментарий' 
-          className={sass.commentInput}
-          multiline
-          fullWidth
-          size='small'
-          autoComplete="off"
-          value={state}
-          onChange={inputHandler}
-          /> */}
+        data-ph="Комментарий или ' / ' для команды"
+        onInput={inputHandler}>
       </Box>
     
-
-      {inputRef.current &&
-      <div 
-      onClick={insertComment} 
-      className={sass.saveButton}>
-        Сохранить
-      </div>
-      }
+      <div onClick={insertComment} className={sass.saveButton}><UilMessage/></div>
     </div>
 
-
      {!loading && 
-      data.erp_Comments.map( (data) => <Comment 
-        data={data} 
-        key={data.CommentID}
+      comments.erp_Comments.map( (comment) => <Comment 
+        data={comment} 
+        key={comment.CommentID}
         userID={user.UserID}
         deleteComment={deleteComment}
         updateComment={updateComment}
