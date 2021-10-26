@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState, useMemo } from 'react';
 import { Context } from './index';
 
 // import ReactTooltip from 'react-tooltip';
@@ -7,62 +7,61 @@ import {observer} from 'mobx-react-lite';
 import BaseLayout from './components/BaseLayout';
 import Sidebar from './components/Sidebar/Sidebar';
 
-import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 
-const darkTheme = createTheme({
-});
-
-darkTheme.overrides = {
-  MuiInputLabel: {
-    root: {
-      color: 'var(--lowContrast)',
-      fontSize: '.8rem',
-    },
-  },
-  MuiOutlinedInput: {
-    notchedOutline: {
-      borderColor: 'var(--border)',
-    },
-    focused:{
-      borderColor: 'var(--border) !important',
-    }
-  },
-  MuiInputBase: {
-    root: {
-      borderBottom: 'none',
-      color: 'var(--highContrast)',
-      '&::before': {
-        borderColor: 'var(--border) !important',
-      }
-    },
-  },
-  MuiIconButton:{
-    root: {
-      color: 'var(--lowContrast)',
-      opacity: .5
-    }
-  },
-  MuiAutocomplete: {
-    paper: {
-      background: 'var(--L0) !important',
-      border: '1px solid var(--border)',
-    },
-    listbox: {
-      color: 'var(--highContrast)',
-      fontSize: '.8rem',
-    },
-  },
-}
-
+import {getCookie, SystemPreferTheme} from './components/_core/SystemPreferTheme'
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { muicomponents } from './materialStyles'
 
 function App() {  
   const { store } = useContext(Context);
+  const [appTheme, setAppTheme] = useState(() => getCookie('theme'))
+  store.setUItheme(appTheme, setAppTheme)
+  const {mode} = SystemPreferTheme(appTheme, setAppTheme)
+  
+  const getDesignTokens = (mode) => ({
+    palette: {
+      mode,
+      ...(mode === 'light'
+        ? {
+            // palette values for light mode
+            primary: {
+              main: '#3763FE',
+              light: '#E7E9FB',
+            },
+            secondary: {
+              main: '#e5534b',
+            }
+          }
+        : {
+            // palette values for dark mode
+            primary: {
+              main: '#99affc',
+              light: '#43435c',
+            },
+            secondary: {
+              main: '#e5534b',
+            },
+           
+          }),
+    },
+    typography: {
+      fontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',sans-serif`,
+      subtitle1: {
+        fontSize: '.9rem',
+        fontFamily: "IBM PLEX MONO"
+      }
+    },
+  });
+
+  var theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
+  theme = createTheme(theme, muicomponents(theme));
+
+
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={theme}>
       <div className="App">
         
         { store.inMemoryToken && <Sidebar/> }
-
           <BaseLayout/>
         
       </div>

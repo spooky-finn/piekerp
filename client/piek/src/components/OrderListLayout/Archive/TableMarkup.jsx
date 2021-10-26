@@ -1,19 +1,20 @@
 import { useTable } from 'react-table'
 import mainsass from '../main.module.sass'
+import { Typography } from '@mui/material/';
 
 export default function Table({columns, data, className }){
     const {
         getTableProps,
         getTableBodyProps,
         headerGroups,
-        rows,
+        rows, 
         prepareRow,
       } = useTable({
         columns,
         data,
       })
 
-    if (data.length === 0) return '-> ничего не найдено';
+    if (data.length === 0) return <Typography color='textSecondary' variant="subtitle2">-> ничего не найдено</Typography>
    return (
      <>
     <table className={`${mainsass.tableMain} ${className}`} {...getTableProps()}>

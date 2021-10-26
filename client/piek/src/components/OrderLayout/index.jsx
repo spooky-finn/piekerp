@@ -10,18 +10,18 @@ import { PUSH_DOCS_ARRAY } from './queries/MutationOrderDocs'
 import { useMutation, useQuery } from "@apollo/client";
 
 //components
-import ActionsHeader from "../BaseHeader/ActionsHeader";
 import Composition from "./Composition";
 import Info from "./Info";
 import EditableInfo from "./EditableComponents/EditableInfo";
-import CheckList from './CheckList/CheckList';
 import Docs from './Docs/Docs';
 import CommentsList from "./Comments/CommentsList";
 import { isFileOnDropzone } from "./Dropzone";
 
 //ui
-import { Heading } from 'evergreen-ui';
 import './sass/index.sass';
+import { Typography, Button, Box } from '@mui/material'
+import { UilPlus, UilEditAlt } from '@iconscout/react-unicons';
+
 
 function orderStatus(data){
     // add a note to the title if this is a pre-order
@@ -35,6 +35,8 @@ const OrderLayout = (props) => {
 
     const editStateQueryArg = new URLSearchParams(useLocation().search).get('edit')
     const [editState, setEditState] = useState(editStateQueryArg)
+    // Add new Order Item Dialog
+    const [OIDialog, setOIDialog] = useState(false)
     const [pushDocs] = useMutation(PUSH_DOCS_ARRAY);
     const orderID = useParams().id
 
@@ -65,7 +67,11 @@ const OrderLayout = (props) => {
     var { data = [], refetch } = useQuery(GET_ORDER_BY_ID, { variables: { OrderID: orderID} });
     const { data: users = []} = useQuery(GET_USERS);
     const {getRootProps, isDragActive} = useDropzone({className: 'dropzone', onDrop: S3Upload });
-      
+    
+    function showOrderActions(){
+        if ([1,2,4].includes(store.user.AccessLevelID)) return true
+    }
+
     return(
     <div> 
         {isFileOnDropzone(isDragActive)}
@@ -75,16 +81,20 @@ const OrderLayout = (props) => {
                 <div className='LeftSideContent'>
 
                     <div className="page-header">
-                        <Heading>
+                        <Typography sx={{ fontWeight: 600, fontSize: '1rem'}}>
                             {data.erp_Orders[0].Entity} __ {data.erp_Orders[0].City} 
                             <span className="preorderTitle">{orderStatus(data.erp_Orders[0])}</span>
-                        </Heading>
+                        </Typography>
 
-                        <ActionsHeader 
-                        accessLevel = {2} 
-                        setEditState = {setEditState} 
-                        editState = {editState} />
-                        
+                       {showOrderActions() && <Box className='orderActions_box'>
+                         {editState && 
+                          <Button variant="iconbutton" onClick={() => setOIDialog(true)}>
+                            <UilPlus/>
+                          </Button>}
+                          <Button variant="iconbutton" onClick={() => setEditState(!editState)}>
+                              <UilEditAlt/>
+                          </Button>
+                        </Box>}
                     </div>
 
                     <div className="Composition">  
@@ -92,6 +102,8 @@ const OrderLayout = (props) => {
                           data={data.erp_Orders[0].OrderItems} 
                           editState={editState}
                           refetch={refetch}
+                          OIDialog={OIDialog}
+                          setOIDialog={setOIDialog}
                           orderID= {orderID} /> 
                     </div>
 
@@ -104,8 +116,6 @@ const OrderLayout = (props) => {
                     onUpload={onUploadFiles} 
                     editState = {editState} 
                     refetch={refetch} />
-
-                    <CheckList data={data.erp_Orders[0].CheckListUnits} OrderID={orderID} />
                      
                 </div>
                 <div className="Info">

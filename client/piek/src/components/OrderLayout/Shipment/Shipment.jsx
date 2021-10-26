@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import sass from './shipment.module.sass'
-import { CornerDialog, Button, Checkbox } from 'evergreen-ui'
 import { useMutation } from "@apollo/client"
 import { useHistory } from "react-router-dom";
 
@@ -9,9 +8,11 @@ import {
   UPDATE_ORDER_STATUS } from '../queries/MutationOrderInfo'
 import { DELETE_ORDER } from '../queries/MutationDeleteOrder';
 
+import ConfirmDialog from './ConfirmDialog'
+import { Button, Checkbox, FormControlLabel } from '@mui/material';
+
 const Shipment = (props) => {
   const { data, orderID } = props
-  const [isShown, setIsShown] = useState(false)
   const history = useHistory();
   const [mutateAwaitingDispatch] = useMutation(UPDATE_AWAITING_DISPATCH);
   const [mutateOrderStatus] = useMutation(UPDATE_ORDER_STATUS);
@@ -54,23 +55,27 @@ const Shipment = (props) => {
   if (data.OrderStatusID === 3) return null
   if (data.OrderStatusID === 1) return (
     <div>
-        <Button onClick={deleteOrderHandler} className={sass.deletePreOrderBtn} appearance="minimal">Удалить предзаказ</Button>
+        <Button onClick={deleteOrderHandler} color='secondary'>
+          Удалить предзаказ
+        </Button>
     </div>
   )
   return (
     <div>
-        <CornerDialog
-          title="Перенести в архив?"
-          isShown={isShown}
-          confirmLabel='Перенести'
-          onConfirm={TransferOrder}
-          cancelLabel='Не нужно'
-          onCloseComplete={() => setIsShown(false)}
-        >
-          Заказ удалится из очередности, но его в любое время можно будет найти в архиве по номеру счета, юрлицу, маркировке привода.
-        </CornerDialog>
-        <Checkbox className={sass.checkbox} marginTop={0} label="Ожидает отгрузки" onChange={awaitingDispatchHandler} checked={data.AwaitingDispatch}/>
-        <Button onClick={() => setIsShown(true)} className={sass.btn} appearance="primary">Отгружен</Button>
+        {/* <Checkbox className={sass.checkbox} marginTop={0} label="Ожидает отгрузки" onChange={awaitingDispatchHandler} checked={data.AwaitingDispatch}/> */}
+
+        <FormControlLabel 
+        sx={{
+          margin: 0,
+          padding: '0 0 10px',
+        }}
+        className={sass.checkbox}
+        control={<Checkbox 
+        onChange={awaitingDispatchHandler}
+        checked={data.AwaitingDispatch}
+        />} label="Ожидает отгрузки" />
+
+        <ConfirmDialog onConfirmF={TransferOrder}/>
     </div>
   )
 }

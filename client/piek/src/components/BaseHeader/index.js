@@ -1,12 +1,10 @@
-import { Heading } from 'evergreen-ui';
-
-
+import { Typography } from "@mui/material"
 const BaseHeader = (props) => {
 
     return(
            <div className="page-header">
                     <span>{props.pageParams.icon}</span>
-                    <Heading>{props.pageParams.title}</Heading>                    
+                    <Typography>{props.pageParams.title}</Typography>                    
                     {props.children}
             </div>
     )

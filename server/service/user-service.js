@@ -14,6 +14,7 @@ class UserService {
             'FirstName': o.FirstName,
             'LastName': o.LastName,
             'Email': o.Email,
+            'AccessLevelID': o.AccessLevelID,
         }
     }
 

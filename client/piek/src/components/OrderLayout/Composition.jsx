@@ -1,4 +1,4 @@
-import { useReducer, useEffect } from 'react'
+import { useReducer, useEffect, useState } from 'react'
 
 //apollo 
 import { useMutation } from "@apollo/client"
@@ -7,27 +7,12 @@ DELETE_ORDER_ITEM,
 INSERT_ORDER_ITEM, 
 UPDATE_ORDER_ITEM, 
 UPDATE_ORDER_ITEM_METADATA 
-} from "./queries/MutationOrderItem"
+} from "./queries/MutationOrderItem";
 
 // ui 
-import { TextField, Button } from '@material-ui/core'
-import { withStyles } from '@material-ui/core/styles';
-
+import { Button, TextField, Box, Typography, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import sass from './sass/composition.module.sass'
-
 import OrderItemActions from './OrderItemActions'
-
-
-const Input = withStyles({
-  root: {
-  }
-})((props) => 
-  <TextField 
-    size='small' 
-    autoComplete='off'
-    InputProps={{ disableUnderline: true }}
-    {...props} 
-  />);
 
 const initialState = {
     name: '',
@@ -59,7 +44,8 @@ function reducer(state, action){
 
 }
 
-const OrderComposition = ({ data, editState, refetch, orderID }) => {
+const OrderComposition = props => {
+    const { data, editState, refetch, orderID, OIDialog, setOIDialog } = props
     const [ deleteOrderItemMutation ]         = useMutation(DELETE_ORDER_ITEM)
     const [ insertOrderItemMutation ]         = useMutation(INSERT_ORDER_ITEM);
     const [ updateOrderItemMutation ]         = useMutation(UPDATE_ORDER_ITEM);
@@ -72,9 +58,11 @@ const OrderComposition = ({ data, editState, refetch, orderID }) => {
     }
     const editItemHandler = (e, item) => {
         dispatch({ type: 'editItem', payload: [item.OrderItemID, item.Name, item.FullName, item.Quantity] })
-
-        // deleteItem(item.OrderItemID)
     }
+
+    const closeOIDialog = () => {
+      setOIDialog(false);
+    };
 
     useEffect(() => {
         if (!editState && state.name !== '' && state.quantity !== ''){
@@ -84,8 +72,8 @@ const OrderComposition = ({ data, editState, refetch, orderID }) => {
     }, [editState]);
 
     const insertOrderItem = () => {
+        closeOIDialog();
         if (state.quantity === '' || state.name === '') return null
-
         insertOrderItemMutation({variables: { 
             orderID,
             name: state.name, 
@@ -99,68 +87,77 @@ const OrderComposition = ({ data, editState, refetch, orderID }) => {
 
     const updateOrderItem = () => {
       if (state.quantity === '' || state.name === '') return null
+      closeOIDialog();
       updateOrderItemMutation({variables: { 
-          OrderItemID: state.id,
-          Name: state.name, 
-          Quantity: parseInt(state.quantity),
-          FullName: state.fullName, }}).then( () => { dispatch({ type: 'reset'}); refetch() })    
+        OrderItemID: state.id,
+        Name: state.name, 
+        Quantity: parseInt(state.quantity),
+        FullName: state.fullName, }}).then( () => { dispatch({ type: 'reset'}); refetch() })    
   }
   
-    const addItemForm = () => {
-      if (!editState) return null
-      return(
-        <div className={sass.addOrderItem}>
-            <Input
-                label="Наименование"
-                value={state.name}
-                onChange={ (e) => dispatch({ type: 'name', payload: e.target.value }) }
-              />
-           <Input
-                label="Полное наименование"
-                multiline
-                className={sass.fullNameInput}
-                value={state.fullName}
-                onChange= { (e) => dispatch({ type: 'fullName', payload: e.target.value }) }
-                />
-            <Input
-                label="Кол-во"
-                type="number"
-                className={sass.quantityInput}
-                value={state.quantity}
-                onChange={ (e) => dispatch({ type: 'quantity', payload: e.target.value }) }
-               />
-
-              {!state.id 
-              ? <Button className={sass.pushOrderItemButton} onClick={insertOrderItem}>Добавить</Button> 
-              : <Button className={sass.pushOrderItemButton} onClick={updateOrderItem}>Изменить</Button> }
-        </div>
-        )
-      }
-
     return(<>     
         {data.map( (el, index) => 
-        
         <div
           key={el.OrderItemID}
           className={sass.Unit} 
         >
               <span className={sass.index}>{index+1}</span>
-              <div className={sass.name}> {el.Name} </div>
+              <Typography color='textPrimary' className={sass.name}> {el.Name} </Typography>
               <span  className={sass.quantity}> {el.Quantity}</span>
-              <OrderItemActions 
-                  editState={editState} 
+              <OrderItemActions
+                  {...props}
                   item={el}
                   editItemHandler={editItemHandler}
                   deleteItemHandler={deleteItemHandler}
                   updateItem={updateOrderItemMetadataMutation}
               />
 
-              <div  className={sass.fullName}> { el.FullName }</div>
+              <div className={sass.fullName}> { el.FullName }</div>
 
         </div>
         )}
         
-      {addItemForm()}
+      <Dialog maxWidth='md' fullWidth={true} open={OIDialog} onClose={closeOIDialog}>
+        <DialogTitle>Добавить позицию</DialogTitle>
+        <DialogContent>
+        <Box className={sass.addOrderItem}>
+          <TextField
+            label="Наименование"
+            value={state.name}
+            variant='filled'
+            sx={{mb: '8px'}}
+            onChange={ (e) => dispatch({ type: 'name', payload: e.target.value }) }
+            />
+        <TextField
+            label="Полное наименование"
+            multiline
+            variant='filled'
+            sx={{mb: '8px'}}
+            className={sass.fullNameInput}
+            value={state.fullName}
+            onChange= { (e) => dispatch({ type: 'fullName', payload: e.target.value }) }
+            />
+        <TextField
+            label="Кол-во"
+            type="number"
+            variant='filled'
+            sx={{mb: '8px'}}
+            className={sass.quantityInput}
+            value={state.quantity}
+            onChange={ (e) => dispatch({ type: 'quantity', payload: e.target.value }) }
+            />
+        </Box>
+        </DialogContent>
+        <DialogActions sx={{ justifyContent: 'start'}} >
+            {state.name && state.quantity && (!state.id 
+            ? <Box><Button variant='contained' onClick={insertOrderItem}>Добавить</Button> </Box>
+            : <Box><Button variant='contained' onClick={updateOrderItem}>Изменить</Button></Box> )}
+              <Box  ><Button onClick={() => {
+                  closeOIDialog();
+                  dispatch({type: 'reset'});
+              }}>Закрыть</Button></Box>
+        </DialogActions>
+      </Dialog>
     </>)
 }
 

@@ -1,6 +1,6 @@
 html
     background: var(--L0) !important
-    color: var(--highContrast)
+    color: var(--lowContrast)
     @media (max-width: 1000px)
         font-size: .9rem
     
@@ -19,7 +19,15 @@ input::-webkit-inner-spin-button
 input[type=number] 
   -moz-appearance: textfield
 
-
+[contenteditable]
+  outline: 0px solid transparent
+[contentEditable=true]:empty:not(:focus):before
+  content: attr(data-ph)
+  color: var(--lowContrast)
+  font-size: .9rem
+  opacity: .5
+  font-weight: 500
+  
 @media print
    .noprint
         display: none !important
@@ -94,3 +102,15 @@ input[type=number]
     &:hover  
         svg 
             color: var(--accent)
+
+.MuiDialog-paper
+  background: var(--L0) !important
+
+// .MuiDialogTitle-root
+//   color: var(--highContrast) !important
+
+// .MuiButton-root
+//   text-transform: none !important
+//   color: var(--highContrast) !important
+//   border-color: var(--border) !important
+//   box-shadow: none !important

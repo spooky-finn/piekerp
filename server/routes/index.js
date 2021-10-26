@@ -5,7 +5,7 @@ const userController = require('../controllers/user-controller');
 const { body } = require('express-validator');
 const authMiddleware = require('../middlewares/auth-middleware');
 
-const  { upload, download, deleteObject }  = require('../S3/s3');
+const  { upload, download, deleteObject, getBackup }  = require('../S3/s3');
 
 
 router.post('/login', body('email').isEmail(), userController.login);
@@ -24,5 +24,10 @@ router.get('/s3/delete/:key', (req, res) => {
   deleteObject(req.params.key);
   res.send()
 })
+
+router.get('/s3/get-backup/:key', (req, res) => {
+  getBackup(req.params.key, res)
+})
+
 
 module.exports = router;
