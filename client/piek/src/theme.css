@@ -2,7 +2,7 @@
 
 html{
     --L0: #f7f7fa;
-    --L1: #f0f0f5;
+    --L1: #f0f0f5be;
     --L2: #c7c7d85d;
     
     --highContrast: rgba(0, 0, 0, 0.87);
@@ -28,7 +28,7 @@ html{
     
 html.dark {
     --L0: #1e1e1e;
-    --L1: rgba(200, 200, 255, 0.05);
+    --L1: #262629;   /* rgba(200, 200, 255, 0.05) */
     --L2: rgba(200, 200, 255, .07);
 
     --highContrast: rgba(233, 233, 233);
