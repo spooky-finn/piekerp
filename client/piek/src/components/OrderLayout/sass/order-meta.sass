@@ -4,6 +4,9 @@
   border: 1px solid var(--border)
   border-radius: var(--br)
   padding: 15px 
+  &:hover
+    .secondaryHeading
+      opacity: 1
   .row
     display: flex !important
     justify-content: space-between
@@ -15,6 +18,8 @@
   .secondaryHeading
     font-size: .9rem
     color: var(--lowContrast)
+    transition: opacity 200ms ease
+    opacity: 0
   table tr
     line-height: 1.5
     font-size: .9rem
@@ -39,22 +44,13 @@
       height: fit-content !important
       position: relative
       .bold
-        font-size: 1.1rem
+        font-size: 1.2rem
         font-weight: 700
-      div:hover
-        pre
-          opacity: 1
       .significantInfo
         display: grid
         grid-template-columns: 1fr 1fr 
         grid-template-rows: 40px auto
         grid-gap: 20px 10px
-
-      pre
-        font: 400 12px sans-serif
-        color: var(--lowContrast)
-        margin: 0
-        user-select: none
       .OrderComment
         grid-column: 1 / -1
         color: var(--highContrast)

@@ -14,7 +14,6 @@ import { UilSun, UilMoon, UilDesktop, UilSetting } from '@iconscout/react-unicon
 import {
   ToggleButton,
   ToggleButtonGroup,
-  Divider
 } from '@mui/material/';
 
 import sass from './index.module.sass'
@@ -50,15 +49,15 @@ export default function SettingsDrawer() {
   const {store} = useContext(Context);
   const [state, setState] = useState(false);
   const history = useHistory()
-  const [theme, changeTheme] = SystemPreferTheme()
+  const {changeTheme} = SystemPreferTheme(store.UItheme.state, store.UItheme.dispatch)
 
   async function logout(){
     await store.logout(); 
     history.push('/login')
   }
 
-  const themeHandler = (event, newTheme) => {
-    changeTheme(newTheme);
+  const themeHandler = (e, newTheme) => {
+    changeTheme(newTheme)
   };
 
   const toggleDrawer = (open) => (event) => {

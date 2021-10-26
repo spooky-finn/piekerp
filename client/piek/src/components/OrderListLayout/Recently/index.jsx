@@ -1,14 +1,11 @@
 import {  useMemo } from 'react';
-
 import Table from '../UniversalTable/TableMarkup'
-
-import Search from '../Search'
 import { filter } from '../Search/filter'
 
 import { columnsList } from '../UniversalTable/columnList';
 import { spread } from './spreadOrders';
 
-import mainsass from '../main.module.sass'
+import { Typography } from '@mui/material'
 import sass from './recently.module.sass'
 
 const Recently = ({ state, dispatch }) => {
@@ -25,14 +22,18 @@ const Recently = ({ state, dispatch }) => {
 
     return(
         <div>
-            <div className={sass.heading}>Сегодня</div>
+            <Typography color='textSecondary' variant="subtitle1" m='10px 0'>
+                Сегодня
+            </Typography>
             { spreadData[0].objs.length ? ( <>
            
             <Table columns={columns} data={spreadData[0].objs} className={sass.recentlyTable} />
             </>): null}
 
 
-            <div className={sass.heading}>Вчера</div>
+            <Typography color='textSecondary' variant="subtitle1" m='10px 0'>
+                Вчера
+            </Typography>
             { spreadData[1].objs.length ? ( <>
           
             <Table columns={columns} data={spreadData[1].objs} className={sass.recentlyTable} />

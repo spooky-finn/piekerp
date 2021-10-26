@@ -1,6 +1,4 @@
 import { useEffect } from 'react';
-import {TextField} from '@material-ui/core';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import './EditableInfo.sass'
 
 import { useMutation } from '@apollo/client';
@@ -10,6 +8,7 @@ import { INSERT_PAYMENT } from '../queries/MutationPaymentHistory'
 import NumberFormat from 'react-number-format';
 import moment  from 'moment'
 
+import { TextField, Autocomplete } from '@mui/material';
 let fields = {}
 
 function DateFormatCustom(props) {
@@ -31,7 +30,6 @@ function DateFormatCustom(props) {
   );
 }
 
-console.log(fields)
 function MoneyFormatCustom(props) {
   const { inputRef, onChange, ...other } = props;
 
@@ -88,7 +86,7 @@ const EditableInfo = ({ data, orderID, refetch, users }) => {
     }
 
   return(
-    <form className="Info EditableInfo">  
+    <form className="EditableInfo">  
       <div className="wrap">
        <TextField
           label="План. отгрузка"
@@ -101,14 +99,13 @@ const EditableInfo = ({ data, orderID, refetch, users }) => {
           placeholder="dd.mm.yy"
           autoComplete="off"
           InputProps={{
-            inputComponent: DateFormatCustom
+            inputComponent: DateFormatCustom,
           }}
         />
 
         <TextField
           label="Номер счета"
           type="number"
-
           name='InvoiceNumber'
           defaultValue={data.InvoiceNumber}
           onChange={addField}
@@ -155,7 +152,7 @@ const EditableInfo = ({ data, orderID, refetch, users }) => {
           autoComplete="off"
           onChange={addField}
           InputProps={{
-            inputComponent: MoneyFormatCustom
+            inputComponent: MoneyFormatCustom,
           }}
           />
         
@@ -166,7 +163,7 @@ const EditableInfo = ({ data, orderID, refetch, users }) => {
           autoComplete="off"
           onChange={addField}
           InputProps={{
-            inputComponent: MoneyFormatCustom
+            inputComponent: MoneyFormatCustom,
           }}
         />
 

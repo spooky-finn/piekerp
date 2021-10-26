@@ -13,40 +13,32 @@
   
 .preorderTitle
     color: var(--accent)
-    
-.MuiPaper-root
-    background: var(--L0) !important
-    input
-        color: var(--highContrast) !important
-    .MuiTypography-root
-        color: var(--lowContrast) 
-        span
-            font-weight: 500 
-            color: var(--highContrast) !important
-
-    .dialog-danger-btn
-        text-transform: initial !important
-
-        span
-            color: var(--danger)
         
 .OrderLayout
   --window-padding: 0px
   position: relative
   min-height: 100vh
   border-left: 1px solid var(--border)
-  // border-radius: var(--br)
   outline: none !important  
-  // background: var(--L0)
   position: relative
   display: grid
   grid-template-columns: 2fr auto
+  .orderActions_box
+    margin-left: auto
+    background: var(--L0)
+    border-radius: var(--br10)
+    border: 1px solid var(--border)
+    button
+      border-radius: 0
+    button:not(:last-of-type)
+      border-right: 1px solid var(--border)
+
   .page-header
     grid-column-start: 1
     grid-column-end: 3
     border-bottom: 1px solid var(--border)
-    padding: 2px 15px
-
+    padding: 2px 20px
+    background: var(--L1)
   .Info
     grid-column-start: 3
     overflow-y: auto
@@ -72,40 +64,7 @@
   .Composition
     grid-column-start: 1
     grid-column-end: -1
-  .CheckList, .Docs
+  .Docs
     min-height: 100px
     grid-column-start: 2
     grid-column-end: -1
-      
-.CheckList
-  .CheckListUnit
-    position: relative
-    padding:  .4em 2em
-    width: fit-content
-    &:hover
-      background: var(--borderLight)
-      border-radius: 5px
-    &::after
-      content: ''
-      top: 50%
-      transform: translateY(-50%)
-      left: 10px
-      position: absolute
-      width: 8px 
-      height: 8px
-      border-radius: 100%
-      opacity: .6
-      border: 1px solid var(--accent)
-  .CheckListUnit.complited
-      text-decoration: line-through 
-      color: var(--lowContrast)
-      &::after
-          background: var(--accent)
-            
-
-
-
-
-
-        
-            

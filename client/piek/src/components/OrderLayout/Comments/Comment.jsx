@@ -1,14 +1,13 @@
 import sass from './index.module.sass'
 import moment from 'moment'
-import { TextField } from '@mui/material/';
 
 const Comment = (props) => {
   const { data, userID, updateComment, deleteComment, nowEditing, setNowEditing } = props
 
   function sender(){
-    if (userID === data.User.UserID) return 'Вы'
-    else return `${data.User.FirstName} ${data.User.LastName}`
+    return `${data.User.FirstName} ${data.User.LastName}`
   }
+  
   function actions(){
     if (userID === data.User.UserID && nowEditing?.CommentID !== data.CommentID ) return (
         <div onClick={()=> deleteComment(data.CommentID)}>Удалить</div>
