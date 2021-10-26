@@ -34,15 +34,17 @@ const StyledTabs = styled((props) => <Tabs {...props} />)(
 const StyledTab = styled((props) => <Tab {...props} />)(
     ({ theme }) => ({
       textTransform: 'none',
-      fontWeight: 500,
+      fontWeight: 400,
       color: theme.palette.text.secondary,
       fontSize: theme.typography.pxToRem(15),
       marginRight: theme.spacing(1),
       borderBottomRightRadius: '8px',
       borderBottomLeftRadius: '8px',
+      border: '1px solid transparent',
       '&.Mui-selected': {
-        backgroundColor: theme.palette.primary.light,
-        color: theme.palette.primary
+        backgroundColor: 'var(--L1)',
+        color: theme.palette.primary,
+        border: '1px solid var(--borderLight)'
       }
     }),
   );

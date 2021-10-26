@@ -7,7 +7,7 @@ const СommandsPopover = props => {
   const {anchorEl, open, handleClose, inputRef} = props
 
   function insertTodoinDOM (){
-    const s = <div className={sass.checklistUnit}>что</div>
+    const s = <div className={sass.checklistUnit}> </div>
     ReactDOM.render(s, inputRef.current)
   }
   return (

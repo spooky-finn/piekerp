@@ -5,7 +5,7 @@ import { Button, Menu, MenuItem, TextField } from '@mui/material';
 import { UilEllipsisV } from '@iconscout/react-unicons'
 import sass from './index.module.sass'
   
-const OrderItemActions = ({ editState, item, editItemHandler, deleteItemHandler, updateItem }) => {
+const OrderItemActions = ({ editState, item, editItemHandler, deleteItemHandler, updateItem, setOIDialog }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [state, setState] = useState({
     'serialNumber': item.SerialNumber,
@@ -74,9 +74,10 @@ const OrderItemActions = ({ editState, item, editItemHandler, deleteItemHandler,
       {editState && (
         <div className={sass.actionsWrapper}>
           <MenuItem onClick={ (e) => {
+              setOIDialog(true)
               handleClose();
               editItemHandler(e, item);
-          }}>Изменить</MenuItem>
+          }}>Редактировать</MenuItem>
 
           <MenuItem 
             className={sass.deleteButton}

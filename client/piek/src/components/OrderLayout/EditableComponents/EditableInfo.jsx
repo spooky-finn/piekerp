@@ -86,7 +86,7 @@ const EditableInfo = ({ data, orderID, refetch, users }) => {
     }
 
   return(
-    <form className="Info EditableInfo">  
+    <form className="EditableInfo">  
       <div className="wrap">
        <TextField
           label="План. отгрузка"

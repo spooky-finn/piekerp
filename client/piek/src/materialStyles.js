@@ -1,3 +1,5 @@
+import { palette } from "@mui/system";
+
 export const muicomponents = (theme) => ({
   components: {
     MuiDialog: {
@@ -34,6 +36,18 @@ export const muicomponents = (theme) => ({
         textInfo: {
           color: 'var(--lowContrast) !important',
         },
+        iconbutton: {
+          minWidth: '40px',
+          padding: '5px',
+          'path': {
+            color: theme.palette.text.primary,
+            strokeWidth: .8,
+            stroke: 'var(--L0)'
+          },
+          '&:hover': {
+            background: 'var(--accentLight)',
+          }
+        }
       },
       defaultProps: {
         disableElevation: true,

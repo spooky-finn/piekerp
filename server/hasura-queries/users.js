@@ -17,9 +17,7 @@ class HasuraQuery {
                   LastName
                   Email
                   Password
-                  AccessLevel {
-                    Name
-                  }
+                  AccessLevelID
                 }
                }`
         })
@@ -51,6 +49,7 @@ async getTokens() {
                 FirstName
                 LastName
                 Email
+                AccessLevelID
               }
             }
              }`

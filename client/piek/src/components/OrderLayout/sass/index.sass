@@ -23,6 +23,16 @@
   position: relative
   display: grid
   grid-template-columns: 2fr auto
+  .orderActions_box
+    margin-left: auto
+    background: var(--L0)
+    border-radius: var(--br10)
+    border: 1px solid var(--border)
+    button
+      border-radius: 0
+    button:not(:last-of-type)
+      border-right: 1px solid var(--border)
+
   .page-header
     grid-column-start: 1
     grid-column-end: 3
@@ -58,9 +68,3 @@
     min-height: 100px
     grid-column-start: 2
     grid-column-end: -1
-      
-
-
-
-        
-            
