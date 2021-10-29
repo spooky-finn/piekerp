@@ -13,11 +13,13 @@ const s3 = new AWS.S3({
 });
 
 const uploadFile = (fileName) => {
-  fs.readFile(fileName, (err, data) => {
+  fs.readFile(fileName, {encoding: 'utf-8'}, (err, data) => {
      if (err) throw err;
+     console.log(data);
      const params = {
          Bucket: process.env.S3_BUCKET,
          Key: 'pg-backup ' + new Date().toISOString(),
+	 ContentType: "text/plain;charset=utf-8",
          Body: JSON.stringify(data, null, 2)
      };
      s3.upload(params, function(s3Err, data) {
@@ -61,4 +63,4 @@ function intervalFunc() {
   })
 }
 
-setInterval(intervalFunc, 1000*60*60*3)
+setInterval(intervalFunc, 1000*60*60)
