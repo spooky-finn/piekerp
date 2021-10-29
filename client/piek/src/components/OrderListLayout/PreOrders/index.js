@@ -9,9 +9,10 @@ import { MUTATE_ORDER_STATUS } from "./MutationOrderStatus";
 import { useMutation } from '@apollo/client';
 
 //UI
-import { UilArrowFromRight} from '@iconscout/react-unicons';
+import { UilFileCheck} from '@iconscout/react-unicons';
 import sass from './preorders.module.sass'
 import mainsass from '../main.module.sass'
+import { Button } from '@mui/material';
 
 const PreOrders = ({ state, dispatch }) => {
     const data = state.preOrders
@@ -31,9 +32,9 @@ const PreOrders = ({ state, dispatch }) => {
     const filtredData = filter(data, state.searchKeyword)
     
     newColumnList.push({
-        Header: ' ',
+        Header: 'Принять',
         accessor: data => 
-        <div onClick={() => onClickTransfer(data)} className="square-button"><UilArrowFromRight/></div>
+        <Button onClick={() => onClickTransfer(data)} variant='iconic'><UilFileCheck/></Button>
         ,
       })
    

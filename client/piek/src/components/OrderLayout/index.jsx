@@ -1,4 +1,4 @@
-import { useContext, useCallback, useState } from "react";
+import { useContext, useCallback, useState, useRef } from "react";
 import { Context } from "../..";
 import {useDropzone} from 'react-dropzone'
 import { useParams, useLocation } from "react-router-dom"
@@ -20,8 +20,8 @@ import { isFileOnDropzone } from "./Dropzone";
 //ui
 import './sass/index.sass';
 import { Typography, Button, Box } from '@mui/material'
-import { UilPlus, UilEditAlt } from '@iconscout/react-unicons';
-
+import { UilPlus, UilEditAlt, UilEllipsisH } from '@iconscout/react-unicons';
+import OrderActionsMenu from "./OrderActions/OrderActionsMenu";
 
 function orderStatus(data){
     // add a note to the title if this is a pre-order
@@ -37,6 +37,11 @@ const OrderLayout = (props) => {
     const [editState, setEditState] = useState(editStateQueryArg)
     // Add new Order Item Dialog
     const [OIDialog, setOIDialog] = useState(false)
+
+    //OrderActions Dropdown menu
+    const [OAMenu, setOAMenu] = useState(false);
+    const OAMenuRef = useRef(null);
+
     const [pushDocs] = useMutation(PUSH_DOCS_ARRAY);
     const orderID = useParams().id
 
@@ -78,54 +83,72 @@ const OrderLayout = (props) => {
         { data.erp_Orders ? (<>
         <section className='OrderLayout' {...getRootProps()} id='dropzone'>
 
-                <div className='LeftSideContent'>
+          <div className='LeftSideContent'>
 
-                    <div className="page-header">
-                        <Typography sx={{ fontWeight: 600, fontSize: '1rem'}}>
-                            {data.erp_Orders[0].Entity} __ {data.erp_Orders[0].City} 
-                            <span className="preorderTitle">{orderStatus(data.erp_Orders[0])}</span>
-                        </Typography>
+              <div className="page-header">
+                <Typography sx={{ fontWeight: 600, fontSize: '1rem'}}>
+                    {data.erp_Orders[0].Entity} __ {data.erp_Orders[0].City} 
+                    <span className="preorderTitle">{orderStatus(data.erp_Orders[0])}</span>
+                </Typography>
 
-                       {showOrderActions() && <Box className='orderActions_box'>
-                         {editState && 
-                          <Button variant="iconbutton" onClick={() => setOIDialog(true)}>
-                            <UilPlus/>
-                          </Button>}
-                          <Button variant="iconbutton" onClick={() => setEditState(!editState)}>
-                              <UilEditAlt/>
-                          </Button>
-                        </Box>}
-                    </div>
+                {showOrderActions() && <Box className='orderActions_box'>
+                  {editState && 
+                  <Button variant="iconic" onClick={() => setOIDialog(true)}>
+                    <UilPlus/>
+                  </Button>}
+                  <Button variant="iconic" onClick={() => setEditState(!editState)}>
+                      <UilEditAlt/>
+                  </Button>
+                  <Button aria-haspopup="true" ref={OAMenuRef} variant="iconic" onClick={() => setOAMenu(true)}>
+                      <UilEllipsisH/>
+                  </Button>
+                </Box>}
+              </div>
 
-                    <div className="Composition">  
-                      <Composition 
-                          data={data.erp_Orders[0].OrderItems} 
-                          editState={editState}
-                          refetch={refetch}
-                          OIDialog={OIDialog}
-                          setOIDialog={setOIDialog}
-                          orderID= {orderID} /> 
-                    </div>
+              <div className="Composition">  
+                <Composition 
+                  data={data.erp_Orders[0].OrderItems} 
+                  editState={editState}
+                  refetch={refetch}
+                  OIDialog={OIDialog}
+                  setOIDialog={setOIDialog}
+                  orderID= {orderID} /> 
+              </div>
 
-                    <CommentsList 
-                    orderID={orderID} 
-                    user={store.user} 
-                    data={data.erp_Orders[0].Comments}/> 
+              <CommentsList 
+              orderID={orderID} 
+              user={store.user} 
+              data={data.erp_Orders[0].Comments}/> 
 
-                    <Docs data={data.erp_Orders[0].Docs} 
-                    onUpload={onUploadFiles} 
-                    editState = {editState} 
-                    refetch={refetch} />
-                     
-                </div>
-                <div className="Info">
-                  {editState? <EditableInfo data={data.erp_Orders[0]} orderID={orderID} refetch={refetch} users={users.erp_Users} /> : (
-                              <Info data={data.erp_Orders[0]} editState = {editState} orderID={orderID} />)}
-                </div>
+              <Docs data={data.erp_Orders[0].Docs} 
+              onUpload={onUploadFiles} 
+              editState = {editState} 
+              refetch={refetch} />
+          </div>
+
+          <div className="Info">
+            {editState? <EditableInfo 
+            data={data.erp_Orders[0]} 
+            orderID={orderID} refetch={refetch} 
+            users={users.erp_Users} /> : (
+
+            <Info data={data.erp_Orders[0]} 
+            editState = {editState} 
+            orderID={orderID} 
+            />
+            )}
+          </div>
+
+          <OrderActionsMenu
+          refetch={refetch}
+          order={data.erp_Orders[0]}
+          OAMenu={OAMenu} 
+          setOAMenu={setOAMenu}
+          OAMenuRef={OAMenuRef}
+          />
+
         </section> 
-
         </>): null }
-
     </div>
     )
 }

@@ -60,7 +60,7 @@ const EditableInfo = ({ data, orderID, refetch, users }) => {
     function saveChanges(){
       console.log('doing mutation for order', orderID, fields)
       updateOrderInfo({variables: {
-        orderID,
+        OrderID: orderID,
         fields,
       }})
 
@@ -97,7 +97,6 @@ const EditableInfo = ({ data, orderID, refetch, users }) => {
             addField(e)
           }}
           placeholder="dd.mm.yy"
-          autoComplete="off"
           InputProps={{
             inputComponent: DateFormatCustom,
           }}
@@ -131,7 +130,6 @@ const EditableInfo = ({ data, orderID, refetch, users }) => {
 
          <TextField
           label="Юр лицо"
-          autoComplete="off"
           name='Entity'
           defaultValue={data.Entity}
           onChange={addField}
@@ -139,7 +137,6 @@ const EditableInfo = ({ data, orderID, refetch, users }) => {
         
         <TextField
           label="Город"
-          autoComplete="off"
           name='City'
           defaultValue={data.City}
           onChange={addField}
@@ -149,7 +146,6 @@ const EditableInfo = ({ data, orderID, refetch, users }) => {
           label="Сумма заказа"
           name='TotalAmount'
           defaultValue={data.TotalAmount}
-          autoComplete="off"
           onChange={addField}
           InputProps={{
             inputComponent: MoneyFormatCustom,
@@ -160,7 +156,6 @@ const EditableInfo = ({ data, orderID, refetch, users }) => {
           label="Оплачено"
           name='PaidAmount'
           defaultValue={data.PaidAmount}
-          autoComplete="off"
           onChange={addField}
           InputProps={{
             inputComponent: MoneyFormatCustom,
@@ -170,7 +165,6 @@ const EditableInfo = ({ data, orderID, refetch, users }) => {
         <TextField
           label="Комментарий"
           multiline
-          autoComplete="off"
           name='Comment'
           defaultValue={data.Comment}
           onChange={addField}
