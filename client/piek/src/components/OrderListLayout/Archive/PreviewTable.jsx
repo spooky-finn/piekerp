@@ -7,12 +7,20 @@ import { GET_ARCHIVED_UNPAID_ORDERS } from './queries/getArchivedUnpaidOrders'
 import Table from './TableMarkup'
 import sass from './archive.module.sass'
 import { Typography } from '@mui/material/';
-
+import moment from 'moment'
 
 const PreviewTable = (props) => {
   const { state, dispatch, columns } = props
 
-  const { data : latestOrders = [], loading: latestOrdersloading } = useQuery(GET_ARCHIVED_LATEST_ORDERS, {variables:{ limit: 10 }});
+  var archiveColumns = [...columns]
+  archiveColumns[3] = {
+    Header: 'Факт отгрузка',
+    accessor: order => 
+    <> { order.ActualShippingDate && moment(order.ActualShippingDate).format('DD.MM.YY') }
+    </>
+  }
+
+  const { data : latestOrders = [], loading: latestOrdersloading } = useQuery(GET_ARCHIVED_LATEST_ORDERS, {variables:{ limit: 12 }});
 
   const { loading } = useQuery(GET_ALL_ORDERS_AMOUNT, { onCompleted: (res) => {
     dispatch({ type: 'unpaidIDs', payload: res.erp_Orders.filter(e => e.PaidAmount / e.TotalAmount < .999).map(e => e.OrderID)})
@@ -43,7 +51,7 @@ const PreviewTable = (props) => {
       Недавно отгруженные
     </Typography>
 
-      <Table columns = {columns} data = {previewData()} className={sass.archiveTable}/>
+      <Table columns = {archiveColumns} data = {previewData()} className={sass.archiveTable}/>
   </>)
 }
 export default PreviewTable

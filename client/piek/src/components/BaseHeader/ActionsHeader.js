@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client';
-import { INSERT_ORDER } from './MutationInsertOrder'
+import { INSERT_ORDER } from '../OrderListLayout/queries/MutationInsertOrder'
 
 import { UilPlus, UilEditAlt} from '@iconscout/react-unicons';
 

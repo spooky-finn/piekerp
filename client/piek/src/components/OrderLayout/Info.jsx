@@ -2,7 +2,6 @@ import  moment  from 'moment'
 import "./sass/order-meta.sass";
 import { Typography, Box } from '@mui/material/';
 
-import Shipment from "./Shipment/Shipment";
 import { styled } from '@mui/material/styles';
 
 const OrderInfoCard = (props) => {
@@ -40,7 +39,7 @@ const OrderMeta = (props) => {
     }
    
     const paidVisualization = () => {
-      if (data.PaymentHistories.length == 0) return null
+      if (data.PaymentHistories.length == 0 || !data.PaidAmount || !data.TotalAmount) return null
 
       return (
         <OrderInfoCard className='noprint' heading="Платежи" secondaryHeading={`${data.TotalAmount} ₽`}>
@@ -118,9 +117,6 @@ const OrderMeta = (props) => {
 
         {aboutOrder()}
         {paidVisualization()}
-      </div>
-      <div className="actions noprint">
-        <Shipment {...props} />
       </div>
   </>)
 }

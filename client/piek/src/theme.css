@@ -22,6 +22,7 @@ html{
     --br: 15px;
 
     --awaitingDispatch: rgb(205, 243, 170);
+    --needAttention: #fa4d4d;
 }
 
 
@@ -42,4 +43,5 @@ html.dark {
     --borderLight: rgba(255,255,255,.05);
 
     --awaitingDispatch: #32472b;
+    --needAttention: #940404;
     }

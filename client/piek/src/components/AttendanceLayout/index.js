@@ -13,9 +13,7 @@ import { getVarsForSubscription } from './functions'
 
 import './index.sass'
 import ReportConfigurator from './ReportConfigurator'
-import BaseHeader from '../BaseHeader'
-import { UilSearch } from '@iconscout/react-unicons'
-
+import { UilSearch, UilConstructor } from '@iconscout/react-unicons'
 import sass from './attendance.module.sass'
 
 var attendanceData = null;
@@ -81,7 +79,10 @@ const Attendance = props => {
 
     return(
     <div className={sass.attendanceLayout}>
-            <BaseHeader pageParams = { store.getPageParams(window.location.pathname) } search={onChangeSearch} /> 
+            <div className="pageLayout__header">
+                <UilConstructor className='pageLayout__icon'/>
+                <div className='pageLayout__title'>Рабочее время</div>                    
+            </div> 
             <ReportConfigurator state={state} dispatch={dispatch} />
 
         <div className={sass.tableWrapper}>

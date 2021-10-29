@@ -1,6 +1,12 @@
 import { useTable } from 'react-table'
 import mainsass from '../main.module.sass'
 
+function statusHighlighting(order){
+  // Выделение заказов требующих внимания имеют приоритет
+  if (order.NeedAttention) return mainsass.needAttention
+  else if (order.AwaitingDispatch) return mainsass.awaitingDispatch
+  else return ''
+}
 export default function Table({columns, data, className }){
     const {
         getTableProps,
@@ -29,9 +35,8 @@ export default function Table({columns, data, className }){
       <tbody {...getTableBodyProps()}>
         {rows.map((row, i) => {
           prepareRow(row)
-          const awaitingDispatch = row.original.AwaitingDispatch
           return (
-               <tr className={awaitingDispatch ? mainsass.awaitingDispatch : ''} {...row.getRowProps()}>
+               <tr className={statusHighlighting(row.original)} {...row.getRowProps()}>
               {row.cells.map((cell, i) => {
                 return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
               })}

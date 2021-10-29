@@ -17,6 +17,7 @@ query MyQuery($OrderID: Int!) {
     Comment
     Entity
     InvoiceNumber
+    NeedAttention
     OrderNumber
     PaidAmount
     TotalAmount

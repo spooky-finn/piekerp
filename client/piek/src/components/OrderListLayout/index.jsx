@@ -6,20 +6,21 @@ import { reducer, initialState } from './reducer';
 import PropTypes from 'prop-types';
 
 // apollo
-import { useSubscription, useQuery } from '@apollo/client'
+import { useSubscription, useQuery, useMutation } from '@apollo/client'
 import { GetOrdersSubscription } from './queries/getOrders'
 import { GET_USERS } from '../../hasura-queries/getUsers'
+import { INSERT_ORDER } from './queries/MutationInsertOrder';
 
 // ui 
-import {Tabs, Tab, Box} from '@mui/material';
+import {Tabs, Tab, Box, Button} from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { UilPlus} from '@iconscout/react-unicons';
 
 import mainsass from './main.module.sass'
 
 import PreOrders from './PreOrders';
 import Priority from './Priority';
 import Recently from './Recently/index.jsx';
-import ActionsHeader from '../BaseHeader/ActionsHeader'
 import Archive from './Archive/';
 
 const StyledTabs = styled((props) => <Tabs {...props} />)(
@@ -80,6 +81,12 @@ const OrderListLayout = (props) => {
     useSubscription(GetOrdersSubscription, { onSubscriptionData,  fetchPolicy: "cache-first", nextFetchPolicy: "cache-first" });
     const { data: users = []} = useQuery(GET_USERS);
 
+    const [ createNewOrder] = useMutation(INSERT_ORDER, {variables: {
+      'managerID':     store.user.UserID,
+      'orderStatusID': 1,
+      'isReclamation':  false,
+    }})
+
     const tabHandler = (event, newValue) => {
         dispatch({ type: 'selectedTab', payload: newValue })
         dispatch({ type: 'resetFilters'})
@@ -116,7 +123,13 @@ const OrderListLayout = (props) => {
         'aria-controls': `simple-tabpanel-${index}`,
         };
     }
-    
+  
+    const createOrderHandler = () => {
+        createNewOrder().then( (res) => {
+            history.push(`/orders/${res.data.insert_erp_Orders.returning[0].OrderID}?edit=true`)
+        })
+    }
+  
     return(
         <div className={mainsass.OrderListLayout}>
         <StyledTabs value={selectedTab} onChange={tabHandler} aria-label="simple tabs example" className='orderListLayoutTabs'>
@@ -124,7 +137,8 @@ const OrderListLayout = (props) => {
             <StyledTab label="Очередость" {...a11yProps(1)} />
             <StyledTab label="Недавние"   {...a11yProps(2)} />
             <StyledTab label='Архив'      {...a11yProps(3)} />
-            <ActionsHeader createOrder={1} userID={store.user.UserID} history={history}/>
+
+            <Button onClick={createOrderHandler} sx={{ marginLeft: 'auto' }} variant='iconic'><UilPlus/></Button>
         </StyledTabs>
 
 

@@ -19,6 +19,7 @@ subscription{
       PaidAmount
       TotalAmount
       AwaitingDispatch
+      NeedAttention
       CreatingDate
       ManagerID
       OrderStatus {

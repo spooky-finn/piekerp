@@ -5,6 +5,7 @@ export const muicomponents = (theme) => ({
     MuiDialog: {
       styleOverrides: {
         paper: {
+          background: 'var(--L0) !important',
           borderRadius: 'var(--br) !important',
         }
       }
@@ -20,11 +21,32 @@ export const muicomponents = (theme) => ({
     MuiMenuItem: {
       styleOverrides: {
         root: {
-          fontSize: '.8rem'
+          fontSize: '.8rem',
         }
       },
       defaultProps: {
         disableRipple: true
+      }
+    },
+    MuiListItemText: {
+      styleOverrides: {
+        primary: {
+          fontSize: '.8rem'
+        }
+      }
+    },
+    MuiListItemIcon: {
+      styleOverrides: {
+        root: {
+          minWidth: '25px !important',
+          'svg':{
+            width: '17px'
+          },
+          'path':{
+            strokeWidth: .8,
+            stroke: 'var(--L0)'
+          },
+        }
       }
     },
     MuiButton: {
@@ -36,7 +58,7 @@ export const muicomponents = (theme) => ({
         textInfo: {
           color: 'var(--lowContrast) !important',
         },
-        iconbutton: {
+        iconic: {
           minWidth: '40px',
           padding: '5px',
           'path': {
@@ -57,7 +79,8 @@ export const muicomponents = (theme) => ({
 
     MuiTextField: {
       defaultProps: {
-        variant: 'standard'
+        variant: 'standard',
+        autoComplete: 'off',
       }
     },
     MuiInputLabel: {
