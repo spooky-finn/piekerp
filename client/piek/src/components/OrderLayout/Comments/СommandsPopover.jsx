@@ -1,15 +1,16 @@
-import PropTypes from 'prop-types'
-import { Menu, MenuItem, Box } from '@mui/material/';
-import ReactDOM from 'react-dom';
+import { Menu, MenuItem } from '@mui/material/';
 import sass from './index.module.sass'
 
 const СommandsPopover = props => {
-  const {anchorEl, open, handleClose, inputRef} = props
+  const {anchorEl, open, handleClose} = props
 
   function insertTodoinDOM (){
-    const s = <div className={sass.checklistUnit}> </div>
-    ReactDOM.render(s, inputRef.current)
+    const root = document.getElementById('Comments__commandMenu__button')
+    const elem = document.createElement('div')
+    elem.classList.add(sass.checklistUnit)
+    root.appendChild(elem)
   }
+
   return (
     <Menu
         id="Comments__commandMenu"
@@ -33,10 +34,6 @@ const СommandsPopover = props => {
         <MenuItem onClick={handleClose} sx={{ color: 'var(--border)'}}>Упомянуть</MenuItem>
     </Menu>
   )
-}
-
-СommandsPopover.propTypes = {
-
 }
 
 export default СommandsPopover

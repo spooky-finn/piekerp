@@ -14,8 +14,10 @@ const CommentsList = (props) => {
   const [ insertOrderCommentMutation ] = useMutation(INSERT_ORDER_COMMENT);
   const [ updateOrderCommentMutation ] = useMutation(UPDATE_ORDER_COMMENT);
   const [ deleteOrderCommentMutation ] = useMutation(DELETE_ORDER_COMMENT);
-  var inputRef = useRef();
+
+  var   inputRef = useRef();
   const [nowEditing, setNowEditing] = useState();
+  
   const { data: comments = [], loading } = useSubscription(SUBSCRIBTION_ORDER_COMMENT, { variables: { OrderID: orderID }});
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -30,7 +32,8 @@ const CommentsList = (props) => {
       Text: text
       }
     })
-    inputRef.current.innerHTML = ''
+    inputRef.current.innerText = ''
+   
   }
 
   function updateComment(id, newText){
@@ -53,17 +56,16 @@ const CommentsList = (props) => {
   }
 
   function inputHandler(e){
-    if (e.target.innerText.trim() === '/') setAnchorEl(e.target)
+    if (e.target.innerText.trim() === '/'){
+      setAnchorEl(e.target)
+      e.target.innerHTML = ''
+    }
   }
   
   const handleClose = () => {
     setAnchorEl(null);
   };
   
-  function switchTodo(e) {
-    e.target.classList.toggle(sass.checklistUnit_complited)
-  }
-
   useEffect(() => {
     const els = [...document.querySelectorAll(`div.${sass.commentUnit} div.${sass.checklistUnit}`)]
     els.forEach( el => {
@@ -80,14 +82,16 @@ const CommentsList = (props) => {
     <div className={sass.commentsListWrapper}>
      <div className={sass.commentInputForm}>
       
-      <СommandsPopover anchorEl={anchorEl} open={open} handleClose={handleClose} inputRef={inputRef}/>
+      <СommandsPopover anchorEl={anchorEl} open={open} handleClose={handleClose}/>
 
-      <Box id="Comments__commandMenu__button inputField"
+      <Box id="Comments__commandMenu__button"
         aria-controls="Comments__commandMenu"
         aria-haspopup="true"
         contentEditable='true'
         ref={inputRef}
+        sx={{ minHeight: 20, padding: '10px 5px'}}
         data-ph="Комментарий или ' / ' для команды"
+        suppressContentEditableWarning={true}
         onInput={inputHandler}>
       </Box>
     

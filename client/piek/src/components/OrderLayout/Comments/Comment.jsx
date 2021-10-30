@@ -32,7 +32,7 @@ const Comment = (props) => {
     }}
     dangerouslySetInnerHTML={{ __html: data.Text}}></div>
 
-    else return <div className={sass.commentContent}>{data.Text}</div>
+    else return <div dangerouslySetInnerHTML={{ __html: data.Text }} className={sass.commentContent}></div>
 
   }
 

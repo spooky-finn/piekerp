@@ -132,7 +132,7 @@ export const muicomponents = (theme) => ({
     MuiPopover: {
       styleOverrides: {
         paper: {
-          background: 'var(--L0)',
+          background: 'var(--L1)',
           borderRadius: 'var(--br) !important'
         }
       }
