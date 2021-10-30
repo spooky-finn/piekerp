@@ -34,12 +34,14 @@ const LoginForm = () => {
       <div className='loginCard'>
         <TextField
         className='loginInput'
+        variant='filled'
         label="Email"
         onChange={e => setEmail(e.target.value.trim())}
         />
         <TextField
           label="Password"
           type="password"
+          variant='filled'
           className='loginInput'
           onChange={e => setPassword(e.target.value.trim()) }
         />

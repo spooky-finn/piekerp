@@ -32,16 +32,16 @@ html.dark {
     --L1: #262629;   /* rgba(200, 200, 255, 0.05) */
     --L2: rgba(200, 200, 255, .07);
 
-    --highContrast: rgba(233, 233, 233);
-    --lowContrast: #8f8f8f;
-    --textInvert: rgb(0, 0, 0);
+    --highContrast: rgba( 233 , 233 , 233) ;
+    --lowContrast:  #8f8f8f;
+    --textInvert:   rgb( 0 , 0 , 0 );
 
 
-    --accent: #99affc;
+    --accent:      #99affc;
     --accentLight: #43435c;
-    --border: rgba(255,255,255,.1);
-    --borderLight: rgba(255,255,255,.05);
+    --border:      rgba( 255 , 255 , 255 , .07 );
+    --borderLight: rgba( 255 , 255 , 255 , .04 );
 
     --awaitingDispatch: #32472b;
-    --needAttention: #940404;
+    --needAttention:    #940404;
     }

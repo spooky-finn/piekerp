@@ -4,10 +4,13 @@
 .commentInputForm
   display: flex
   align-items: center
-  border-bottom: 1px solid var(--border)
-  padding: 10px 15px
+  border: 1px solid var(--borderLight)
+  padding: 0px 15px
+  margin: 10px
+  border-radius: 10px
   white-space: pre-wrap
   color: var(--highContrast)
+  background: var(--L1)
   div:first-of-type
     flex-grow: 1
     outline: none
@@ -22,6 +25,7 @@
   padding:  .2em 2em
   width: fit-content !important
   text-decoration: none
+  min-height: 20px
   &:hover
     background: var(--borderLight) !important
     border-radius: 5px
@@ -52,6 +56,7 @@
   width: fit-content
   color: var(--accent)
   border-radius: var(--br10)
+  margin: 5px 0
   svg
     width: 17px 
   &:hover
