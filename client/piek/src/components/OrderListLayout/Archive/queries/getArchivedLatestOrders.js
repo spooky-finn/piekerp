@@ -1,10 +1,10 @@
 import { gql } from "graphql-tag"
 
 export const GET_ARCHIVED_LATEST_ORDERS = gql`
-query($limit: Int!){
+query($limit: Int!, $OrderStatus: Int!){
   erp_Orders(
     order_by: {ActualShippingDate: desc_nulls_last}
-    where: { OrderStatusID: {_eq: 3} } 
+    where: { OrderStatusID: {_eq: $OrderStatus } } 
     limit: $limit
     ){
     ActualShippingDate

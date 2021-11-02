@@ -3,19 +3,10 @@ import { useHistory } from "react-router-dom";
 import {
   Popper,
   ClickAwayListener,
-  ListItemIcon,
-  ListItemText,
-  MenuItem,
   MenuList,
-  Paper,
-  Divider
+  Paper
 } from '@mui/material/';
-import { 
-  UilTrashAlt, 
-  UilArchive, 
-  UilClock,
-  UilFileCheck,
-  UilExclamationTriangle } from '@iconscout/react-unicons'
+
 
 //apollo
 import { useMutation } from "@apollo/client"
@@ -27,26 +18,35 @@ import {
 } from '../queries/MutationOrderInfo'
 import { DELETE_ORDER } from '../queries/MutationDeleteOrder';
 
-import DeleteOrderConfirmDialog from './DeleteOrderConfirmDialog'
+import OrderActions from "./Actions/OrderActions";
+import PreOrderActions from "./Actions/PreOrderActions";
+import OrderStatusesActions from "./Actions/OrderStatusesActions";
+
+import ReclamationActions from "./Actions/ReclamationActions";
 
 const OrderActionsMenu = props => {
   const OrderID = props.order.OrderID 
   const { OAMenu, setOAMenu, OAMenuRef, order, refetch} = props
 
-  const [mutateAwaitingDispatch] = useMutation(UPDATE_AWAITING_DISPATCH);
-  const [mutateNeedAttention] = useMutation(UPDATE_NEED_ATTENTION);
-  const [mutateMoveOrderToArchive] = useMutation(MOVE_ORDER_TO_ARCHIVE);
-  const [mutateMoveOrderToPriority] = useMutation(MOVE_ORDER_TO_PRIORITY);
-  const [deleteOrder] = useMutation(DELETE_ORDER);
+  const [mutationAwaitingDispatch] = useMutation(UPDATE_AWAITING_DISPATCH);
+  const [mutationNeedAttention] = useMutation(UPDATE_NEED_ATTENTION);
+  const [mutationMoveOrderToArchive] = useMutation(MOVE_ORDER_TO_ARCHIVE);
+  const [mutationMoveOrderToPriority] = useMutation(MOVE_ORDER_TO_PRIORITY);
+  const [mutationDeleteOrder] = useMutation(DELETE_ORDER);
 
   const history = useHistory();
+
+  const baseurl = () => {
+    if ( [1,2].includes(order.OrderStatusID) ) return '/'
+    if ( [10,11,12].includes(order.OrderStatusID) ) return '/reclamation'
+  }
 
   // При статусе "требует внимания" происходит выделение заказа красным цветом в очередности. 
   // В левом меню в информации о заказе фиксируется  дата включения этого статуса.  
   // Желательно чтобы возможность снятия была только у определенных аккаунтов .  
   // Это необходимо когда при открытии заказа выясняется дефицит комплектующих или по заказу требуются срочные уточнения от заказчика какие-нибудь.
   function needAttentionHandler(){
-    mutateNeedAttention({
+    mutationNeedAttention({
       variables: {OrderID, NeedAttention: !order.NeedAttention },
       optimisticResponse: {
           erp_Orders: {
@@ -60,7 +60,7 @@ const OrderActionsMenu = props => {
   // При статусе "ожидает отгрузки" происходит выделение зеленым цветом в очередности, что означает, что заказ уже собран,
   // и не отгружается по бумажным причинам
   function awaitingDispatchHandler(){
-    mutateAwaitingDispatch({
+    mutationAwaitingDispatch({
       variables: {OrderID, AwaitingDispatch: !order.AwaitingDispatch },
       optimisticResponse: {
           erp_Orders: {
@@ -72,14 +72,15 @@ const OrderActionsMenu = props => {
     })
   }
   // Перекидывает заказ в архив (убирает из очередности)
-  async function transferOrderToArchive(){
-    mutateMoveOrderToArchive({ variables: { 
+  async function transferOrderToArchive(OrderStatusID){
+    mutationMoveOrderToArchive({ variables: { 
       OrderID,
-      ActualShippingDate: new Date()
+      ActualShippingDate: new Date(),
+      OrderStatusID
      }}).then(
       (res) =>{
-        if (res.data.update_erp_Orders_by_pk.OrderStatusID === 3){
-          history.push("/")
+        if (res.data.update_erp_Orders_by_pk.OrderID){
+          history.push(baseurl())
         }
       }
     )
@@ -87,26 +88,25 @@ const OrderActionsMenu = props => {
 
   // Перекидывает предзаказ в очередность 
   async function transferOrderToPriority(){
-    mutateMoveOrderToPriority({ variables: { 
+    mutationMoveOrderToPriority({ variables: { 
       OrderID,
-      AcceptanceDate: new Date()
+      AcceptanceDate: new Date(),
      }}).then(
       (res) =>{
-        console.log(res)
-        if (res.data.update_erp_Orders_by_pk.OrderStatusID === 2){
+        if (res.data.update_erp_Orders_by_pk.OrderID){
           refetch()
         }
       }
     )
   }
   
-  // для удаления предзаказа
-  function deleteOrderHandler(){
-    deleteOrder({ variables: {
+  // для удаления заказа
+  function mutationDeleteOrderHandler(){
+    mutationDeleteOrder({ variables: {
       OrderID
     }}).then( res => {
       if (res.data.delete_erp_Orders_by_pk.OrderID){
-        history.push("/")
+        history.push(baseurl())
       }
     })
   }
@@ -114,8 +114,6 @@ const OrderActionsMenu = props => {
   const handleClose = (event) => {
     setOAMenu(false);
   };
-
-  function isPreOrder(){if (order.OrderStatusID === 1) return true; else return false}
 
   return (
     <Popper
@@ -125,62 +123,34 @@ const OrderActionsMenu = props => {
 
     <Paper 
       sx={{ 
-      boxShadow: '0 0 1px 0',
+      boxShadow: '0 10px 50px 0 var(--bs)',
+      background: 'var(--LI)',
        width: 200,
        maxWidth: '100%',
        borderRadius: 'var(--br)' }}> 
       <ClickAwayListener onClickAway={handleClose}>
       <MenuList>
 
-        {!isPreOrder() && (<div>
-        <MenuItem 
-          className={ order.AwaitingDispatch? 'awaitingDispatch': ''}
-          onClick={awaitingDispatchHandler}>
-          <ListItemIcon>
-            <UilClock/>
-          </ListItemIcon>
-          <ListItemText>Ожидает отгрузки</ListItemText>
-        </MenuItem>
-        <MenuItem 
-        className={ order.NeedAttention? 'needAttention': ''}
-        onClick={needAttentionHandler}>
-          <ListItemIcon>
-            <UilExclamationTriangle/>
-          </ListItemIcon>
-          <ListItemText>Требует внимания</ListItemText>
-        </MenuItem>
-        <Divider/>
-        <MenuItem>
-          <ListItemIcon>
-            <UilArchive/>
-          </ListItemIcon>
-          <ListItemText>
-            <DeleteOrderConfirmDialog onConfirmF={transferOrderToArchive}/>  
-          </ListItemText>
-        </MenuItem>
-        </div>)}
+        <OrderStatusesActions
+        order                   = {order}
+        awaitingDispatchHandler = {awaitingDispatchHandler}
+        needAttentionHandler    = {needAttentionHandler}
+        />
 
-
-        { isPreOrder() && (<div>
-         <MenuItem>
-         <ListItemIcon>
-          <UilFileCheck/> 
-         </ListItemIcon>
-         <ListItemText onClick={transferOrderToPriority}>
-            В очередность
-         </ListItemText>
-       </MenuItem>
-
-        <MenuItem sx={{ color: 'var(--danger)', 'svg': {
-          color: 'var(--danger)'
-        }}}>
-          <ListItemIcon>
-            <UilTrashAlt/>
-          </ListItemIcon>
-          <ListItemText onClick={deleteOrderHandler}>Удалить предазказ</ListItemText>
-        </MenuItem>
-        </div>)}
-        
+        <PreOrderActions 
+        order                      = {order}
+        transferOrderToPriority    = {transferOrderToPriority}
+        mutationDeleteOrderHandler = {mutationDeleteOrderHandler}
+        />
+        <OrderActions 
+        order                  = {order}
+        transferOrderToArchive = {transferOrderToArchive}
+        />
+        <ReclamationActions
+        order = {order }
+        transferOrderToArchive ={transferOrderToArchive}
+        mutationDeleteOrderHandler ={mutationDeleteOrderHandler}
+        />
       </MenuList>
       </ClickAwayListener>
     </Paper>

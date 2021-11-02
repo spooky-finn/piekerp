@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
 
 html{
+    --LI: #fff;
     --L0: #f7f7fa;
-    --L1: #f0f0f5be;
-    --L2: #c7c7d85d;
+    --L1: #f2f2f6;
+    --L2: #c7c7d82a;
     
     --highContrast: rgba(0, 0, 0, 0.87);
     --lowContrast: rgba(0, 0, 0, .6);
@@ -11,7 +12,7 @@ html{
 
     --textInvert: rgba(233, 233, 233);
     
-    --accent: #3763FE;
+    --accent: #3356f6;
     --danger: #e5534b;
     --accentLight: #E7E9FB;
     --border: #e0e2e7;
@@ -20,14 +21,16 @@ html{
 
     --br10: 6px;
     --br: 15px;
+    --bs: #ccccce;
 
-    --awaitingDispatch: rgb(205, 243, 170);
-    --needAttention: #fa4d4d;
+    --awaitingDispatch: rgb(102, 207, 3);
+    --needAttention: #e60909;
 }
 
 
     
 html.dark {
+    --LI: rgb(26, 26, 26);
     --L0: #1e1e1e;
     --L1: #262629;   /* rgba(200, 200, 255, 0.05) */
     --L2: rgba(200, 200, 255, .07);
@@ -41,7 +44,8 @@ html.dark {
     --accentLight: #43435c;
     --border:      rgba( 255 , 255 , 255 , .07 );
     --borderLight: rgba( 255 , 255 , 255 , .04 );
+    --bs: #252525;
 
-    --awaitingDispatch: #32472b;
-    --needAttention:    #940404;
+    --awaitingDispatch: #269102;
+    --needAttention:    #db0404;
     }

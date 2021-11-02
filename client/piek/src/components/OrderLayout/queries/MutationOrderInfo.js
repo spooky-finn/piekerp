@@ -32,11 +32,11 @@ mutation MyMutation($OrderID: Int!, $NeedAttention: Boolean!) {
 `
 
 export const MOVE_ORDER_TO_ARCHIVE = gql`
-  mutation MyMutation($OrderID: Int!, $ActualShippingDate: timestamptz!) {
+  mutation MyMutation($OrderID: Int!, $ActualShippingDate: timestamptz!, $OrderStatusID: Int!) {
     update_erp_Orders_by_pk(
       pk_columns: {OrderID: $OrderID}, 
       _set: {
-        OrderStatusID: 3,
+        OrderStatusID: $OrderStatusID,
         AwaitingDispatch: false,
         ActualShippingDate: $ActualShippingDate,
         }){

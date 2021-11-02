@@ -8,7 +8,7 @@ export const isFileOnDropzone = (isDragActive) => {
         return (
             <div >
              <UilCloudUpload className='inCloudconIcon'/>
-         </div>
+            </div>
         )
     } else el?.classList?.remove('isDragAccept')
 }

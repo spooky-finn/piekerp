@@ -38,6 +38,12 @@ const OrderItemActions = ({ editState, item, editItemHandler, deleteItemHandler,
       anchorEl={anchorEl}
       keepMounted
       open={Boolean(anchorEl)}
+      PaperProps={{
+        sx: {
+          boxShadow: '0 10px 50px 0 var(--bs)',
+          background: 'var(--LI)',
+          borderRadius: 'var(--br)' }
+      }}
       onClose={handleClose}
     >
 

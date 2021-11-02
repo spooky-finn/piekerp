@@ -19,10 +19,11 @@ const Comment = (props) => {
   }
 
   function getCommentContent(){
-    if (userID === data.User.UserID) return <div contentEditable="true"
-    key={data.CommentID}
-    className={sass.commentContent}
-    suppressContentEditableWarning="true"
+    if (userID === data.User.UserID) return <div 
+    contentEditable = "true"
+    key             = {data.CommentID}
+    className       = {sass.commentContent}
+    suppressContentEditableWarning = "true"
     onBlur={async (e) => {
       await updateComment(data.CommentID, e.target.innerHTML)
     }}
@@ -30,9 +31,19 @@ const Comment = (props) => {
       await updateComment(data.CommentID, e.target.innerHTML)
       setNowEditing(null)
     }}
-    dangerouslySetInnerHTML={{ __html: data.Text}}></div>
+    dangerouslySetInnerHTML={{ __html: data.Text}}>
+    </div>
 
-    else return <div dangerouslySetInnerHTML={{ __html: data.Text }} className={sass.commentContent}></div>
+    else return <div 
+    onClick={(e) => {
+      // если комментарий содержит чек-лист выполняем мутацию на обновление состояния
+      if (e.currentTarget.innerHTML.toString().includes(sass.checklistUnit, 0)){
+        updateComment(data.CommentID, e.currentTarget.innerHTML)
+      }
+    }}
+    dangerouslySetInnerHTML={{ __html: data.Text }} 
+    className={sass.commentContent}>
+    </div>
 
   }
 
