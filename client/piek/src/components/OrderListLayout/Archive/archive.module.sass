@@ -16,7 +16,16 @@
 .archiveTable
   border-radius: var(--br)
   border: 1px solid var(--border)
-  tbody tr:nth-of-type(2n)
-    background: var(--L1)
-  td
-    border: none !important
+
+.filterFormControl
+  display: flex !important
+  flex-direction: row !important
+  align-items: center
+.filterInputBase
+  margin: 0 5px 
+  padding: 2px 5px !important
+  border-radius: var(--br10) !important
+  &:hover
+    background: var(--accentLight) !important
+    color: var(--accent) !important
+    

@@ -4,29 +4,33 @@ import {useDropzone} from 'react-dropzone'
 import { useParams, useLocation } from "react-router-dom"
 
 //apollo
-import { GET_USERS } from '../../hasura-queries/getUsers';
-import { GET_ORDER_BY_ID } from './queries/GetOrderByID'
-import { PUSH_DOCS_ARRAY } from './queries/MutationOrderDocs'
+import { GET_USERS }             from '../../hasura-queries/getUsers';
+import { GET_ORDER_BY_ID }       from './queries/GetOrderByID'
+import { PUSH_DOCS_ARRAY }       from './queries/MutationOrderDocs'
 import { useMutation, useQuery } from "@apollo/client";
 
 //components
-import Composition from "./Composition";
-import Info from "./Info";
-import EditableInfo from "./EditableComponents/EditableInfo";
-import Docs from './Docs/Docs';
-import CommentsList from "./Comments/CommentsList";
+import Composition      from "./Composition";
+import Info             from "./Info";
+import EditableInfo     from "./EditableComponents/EditableInfo";
+import Docs             from './Docs/Docs';
+import CommentsList     from "./Comments/CommentsList";
+import OrderActionsMenu from "./OrderActions/OrderActionsMenu";
+
 import { isFileOnDropzone } from "./Dropzone";
 
 //ui
 import './sass/index.sass';
 import { Typography, Button, Box } from '@mui/material'
 import { UilPlus, UilEditAlt, UilEllipsisH } from '@iconscout/react-unicons';
-import OrderActionsMenu from "./OrderActions/OrderActionsMenu";
+import OS from "../_core/OrderStatus";
+import US from "../_core/UserStatus";
 
 function orderStatus(data){
     // add a note to the title if this is a pre-order
-    if (data.OrderStatusID === 1) return ' | Предзаказ';
-    if (data.OrderStatusID === 3) return ' | В архиве';
+    if (data.OrderStatusID === OS.ordRegistration) return ' | Предзаказ';
+    if (data.OrderStatusID === OS.ordArchived) return ' | В архиве';
+    if ([ OS.reclInbox, OS.reclDecision , OS.reclProduction ].includes(data.OrderStatusID)) return ' | Рекламация';
 }
 
 const OrderLayout = (props) => {
@@ -74,13 +78,13 @@ const OrderLayout = (props) => {
     const {getRootProps, isDragActive} = useDropzone({className: 'dropzone', onDrop: S3Upload });
     
     function showOrderActions(){
-        if ([1,2,4].includes(store.user.AccessLevelID)) return true
+        if ([ US.general, US.management , US.bookkeeping ].includes(store.user.AccessLevelID)) return true
     }
 
     return(
     <div> 
         {isFileOnDropzone(isDragActive)}
-        { data.erp_Orders ? (<>
+        { data.erp_Orders && users.erp_Users ? (<>
         <section className='OrderLayout' {...getRootProps()} id='dropzone'>
 
           <div className='LeftSideContent'>
@@ -91,15 +95,28 @@ const OrderLayout = (props) => {
                     <span className="preorderTitle">{orderStatus(data.erp_Orders[0])}</span>
                 </Typography>
 
-                {showOrderActions() && <Box className='orderActions_box'>
+                {/* Показывать Кнопки редактирования заказа только для определенных групп юзеров */}
+                { <Box className='orderActions_box'>
                   {editState && 
-                  <Button variant="iconic" onClick={() => setOIDialog(true)}>
+                  <Button 
+                  variant = "iconic" 
+                  onClick = {() => setOIDialog(true)}>
                     <UilPlus/>
-                  </Button>}
-                  <Button variant="iconic" onClick={() => setEditState(!editState)}>
+                  </Button>
+                  }
+                  
+                 {[ US.general, US.management , US.bookkeeping ].includes(store.user.AccessLevelID) && 
+                  <Button 
+                  variant = "iconic" 
+                  onClick = {() => setEditState(!editState)}>
                       <UilEditAlt/>
                   </Button>
-                  <Button aria-haspopup="true" ref={OAMenuRef} variant="iconic" onClick={() => setOAMenu(true)}>
+                }
+                  <Button 
+                  aria-haspopup = "true" 
+                  ref           = {OAMenuRef} 
+                  variant       = "iconic" 
+                  onClick       = {() => setOAMenu(true)}>
                       <UilEllipsisH/>
                   </Button>
                 </Box>}
@@ -107,44 +124,47 @@ const OrderLayout = (props) => {
 
               <div className="Composition">  
                 <Composition 
-                  data={data.erp_Orders[0].OrderItems} 
-                  editState={editState}
-                  refetch={refetch}
-                  OIDialog={OIDialog}
-                  setOIDialog={setOIDialog}
-                  orderID= {orderID} /> 
+                  data        = {data.erp_Orders[0].OrderItems} 
+                  editState   = {editState}
+                  refetch     = {refetch}
+                  OIDialog    = {OIDialog}
+                  setOIDialog = {setOIDialog}
+                  orderID     = {orderID} /> 
               </div>
 
               <CommentsList 
-              orderID={orderID} 
-              user={store.user} 
-              data={data.erp_Orders[0].Comments}/> 
+              orderID = {orderID} 
+              user    = {store.user} 
+              data    = {data.erp_Orders[0].Comments}/> 
 
-              <Docs data={data.erp_Orders[0].Docs} 
-              onUpload={onUploadFiles} 
+              <Docs 
+              data      = {data.erp_Orders[0].Docs} 
+              onUpload  = {onUploadFiles} 
               editState = {editState} 
-              refetch={refetch} />
+              refetch   = {refetch} />
           </div>
 
           <div className="Info">
-            {editState? <EditableInfo 
-            data={data.erp_Orders[0]} 
-            orderID={orderID} refetch={refetch} 
-            users={users.erp_Users} /> : (
+            { editState? <EditableInfo 
+            data      = {data.erp_Orders[0]} 
+            orderID   = {orderID} 
+            refetch   = {refetch} 
+            users     = {users.erp_Users} /> : (
 
-            <Info data={data.erp_Orders[0]} 
+            <Info 
+            data      = {data.erp_Orders[0]} 
             editState = {editState} 
-            orderID={orderID} 
+            orderID   = {orderID} 
             />
             )}
           </div>
 
           <OrderActionsMenu
-          refetch={refetch}
-          order={data.erp_Orders[0]}
-          OAMenu={OAMenu} 
-          setOAMenu={setOAMenu}
-          OAMenuRef={OAMenuRef}
+          refetch   = {refetch}
+          order     = {data.erp_Orders[0]}
+          OAMenu    = {OAMenu} 
+          setOAMenu = {setOAMenu}
+          OAMenuRef = {OAMenuRef}
           />
 
         </section> 

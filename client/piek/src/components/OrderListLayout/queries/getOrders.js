@@ -9,7 +9,7 @@ import gql from 'graphql-tag';
 
 export const GetOrdersSubscription = gql`
 subscription{
-    erp_Orders(where: {OrderStatusID: {_neq: 3} }) {
+    erp_Orders(where: {OrderStatusID: {_in: [1,2]} }) {
       OrderID
       Entity
       InvoiceNumber

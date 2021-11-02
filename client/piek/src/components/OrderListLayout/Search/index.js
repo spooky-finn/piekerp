@@ -1,24 +1,6 @@
 import { UilSearch } from '@iconscout/react-unicons'
 import sass from './search.module.sass'
-
 import { FormControl, Select, MenuItem } from '@mui/material';
-
-// const useStyles = makeStyles((theme) => ({
-//     formControl: {
-//       minWidth: 70,
-//       borderRadius: 'var(--br10)',
-//       border: '1px solid var(--border)',
-//       padding: '0 10px',
-//     },
-//     select: {
-//         fontSize: '.8rem',
-//         color: 'var(--highContrast)',
-//     },
-//     menuItem: {
-//         fontSize: '.8rem',
-//         color: 'var(--lowContrast)',
-//     },
-//   }));
 
 const Search = ({state, dispatch, users }) => {
     // const classes = useStyles();
@@ -44,7 +26,7 @@ const Search = ({state, dispatch, users }) => {
         <>
         <div className={sass.tableSearchInput}>
             <UilSearch/>
-            <input type='text' placeholder="Номер счета или организация" onChange={searchHandler} autoFocus defaultValue={state.searchKeyword}/>
+            <input type='text' placeholder="Счет или юрлицо" onChange={searchHandler} autoFocus defaultValue={state.searchKeyword}/>
 
             {/* filter data by manager */}
             { users && (<div className={sass.filter}>
@@ -65,7 +47,6 @@ const Search = ({state, dispatch, users }) => {
                 </FormControl>
             </div>)}
         </div>
-
 
      {/* filter indicator */}
     {managerFilterIndicator(state.managerFilter)}

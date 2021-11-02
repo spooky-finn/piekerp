@@ -84,7 +84,6 @@ const OrderListLayout = (props) => {
     const [ createNewOrder] = useMutation(INSERT_ORDER, {variables: {
       'managerID':     store.user.UserID,
       'orderStatusID': 1,
-      'isReclamation':  false,
     }})
 
     const tabHandler = (event, newValue) => {
@@ -105,7 +104,7 @@ const OrderListLayout = (props) => {
             {...other}
         >
             {value === index && (
-            <Box>{children}</Box>
+            <Box mb='30px'>{children}</Box>
             )}
         </div>
         );

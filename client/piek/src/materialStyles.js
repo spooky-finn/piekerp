@@ -1,4 +1,4 @@
-import { palette } from "@mui/system";
+import { color, palette } from "@mui/system";
 
 export const muicomponents = (theme) => ({
   components: {
@@ -87,6 +87,11 @@ export const muicomponents = (theme) => ({
       styleOverrides: {
         root: {
           color: 'var(--lowContrast) !important',
+        },
+        filter: {
+          fontSize: '.8rem',
+          transform: 'none',
+          position: 'relative',
         }
       },
       defaultProps: {
@@ -132,7 +137,7 @@ export const muicomponents = (theme) => ({
     MuiPopover: {
       styleOverrides: {
         paper: {
-          background: 'var(--L1)',
+          background: 'var(--L0)',
           borderRadius: 'var(--br) !important'
         }
       }

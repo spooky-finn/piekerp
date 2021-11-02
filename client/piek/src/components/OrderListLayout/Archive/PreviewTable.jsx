@@ -20,13 +20,21 @@ const PreviewTable = (props) => {
     </>
   }
 
-  const { data : latestOrders = [], loading: latestOrdersloading } = useQuery(GET_ARCHIVED_LATEST_ORDERS, {variables:{ limit: 12 }});
+  const { data : latestOrders = [], loading: latestOrdersloading } = useQuery(GET_ARCHIVED_LATEST_ORDERS, { variables: {
+     limit: 15, 
+     OrderStatus: state.reqOrderStatus
+    },
+    fetchPolicy: "cache-and-network"
+    });
 
   const { loading } = useQuery(GET_ALL_ORDERS_AMOUNT, { onCompleted: (res) => {
     dispatch({ type: 'unpaidIDs', payload: res.erp_Orders.filter(e => e.PaidAmount / e.TotalAmount < .999).map(e => e.OrderID)})
   }})
 
-  const { data : unpaidOrders = [], loading: unpaidOrdersLoading } = useQuery(GET_ARCHIVED_UNPAID_ORDERS, { variables: {unpaidIDs: state.unpaidIDs } })
+  const { data : unpaidOrders = [], loading: unpaidOrdersLoading } = useQuery(GET_ARCHIVED_UNPAID_ORDERS, { variables: {
+    unpaidIDs: state.unpaidIDs,
+    OrderStatus: state.reqOrderStatus
+  } })
 
   const previewData = () => {
     if (!unpaidOrders.erp_Orders || !latestOrders.erp_Orders) return []
@@ -41,14 +49,9 @@ const PreviewTable = (props) => {
       ])
   }
 
-  // if (latestOrdersloading || unpaidOrdersLoading || loading) return( 
-  // <Pane display="flex" alignItems="center" justifyContent="center" height={400}>
-  //   <Spinner />
-  // </Pane>)
-
   return (<>
     <Typography color='textSecondary' variant="subtitle1" m='10px 0'>
-      Недавно отгруженные
+      Последние 15
     </Typography>
 
       <Table columns = {archiveColumns} data = {previewData()} className={sass.archiveTable}/>

@@ -1,8 +1,8 @@
 import { gql } from "graphql-tag"
 
 export const GET_ARCHIVED_UNPAID_ORDERS = gql`
-query MyQuery($unpaidIDs: [Int!]) {
-    erp_Orders(where: { OrderStatusID: {_eq: 3}, OrderID: {_in: $unpaidIDs } } ) {
+query MyQuery($unpaidIDs: [Int!], $OrderStatus: Int!) {
+    erp_Orders(where: { OrderStatusID: {_eq: $OrderStatus}, OrderID: {_in: $unpaidIDs } } ) {
       OrderID
       Entity
       InvoiceNumber

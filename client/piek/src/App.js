@@ -47,8 +47,11 @@ function App() {
     typography: {
       fontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',sans-serif`,
       subtitle1: {
-        fontSize: '.9rem',
-        fontFamily: "IBM PLEX MONO"
+        fontSize: '.7rem',
+        textTransform: 'uppercase',
+        fontWeight: 600,
+        letterSpacing: '.5px'
+        // color: 'var(--lowContrast)'
       }
     },
   });
