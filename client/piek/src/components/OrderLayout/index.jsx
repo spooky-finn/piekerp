@@ -96,7 +96,7 @@ const OrderLayout = (props) => {
                 </Typography>
 
                 {/* Показывать Кнопки редактирования заказа только для определенных групп юзеров */}
-                { <Box className='orderActions_box'>
+                { <Box className='orderActions_box noprint'>
                   {editState && 
                   <Button 
                   variant = "iconic" 

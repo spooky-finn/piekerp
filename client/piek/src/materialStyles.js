@@ -76,7 +76,11 @@ export const muicomponents = (theme) => ({
         disableRipple: true,
       },
     },
-
+    MuiToggleButton: {
+      defaultProps: {
+        disableRipple: true,
+      }
+    },
     MuiTextField: {
       defaultProps: {
         variant: 'standard',

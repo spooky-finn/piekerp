@@ -2,7 +2,9 @@ import { gql } from "graphql-tag"
 
 export const GET_ARCHIVED_SEARCH_ORDERS = gql`
   query ($keyword: String!, $OrderStatus: Int!){
-  erp_Orders(where: {
+  erp_Orders(
+    order_by: {ActualShippingDate: desc_nulls_last},
+    where: {
     _or: [
       { Entity: {_ilike: $keyword} }, 
       { InvoiceNumber: {_ilike: $keyword} }

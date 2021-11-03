@@ -7,18 +7,9 @@ import { GET_ARCHIVED_UNPAID_ORDERS } from './queries/getArchivedUnpaidOrders'
 import Table from './TableMarkup'
 import sass from './archive.module.sass'
 import { Typography } from '@mui/material/';
-import moment from 'moment'
 
 const PreviewTable = (props) => {
   const { state, dispatch, columns } = props
-
-  var archiveColumns = [...columns]
-  archiveColumns[3] = {
-    Header: 'Факт отгрузка',
-    accessor: order => 
-    <> { order.ActualShippingDate && moment(order.ActualShippingDate).format('DD.MM.YY') }
-    </>
-  }
 
   const { data : latestOrders = [], loading: latestOrdersloading } = useQuery(GET_ARCHIVED_LATEST_ORDERS, { variables: {
      limit: 15, 
@@ -54,7 +45,7 @@ const PreviewTable = (props) => {
       Последние 15
     </Typography>
 
-      <Table columns = {archiveColumns} data = {previewData()} className={sass.archiveTable}/>
+      <Table columns = {columns} data = {previewData()} className={sass.archiveTable}/>
   </>)
 }
 export default PreviewTable

@@ -57,6 +57,7 @@ export default function SettingsDrawer() {
   }
 
   const themeHandler = (e, newTheme) => {
+    console.log(newTheme)
     changeTheme(newTheme)
   };
 

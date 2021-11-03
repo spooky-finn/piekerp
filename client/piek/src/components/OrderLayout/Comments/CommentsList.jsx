@@ -80,7 +80,7 @@ const CommentsList = (props) => {
 
   return(
     <div className={sass.commentsListWrapper}>
-     <div className={sass.commentInputForm}>
+     <div className={`${sass.commentInputForm} noprint`}>
       
       <СommandsPopover anchorEl={anchorEl} open={open} handleClose={handleClose}/>
 
