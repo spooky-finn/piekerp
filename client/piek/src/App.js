@@ -16,7 +16,7 @@ function App() {
   const { store } = useContext(Context);
   const [appTheme, setAppTheme] = useState(() => getCookie('theme'))
   store.setUItheme(appTheme, setAppTheme)
-  const {mode} = SystemPreferTheme(appTheme, setAppTheme)
+  const { mode } = SystemPreferTheme(appTheme, setAppTheme)
   
   const getDesignTokens = (mode) => ({
     palette: {

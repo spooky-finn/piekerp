@@ -12,12 +12,13 @@ import { Typography, InputBase } from '@mui/material/';
 
 import PreviewTable from './PreviewTable';
 
-import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+
 import OS from '../../_core/OrderStatus'
+import moment from 'moment'
 
 function reducer(state, action) {
   switch (action.type) {
@@ -42,13 +43,21 @@ const Archive = () => {
   };
 
   const { data = [] } = useQuery(GET_ARCHIVED_SEARCH_ORDERS, { variables: {
-    keyword: '%' + state.searchKeyword + '%'
+    keyword: '%' + state.searchKeyword + '%',
+    OrderStatus: state.reqOrderStatus
   }})
 
-  const columns = useMemo(
+  var columns = useMemo(
     () => columnsList, []
   )
   
+  columns[3] = {
+    Header: 'Факт отгрузка',
+    accessor: order => 
+    <> { order.ActualShippingDate && moment(order.ActualShippingDate).format('DD.MM.YY') }
+    </>
+  }
+
   const searchHandler = (e) => {
     setTimeout(() => {
       dispatch({ type: 'searchKeyword', payload: e.target.value})
