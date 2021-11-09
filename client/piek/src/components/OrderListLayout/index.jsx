@@ -16,8 +16,6 @@ import {Tabs, Tab, Box, Button} from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { UilPlus} from '@iconscout/react-unicons';
 
-import mainsass from './main.module.sass'
-
 import PreOrders from './PreOrders';
 import Priority from './Priority';
 import Recently from './Recently/index.jsx';
@@ -25,7 +23,8 @@ import Archive from './Archive/';
 
 const StyledTabs = styled((props) => <Tabs {...props} />)(
   ({ theme }) => ({
-    margin: '0 0 1rem',
+    background: 'var(--LI)',
+    minHeight: '10px',
     '& .MuiTabs-indicator': {
       display: 'none'
     },
@@ -35,17 +34,23 @@ const StyledTabs = styled((props) => <Tabs {...props} />)(
 const StyledTab = styled((props) => <Tab {...props} />)(
     ({ theme }) => ({
       textTransform: 'none',
-      fontWeight: 400,
-      color: theme.palette.text.secondary,
-      fontSize: theme.typography.pxToRem(15),
-      marginRight: theme.spacing(1),
-      borderBottomRightRadius: '8px',
-      borderBottomLeftRadius: '8px',
-      border: '1px solid transparent',
+      fontWeight: 500,
+      color: theme.palette.text.primary,
+      fontSize: theme.typography.pxToRem(14),
+      borderRight: '1px solid transparent',
+      borderLeft: '1px solid transparent',
+      minHeight: '10px',
       '&.Mui-selected': {
-        backgroundColor: 'var(--L1)',
+        backgroundColor: 'var(--L0)',
         color: theme.palette.primary,
-        border: '1px solid var(--borderLight)'
+        borderRight: '1px solid var(--border)',
+        borderLeft: '1px solid var(--border)',
+      },
+      '&:first-of-type':{
+        borderLeft: 'none !important',
+      },
+      '&.Mui-selected:first-of-type': {
+        borderLeft: 'none !important',
       }
     }),
   );
@@ -78,7 +83,7 @@ const OrderListLayout = (props) => {
         dispatch({ type: 'orders', payload: orders })
     }
     
-    useSubscription(GetOrdersSubscription, { onSubscriptionData,  fetchPolicy: "cache-first", nextFetchPolicy: "cache-first" });
+    useSubscription(GetOrdersSubscription, { onSubscriptionData });
     const { data: users = []} = useQuery(GET_USERS);
 
     const [ createNewOrder] = useMutation(INSERT_ORDER, {variables: {
@@ -130,8 +135,8 @@ const OrderListLayout = (props) => {
     }
   
     return(
-        <div className={mainsass.OrderListLayout}>
-        <StyledTabs value={selectedTab} onChange={tabHandler} aria-label="simple tabs example" className='orderListLayoutTabs'>
+        <>
+        <StyledTabs value={selectedTab} onChange={tabHandler} aria-label="simple tabs example">
             <StyledTab label="Предзаказы" {...a11yProps(0)} />
             <StyledTab label="Очередость" {...a11yProps(1)} />
             <StyledTab label="Недавние"   {...a11yProps(2)} />
@@ -157,7 +162,7 @@ const OrderListLayout = (props) => {
             <Archive state={state} dispatch={dispatch} />
         </TabPanel>
 
-      </div>
+      </>
     )
 }
 export default OrderListLayout

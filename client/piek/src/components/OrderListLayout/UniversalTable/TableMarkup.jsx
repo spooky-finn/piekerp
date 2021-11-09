@@ -3,7 +3,7 @@ import mainsass from '../main.module.sass'
 
 function statusHighlighting(order){
   // Выделение заказов требующих внимания имеют приоритет
-  if (order.NeedAttention) return mainsass.needAttention
+  if (order.NeedAttention?.split(',')[0] === 'true') return mainsass.needAttention
   else if (order.AwaitingDispatch) return mainsass.awaitingDispatch
   else return ''
 }

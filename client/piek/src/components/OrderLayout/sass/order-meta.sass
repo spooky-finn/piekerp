@@ -1,9 +1,9 @@
 //component 
 .OrderInfoCard
-  background: var(--L1)
-  border: 1px solid var(--border)
-  border-radius: var(--br)
-  padding: 15px 
+  border-bottom: 1px solid var(--border)
+  border-top: 1px solid var(--border)
+  padding: .7rem 0
+  font-size: .85rem 
   &:hover
     .secondaryHeading
       opacity: 1
@@ -16,20 +16,19 @@
     font-weight: 700
     font-size: .9rem
   .secondaryHeading
-    font-size: .9rem
+    font-size: .8rem
     color: var(--lowContrast)
     transition: opacity 200ms ease
     opacity: 0
   table tr
     line-height: 1.5
-    font-size: .9rem
   table td 
     padding-right: 10px
     
 
 .OrderLayout
   .Info
-    width: 400px
+    width: 350px
     display: grid
     grid-template-rows: auto 100px
     height: 100%
@@ -40,11 +39,11 @@
       display: grid
       grid-template-columns: 1fr 
       grid-gap: 15px 10px
-      padding: 1rem 1rem 
       height: fit-content !important
       position: relative
+      padding: 1rem 1rem
       .bold
-        font-size: 1.2rem
+        font-size: 1.1rem
         font-weight: 700
       .significantInfo
         display: grid
@@ -58,19 +57,6 @@
         line-height: 1.5
         padding: 1rem 0
         white-space: pre-wrap
-        pre
-          padding-bottom: .5rem
-   
-    .actions
-      position: fixed
-      bottom: 0
-      background: var(--L1)
-      padding: 1em
-      color: var(--highContrast)
-      width: 100%
-      font-size: .8rem
-      border-top: 1px solid var(--border)
-
  
 .paidVisualization
   td:first-of-type

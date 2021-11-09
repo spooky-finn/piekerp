@@ -1,5 +1,3 @@
-import { color, palette } from "@mui/system";
-
 export const muicomponents = (theme) => ({
   components: {
     MuiDialog: {
@@ -41,11 +39,7 @@ export const muicomponents = (theme) => ({
           minWidth: '25px !important',
           'svg':{
             width: '17px'
-          },
-          'path':{
-            strokeWidth: .8,
-            stroke: 'var(--L0)'
-          },
+          }
         }
       }
     },
@@ -166,6 +160,13 @@ export const muicomponents = (theme) => ({
     MuiCheckbox: {
       defaultProps: {
         disableRipple: true
+      }
+    },
+    MuiDrawer: {
+      styleOverrides: {
+        paper: {
+          background: 'var(--LI)'
+        }
       }
     }
   },

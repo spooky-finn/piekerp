@@ -16,7 +16,6 @@ import {
   UPDATE_ORDER_STATUS,
   INSERT_ORDER } from './queries';
 
-
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
     const result = Array.from(list);
@@ -41,7 +40,6 @@ const move = (source, destination, droppableSource, droppableDestination) => {
     return {result, movedObj: removed };
 };
 
-const grid = 8;
 
 const getItemStyle = (isDragging, draggableStyle) => ({
     // some basic styles to make the items look a bit nicer
@@ -114,7 +112,7 @@ const Reclamation = (props) => {
     })
   }
 
-  useSubscription(SUBSCRIPTION_RECLAMATION_ORDERS, { onSubscriptionData});
+  useSubscription(SUBSCRIPTION_RECLAMATION_ORDERS, { onSubscriptionData})
 
   const onDragEnd = result => {
     const { source, destination } = result;
@@ -175,7 +173,8 @@ const Reclamation = (props) => {
 
   return(
     <div className={sass.reclatationLayout}>
-       <div className='pageLayout__header'>
+      
+      <div className='pageLayout__header'>
         <UilWrench className='pageLayout__icon'/>
         <div className="pageLayout__title">Рекламация</div>
 
