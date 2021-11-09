@@ -11,6 +11,9 @@ import OS from '../../../_core/OrderStatus';
 
 const OrderStatusesActions = (props) => {
   const { order, needAttentionHandler, awaitingDispatchHandler} = props
+
+  const needAttention = ( order.NeedAttention?.split(',')[0] === 'true' )
+
   if ( [OS.ordProduction, OS.reclInbox, OS.reclDecision, OS.reclProduction].includes(order.OrderStatusID) ) return (
     <div>
       <MenuItem 
@@ -22,7 +25,7 @@ const OrderStatusesActions = (props) => {
         <ListItemText>Ожидает отгрузки</ListItemText>
       </MenuItem>
       <MenuItem 
-        className={ order.NeedAttention? 'needAttention': ''}
+        className={ needAttention ? 'needAttention': ''}
         onClick={needAttentionHandler}>
         <ListItemIcon>
           <UilExclamationTriangle/>

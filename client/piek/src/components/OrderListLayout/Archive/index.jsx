@@ -20,6 +20,8 @@ import Select from '@mui/material/Select';
 import OS from '../../_core/OrderStatus'
 import moment from 'moment'
 
+import TableSearch from '../../_core/mui/TableSearch'
+
 function reducer(state, action) {
   switch (action.type) {
       case 'reqOrderStatus': 
@@ -48,7 +50,7 @@ const Archive = () => {
   }})
 
   var columns = useMemo(
-    () => columnsList, []
+    () => [...columnsList], []
   )
   
   columns[3] = {
@@ -65,12 +67,10 @@ const Archive = () => {
   }
 
   return(
-    <div>
-      <InputBase
-      className   ={sass.inputWrapper}
-      onChange    = {searchHandler}
-      placeholder = 'номер счета или юрлицо'
-      autoFocus
+    <>
+      <TableSearch
+      placeholder='Cчет, юрлицо'
+      onChange={searchHandler}
       />
 
       <FormControl className={sass.filterFormControl}>
@@ -88,16 +88,20 @@ const Archive = () => {
         </Select>
       </FormControl>
 
-      {!state.searchKeyword && <PreviewTable state={state} dispatch={dispatch} columns={columns} /> }
+      {!state.searchKeyword && < PreviewTable 
+          state    = {state} 
+          dispatch = {dispatch} 
+          columns  = {columns} 
+          /> }
 
       {state.searchKeyword &&  data.erp_Orders && <>
-          <Typography color='textSecondary' variant="subtitle1" m='10px 0'>
+          <Typography color='textSecondary' variant="subtitle1" m='10px 1rem'>
             Результат поиска по архиву
           </Typography>
           <Table columns = {columns} data = {data.erp_Orders} className={sass.archiveTable}/>
       </>}
 
-    </div>
+    </>
   )
 }
 export default Archive;

@@ -1,27 +1,22 @@
-
-import  { useContext, useMemo, useEffect, useReducer } from 'react'
-import { Context } from '../../index'
+import  { useMemo, useEffect, useReducer } from 'react'
 
 //apollo
 import { useQuery } from '@apollo/client'
 import { GET_USERS } from './queries/getUsers' 
 
-
 import Table, { generateColumns } from './table'
 import { getVarsForSubscription } from './functions'
 
-
 import './index.sass'
 import ReportConfigurator from './ReportConfigurator'
-import { UilSearch, UilConstructor } from '@iconscout/react-unicons'
+import { UilConstructor } from '@iconscout/react-unicons'
 import sass from './attendance.module.sass'
+import TableSearch from '../_core/mui/TableSearch'
 
 var attendanceData = null;
 // учет рабочего времени
 const Attendance = props => {
     const date = new Date()
-    const { store } = useContext(Context);
-
     function reducer(state, action) {
         switch (action.type) {
 
@@ -78,7 +73,7 @@ const Attendance = props => {
     )
 
     return(
-    <div className={sass.attendanceLayout}>
+    <div>
             <div className="pageLayout__header">
                 <UilConstructor className='pageLayout__icon'/>
                 <div className='pageLayout__title'>Рабочее время</div>                    
@@ -86,12 +81,7 @@ const Attendance = props => {
             <ReportConfigurator state={state} dispatch={dispatch} />
 
         <div className={sass.tableWrapper}>
-
-            <div className={sass.tableSearchInput}>
-                <UilSearch/>
-                <input type='text' placeholder="поиск (номер счета или организация)" onChange={ (e) => onChangeSearch(e) } autoFocus/>
-            </div>
-            
+            <TableSearch onChange={ (e) => onChangeSearch(e) } disableAutoFocus/>            
             {filtredData && columns && <Table columns = {columns} data = {filtredData} className={sass.attendanceTable} /> }
 
              {/* условное обозначение */}

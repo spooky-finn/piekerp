@@ -46,13 +46,25 @@ const OrderActionsMenu = props => {
   // Желательно чтобы возможность снятия была только у определенных аккаунтов .  
   // Это необходимо когда при открытии заказа выясняется дефицит комплектующих или по заказу требуются срочные уточнения от заказчика какие-нибудь.
   function needAttentionHandler(){
+    const curDate = new Date().toISOString()
+    var payload = [];
+    if (!order.NeedAttention) payload = ['true', curDate, 'null']
+    else {
+      const nd = order.NeedAttention.split(',')
+      if (nd[0] === 'true') payload = ['false', nd[1], curDate]
+      if (nd[0] === 'false') payload = ['true', curDate, 'null']
+    }
+    
     mutationNeedAttention({
-      variables: {OrderID, NeedAttention: !order.NeedAttention },
+      variables: {
+        OrderID, 
+        NeedAttention: payload.join(',')
+      },
       optimisticResponse: {
           erp_Orders: {
             __typename: 'erp_Orders',
             OrderID: order.OrderID,
-            NeedAttention: !order.NeedAttention
+            NeedAttention: payload.join(',')
           }
         }
     })
@@ -123,11 +135,11 @@ const OrderActionsMenu = props => {
 
     <Paper 
       sx={{ 
-      boxShadow: '0 10px 50px 0 var(--bs)',
-      background: 'var(--LI)',
+      background: 'var(--L0)',
+      boxShadow: '0 1px 10px 0 rgb(0 0 0 / 25%)',
        width: 200,
        maxWidth: '100%',
-       borderRadius: 'var(--br)' }}> 
+       borderRadius: 'var(--br10)' }}> 
       <ClickAwayListener onClickAway={handleClose}>
       <MenuList>
 

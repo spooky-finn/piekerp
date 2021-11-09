@@ -1,10 +1,8 @@
-import { UilSearch } from '@iconscout/react-unicons'
 import sass from './search.module.sass'
-import { FormControl, Select, MenuItem } from '@mui/material';
+import { FormControl, Select, MenuItem, Box } from '@mui/material';
+import TableSearch from '../../_core/mui/TableSearch'
 
-const Search = ({state, dispatch, users }) => {
-    // const classes = useStyles();
-
+const Search = ({ state, dispatch, users  }) => {
     const searchHandler = (e) => {
         dispatch({ type: 'searchKeyword', payload: e.target.value }) 
     }
@@ -24,29 +22,27 @@ const Search = ({state, dispatch, users }) => {
 
     return (
         <>
-        <div className={sass.tableSearchInput}>
-            <UilSearch/>
-            <input type='text' placeholder="Счет или юрлицо" onChange={searchHandler} autoFocus defaultValue={state.searchKeyword}/>
+        <Box sx={{ display: 'flex' }}>
+            <TableSearch placeholder="Счет, юрлицо" onChange={searchHandler} defaultValue={state.searchKeyword}/>
 
             {/* filter data by manager */}
             { users && (<div className={sass.filter}>
             <span className={sass.filterPlaceholder}>manager</span>
 
                 <FormControl>
-                <Select
-                    name="managerFilter"
-                    value={state.managerFilter}
-                    onChange={managerHandler}
-                >
-                    <MenuItem value={0}>Все</MenuItem>
-                    { users.map( (user) => 
-                    <MenuItem value={ user.UserID } key={user.UserID} > {`${user.FirstName} ${user.LastName}`} </MenuItem>
-                    )}
-                
-                </Select>
+                  <Select
+                  name    = "managerFilter"
+                  value    = {state.managerFilter}
+                  onChange = {managerHandler}
+                  >
+                      <MenuItem value={0}>Все</MenuItem>
+                      { users.map( (user) => 
+                      <MenuItem value={ user.UserID } key={user.UserID} > {`${user.FirstName} ${user.LastName}`} </MenuItem>
+                      )}
+                  </Select>
                 </FormControl>
             </div>)}
-        </div>
+        </Box>
 
      {/* filter indicator */}
     {managerFilterIndicator(state.managerFilter)}

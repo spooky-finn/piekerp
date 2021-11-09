@@ -1,8 +1,7 @@
 .reclatationLayout
   position: relative
-  margin: 0 15px 15px
   height: calc(100vh - 40px)
-  overflow-y: clip
+
 .columnWrapper
   position: absolute
   top: 60px
@@ -10,8 +9,11 @@
   display: grid !important
   grid-template-columns: 1fr 1fr 1fr
   width: 100%
-  border: 1px solid var(--border)
-  border-radius: var(--br) 
+
+  border-top: 1px solid var(--border)
+  border-bottom: 1px solid var(--border)
+
+
   .reclColumn:not(:first-of-type)
     border-left: 1px solid var(--border)
   .draggableWrapper
@@ -54,7 +56,7 @@
     left: 0
     background: var(--needAttention)
     height: 100%
-    width: 4px
+    width: 3px
 
 .awaitingDispatch
   &::before

@@ -1,4 +1,3 @@
-// import { observer } from 'mobx-react-lite';
 import { NavLink} from 'react-router-dom';
 import './index.sass';
 
@@ -6,19 +5,22 @@ import { UilSortAmountDown, UilWrench, UilConstructor} from '@iconscout/react-un
 import SettingsDrawer from './SettingsDrawer/SettingsDrawer';
 
 const Sidebar = () => {
-    return(
-        <div className='Sidebar noprint'>
 
-            <NavLink  exact  to='/' activeClassName='sidebar-active' className="action-icon"><UilSortAmountDown/></NavLink>
-            <NavLink  to='/reclamation' activeClassName='sidebar-active' className="action-icon"><UilWrench/></NavLink>
-            <NavLink  to='/attendance' activeClassName='sidebar-active' className="action-icon"><UilConstructor/></NavLink>
-                
-            <div className="action-icon settings">
-                <SettingsDrawer/>
-            </div>
+  function wrap(icon){ 
+    return <div className='iconWrapper'>{icon}</div>
+  }
 
-        </div>
-    );
+  return(
+    <div className='Sidebar'>
+      <NavLink  exact  to='/' activeClassName='sidebar-active' className="link">{wrap(<UilSortAmountDown/>)}</NavLink>
+      <NavLink  to='/reclamation' activeClassName='sidebar-active' className="link">{wrap(<UilWrench/>)}</NavLink>
+      <NavLink  to='/attendance' activeClassName='sidebar-active' className="link">{wrap(<UilConstructor/>)}</NavLink>
+      <div className="link settings">
+          {wrap(<SettingsDrawer/>)}
+      </div>
+
+    </div>
+  );
 }
 
 export default Sidebar;

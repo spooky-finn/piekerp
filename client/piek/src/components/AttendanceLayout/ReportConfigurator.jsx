@@ -34,9 +34,11 @@ const ReportConfigurator = ({ state, dispatch }) => {
         for (var i=0; i< 6; i++) {
             const suitable = monthAdd(date, -i)
             m.push(
-                <div onClick={selectedMonthHandler} 
-                    className={suitable.getMonth() == state.selectedMonth[0] ? 'active' : ''}
-                    date={suitable}> {months[suitable.getMonth()]} </div>
+                <div 
+                key={suitable}
+                onClick={selectedMonthHandler} 
+                className={suitable.getMonth() == state.selectedMonth[0] ? 'active' : ''}
+                date={suitable}> {months[suitable.getMonth()]} </div>
                 )
         } 
         return <div className="chooseMonth">{m}</div>

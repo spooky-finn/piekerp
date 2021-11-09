@@ -2,26 +2,35 @@
     display: flex
     flex-direction: column
     padding: 10px 0
-    position: fixed
-    top: 0
-    left: 0
-    bottom: 0
     width: 50px 
-   
-    .action-icon
+    border-right: 1px solid var(--border)
+    .link
         display: flex
-        background: transparent
         border: none !important
         justify-content: center
-        box-shadow: inset 10px 0px 0px transparent
         align-self: center
-        padding: 15px 5px 
+        padding: 5px 0
         width: 100%
-        color: var(--lowContrast)
+        box-sizing: border-box
+        color: var(--highContrast)
+    .iconWrapper
+        display: flex
+        align-self: center
+        padding: 5px
+        border-radius: 4px
+        path
+            stroke-width: .8
+            stroke: var(--L0)
     .settings
         margin-top: auto
 
     .sidebar-active 
-        box-shadow: inset 8px 0px 0px var(--accent) !important
-        color: var(--accent) !important
+        .iconWrapper
+            background: var(--accentLight)
+            padding: 5px
+            border-radius: 4px
+            path
+                color: var(--accent)
+                stroke: var(--accentLight)
+
 

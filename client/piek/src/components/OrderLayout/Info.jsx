@@ -26,7 +26,7 @@ const OrderInfoCard = (props) => {
 const Pre = styled((props) => <Typography {...props} />)(
   ({ theme }) => ({
     color: theme.palette.text.secondary,
-    fontSize: '.8rem'
+    fontSize: '.7rem'
   }),
   );
 
@@ -74,6 +74,10 @@ const OrderMeta = (props) => {
         {
           'heading': "Факт. отгрузка",
           'data': moment(data.ActualShippingDate).format('DD.MM.YY'), 
+        }, 
+        {
+          'heading': 'Проблемки с',
+          'data': moment(data.NeedAttention?.split(',')[1] || null).format('DD.MM.YY hh:mm')
         }
       ]
       return (
@@ -91,7 +95,6 @@ const OrderMeta = (props) => {
         </OrderInfoCard>
       )
     }
-
   return (<>
       <div className="wrap">
 
@@ -110,10 +113,10 @@ const OrderMeta = (props) => {
             </div>
           </Box>
 
-          <div className='OrderComment'>
+          <Box className='OrderComment'>
               <Pre>Комментарий</Pre>
               {data.Comment}
-          </div>
+          </Box>
 
         {aboutOrder()}
         {paidVisualization()}

@@ -18,7 +18,6 @@
   --window-padding: 0px
   position: relative
   min-height: 100vh
-  border-left: 1px solid var(--border)
   outline: none !important  
   position: relative
   display: grid
@@ -38,7 +37,6 @@
     grid-column-end: 3
     border-bottom: 1px solid var(--border)
     padding: 2px 20px
-    background: var(--L1)
   .Info
     grid-column-start: 3
     overflow-y: auto
@@ -69,8 +67,12 @@
     grid-column-start: 2
     grid-column-end: -1
 
-.awaitingDispatch
-  background: var(--awaitingDispatch) !important
 
-.needAttention 
-  background: var(--needAttention) !important
+
+.awaitingDispatch 
+  svg, div
+    color: var(--awaitingDispatch) !important
+
+.needAttention
+  svg, div
+    color: var(--needAttention) !important

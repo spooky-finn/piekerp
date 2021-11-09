@@ -41,7 +41,7 @@ const PreviewTable = (props) => {
   }
 
   return (<>
-    <Typography color='textSecondary' variant="subtitle1" m='10px 0'>
+    <Typography color='textSecondary' variant="subtitle1" m='10px 1rem'>
       Последние 15
     </Typography>
 

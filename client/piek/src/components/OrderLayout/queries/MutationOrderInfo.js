@@ -20,7 +20,7 @@ export const UPDATE_AWAITING_DISPATCH = gql`
 }
 `;
 export const UPDATE_NEED_ATTENTION = gql`
-mutation MyMutation($OrderID: Int!, $NeedAttention: Boolean!) {
+mutation MyMutation($OrderID: Int!, $NeedAttention: String! ) {
   update_erp_Orders_by_pk(
     pk_columns: {OrderID: $OrderID},
    _set: { NeedAttention: $NeedAttention }

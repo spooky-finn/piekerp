@@ -50,8 +50,8 @@ function App() {
         fontSize: '.7rem',
         textTransform: 'uppercase',
         fontWeight: 600,
-        letterSpacing: '.5px'
-        // color: 'var(--lowContrast)'
+        letterSpacing: '.5px',
+        color: 'var(--accent) !important',
       }
     },
   });
