@@ -18,7 +18,6 @@ const AppRouter = () => {
 
             #if required route was not found
             <Redirect     to="/" />
-            {/* <PrivateRoute path='/recently' component={() => <PriorityLayout props={isRecently}/>} store={props.store}/> */}
         </Switch>
     )
 };

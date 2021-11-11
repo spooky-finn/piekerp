@@ -1,0 +1,29 @@
+.wrapper
+  padding: 1rem
+
+.notificationUnit
+  margin: 20px 0
+
+
+.notificationHeader
+  display: grid
+  grid-template-columns: auto auto
+  align-items: end
+  grid-template-areas:  "sender timstamp" "entity null"
+
+.item1 
+  grid-area: sender
+
+.item2 
+  grid-area: timstamp
+  text-align: right
+
+.item3 
+  grid-area: entity
+
+
+.commentContent
+  padding: 10px 10px
+  background: var(--L2) !important
+  border-left: 1px solid var(--accent)
+  margin-left: .5rem
