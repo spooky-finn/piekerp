@@ -5,7 +5,7 @@ const СommandsPopover = props => {
   const {anchorEl, open, handleClose} = props
 
   function insertTodoinDOM (){
-    const root = document.getElementById('Comments__commandMenu__button')
+    const root = document.getElementById('Comments_InputForm')
     const elem = document.createElement('div')
     elem.classList.add(sass.checklistUnit)
     root.appendChild(elem)
@@ -14,7 +14,7 @@ const СommandsPopover = props => {
   return (
     <Menu
         id="Comments__commandMenu"
-        aria-labelledby="Comments__commandMenu__button"
+        aria-labelledby="Comments_InputForm"
         anchorEl={anchorEl}
         open={open}
         elevation={5}

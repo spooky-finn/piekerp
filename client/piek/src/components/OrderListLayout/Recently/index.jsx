@@ -1,24 +1,26 @@
 import {  useMemo } from 'react';
 import Table from '../UniversalTable/TableMarkup'
-import { filter } from '../Search/filter'
 
 import { columnsList } from '../UniversalTable/columnList';
 import { spread } from './spreadOrders';
 
 import { Typography } from '@mui/material'
-import sass from './recently.module.sass'
 
-const style_heading = {
+const styles = {
+  heading :{
     display: 'flex',
     flexDirection: 'row',
     padding: '0 10px'
-}
-
-const style_secondaty_heading = {
+  },
+  secondary: {
     color: 'var(--lowContrast)',
     fontSize: '.8rem',
     padding: '0 8px',
     textTransform: 'none'
+  },
+  table: {
+    borderTop: '1px solid var(--border)'
+  }
 }
 
 const Recently = ({ state }) => {
@@ -34,28 +36,41 @@ const Recently = ({ state }) => {
    
 
     function ifNothing(data){
-        if (data.length === 0) return <Typography style={style_secondaty_heading}>(Ничего не было добавлено)</Typography>
+        if (data.length === 0) return <Typography style={styles.secondary}>(Ничего не было добавлено)</Typography>
     } 
 
     return(
-        <div>
-            <Typography style={style_heading} color='textSecondary' variant="subtitle1" m='10px 0'>
-                Сегодня {ifNothing(spreadData[0].objs)} 
+        <>
+            <Typography 
+            style   = {styles.heading} 
+            variant = "subtitle1" 
+            m       = '10px 0'>
+            Сегодня {ifNothing(spreadData[0].objs)} 
             </Typography>
 
             { spreadData[0].objs.length ? ( <>
-            <Table columns={columns} data={spreadData[0].objs} className={sass.recentlyTable} />
-            </>): null}
+              <Table 
+              columns = {columns} 
+              data    = {spreadData[0].objs} 
+              style   = {styles.table} />
+              </>): 
+            null}
 
 
-            <Typography  style={style_heading} color='textSecondary' variant="subtitle1" m='10px 0'>
-                Вчера {ifNothing(spreadData[1].objs)} 
+            <Typography  
+            style={styles.heading} 
+            variant="subtitle1" 
+            m='10px 0'>
+            Вчера {ifNothing(spreadData[1].objs)} 
             </Typography>
 
             { spreadData[1].objs.length ? ( <>
-            <Table columns={columns} data={spreadData[1].objs} className={sass.recentlyTable} />
+              <Table 
+                columns = {columns} 
+                data    = {spreadData[1].objs} 
+                style   = {styles.table} />
             </>): null}
-        </div>
+        </>
     )
 }
 export default Recently

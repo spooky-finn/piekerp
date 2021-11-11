@@ -10,11 +10,7 @@ export const spread = (orders) => {
         'name': 'Вчера',
         'date': moment().subtract(1, "day").format("YYYY-MM-DD"),
         'objs': []
-        }, 
-        {
-        'name': '',
-        'objs': [] 
-        },
+        }
         ]
         
     for(const order of orders){
@@ -22,8 +18,7 @@ export const spread = (orders) => {
         const dateCreation = order.AcceptanceDate?.split('T')[0]
 
         if (dateCreation === days[0].date) days[0].objs.push(order);
-        else if (dateCreation === days[1].date) days[1].objs.push(order);
-        else days[2].objs.push(order);    
+        else if (dateCreation === days[1].date) days[1].objs.push(order);  
     }
 
     return days;

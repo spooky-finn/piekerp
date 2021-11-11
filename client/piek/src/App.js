@@ -11,6 +11,7 @@ import Sidebar from './components/Sidebar/Sidebar';
 import {getCookie, SystemPreferTheme} from './components/_core/SystemPreferTheme'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { muicomponents } from './materialStyles'
+import { normalizeUnits } from 'moment';
 
 function App() {  
   const { store } = useContext(Context);
@@ -52,6 +53,11 @@ function App() {
         fontWeight: 600,
         letterSpacing: '.5px',
         color: 'var(--accent) !important',
+      },
+      subtitle2: {
+        fontSize: '.8rem',
+        fontWeight: 'normal',
+        color: 'var(--lowContrast) !important',
       }
     },
   });
