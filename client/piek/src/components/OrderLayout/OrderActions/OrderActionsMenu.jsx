@@ -1,10 +1,7 @@
 import { useHistory } from "react-router-dom";
 
 import {
-  Popper,
-  ClickAwayListener,
-  MenuList,
-  Paper
+  Menu
 } from '@mui/material/';
 
 
@@ -128,20 +125,11 @@ const OrderActionsMenu = props => {
   };
 
   return (
-    <Popper
+    <Menu
     open={OAMenu} 
+    onClose={handleClose}
     anchorEl={OAMenuRef.current}
     >
-
-    <Paper 
-      sx={{ 
-      background: 'var(--L0)',
-      boxShadow: '0 1px 10px 0 rgb(0 0 0 / 25%)',
-       width: 200,
-       maxWidth: '100%',
-       borderRadius: 'var(--br10)' }}> 
-      <ClickAwayListener onClickAway={handleClose}>
-      <MenuList>
 
         <OrderStatusesActions
         order                   = {order}
@@ -163,10 +151,7 @@ const OrderActionsMenu = props => {
         transferOrderToArchive ={transferOrderToArchive}
         mutationDeleteOrderHandler ={mutationDeleteOrderHandler}
         />
-      </MenuList>
-      </ClickAwayListener>
-    </Paper>
-  </Popper>
+  </Menu>
 
   
   )

@@ -34,21 +34,13 @@ const OrderItemActions = ({ editState, item, editItemHandler, deleteItemHandler,
       <UilEllipsisV className={sass.moreVertIcon}/>
     </Button>
     <Menu
-      id="simple-menu"
-      anchorEl={anchorEl}
+      id       = "simple-menu"
+      anchorEl = {anchorEl}
       keepMounted
-      open={Boolean(anchorEl)}
-      PaperProps={{
-        sx: {
-          boxShadow: '0 10px 50px 0 var(--bs)',
-          background: 'var(--LI)',
-          borderRadius: 'var(--br)' }
-      }}
-      onClose={handleClose}
+      open     = {Boolean(anchorEl)}
+      onClose  = {handleClose}
     >
-
-
-      <MenuItem className={sass.inputListItem} >
+      <div className={sass.inputListItem} >
         <TextField 
           type="number"
           label="Серийный номер" 
@@ -61,9 +53,9 @@ const OrderItemActions = ({ editState, item, editItemHandler, deleteItemHandler,
           }))}
           defaultValue={state.serialNumber}
           />
-      </MenuItem>
+      </div>
 
-      <MenuItem className={sass.inputListItem} >
+      <div className={sass.inputListItem} >
         <TextField 
           label="Сборщик"  
           variant="filled"
@@ -74,7 +66,7 @@ const OrderItemActions = ({ editState, item, editItemHandler, deleteItemHandler,
           }))}
           defaultValue={state.fitter}
         />
-      </MenuItem>
+      </div>
 
 
       {editState && (

@@ -41,7 +41,12 @@ const InputForm = props => {
   return (
     <div className={`${sass.commentInputForm} noprint`}>
       
-      <СommandsPopover anchorEl={anchorEl} open={Boolean(anchorEl)} handleClose={handleClose} />
+      <СommandsPopover 
+      setAnchorULP = {setAnchorULP} 
+      anchorEl     = {anchorEl} 
+      open         = {Boolean(anchorEl)} 
+      handleClose  = {handleClose}
+      inputRef     = {inputRef} />
       <UserListPopover 
       anchorEl    = {anchorULP} 
       open        = {Boolean(anchorULP)} 

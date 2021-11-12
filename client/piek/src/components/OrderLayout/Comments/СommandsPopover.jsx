@@ -2,7 +2,7 @@ import { Menu, MenuItem } from '@mui/material/';
 import sass from './index.module.sass'
 
 const СommandsPopover = props => {
-  const {anchorEl, open, handleClose} = props
+  const {anchorEl, open, handleClose, setAnchorULP, inputRef} = props
 
   function insertTodoinDOM (){
     const root = document.getElementById('Comments_InputForm')
@@ -11,27 +11,23 @@ const СommandsPopover = props => {
     root.appendChild(elem)
   }
 
+  function mentionHandler(){
+    handleClose();
+    setAnchorULP(inputRef.current)
+  }
   return (
     <Menu
         id="Comments__commandMenu"
         aria-labelledby="Comments_InputForm"
         anchorEl={anchorEl}
         open={open}
-        elevation={5}
         onClose={handleClose}
-        sx={{
-          border: '1px solid var(--border) !important',
-          '.MuiList-root':{
-            padding: '10px',
-
-          }
-        }}
       >
         <MenuItem onClick={() => {
           handleClose();
           insertTodoinDOM();
         }}>Чеклист</MenuItem>
-        <MenuItem onClick={handleClose} sx={{ color: 'var(--border)'}}>Упомянуть</MenuItem>
+        <MenuItem onClick={mentionHandler}>Упомянуть</MenuItem>
     </Menu>
   )
 }

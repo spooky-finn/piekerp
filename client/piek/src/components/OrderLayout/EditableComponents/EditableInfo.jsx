@@ -94,6 +94,7 @@ const EditableInfo = ({ data, orderID, refetch, users }) => {
           defaultValue={moment(data.ShippingDate).format('DD.MM.YY')}
           onChange={(e) => {
             e.target.value = moment(e.target.value, "DD-MM-YY").format('YYYY-MM-DD')
+            if (e.target.value === 'Invalid date') e.target.value=null
             addField(e)
           }}
           placeholder="dd.mm.yy"
@@ -165,6 +166,9 @@ const EditableInfo = ({ data, orderID, refetch, users }) => {
         <TextField
           label="Комментарий"
           multiline
+          InputProps={{
+            sx: {fontSize: '.9rem !important'}
+          }}
           name='Comment'
           defaultValue={data.Comment}
           onChange={addField}

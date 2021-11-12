@@ -1,9 +1,15 @@
 .wrapper
-  padding: 1rem
+  padding: .5rem 1rem
 
 .notificationUnit
-  margin: 20px 0
+  padding: 10px 0
 
+.unreadedWrapper
+  margin: 1rem 0
+  padding: 1rem
+  border-radius: var(--br)
+  background: var(--L2)
+  border: 1px solid var(--border)
 
 .notificationHeader
   display: grid
@@ -13,6 +19,8 @@
 
 .item1 
   grid-area: sender
+  color: var(--hightContrast)
+  font-size: .9rem !important
 
 .item2 
   grid-area: timstamp
@@ -21,9 +29,10 @@
 .item3 
   grid-area: entity
 
-
 .commentContent
   padding: 10px 10px
-  background: var(--L2) !important
+  background: var(--L1) !important
   border-left: 1px solid var(--accent)
-  margin-left: .5rem
+  font-size: .9rem
+  &:hover
+    background: var(--L2) !important
