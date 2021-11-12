@@ -2,7 +2,7 @@
 
 html{
     --LI: #eff0f3;
-    --L0: #fff;
+    --L0: rgb(248, 248, 248);
     --L1: #f2f2f6;
     --L2: #c7c7d82a;
     
@@ -41,7 +41,7 @@ html.dark {
     --accentLight: #43435c;
     --border:      rgba( 255 , 255 , 255 , .08 );
     --borderLight: rgba( 255 , 255 , 255 , .04 );
-    --bs: #252525;
+    --bs: #0e0e0e;
 
     --awaitingDispatch: #26910280;
     --needAttention:    #db0404;

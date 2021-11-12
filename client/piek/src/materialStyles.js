@@ -15,11 +15,20 @@ export const muicomponents = (theme) => ({
         }
       }
     },
-
+    MuiMenu: {
+      styleOverrides: {
+        paper: {
+          background: 'var(--L0) !important',
+          boxShadow: '0 10px 50px 0 var(--bs) !important',
+          borderRadius: 'var(--br)',
+        }
+      }
+    },
     MuiMenuItem: {
       styleOverrides: {
         root: {
           fontSize: '.8rem',
+          padding: '4px 15px !important'
         }
       },
       defaultProps: {
@@ -53,11 +62,15 @@ export const muicomponents = (theme) => ({
           color: 'var(--lowContrast) !important',
         },
         iconic: {
-          minWidth: '40px',
-          padding: '5px',
+          minWidth: '10px',
+          minHeight: '10px',
+          padding: '4px 6px',
+          'svg':{
+            width: 20
+          },
           'path': {
-            color: theme.palette.text.primary,
-            strokeWidth: .8,
+            color: theme.palette.text.secondary,
+            strokeWidth: .4,
             stroke: 'var(--L0)'
           },
           '&:hover': {
@@ -165,7 +178,7 @@ export const muicomponents = (theme) => ({
     MuiDrawer: {
       styleOverrides: {
         paper: {
-          background: 'var(--LI)'
+          background: 'var(--L0)'
         }
       }
     }

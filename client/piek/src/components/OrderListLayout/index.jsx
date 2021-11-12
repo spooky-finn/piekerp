@@ -14,7 +14,7 @@ import { INSERT_ORDER } from './queries/MutationInsertOrder';
 // ui 
 import {Tabs, Tab, Box, Button} from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { UilPlus} from '@iconscout/react-unicons';
+import { UilPlusCircle } from '@iconscout/react-unicons';
 
 import PreOrders from './PreOrders';
 import Priority from './Priority';
@@ -83,7 +83,8 @@ const OrderListLayout = (props) => {
         dispatch({ type: 'orders', payload: orders })
     }
     
-    useSubscription(GetOrdersSubscription, { onSubscriptionData });
+    const { error, loading } = useSubscription(GetOrdersSubscription, { onSubscriptionData });
+    if (error) console.error(error)
     const { data: users = []} = useQuery(GET_USERS);
 
     const [ createNewOrder] = useMutation(INSERT_ORDER, {variables: {
@@ -134,6 +135,14 @@ const OrderListLayout = (props) => {
         })
     }
   
+    const styles = {
+      adddtn: {
+        marginLeft: 'auto',
+        marginRight: '10px',
+        display: 'flex',
+        alignSelf: 'center',
+      }
+    }
     return(
         <>
         <StyledTabs value={selectedTab} onChange={tabHandler} aria-label="simple tabs example">
@@ -142,7 +151,9 @@ const OrderListLayout = (props) => {
             <StyledTab label="Недавние"   {...a11yProps(2)} />
             <StyledTab label='Архив'      {...a11yProps(3)} />
 
-            <Button onClick={createOrderHandler} sx={{ marginLeft: 'auto' }} variant='iconic'><UilPlus/></Button>
+           <Box style={styles.adddtn}>
+            <Button onClick={createOrderHandler} variant='iconic'><UilPlusCircle /></Button>
+           </Box>
         </StyledTabs>
 
 

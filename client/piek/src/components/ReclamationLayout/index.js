@@ -5,7 +5,7 @@ import { useReducer } from 'react'
 import sass from './index.module.sass'
 import { Button, Typography, Box } from "@mui/material"
 
-import { UilWrench, UilPlus, UilArchive } from '@iconscout/react-unicons'
+import { UilWrench, UilPlusCircle } from '@iconscout/react-unicons'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 import { reducer, initialState } from './reducer';
@@ -180,10 +180,7 @@ const Reclamation = (props) => {
 
         <div className='pageLayout__actions'>
           <Button variant='iconic' onClick={insertOrderHandler}>
-            <UilPlus/>
-          </Button>
-          <Button variant='iconic'>
-            <UilArchive/>
+            <UilPlusCircle/>
           </Button>
         </div>
       </div>

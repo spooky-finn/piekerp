@@ -23,10 +23,10 @@ export const DELETE_ORDER_COMMENT = gql`
 `;
 
 export const UPDATE_ORDER_COMMENT = gql`
-mutation($CommentID: Int!, $Text: String!, $Timestamp: timestamptz!) {
+mutation($CommentID: Int!, $Text: String!) {
   update_erp_Comments_by_pk(
     pk_columns: {CommentID: $CommentID},
-    _set: {Text: $Text, Timestamp: $Timestamp}) 
+    _set: {Text: $Text}) 
     {
     OrderID
     Text

@@ -58,6 +58,11 @@ function App() {
         fontSize: '.8rem',
         fontWeight: 'normal',
         color: 'var(--lowContrast) !important',
+      },
+      subtitle3: {
+        fontSize: '.9rem',
+        fontWeight: '600',
+        color: '#9e9e9e !important',
       }
     },
   });

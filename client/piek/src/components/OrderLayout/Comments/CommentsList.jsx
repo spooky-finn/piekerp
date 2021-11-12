@@ -54,7 +54,6 @@ const CommentsList = (props) => {
     updateOrderCommentMutation({ variables: {
       CommentID: id,
       Text: newText,
-      Timestamp: new Date()
     }})
   }
 

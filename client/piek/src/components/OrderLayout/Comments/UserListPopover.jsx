@@ -12,7 +12,7 @@ const UserListPopover = props => {
     const elem = document.createElement('span')
     inputRef.current.innerText = inputRef.current.innerText.slice(0, -1)
 
-    elem.innerHTML=`@${user.FirstName}${user.LastName}`
+    elem.innerHTML=`@${user.FirstName} ${user.LastName}`
     elem.classList.add(sass.mentionedUserHiglight)
     elem.dataset.mentionedUser = user.UserID
     elem.contentEditable = 'false'
@@ -20,9 +20,6 @@ const UserListPopover = props => {
 
     const space = document.createElement('span')
     root.appendChild(space)
-    
-    // console.log(Array.from(inputRef.current.innerHTML))
-
   }
 
   return (
