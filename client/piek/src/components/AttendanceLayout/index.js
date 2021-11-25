@@ -7,10 +7,10 @@ import { GET_USERS } from './queries/getUsers'
 import Table, { generateColumns } from './table'
 import { getVarsForSubscription } from './functions'
 
-import './index.sass'
+import './sass/index.sass'
 import ReportConfigurator from './ReportConfigurator'
 import { UilConstructor } from '@iconscout/react-unicons'
-import sass from './attendance.module.sass'
+import sass from './sass/attendance.module.sass'
 import TableSearch from '../_core/mui/TableSearch'
 
 var attendanceData = null;
@@ -42,11 +42,13 @@ const Attendance = props => {
 
 
     const { gte, lte } = getVarsForSubscription(selectedMonth)
-    const { loading } = useQuery(GET_USERS, { variables: { gte, lte }, onCompleted: (options) => {
+
+    const { loading, data } = useQuery(GET_USERS, { variables: { gte, lte }, onCompleted: (options) => {
         attendanceData = options.attendance_users_aggregate.nodes;
         dispatch({ type: 'filtredData', payload: attendanceData})
     } });
     
+
     useEffect(() => {
         return () => {
             attendanceData = null
@@ -86,8 +88,6 @@ const Attendance = props => {
 
              {/* условное обозначение */}
              <div className={`${sass.tableFooter} legend`}>
-                <div className="status-101">Прерванный рабочий день</div>
-                <div className="status-102">Не отмечен конец смены</div>
                 <span className="reportMeta">
                     Отчет за {selectedMonth[0] + 1} месяц {selectedMonth[1]} года 
                 </span>
