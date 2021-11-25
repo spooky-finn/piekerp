@@ -1,7 +1,7 @@
 import { useTable } from 'react-table'
 import { daysInMonth } from './functions'
-import sass from './attendance.module.sass'
-
+import sass from './sass/attendance.module.sass'
+import { getIntervalData } from './getIntervalData'
 
 export function generateColumns(selectedMonth, timeDeduction){
   let columnsList = [
@@ -17,13 +17,13 @@ export function generateColumns(selectedMonth, timeDeduction){
       Header: 'Итого',
       Cell: row => {
         var hours = 0;
-        const intervals = row.row.original.intervalsPools
-        intervals.forEach( interval => {
-          hours += interval.interval 
+        const duration = row.row.original.intervals
+        duration.forEach( interval => {
+          hours += interval.dur 
         });
 
         //вычетаем время на обед
-        hours -= timeDeduction/60 * intervals.length
+        hours -= timeDeduction/60 * duration.length
 
         return <div>{hours.toFixed(0)}</div>
       }
@@ -36,13 +36,13 @@ export function generateColumns(selectedMonth, timeDeduction){
       Cell: row => {
         const day1 = row.column.Header
 
-        const [entrance, exit, interval, status] = getIntervalData(day1, row.row.original.intervalsPools, timeDeduction)
+        const [ent, ext, dur] = getIntervalData(day1, row.row.original.intervals, timeDeduction)
         
         return (
-          <div className={"status-"+ status}> 
-            <div>{ entrance }</div> 
-            <div>{ exit }</div>
-            <div className={sass.interval}>{ interval }</div>
+          <div className={sass.intervalgrid}> 
+            <div>{ ent }</div> 
+            <div>{ ext }</div>
+            <div className={sass.interval}>{ dur }</div>
           
           </div>
         )
@@ -52,49 +52,6 @@ export function generateColumns(selectedMonth, timeDeduction){
   return columnsList
 }
 
-
-
-function getIntervalData(day, intervals, timeDeduction){
-
-    // конвертация float в часы и минуты
-    function convertInterval(number, timeDeduction){
-        //вычетаем время на обед
-        number -= timeDeduction/60
-
-        var hour = Math.floor(number);
-        var decpart = number - hour;
-        var min = 1 / 60;
-
-        // Round to nearest minute
-        decpart = min * Math.round(decpart / min);
-        var minute = Math.floor(decpart * 60) + '';
-
-        // Add padding if need
-        if (minute.length < 2) {
-            minute = '0' + minute; 
-        }
-
-        return hour + ':' + minute;
-    }
-
-    function getMinutes(t){
-        const minutes = t.getMinutes()
-        return (minutes < 10) ? `0${minutes}` : minutes
-    }
-
-    const e = intervals.find(el =>  new Date(el.entrance).getDate() == day)
-
-    if (e) {
-        const _entr = new Date(e.entrance)
-        const _exit = new Date(e.exit)
-
-        const entrance = _entr.getHours()+':'+ getMinutes(_entr)
-        const exit = _exit.getHours()+':'+ getMinutes(_exit)
-        const interval = convertInterval(e.interval, timeDeduction)
-
-        return [entrance, exit, interval, e.status]
-    }   else return [null, null, null, null]
-}
 
 export default function Table({columns, data, className}){
     const {

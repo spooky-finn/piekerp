@@ -10,12 +10,11 @@ query MyQuery($gte: timestamp!, $lte: timestamp!) {
       card
       firstname
       lastname
-      intervalsPools(where: {entrance: {_gte: $gte,  _lte: $lte}}) {
-        entrance
-        exit
+      intervals(where: {ent: {_gte: $gte,  _lte: $lte}}) {
+        ent
+        ext
         card
-        interval
-        status
+        dur
       }
     }
   }
