@@ -80,15 +80,17 @@ const CommentsList = (props) => {
     }
   }, [comments])
 
+  const line = comments?.erp_Comments?.length ? sass.commentListThread : ''
+  
   return(
-    <div className={sass.commentsListWrapper}>
+    <div className={`${sass.commentsListWrapper} ${line}`}>
       <InputForm 
       insertComment={insertComment} 
       inputRef={inputRef} 
       />
 
      {!loading ?
-      comments.erp_Comments.map( (comment) => <Comment 
+      comments?.erp_Comments?.map( (comment) => <Comment 
         data={comment} 
         key={comment.CommentID}
         userID={user.UserID}

@@ -76,24 +76,24 @@ export default class Store {
     }
 
     async getNewToken(){
-        return axios.get(`${API_URL}/refresh`, {withCredentials: true}).then(
+        return await axios.get(`${API_URL}/refresh`, { withCredentials: true }).then(
             (r) => {
+                if (r.status !== 200) new Error('Invalid response while trying to get new access token')
                 this.setInMemoryToken(r.data.accessToken)
                 return r.data.accessToken
             }
         );
     }
 
+    
     async checkAuth() {
         this.setLoading(true);
         try {
             await axios.get(`${API_URL}/refresh`, {withCredentials: true}).then(
               (res) => {
                 if (res.status === 200){
-                  console.log(res)
                   this.setUser(res.data.user);
                   this.setInMemoryToken(res.data.accessToken)      
-                  console.log('token validation complited')  
                 }
               }
             )

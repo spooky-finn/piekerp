@@ -1,13 +1,8 @@
-
 export function daysInMonth (selectedMonth) {
     // количество дней в текущем месяце
       const [month, year] = selectedMonth
       return new Date(year, month+1, 0).getDate();
 }
-
-
-  
-
 
 export function getVarsForSubscription(selectedMonth){
   const [month, year] = selectedMonth
@@ -20,4 +15,10 @@ export function getVarsForSubscription(selectedMonth){
   const gte = year+ "-"+ m +"-01T00:00:00";
   const lte = year+ "-"+ m +"-" +daysInMonth(selectedMonth)+ "T23:59:59";
   return {gte, lte}
+}
+
+export function search_alg(user, keyword){
+  if (user.lastname.toLowerCase().startsWith(keyword.toLowerCase())) return true
+  else if (user.firstname.toLowerCase().startsWith(keyword.toLowerCase())) return true
+  else return false
 }

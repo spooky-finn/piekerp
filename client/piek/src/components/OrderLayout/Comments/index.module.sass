@@ -1,5 +1,18 @@
 .commentsListWrapper
+  position: relative
   height: 100%
+
+.commentListThread
+  &::after
+    content: ''
+    position: absolute
+    left: 30px
+    top: 100px
+    width: 2px
+    opacity: .4
+    height: calc( 100% - 130px )
+    background: var(--lowContrast)
+    z-index: -1
 
 .commentInputForm
   display: flex
@@ -8,13 +21,15 @@
   margin: 10px
   border-radius: 10px
   white-space: pre-wrap
-  color: var(--highContrast)
-  border: 1px solid var(--borderLight)
+  color: var(--highContrast) !important
+  border: 1px solid var(--border)
+  background: var(--L0)
   div:first-of-type
     flex-grow: 1
     outline: none
     p, span, div, li, td
       font-size: .9rem !important
+      color: var(--highContrast) !important
   .checklistUnit:hover
     background: transparent !important
 
@@ -45,10 +60,10 @@
       background: var(--accent)
       
 .mentionedUserHiglight
-  background: var(--accentLight)
+  // background: var(--accentLight)
   width: fit-content
-  padding: 0 5px
-  border-radius: 4px
+  // padding: 0 5px
+  font-weight: 5  00
 
 .saveButton
   align-self: end
@@ -67,29 +82,36 @@
     
 
 .commentUnit
-  margin: 10px
-  border-bottom: 1px solid var(--borderLight)
+  margin: 10px 10px 20px
+  border: 1px solid var(--border)
   line-height: 1.4
+  border-radius: var(--br10)
+  overflow: hidden
   white-space: pre-wrap
   &:hover
     .actions
       opacity: 1
 
 .commentContent
-  padding: 5px 5px 10px
+  padding: 10px 15px 10px
   color: var(--highContrast) !important
+  font-size: 14px !important
+  background: var(--L0)
   p,span, div
     background: var(--L0) !important
-    font-size: .9rem !important
+    font-size: 14px !important
     color: var(--highContrast) !important
 
     
 .commentHeader
   display: flex
+  background: var(--L1)
+  padding: .2rem 10px
+  border-bottom: 1px solid var(--border)
   .sender 
-    color: var(--accent)
+    color: var(--highContrast)
     font-weight: 500
-    font-size: .9rem
+    font-size: 14px
   .time
     color: var(--lowContrast)
     font-size: .8rem

@@ -31,6 +31,12 @@ const InputForm = props => {
     }
   }
 
+  function keyPressHandler(e){
+    if ((e.ctrlKey || e.metaKey) && (e.keyCode === 13 || e.keyCode === 10)) {
+      insertComment()
+    }
+  }
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -62,7 +68,9 @@ const InputForm = props => {
         sx={{ minHeight: 20, padding: '10px 5px'}}
         data-ph="Комментарий или ' / ' для команды"
         suppressContentEditableWarning={true}
-        onInput={inputHandler}>
+        onInput={inputHandler}
+        onKeyUp={keyPressHandler}
+        >
       </Box>
     
       <div onClick={insertComment} className={sass.saveButton}><UilMessage/></div>

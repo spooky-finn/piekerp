@@ -27,22 +27,23 @@ html{
     --needAttention: #e60909;
 } 
 html.dark {
-    --LI: rgb(14, 18, 19);
-    --L0: rgb(18, 22, 28);
-    --L1: rgb(24 27 34);  
-    --L2: rgba(200, 200, 255, .07);
+    --LI: rgb(38 39 43);
+    --L0: rgb(43 44 48);
 
-    --highContrast: rgba( 233 , 233 , 233) ;
-    --lowContrast:  #8f8f8f;
+    --L1: rgb(53 54 58);  
+    --L2: rgb(63 64 68);
+
+    --highContrast: #d9e4f0;
+    --lowContrast:  #adadad;
     --textInvert:   rgb( 0 , 0 , 0 );
 
 
-    --accent:      #99affc;
+    --accent:      #a2b3ff;
     --accentLight: #43435c;
     --border:      rgba( 255 , 255 , 255 , .08 );
     --borderLight: rgba( 255 , 255 , 255 , .04 );
     --bs: #0e0e0e;
 
-    --awaitingDispatch: #26910280;
+    --awaitingDispatch: #79cc5de5;
     --needAttention:    #db0404;
     }

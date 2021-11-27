@@ -1,4 +1,3 @@
-
 export function getIntervalData(day, intervals, timeDeduction){
 
   // конвертация float в часы и минуты
