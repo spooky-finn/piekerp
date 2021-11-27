@@ -4,7 +4,7 @@ import { HttpLink, Observable } from "@apollo/client";
 
 import { getInMemoryToken, getNewInMemoryToken } from '../../index'
 
-const http_protocol = process.env.REACT_APP_NODE_ENV === 'development' ? 'http://' : 'htpps://'
+const http_protocol = process.env.REACT_APP_NODE_ENV === 'development' ? 'http://' : 'https://'
 
 
 export const httpErrorLink = onError( ({ graphQLErrors, networkError, operation, forward }) => {
