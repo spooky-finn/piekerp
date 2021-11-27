@@ -5,15 +5,15 @@ import { useQuery } from '@apollo/client'
 import { GET_USERS } from './queries/getUsers' 
 
 import Table, { generateColumns } from './table'
-import { getVarsForSubscription } from './functions'
+import { getVarsForSubscription, search_alg } from './functions'
 
 import './sass/index.sass'
 import ReportConfigurator from './ReportConfigurator'
 import { UilConstructor } from '@iconscout/react-unicons'
 import sass from './sass/attendance.module.sass'
 import TableSearch from '../_core/mui/TableSearch'
+import { Typography } from '@mui/material'
 
-var attendanceData = null;
 // учет рабочего времени
 const Attendance = props => {
     const date = new Date()
@@ -26,7 +26,7 @@ const Attendance = props => {
           case 'timeDeduction':
             return {...state, [action.type]: action.payload };
 
-          case 'filtredData':
+          case 's_keyword': 
             return { ...state, [action.type]: action.payload};
 
           default:
@@ -37,62 +37,67 @@ const Attendance = props => {
     const [state, dispatch] = useReducer(reducer, {
         timeDeduction: 30,
         selectedMonth: [date.getMonth()-1, date.getFullYear()],
+        s_keyword: ''
     });
-    const { timeDeduction, selectedMonth, filtredData } = state;
 
+    const { timeDeduction, selectedMonth } = state;
 
     const { gte, lte } = getVarsForSubscription(selectedMonth)
 
-    const { loading, data } = useQuery(GET_USERS, { variables: { gte, lte }, onCompleted: (options) => {
-        attendanceData = options.attendance_users_aggregate.nodes;
-        dispatch({ type: 'filtredData', payload: attendanceData})
-    } });
+    const { loading, data } = useQuery(GET_USERS, { variables: { gte, lte }, fetchPolicy: 'no-cache' });
     
-
-    useEffect(() => {
-        return () => {
-            attendanceData = null
-        };
-    }, []);
-
-    function filteringAlg(user, keyword){
-        if (user.lastname.toLowerCase().startsWith(keyword.toLowerCase())) return true
-        else if (user.firstname.toLowerCase().startsWith(keyword.toLowerCase())) return true
-        else return false
-    }
-
     const onChangeSearch = (e) => {
-        const keyword = e.target.value.trim();
-
-            if (keyword !== '') {
-              const result = attendanceData.filter((user) => filteringAlg(user, keyword))
-              dispatch({ type: 'filtredData', payload: result })
-            } else dispatch({ type: 'filtredData', payload: attendanceData})
+      dispatch({ type: 's_keyword', payload: e.target.value.trim() })
     }
 
     const columns = useMemo(
-        () => generateColumns(selectedMonth, timeDeduction), [selectedMonth, timeDeduction]
+        () => {
+          return generateColumns(selectedMonth, timeDeduction)
+        },
+      [selectedMonth, timeDeduction]
     )
 
+
+    const searchResult = useMemo(
+      () => {
+        if (loading) return []
+
+        const keyword = state.s_keyword
+        const dt = data?.attendance_users_aggregate?.nodes
+
+        if (keyword){
+          const result = dt.filter((user) => search_alg(user, keyword))
+          return result
+        }
+        else return dt
+      },
+    [state.s_keyword, loading]
+   )
+
+   
     return(
     <div>
             <div className="pageLayout__header">
                 <UilConstructor className='pageLayout__icon'/>
-                <div className='pageLayout__title'>Рабочее время</div>                    
+                <div className='pageLayout__title'>
+                    Рабочее время
+                </div>                    
             </div> 
-            <ReportConfigurator state={state} dispatch={dispatch} />
+
+            <ReportConfigurator 
+            state    = {state} 
+            dispatch = {dispatch}
+             />
 
         <div className={sass.tableWrapper}>
-            <TableSearch onChange={ (e) => onChangeSearch(e) } disableAutoFocus/>            
-            {filtredData && columns && <Table columns = {columns} data = {filtredData} className={sass.attendanceTable} /> }
+            <TableSearch onChange={onChangeSearch} disableAutoFocus/>            
 
-             {/* условное обозначение */}
-             <div className={`${sass.tableFooter} legend`}>
-                <span className="reportMeta">
-                    Отчет за {selectedMonth[0] + 1} месяц {selectedMonth[1]} года 
-                </span>
-
-            </div>
+            { !loading ? 
+                <Table 
+                columns   = {columns} 
+                data      = {searchResult} 
+                className = {sass.attendanceTable} /> 
+            : <Typography m="10px" variant='subtitle2'>загрузка..</Typography> }
 
         </div>
     </div>

@@ -85,6 +85,7 @@ const OrderListLayout = (props) => {
     
     const { error, loading } = useSubscription(GetOrdersSubscription, { onSubscriptionData });
     if (error) console.error(error)
+    
     const { data: users = []} = useQuery(GET_USERS);
 
     const [ createNewOrder] = useMutation(INSERT_ORDER, {variables: {

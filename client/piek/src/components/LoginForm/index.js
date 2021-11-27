@@ -18,12 +18,10 @@ const LoginForm = () => {
 
     const login = async () => {
       const res = await store.login(email, password)
-
       if (res?.status === 200){
         history.push('/')
       }
       else{
-        console.error('Invalig email or password')
         notif('warning', 'Unauthorized error', 'Invalig email or password')
       }
       
