@@ -50,7 +50,7 @@
   "scripts": {
     "start": "chmod +x ./env.development.sh && ./env.development.sh && cp env-config.js ./public/ && react-scripts start",
     "dev": "chmod +x ./env.development.sh && ./env.development.sh && cp env-config.js ./public/ && react-scripts start",
-    "build": "chmod +x ./env.production.sh && ./env.production.sh && cp env-config.js ./public/ && react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
