@@ -39,7 +39,7 @@ const OrderMeta = (props) => {
     }
    
     const paidVisualization = () => {
-      if (data.PaymentHistories.length == 0 || !data.PaidAmount || !data.TotalAmount) return null
+      if (data.PaymentHistories.length === 0 || !data.PaidAmount || !data.TotalAmount) return null
 
       return (
         <OrderInfoCard className='noprint' heading="Платежи" secondaryHeading={`${data.TotalAmount} ₽`}>
@@ -100,7 +100,7 @@ const OrderMeta = (props) => {
 
           <Box className='significantInfo' sx={{ color: 'text.primary' }}>
             <div className='bold'>
-              <Pre>План. отгузка</Pre>
+              <Pre>План. отгрузка</Pre>
               {data.ShippingDate &&  moment(data.ShippingDate).format('DD.MM.YY')}
             </div>
             <div className='bold'>
