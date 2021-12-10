@@ -19,13 +19,13 @@ export const columnsList = [
       accessor: data => {
         if (data.OrderItems.length === 0) return <Link to={`/orders/${data.OrderID}`}><div>Нет содержимого</div></Link>
 
-        else return (<Link to={`/orders/${data.OrderID}`}>
+        else return (<>
         {data.OrderItems.map(item => (
           <div key={item.OrderItemID} >
             <span>{item.Name}</span>
           </div>
         ))}
-        </Link>)
+        </>)
       }
       
     },

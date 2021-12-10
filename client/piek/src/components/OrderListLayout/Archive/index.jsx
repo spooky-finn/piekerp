@@ -7,8 +7,8 @@ import { GET_ARCHIVED_SEARCH_ORDERS } from './queries/getArchivedSearchOrders'
 //ui
 import sass from './archive.module.sass'
 import { columnsList } from '../UniversalTable/columnList'
-import Table from './TableMarkup'
-import { Typography, InputBase } from '@mui/material/';
+import Table from '../UniversalTable/TableMarkup'
+import { Typography } from '@mui/material/';
 
 import PreviewTable from './PreviewTable';
 
@@ -21,6 +21,7 @@ import OS from '../../_core/OrderStatus'
 import moment from 'moment'
 
 import TableSearch from '../../_core/mui/TableSearch'
+import { Box } from '@mui/system';
 
 function reducer(state, action) {
   switch (action.type) {
@@ -88,7 +89,8 @@ const Archive = () => {
         </Select>
       </FormControl>
 
-      {!state.searchKeyword && < PreviewTable 
+    <Box marginTop={6}>
+    {!state.searchKeyword && < PreviewTable 
           state    = {state} 
           dispatch = {dispatch} 
           columns  = {columns} 
@@ -99,7 +101,11 @@ const Archive = () => {
             Результат поиска по архиву
           </Typography>
           <Table columns = {columns} data = {data.erp_Orders} className={sass.archiveTable}/>
+          {!data.erp_Orders.length && 
+            <Typography color='textPrimary'  m={2} variant="subtitle2">-> ничего не найдено</Typography>
+          }  
       </>}
+    </Box>
 
     </>
   )

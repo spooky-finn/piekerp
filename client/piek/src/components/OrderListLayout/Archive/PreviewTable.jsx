@@ -4,7 +4,7 @@ import { GET_ALL_ORDERS_AMOUNT } from './queries/getAllOrdersAmount'
 import { GET_ARCHIVED_LATEST_ORDERS } from './queries/getArchivedLatestOrders'
 import { GET_ARCHIVED_UNPAID_ORDERS } from './queries/getArchivedUnpaidOrders'
 
-import Table from './TableMarkup'
+import Table from '../UniversalTable/TableMarkup'
 import sass from './archive.module.sass'
 import { Typography } from '@mui/material/';
 
@@ -42,10 +42,10 @@ const PreviewTable = (props) => {
 
   return (<>
     <Typography color='textSecondary' variant="subtitle1" m='10px 1rem'>
-      Последние 15
+      Последние 15 отгруженных  
     </Typography>
 
-      <Table columns = {columns} data = {previewData()} className={sass.archiveTable}/>
+      <Table columns = {columns} data = {previewData()} className={sass.archiveTable} showUnpaid/>
   </>)
 }
 export default PreviewTable
