@@ -48,8 +48,9 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "chmod +x ./env.development.sh && ./env.development.sh && cp env-config.js ./public/ && react-scripts start",
+    "dev": "chmod +x ./env.development.sh && ./env.development.sh && cp env-config.js ./public/ && react-scripts start",
+    "build": "chmod +x ./env.production.sh && ./env.production.sh && cp env-config.js ./public/ && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

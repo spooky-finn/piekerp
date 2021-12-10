@@ -76,6 +76,8 @@ function App() {
       <div className="App">
         
         { store.inMemoryToken && <Sidebar/> }
+          <p>API_URL: {window._env_.REACT_APP_API_URL}</p>
+
           <BaseLayout/>
         
       </div>
