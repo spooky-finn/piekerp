@@ -1,5 +1,7 @@
 import { Menu, MenuItem } from '@mui/material/';
 import sass from './index.module.sass'
+import placeCaretAtEnd from '../../_core/placeCaretAtEnd'
+
 
 const UserListPopover = props => {
   const { anchorEl, open, handleClose, users, inputRef } = props;
@@ -8,18 +10,20 @@ const UserListPopover = props => {
     handleClose();
     const userID = e.target.getAttribute('userid')
     const user = users.find(e => e.UserID == userID)
-    const root = document.getElementById('Comments_InputForm')
+    const inputform = document.getElementById('Comments_InputForm')
     const elem = document.createElement('span')
     inputRef.current.innerText = inputRef.current.innerText.slice(0, -1)
 
-    elem.innerHTML=`@${user.FirstName} ${user.LastName}`
+    elem.innerHTML= '@' + [user.FirstName, user.LastName].join(' ') + ', '
     elem.classList.add(sass.mentionedUserHiglight)
     elem.dataset.mentionedUser = user.UserID
     elem.contentEditable = 'false'
-    root.appendChild(elem)
+    inputform.appendChild(elem)
+
+    placeCaretAtEnd(inputform)
 
     const space = document.createElement('span')
-    root.appendChild(space)
+    inputform.appendChild(space)
   }
 
   return (
