@@ -1,5 +1,6 @@
 version: '3'
 
+
 services:
   web:
     container_name: 'piek-erp-prod'
@@ -9,6 +10,8 @@ services:
       - "9000:9000"
     restart: always
     # env_file: ./server/.env # TODO - uncomment this to auto-load your .env file!
-    env_file: ./server/.env.production
+    env_file: server/.prod.env
     environment: 
       - NODE_ENV=production
+      - CORS_CLIENT_URL=https://45.10.110.58:9000
+      - REACT_APP_API_URL=https://factory.piek.ru:9000/api
