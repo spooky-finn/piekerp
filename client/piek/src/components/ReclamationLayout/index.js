@@ -150,7 +150,7 @@ const Reclamation = (props) => {
 };
 
   function getOrderStatus(order){
-    if (order.NeedAttention) return sass.needAttention
+    if (order.NeedAttention && order.NeedAttention.split(',')[0] === 'true' ) return sass.needAttention
     if (order.AwaitingDispatch) return sass.awaitingDispatch
   }
 

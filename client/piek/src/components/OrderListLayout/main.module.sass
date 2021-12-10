@@ -1,3 +1,8 @@
+.tableRow
+    display: table-row !important
+    text-decoration: none
+    vertical-align: middle
+
 .tableWrapper 
     display: table
     width: 100%
@@ -12,17 +17,17 @@
         border-left: none !important
     table td:last-of-type
         border-right: none !important
-    
+  
 .tableMain
     border-top: 1px solid var(--border)
     width: 100%
     border-spacing: 0
     thead th
-        color: var(--highContrast)
-        border-bottom: 1px solid var(--border)
+        color: var(--lowContrast)
+        // border-bottom: 1px solid var(--border)
         height: 30px
         font-size: .7rem
-        font-weight: normal
+        font-weight: 500
         text-align: left
     thead th:last-of-type
         padding: 0 
@@ -32,13 +37,14 @@
         font-size: .7rem
 
     tbody td
-        padding: 5px 5px
+        padding: 6px 5px
         color: var(--lowContrast)
         border-bottom: 1px solid var(--border)
         font-size: .9rem
    
-    tbody td:nth-of-type(2) a,
-    tbody td:nth-of-type(3)
+    tbody a td:nth-of-type(2),
+    tbody a td:nth-of-type(3)
+        opacity: .94
         font-family: 'IBM Plex Mono'
         text-decoration: none
         color: var(--highContrast)
@@ -50,8 +56,8 @@
         padding-left: 15px
     td:nth-of-type(4)
         color: var(--highContrast)
-    tbody tr:hover
-        background: var(--L1)
+    tbody a:hover
+        background: var(--LI)
     
 
 .awaitingDispatch,
