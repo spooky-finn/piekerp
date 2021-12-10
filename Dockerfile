@@ -6,13 +6,12 @@ WORKDIR /app/client/
 COPY client/piek/package*.json ./
 
 # RUN npm install npm@latest -g
-RUN npm install 
+# RUN npm install 
 
 COPY client/piek ./
 
 #recomended build on local machine
-RUN npm run build
-
+# RUN npm run build
 
 
 # Setup the server
