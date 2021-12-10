@@ -10,7 +10,7 @@ services:
       - "9000:9000"
     restart: always
     # env_file: ./server/.env # TODO - uncomment this to auto-load your .env file!
-    env_file: server/.prod.env
+    # env_file: server/.prod.env
     environment: 
       - NODE_ENV=production
       - CORS_CLIENT_URL=https://45.10.110.58:9000
