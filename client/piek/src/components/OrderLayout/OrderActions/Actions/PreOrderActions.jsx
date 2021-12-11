@@ -16,21 +16,23 @@ const PreOrderActions = (props) => {
 
   if ( [OS.ordRegistration].includes(order.OrderStatusID)) return (
     <div>
-        <MenuItem>
+        <MenuItem onClick={transferOrderToPriority}>
         <ListItemIcon>
           <UilFileCheck/> 
         </ListItemIcon>
-        <ListItemText onClick={transferOrderToPriority}>
+        <ListItemText >
             В очередность
         </ListItemText>
       </MenuItem>
       <MenuItem sx={{ color: 'var(--danger)', 'svg': {
         color: 'var(--danger)'
-        }}}>
+        }}}
+        onClick={mutationDeleteOrderHandler}
+        >
         <ListItemIcon>
           <UilTrashAlt/>
         </ListItemIcon>
-        <ListItemText onClick={mutationDeleteOrderHandler}>Удалить предазказ</ListItemText>
+        <ListItemText>Удалить предазказ</ListItemText>
       </MenuItem>
     </div>
   )
