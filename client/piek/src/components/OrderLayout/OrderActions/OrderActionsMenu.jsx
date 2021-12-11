@@ -143,8 +143,8 @@ const OrderActionsMenu = props => {
         mutationDeleteOrderHandler = {mutationDeleteOrderHandler}
         />
         <OrderActions 
-        order                  = {order}
-        transferOrderToArchive = {transferOrderToArchive}
+        order           = {order}
+        transferOrderTo = {transferOrderToArchive}
         />
         <ReclamationActions
         order = {order }

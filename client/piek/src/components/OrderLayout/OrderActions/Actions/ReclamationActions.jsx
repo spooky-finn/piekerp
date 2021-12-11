@@ -28,23 +28,25 @@ const ReclamationActions = (props) => {
 
  return (<>
   {ifInproduction() && 
-    <MenuItem>
+    <MenuItem onConfirmF={() => transferOrderToArchive(13) }>
       <ListItemIcon>
         <UilArchive/>
       </ListItemIcon>
       <ListItemText>
-        <TransferOrderConfirmDialog onConfirmF={() => transferOrderToArchive(13) }/>  
+        <TransferOrderConfirmDialog />  
       </ListItemText>
     </MenuItem>
   }
   {ifInbox() && 
       <MenuItem sx={{ color: 'var(--danger)', 'svg': {
         color: 'var(--danger)'
-      }}}>
+      }}}
+      onClick={mutationDeleteOrderHandler}
+      >
       <ListItemIcon>
         <UilTrashAlt/>
       </ListItemIcon>
-      <ListItemText onClick={mutationDeleteOrderHandler}>Удалить</ListItemText>
+      <ListItemText >Удалить</ListItemText>
       </MenuItem>
     }
 
