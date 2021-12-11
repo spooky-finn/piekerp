@@ -6,6 +6,15 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
+import {
+  ListItemIcon,
+  ListItemText,
+  MenuItem,
+} from '@mui/material/';
+import { 
+  UilArchive,
+ } from '@iconscout/react-unicons'
+
 export default function TransferOrderConfirmDialog(props) {
   const [open, setOpen] = React.useState(false);
 
@@ -17,37 +26,44 @@ export default function TransferOrderConfirmDialog(props) {
     setOpen(false);
   };
 
-  return (
-    <div>
-      <div onClick={handleClickOpen}>
-        Отгружен
-      </div>
-      
-      <Dialog
-        open={open}
-        maxWidth='xs'
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          Перенести в архив?
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Заказ удалится из очередности, но его в любое время можно будет найти в архиве по номеру счета, юрлицу, маркировке привода.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button color='info' onClick={handleClose}>Отменить</Button>
-          <Button color='secondary' onClick={()=> {
-            handleClose()
-            props.onConfirmF()
-          }}>
-            Перенести 
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
-  );
+  return (<>
+
+  <MenuItem onClick={handleClickOpen}>
+    <ListItemIcon>
+      <UilArchive/>
+    </ListItemIcon>
+    <ListItemText>
+          Отгружен
+    </ListItemText>
+  </MenuItem>
+
+
+    <Dialog
+      open={open}
+      maxWidth='xs'
+      onClose={handleClose}
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
+    >
+      <DialogTitle id="alert-dialog-title">
+        Перенести в архив?
+      </DialogTitle>
+      <DialogContent>
+        <DialogContentText id="alert-dialog-description">
+          Заказ удалится из очередности, но его в любое время можно будет найти в архиве по номеру счета, юрлицу, маркировке привода.
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button color='info' onClick={handleClose} >Отменить</Button>
+        <Button color='secondary' onClick={()=> {
+          handleClose()
+          props.transferOrderTo(3)
+        }}>
+          Перенести 
+        </Button>
+      </DialogActions>
+    </Dialog>
+
+
+  </>);
 }
