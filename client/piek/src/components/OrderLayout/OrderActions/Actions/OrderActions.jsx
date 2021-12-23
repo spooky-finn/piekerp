@@ -1,11 +1,11 @@
-import TransferOrderConfirmDialog from '../TransferOrderConfirmDialog'
+import TransferOrderConfirmDialog from '../Dialogs/TransferOrderConfirmDialog'
 import OS from '../../../_core/OrderStatus';
 
 const OrderActions = (props) => {
   const { order, transferOrderTo} = props
 
   if ( [OS.ordProduction].includes(order.OrderStatusID) ) return (
-    <TransferOrderConfirmDialog transferOrderTo={transferOrderTo}/>  
+    <TransferOrderConfirmDialog transferOrderTo={() => transferOrderTo(3) }/>  
   )
 
   return null

@@ -36,7 +36,7 @@ const Recently = ({ state }) => {
    
 
     function ifNothing(data){
-        if (data.length === 0) return <Typography style={styles.secondary}>(Ничего не было добавлено)</Typography>
+        if (data.length === 0) return <Typography style={styles.secondary}>ничего не было добавлено</Typography>
     } 
 
     return(

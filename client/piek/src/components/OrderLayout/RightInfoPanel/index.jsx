@@ -1,5 +1,5 @@
 import  moment  from 'moment'
-import "./sass/order-meta.sass";
+import "./rightPanel.sass";
 import { Typography, Box } from '@mui/material/';
 
 import { styled } from '@mui/material/styles';

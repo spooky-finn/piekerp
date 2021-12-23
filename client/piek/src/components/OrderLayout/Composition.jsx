@@ -117,7 +117,7 @@ const OrderComposition = props => {
         </div>
         )}
         
-      <Dialog maxWidth='md' fullWidth={true} open={OIDialog} onClose={closeOIDialog}>
+      <Dialog maxWidth='sm' fullWidth={true} open={OIDialog} onClose={closeOIDialog}>
         <DialogTitle>Добавить позицию</DialogTitle>
         <DialogContent>
         <Box className={sass.addOrderItem}>

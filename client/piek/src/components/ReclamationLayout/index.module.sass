@@ -30,20 +30,27 @@
 
 .item
   display: grid
-  grid-template-columns: 2fr 1fr .7fr
+  grid-template-columns: 2fr 1fr 
   text-decoration: none !important
   align-items: center
   position: relative
   border-bottom: 1px solid var(--borderLight)
   padding: 30px 10px 
   grid-gap: 13px 
+  &:hover
+    background: var(--LI)
   .orderItem
     font-family: 'IBM Plex Mono'
     color: var(--highContrast)
     font-size: 1rem 
+
+  .customerInfo
+    div:first-of-type
+      font-size: .9rem !important
+      color: var(--highContrast)
+      font-weight: 600
   div
     color: var(--lowContrast)
-    font-size: .8rem 
 
 
 .needAttention, 
@@ -61,3 +68,4 @@
 .awaitingDispatch
   &::before
     background: var(--awaitingDispatch)
+

@@ -8,6 +8,7 @@ import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
 
 import { UilSun, UilMoon, UilDesktop, UilSetting } from '@iconscout/react-unicons'
 
@@ -94,22 +95,28 @@ export default function SettingsDrawer() {
       </List>
       
       <div className={sass.logoutButton}>
-        <button onClick={logout}>Выйти</button>
+        <Button variant="outlined" onClick={logout}>Выйти</Button>
       </div>
     </Box>
   );
 
   return (
-    <div>
+    <>
           <div onClick={toggleDrawer(true)}>
             <UilSetting/>
           </div>
           <Drawer
             open={state}
             onClose={toggleDrawer(false)}
+            PaperProps = {{
+              sx: {
+                backgroundColor: 'var(--L0-glass)',
+                backdropFilter: 'var(--blurFilter)'
+              }
+            }}
           >
             {list('left')}
           </Drawer>
-    </div>
+    </>
   );
 }
