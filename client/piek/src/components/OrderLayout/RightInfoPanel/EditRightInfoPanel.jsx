@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import './EditableInfo.sass'
+import './EditRightInfoPanel.sass'
 
 import { useMutation } from '@apollo/client';
 import { UPDATE_ORDER_INFO } from '../queries/MutationOrderInfo'
@@ -63,6 +63,7 @@ const EditableInfo = ({ data, orderID, refetch, users }) => {
         OrderID: orderID,
         fields,
       }})
+
 
       if (fields.PaidAmount) insertPayment({ variables: {
           Date: new Date,

@@ -6,10 +6,9 @@ import {
 
 import { 
   UilTrashAlt, 
-  UilArchive 
 } from '@iconscout/react-unicons'
 
-import TransferOrderConfirmDialog from '../TransferOrderConfirmDialog';
+import TransferOrderConfirmDialog from '../Dialogs/TransferOrderConfirmDialog';
 import OS from '../../../_core/OrderStatus';
 
 const ReclamationActions = (props) => {
@@ -18,9 +17,9 @@ const ReclamationActions = (props) => {
     if (order.OrderStatusID === OS.reclInbox) return true
   }
 
-  const ifDecision = () => {
-    if (order.OrderStatusID === OS.reclDecision) return true
-  }
+  // const ifDecision = () => {
+  //   if (order.OrderStatusID === OS.reclDecision) return true
+  // }
 
   const ifInproduction = () => {
     if (order.OrderStatusID === OS.reclProduction) return true
@@ -28,14 +27,7 @@ const ReclamationActions = (props) => {
 
  return (<>
   {ifInproduction() && 
-    <MenuItem onConfirmF={() => transferOrderToArchive(13) }>
-      <ListItemIcon>
-        <UilArchive/>
-      </ListItemIcon>
-      <ListItemText>
-        <TransferOrderConfirmDialog />  
-      </ListItemText>
-    </MenuItem>
+        <TransferOrderConfirmDialog transferOrderTo={() => transferOrderToArchive(13)}/>  
   }
   {ifInbox() && 
       <MenuItem sx={{ color: 'var(--danger)', 'svg': {

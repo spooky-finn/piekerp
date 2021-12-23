@@ -60,9 +60,9 @@ function App() {
         color: 'var(--lowContrast) !important',
       },
       subtitle3: {
-        fontSize: '.9rem',
-        fontWeight: '600',
-        color: '#9e9e9e !important',
+        fontSize: '.7rem',
+        color: 'var(--lowContrast) !important',
+        textTransform: 'uppercase',
       }
     },
   });

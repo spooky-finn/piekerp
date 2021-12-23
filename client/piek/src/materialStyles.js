@@ -18,7 +18,7 @@ export const muicomponents = (theme) => ({
     MuiMenu: {
       styleOverrides: {
         paper: {
-          background: 'var(--L0) !important',
+          // background: 'var(--L0) !important',
           boxShadow: '0 10px 50px 0 var(--bs) !important',
           borderRadius: 'var(--br)',
         }
@@ -178,7 +178,11 @@ export const muicomponents = (theme) => ({
     MuiDrawer: {
       styleOverrides: {
         paper: {
-          background: 'var(--L0)'
+          background: 'var(--L0-glass)',
+          margin: '.6rem',
+          height: '98%',
+          border: '1px solid var(--border)',
+          borderRadius: 'var(--br)',
         }
       }
     }
