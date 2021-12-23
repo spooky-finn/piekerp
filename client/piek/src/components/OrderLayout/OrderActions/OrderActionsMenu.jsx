@@ -4,7 +4,6 @@ import {
   Menu
 } from '@mui/material/';
 
-
 //apollo
 import { useMutation } from "@apollo/client"
 import { 
@@ -66,7 +65,8 @@ const OrderActionsMenu = props => {
         }
     })
   }
-  // При статусе "ожидает отгрузки" происходит выделение зеленым цветом в очередности, что означает, что заказ уже собран,
+  // При статусе "ожидает отгрузки" происходит
+  //  выделение зеленым цветом в очередности, что означает, что заказ уже собран,
   // и не отгружается по бумажным причинам
   function awaitingDispatchHandler(){
     mutationAwaitingDispatch({
@@ -152,8 +152,6 @@ const OrderActionsMenu = props => {
         mutationDeleteOrderHandler ={mutationDeleteOrderHandler}
         />
   </Menu>
-
-  
   )
 }
 export default OrderActionsMenu;

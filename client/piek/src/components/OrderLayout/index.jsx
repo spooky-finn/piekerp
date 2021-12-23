@@ -11,8 +11,8 @@ import { useMutation, useQuery } from "@apollo/client";
 
 //components
 import Composition      from "./Composition";
-import Info             from "./Info";
-import EditableInfo     from "./EditableComponents/EditableInfo";
+import RightInfoPanel             from "./RightInfoPanel/";
+import EditRightInfoPanel     from "./RightInfoPanel/EditRightInfoPanel";
 import Docs             from './Docs/Docs';
 import CommentsList     from "./Comments/CommentsList";
 import OrderActionsMenu from "./OrderActions/OrderActionsMenu";
@@ -145,13 +145,13 @@ const OrderLayout = (props) => {
           </div>
 
           <div className="Info">
-            { editState? <EditableInfo 
+            { editState? <EditRightInfoPanel 
             data      = {data.erp_Orders[0]} 
             orderID   = {orderID} 
             refetch   = {refetch} 
             users     = {users.erp_Users} /> : (
 
-            <Info 
+            <RightInfoPanel 
             data      = {data.erp_Orders[0]} 
             editState = {editState} 
             orderID   = {orderID} 

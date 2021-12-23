@@ -15,7 +15,7 @@ const Priority = ({ users, state, dispatch }) => {
         () => columnsList, []
     )
     
-    const sortedData = state.orders .sort(function(a,b){
+    const sortedData = state.orders.sort(function(a,b){
         return new Date(a.ShippingDate) - new Date(b.ShippingDate);
     })
 
@@ -23,7 +23,7 @@ const Priority = ({ users, state, dispatch }) => {
 
     return(
         <div className={mainsass.tableWrapper}>
-            {users && <Search state={state} dispatch={dispatch} users={users.filter(e => [1,2].includes(e?.AccessLevelID))}/>}
+            {users && <Search state={state} dispatch={dispatch} users={ users.filter(e => [1,2].includes(e?.AccessLevelID)) }/>}
             {filtredData && <Table columns = {columns} data = {filtredData} />}
         </div>
     )

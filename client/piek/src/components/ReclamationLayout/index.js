@@ -166,8 +166,10 @@ const Reclamation = (props) => {
             </div>
           ))}
         </div>
-        <div>{order.Entity}</div>
-        <div>{order.City}</div>
+        <div className={sass.customerInfo}>
+          <div>{order.Entity}</div>
+          <div>{order.City}</div>
+        </div>
       </Link>)
   }
 

@@ -57,7 +57,7 @@ export default function TransferOrderConfirmDialog(props) {
         <Button color='info' onClick={handleClose} >Отменить</Button>
         <Button color='secondary' onClick={()=> {
           handleClose()
-          props.transferOrderTo(3)
+          props.transferOrderTo()
         }}>
           Перенести 
         </Button>

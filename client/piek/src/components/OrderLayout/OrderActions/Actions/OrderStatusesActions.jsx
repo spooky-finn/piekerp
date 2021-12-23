@@ -24,6 +24,7 @@ const OrderStatusesActions = (props) => {
         </ListItemIcon>
         <ListItemText>Ожидает отгрузки</ListItemText>
       </MenuItem>
+      
       <MenuItem 
         className={ needAttention ? 'needAttention': ''}
         onClick={needAttentionHandler}>

@@ -11,6 +11,12 @@ const CustomDrawer = props => {
 
     <Drawer
     open={state}
+    PaperProps = {{
+      sx: {
+        backgroundColor: 'var(--L0-glass)',
+        backdropFilter: 'var(--blurFilter)'
+      }
+    }}
     onClose={toggleDrawer(false)}
     >
       <Box
