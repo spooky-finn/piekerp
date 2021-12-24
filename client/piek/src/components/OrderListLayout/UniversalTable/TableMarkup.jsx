@@ -25,17 +25,17 @@ export default function Table({columns, data, className, showUnpaid }){
     if (data.length === 0) return null;
    return (
      <>
-    <table className={`${mainsass.tableMain} ${className}`} {...getTableProps()}>
-      <thead>
+    <div className={`${mainsass.tableMain} ${className} ${mainsass.table}`} {...getTableProps()}>
+      <div className={mainsass.thead}>
         {headerGroups.map((headerGroup, i) => (
-          <tr key={i} {...headerGroup.getHeaderGroupProps()}>
+          <div className={mainsass.tr} key={i} {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column, i) => (
-              <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+              <div  className={mainsass.th} {...column.getHeaderProps()}>{column.render('Header')}</div>
             ))}
-          </tr>
+          </div>
         ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
+      </div>
+      <div {...getTableBodyProps()} className={mainsass.tbody}>
         {rows.map((row, i) => {
           prepareRow(row)
 
@@ -43,13 +43,13 @@ export default function Table({columns, data, className, showUnpaid }){
           return (
               <Link to={`/orders/${OrderID}`} className={`${statusHighlighting(row.original, showUnpaid)} ${mainsass.tableRow}`} {...row.getRowProps()}>
               {row.cells.map((cell, i) => {
-                return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                return <div  className={mainsass.td} {...cell.getCellProps()}>{cell.render('Cell')}</div>
               })}
               </Link>
           )
         })}
-      </tbody>
-    </table>
+      </div>
+    </div>
     </>
   )
 }

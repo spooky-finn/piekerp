@@ -15,9 +15,11 @@ const styles = {
   },
   input : {
     border: 'none',
-    flexGrow: 1,
+    flexGrow: '1',
     background: 'transparent',
     color: 'var(--highContrast)',
+    fontSize: '.9rem',
+    fontWeight: 600
   }
 }  
 
@@ -25,9 +27,17 @@ const TableSearch = (props) => {
   const {placeholder, onChange, defaultValue, disableAutoFocus} = props
    return (
     <div style={styles.wrapper}>
-    <UilSearch style={styles.svg}/>
-    <input style={styles.input} type='text' placeholder={placeholder} onChange={onChange} autoFocus={disableAutoFocus? false : true} defaultValue={defaultValue}/>
-</div>
+      <UilSearch style={styles.svg}/>
+      
+      <input 
+      style={styles.input} 
+      type='text' 
+      placeholder={placeholder} 
+      onChange={onChange} 
+      autoFocus={disableAutoFocus? false : true} 
+      defaultValue={defaultValue}
+      />
+    </div>
    )
 }
 
