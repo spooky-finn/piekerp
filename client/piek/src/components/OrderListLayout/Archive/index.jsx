@@ -45,10 +45,12 @@ const Archive = () => {
     dispatch({ type: 'reqOrderStatus', payload: event.target.value })
   };
 
-  const { data = [] } = useQuery(GET_ARCHIVED_SEARCH_ORDERS, { variables: {
+  const { data = [], error } = useQuery(GET_ARCHIVED_SEARCH_ORDERS, { variables: {
     keyword: '%' + state.searchKeyword + '%',
     OrderStatus: state.reqOrderStatus
   }})
+
+  if (error) console.error(error);
 
   var columns = useMemo(
     () => [...columnsList], []
