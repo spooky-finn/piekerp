@@ -22,7 +22,7 @@ import { isFileOnDropzone } from "./Dropzone";
 //ui
 import './sass/index.sass';
 import { Typography, Button, Box } from '@mui/material'
-import { UilPlus, UilEditAlt, UilEllipsisH } from '@iconscout/react-unicons';
+import { UilPlus, UilLock, UilUnlock, UilEllipsisH } from '@iconscout/react-unicons';
 import OS from "../_core/OrderStatus";
 import US from "../_core/UserStatus";
 
@@ -109,9 +109,12 @@ const OrderLayout = (props) => {
                   <Button 
                   variant = "iconic" 
                   onClick = {() => setEditState(!editState)}>
-                      <UilEditAlt/>
+                      {editState ? <UilUnlock/> : <UilLock/> }
                   </Button>
                 }
+
+                {/* Hamburger menu. Didnt shown when order into archive */}
+                {[OS.ordRegistration, OS.ordProduction].includes(data.erp_Orders[0].OrderStatusID)  &&
                   <Button 
                   aria-haspopup = "true" 
                   ref           = {OAMenuRef} 
@@ -119,7 +122,10 @@ const OrderLayout = (props) => {
                   onClick       = {() => setOAMenu(true)}>
                       <UilEllipsisH/>
                   </Button>
-                </Box>}
+                  }
+
+                </Box>
+                }
               </div>
 
               <div className="Composition">  

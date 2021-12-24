@@ -18,7 +18,7 @@ export const muicomponents = (theme) => ({
     MuiMenu: {
       styleOverrides: {
         paper: {
-          // background: 'var(--L0) !important',
+          border: '1px solid var(--border)',
           boxShadow: '0 10px 50px 0 var(--bs) !important',
           borderRadius: 'var(--br)',
         }
