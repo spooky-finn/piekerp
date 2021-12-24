@@ -19,7 +19,7 @@ const Priority = ({ users, state, dispatch }) => {
         return new Date(a.ShippingDate) - new Date(b.ShippingDate);
     })
 
-    const filtredData = filter(sortedData, state.searchKeyword, state.managerFilter)
+    const filtredData = filter(sortedData, state.search.keyword, state.managerFilter)
 
     return(
         <div className={mainsass.tableWrapper}>

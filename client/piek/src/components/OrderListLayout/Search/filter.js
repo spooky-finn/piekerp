@@ -1,4 +1,4 @@
-function filteringAlg(keyword, ...rest){
+function compare(keyword, ...rest){
     var finded = false
     rest.map( (arg) => {
         if (arg && arg.toLowerCase().includes(keyword.toLowerCase())) finded = true
@@ -13,7 +13,7 @@ export const filter = (array, keyword, managerFilter = 0) => {
 
     // применить поиск по ключевому слову
     if (keyword !== '') {
-        result = array.filter( (order) => filteringAlg(keyword, order.InvoiceNumber, order.Entity ))         
+        result = array.filter( (order) => compare(keyword, order.InvoiceNumber, order.Entity ))         
     }
     else result = array
 
@@ -26,4 +26,9 @@ export const filter = (array, keyword, managerFilter = 0) => {
         return newOrders
     }
     else return result
+}
+
+
+export const search_alg = (array, keyword) => {
+    return array.filter( (order) => compare( keyword, order.InvoiceNumber, order.Entity )) 
 }

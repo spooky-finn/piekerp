@@ -33,7 +33,8 @@ query MyQuery($OrderID: Int!) {
       OrderItemID
       OrderID
       Quantity
-      SerialNumber
+      SerialStarts
+      SerialEnds
     }
     CheckListUnits(order_by: {CheckListUnitID: desc}) {
       CheckListUnitID

@@ -17,6 +17,7 @@ html{
     --textInvert: rgba(233, 233, 233);
     
     --accent: #4361e4;
+    --accent-hover: #3953c5;
     --danger: #e5534b;
     --accentLight: #E7E9FB;
     --border: #e0e2e7;
@@ -50,6 +51,7 @@ html.dark {
 
 
     --accent:      #a2b3ff;
+    --accent-hover: #8897d6;
     --accentLight: #43435c;
     --border:      rgba( 255 , 255 , 255 , .06 );
     --borderLight: rgba( 255 , 255 , 255 , .04 );

@@ -104,13 +104,13 @@ const OrderComposition = props => {
               <span className={sass.index}>{index+1}</span>
               <Typography color='textPrimary' className={sass.name}> {el.Name} </Typography>
               <span  className={sass.quantity}> {el.Quantity}</span>
-              <OrderItemActions
+              {/* <OrderItemActions
                   {...props}
                   item={el}
                   editItemHandler={editItemHandler}
                   deleteItemHandler={deleteItemHandler}
                   updateItem={updateOrderItemMetadataMutation}
-              />
+              /> */}
 
               <div className={sass.fullName}> { el.FullName }</div>
 

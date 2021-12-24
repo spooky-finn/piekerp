@@ -35,14 +35,16 @@ const StyledTab = styled((props) => <Tab {...props} />)(
     ({ theme }) => ({
       textTransform: 'none',
       fontWeight: 500,
-      color: theme.palette.text.primary,
       fontSize: theme.typography.pxToRem(14),
       borderRight: '1px solid transparent',
       borderLeft: '1px solid transparent',
       minHeight: '10px',
+      color: 'var(--lowContrast)',
       '&.Mui-selected': {
+        boxShadow: '0 0 10px 5px var(--border)',
+        opacity: 1,
         backgroundColor: 'var(--L0)',
-        color: theme.palette.primary,
+        color: 'var(--accent) !important',
         borderRight: '1px solid var(--border)',
         borderLeft: '1px solid var(--border)',
       },
