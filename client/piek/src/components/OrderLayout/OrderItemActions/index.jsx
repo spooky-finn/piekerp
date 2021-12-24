@@ -19,18 +19,20 @@ const OrderItemActions = ({ editState, item, editItemHandler, deleteItemHandler,
   const handleClose = () => {
     setAnchorEl(null);
 
-    if (item.SerialNumber !== state.serialNumber || item.Fitter !== state.fitter){
-      updateItem({ variables: {
-        'OrderItemID': item.OrderItemID,
-        'Fitter': state.fitter,
-        'SerialNumber': state.serialNumber.toString()
-      } })
-    }
+    // if (item.SerialNumber !== state.serialNumber || item.Fitter !== state.fitter){
+    //   updateItem({ variables: {
+    //     'OrderItemID': item.OrderItemID,
+    //     'Fitter': state.fitter,
+    //     'SerialNumber': state.serialNumber.toString()
+    //   } })
+    // }
   };
     
   return (
   <div className='noprint'>
-    <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} size='small'>
+    <Button sx={{
+      minWidth: '20px'
+    }} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} size='small'>
       <UilEllipsisV className={sass.moreVertIcon}/>
     </Button>
     <Menu
@@ -40,7 +42,7 @@ const OrderItemActions = ({ editState, item, editItemHandler, deleteItemHandler,
       open     = {Boolean(anchorEl)}
       onClose  = {handleClose}
     >
-      <div className={sass.inputListItem} >
+      {/* <div className={sass.inputListItem} >
         <TextField 
           type="number"
           label="Серийный номер" 
@@ -51,7 +53,7 @@ const OrderItemActions = ({ editState, item, editItemHandler, deleteItemHandler,
           ...prevState,
           'serialNumber': e.target.value
           }))}
-          defaultValue={state.serialNumber}
+          // defaultValue={state.serialNumber}
           />
       </div>
 
@@ -66,7 +68,7 @@ const OrderItemActions = ({ editState, item, editItemHandler, deleteItemHandler,
           }))}
           defaultValue={state.fitter}
         />
-      </div>
+      </div> */}
 
 
       {editState && (
