@@ -20,13 +20,16 @@ html{
     --accent-hover: #3953c5;
     --danger: #e5534b;
     --accentLight: #E7E9FB;
-    --border: #e0e2e7;
-    --borderLight: #e9ebf1de;
+
+    --shadow-color: #e0e2e7;
+    --border: 1px solid #e0e2e7;
+    --border-color: #e0e2e7;
+    --border-colorLight: #e9ebf1de;
 
 
     --br10: 6px;
     --br: 15px;
-    --bs: #ccccce;
+    --shadow-color: #ccccce;
 
     --awaitingDispatch: #66cf03;
     --needAttention: #e60909;
@@ -53,9 +56,11 @@ html.dark {
     --accent:      #a2b3ff;
     --accent-hover: #8897d6;
     --accentLight: #43435c;
-    --border:      rgba( 255 , 255 , 255 , .06 );
-    --borderLight: rgba( 255 , 255 , 255 , .04 );
-    --bs: #0e0e0e;
+
+    --border: 1px solid rgba( 255 , 255 , 255 , .06 );
+    --border-color:      rgba( 255 , 255 , 255 , .06 );
+    --border-colorLight: rgba( 255 , 255 , 255 , .04 );
+    --shadow-color: #1a1a1a;
 
     --awaitingDispatch: #79cc5de5;
     --needAttention:    #db0404;

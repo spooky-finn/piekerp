@@ -1,37 +1,50 @@
 .wrapper
-  padding: .5rem 1rem
+  padding: .8rem .8rem
 
 .notificationUnit
-  padding: 10px 0
+  margin: 10px 0
+  border-radius: var(--br10)
+  background: var(--L1-glass) !important
 
 .unreadedWrapper
   margin: 1rem 0
   padding: .7rem 1.2rem 1rem
-  border-radius: var(--br)
-  border: 1px dashed var(--lowContrast)
+  border-left: 2px solid var(--lowContrast)
 
 .notificationHeader
   display: grid
   grid-template-columns: auto auto
   align-items: end
-  grid-template-areas:  "sender timstamp" "entity null"
+  grid-template-areas:  "sender timstamp" ". entity"
+  padding: 5px 12px
 
 .item1 
   grid-area: sender
+  font-weight: 600 !important
   color: var(--hightContrast)
-  font-size: .9rem !important
+  .normal
+    font-weight: 400
+
+.item3, .item1
+  font-size: .85rem !important
 
 .item2 
   grid-area: timstamp
   text-align: right
 
 .item3 
+  text-align: right
   grid-area: entity
+  text-decoration: none
+  &:hover
+    text-decoration: underline
+    h6
+      color: var(--accent) !important
 
 .commentContent
   padding: 10px 10px
-  background: var(--L1-glass) !important
-  border-left: 1px solid var(--accent)
+  background: var(--L2-glass) !important
+  border-radius: 0 0 var(--br10) var(--br10)
   font-size: .9rem
-  &:hover
-    background: var(--L2-glass) !important
+  p, span, div, a
+    color: var(--highContrast) !important

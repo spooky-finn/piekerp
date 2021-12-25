@@ -3,8 +3,9 @@ export const muicomponents = (theme) => ({
     MuiDialog: {
       styleOverrides: {
         paper: {
-          background: 'var(--L0) !important',
+          background: 'var(--LI) !important',
           borderRadius: 'var(--br) !important',
+          border: 'var(--border)',
         }
       }
     },
@@ -12,14 +13,35 @@ export const muicomponents = (theme) => ({
       styleOverrides: {
         root: {
           color: theme.palette.text.primary,
+          background: 'var(--L2)',
+          borderBottom: 'var(--border)',
+          padding: '11px 1rem',
+          fontSize: '.9rem'
+        }
+      }
+    },
+    MuiDialogContent:{
+      styleOverrides: {
+        root: {
+          background: 'var(--L1)',
+          padding: '1rem 1rem .5rem !important',
+        }
+      }
+    },
+    MuiDialogActions: {
+      styleOverrides: {
+        root: {
+          background: 'var(--L2)',
+          borderTop: 'var(--border)',
+          padding: '5px 1rem !important',
         }
       }
     },
     MuiMenu: {
       styleOverrides: {
         paper: {
-          border: '1px solid var(--border)',
-          boxShadow: '0 10px 50px 0 var(--bs) !important',
+          border: 'var(--border)',
+          boxShadow: '0 10px 50px 0 var(--shadow-color) !important',
           borderRadius: 'var(--br)',
         }
       }
@@ -117,7 +139,7 @@ export const muicomponents = (theme) => ({
       styleOverrides: {
         root: {
           background: 'var(--L1)',
-          border: '1px solid var(--borderLight)',
+          border: '1px solid var(--border-colorLight)',
           borderRadius: '10px',
           ':hover': {
             background: 'var(--L1)',
@@ -181,7 +203,7 @@ export const muicomponents = (theme) => ({
           background: 'var(--L0-glass)',
           margin: '.6rem',
           height: '98%',
-          border: '1px solid var(--border)',
+          border: 'var(--lowContrast)',
           borderRadius: 'var(--br)',
         }
       }
