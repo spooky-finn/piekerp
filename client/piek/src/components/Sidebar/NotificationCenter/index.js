@@ -55,20 +55,24 @@ const NotificationCenter = props => {
     className={sass.notificationUnit}
     key={e.ID}>
       <div className={sass.notificationHeader}>
-        <Typography className={sass.item1}>{e.Comment.User.FirstName} {e.Comment.User.LastName}</Typography>
+        <Typography className={sass.item1}>{e.Comment.User.FirstName} {e.Comment.User.LastName} <span className={sass.normal}>упомянул вас</span></Typography>
         <Typography variant='subtitle2' className={sass.item2}>{moment(e.Comment.Timestamp).format('DD MMM H:mm')}</Typography>
-        <Typography variant='subtitle2' className={sass.item3}>{e.Order.Entity}__{e.Order.City}</Typography>
+
+
+          <Link 
+        to={`/orders/${e.Order.OrderID}`} 
+        onClick={() => jumpToOrderHandler(e.ID)}
+        className={sass.item3}
+        >
+           <Typography variant='subtitle2'>{e.Order.Entity}__{e.Order.City}</Typography>
+        </Link>
       </div>
-      <Link 
-      to={`/orders/${e.Order.OrderID}`} 
-      onClick={() => jumpToOrderHandler(e.ID)}
-      style={{ textDecoration: 'none', color: 'var(--highContrast)'}}>
+
         <div 
-        className={sass.commentContent}
-        dangerouslySetInnerHTML={{ __html: e.Comment.Text }}
+          className={sass.commentContent}
+          dangerouslySetInnerHTML={{ __html: e.Comment.Text }}
         >
         </div>
-      </Link>
     </Box>
   )
 

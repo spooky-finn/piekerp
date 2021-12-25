@@ -22,7 +22,7 @@
   border-radius: 10px
   white-space: pre-wrap
   color: var(--highContrast) !important
-  border: 1px solid var(--border)
+  border: var(--border)
   background: var(--L0)
   font-size: .9rem !important
   div:first-of-type
@@ -42,7 +42,7 @@
   text-decoration: none
   min-height: 20px
   &:hover
-    background: var(--borderLight) !important
+    background: var(--border-colorLight) !important
     border-radius: 5px
   &::after
     content: ''
@@ -84,7 +84,7 @@
 
 .commentUnit
   margin: 10px 10px 20px
-  border: 1px solid var(--border)
+  border: var(--border)
   line-height: 1.4
   border-radius: var(--br10)
   overflow: hidden
@@ -108,7 +108,7 @@
   display: flex
   background: var(--L1)
   padding: .2rem 10px
-  border-bottom: 1px solid var(--border)
+  border-bottom: var(--border)
   .sender 
     color: var(--highContrast)
     font-weight: 500

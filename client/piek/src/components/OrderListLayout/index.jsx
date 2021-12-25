@@ -41,12 +41,12 @@ const StyledTab = styled((props) => <Tab {...props} />)(
       minHeight: '10px',
       color: 'var(--lowContrast)',
       '&.Mui-selected': {
-        boxShadow: '0 0 10px 5px var(--border)',
+        boxShadow: '0 0 15px 0px var(--shadow-color)',
         opacity: 1,
         backgroundColor: 'var(--L0)',
         color: 'var(--accent) !important',
-        borderRight: '1px solid var(--border)',
-        borderLeft: '1px solid var(--border)',
+        borderRight: 'var(--border)',
+        borderLeft: 'var(--border)',
       },
       '&:first-of-type':{
         borderLeft: 'none !important',

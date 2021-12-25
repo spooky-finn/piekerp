@@ -15,23 +15,16 @@ import RightInfoPanel             from "./RightInfoPanel/";
 import EditRightInfoPanel     from "./RightInfoPanel/EditRightInfoPanel";
 import Docs             from './Docs/Docs';
 import CommentsList     from "./Comments/CommentsList";
-import OrderActionsMenu from "./OrderActions/OrderActionsMenu";
+import OrderHeader      from "./OrderHeader"
 
 import { isFileOnDropzone } from "./Dropzone";
 
 //ui
 import './sass/index.sass';
-import { Typography, Button, Box } from '@mui/material'
-import { UilPlus, UilLock, UilUnlock, UilEllipsisH } from '@iconscout/react-unicons';
-import OS from "../_core/OrderStatus";
+
 import US from "../_core/UserStatus";
 
-function orderStatus(data){
-    // add a note to the title if this is a pre-order
-    if (data.OrderStatusID === OS.ordRegistration) return ' | Предзаказ';
-    if (data.OrderStatusID === OS.ordArchived) return ' | В архиве';
-    if ([ OS.reclInbox, OS.reclDecision , OS.reclProduction ].includes(data.OrderStatusID)) return ' | Рекламация';
-}
+
 
 const OrderLayout = (props) => {
     const {store} = useContext(Context);
@@ -42,9 +35,6 @@ const OrderLayout = (props) => {
     // Add new Order Item Dialog
     const [OIDialog, setOIDialog] = useState(false)
 
-    //OrderActions Dropdown menu
-    const [OAMenu, setOAMenu] = useState(false);
-    const OAMenuRef = useRef(null);
 
     const [pushDocs] = useMutation(PUSH_DOCS_ARRAY);
     const orderID = useParams().id
@@ -77,10 +67,6 @@ const OrderLayout = (props) => {
     const { data: users = []} = useQuery(GET_USERS);
     const {getRootProps, isDragActive} = useDropzone({className: 'dropzone', onDrop: S3Upload });
     
-    function showOrderActions(){
-        if ([ US.general, US.management , US.bookkeeping ].includes(store.user.AccessLevelID)) return true
-    }
-
     return(
     <div> 
         {isFileOnDropzone(isDragActive)}
@@ -89,44 +75,14 @@ const OrderLayout = (props) => {
 
           <div className='LeftSideContent'>
 
-              <div className="page-header">
-                <Typography sx={{ fontWeight: 600, fontSize: '1rem'}}>
-                    {data.erp_Orders[0].Entity} __ {data.erp_Orders[0].City} 
-                    <span className="preorderTitle">{orderStatus(data.erp_Orders[0])}</span>
-                </Typography>
-
-                {/* Показывать Кнопки редактирования заказа только для определенных групп юзеров */}
-                { <Box className='orderActions_box noprint'>
-                  {editState && 
-                  <Button 
-                  variant = "iconic" 
-                  onClick = {() => setOIDialog(true)}>
-                    <UilPlus/>
-                  </Button>
-                  }
-                  
-                 {[ US.general, US.management , US.bookkeeping ].includes(store.user.AccessLevelID) && 
-                  <Button 
-                  variant = "iconic" 
-                  onClick = {() => setEditState(!editState)}>
-                      {editState ? <UilUnlock/> : <UilLock/> }
-                  </Button>
-                }
-
-                {/* Hamburger menu. Didnt shown when order into archive */}
-                {[OS.ordRegistration, OS.ordProduction].includes(data.erp_Orders[0].OrderStatusID)  &&
-                  <Button 
-                  aria-haspopup = "true" 
-                  ref           = {OAMenuRef} 
-                  variant       = "iconic" 
-                  onClick       = {() => setOAMenu(true)}>
-                      <UilEllipsisH/>
-                  </Button>
-                  }
-
-                </Box>
-                }
-              </div>
+              <OrderHeader
+              data = {data.erp_Orders[0]}
+              editState = {editState}
+              setEditState = {setEditState}
+              setOIDialog = {setOIDialog}
+              store = {store}
+              refetch = {refetch}
+              />
 
               <div className="Composition">  
                 <Composition 
@@ -164,15 +120,6 @@ const OrderLayout = (props) => {
             />
             )}
           </div>
-
-          <OrderActionsMenu
-          refetch   = {refetch}
-          order     = {data.erp_Orders[0]}
-          OAMenu    = {OAMenu} 
-          setOAMenu = {setOAMenu}
-          OAMenuRef = {OAMenuRef}
-          />
-
         </section> 
         </>): null }
     </div>
