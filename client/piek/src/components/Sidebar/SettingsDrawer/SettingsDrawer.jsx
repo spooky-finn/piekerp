@@ -23,7 +23,7 @@ import { SystemPreferTheme } from '../../_core/SystemPreferTheme';
 
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
   '& .MuiToggleButtonGroup-grouped': {
-    border: '1px solid var(--border)',
+    border: 'var(--border)',
     padding: 8,
     textTransform: 'none',
     '&:not(:first-of-type)': {

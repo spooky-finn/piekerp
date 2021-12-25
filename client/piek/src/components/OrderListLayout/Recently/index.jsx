@@ -19,7 +19,7 @@ const styles = {
     textTransform: 'none'
   },
   table: {
-    borderTop: '1px solid var(--border)'
+    borderTop: 'var(--border)'
   }
 }
 

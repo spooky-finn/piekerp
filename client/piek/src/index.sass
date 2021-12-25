@@ -15,6 +15,7 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button 
   -webkit-appearance: none
   margin: 0
+
 input:active, input:focus
     outline: none !important
 
@@ -22,8 +23,8 @@ input:active, input:focus
 input[type=number] 
   -moz-appearance: textfield
 
-[contenteditable]
-  outline: 0px solid transparent
+// [contenteditable]
+  // outline: 0px solid transparent
 [contentEditable=true]:empty:before
   content: attr(data-ph)
   color: var(--lowContrast)
@@ -46,8 +47,8 @@ input[type=number]
   @media ( min-width: 2000px)
     margin: 0 auto
     width: 1700px 
-    border-left: 1px solid var(--border)
-    border-right: 1px solid var(--border)
+    border-left: var(--border)
+    border-right: var(--border)
 
 
 .action-block
