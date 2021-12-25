@@ -201,10 +201,10 @@ export const muicomponents = (theme) => ({
       styleOverrides: {
         paper: {
           background: 'var(--L0-glass)',
-          margin: '.6rem',
-          height: '98%',
-          border: 'var(--lowContrast)',
-          borderRadius: 'var(--br)',
+          // margin: '.6rem',
+          // height: '98%',
+          // border: 'var(--lowContrast)',
+          // borderRadius: 'var(--br)',
         }
       }
     }
