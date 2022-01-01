@@ -1,4 +1,4 @@
-import  { useMemo, useEffect, useReducer } from 'react'
+import  { useMemo, useReducer } from 'react'
 
 //apollo
 import { useQuery } from '@apollo/client'
@@ -14,9 +14,12 @@ import sass from './sass/attendance.module.sass'
 import TableSearch from '../_core/mui/TableSearch'
 import { Typography } from '@mui/material'
 
+import { monthAdd } from './functions'
+
 // учет рабочего времени
 const Attendance = props => {
     const date = new Date()
+
     function reducer(state, action) {
         switch (action.type) {
 
@@ -34,9 +37,11 @@ const Attendance = props => {
         }
       }
 
+    const defaultDate = monthAdd(date, -1);
+    
     const [state, dispatch] = useReducer(reducer, {
         timeDeduction: 30,
-        selectedMonth: [date.getMonth()-1, date.getFullYear()],
+        selectedMonth: [defaultDate.getMonth(), defaultDate.getFullYear()],
         s_keyword: ''
     });
 
@@ -92,7 +97,7 @@ const Attendance = props => {
         <div className={sass.tableWrapper}>
             <TableSearch onChange={onChangeSearch} disableAutoFocus/>            
 
-            { !loading ? 
+            { !loading && data ? 
                 <Table 
                 columns   = {columns} 
                 data      = {searchResult} 
