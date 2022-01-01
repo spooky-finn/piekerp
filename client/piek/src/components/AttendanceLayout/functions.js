@@ -22,3 +22,16 @@ export function search_alg(user, keyword){
   else if (user.firstname.toLowerCase().startsWith(keyword.toLowerCase())) return true
   else return false
 }
+
+export function monthAdd(date, month) {
+  // функция используется для корректного вычитания месяцев в chooseMonth
+  var temp = date;
+  temp = new Date(date.getFullYear(), date.getMonth(), 1);
+  temp.setMonth(temp.getMonth() + (month + 1));
+  temp.setDate(temp.getDate() - 1); 
+
+  if (date.getDate() < temp.getDate()) { 
+      temp.setDate(date.getDate()); 
+  }
+  return temp;    
+}
