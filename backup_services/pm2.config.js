@@ -7,7 +7,6 @@ module.exports = { apps : [{
     S3_SECRET_ACCESS_KEY: 'ivDdvFGWbXt3xDf7L17PN-5WMKyaOib1dSop66FL',
     S3_ENDPOINT: 's3.yandexcloud.net',
     S3_BUCKET: 'piek-factory-backup',
-    MAX_BACKUPS: 100,
-    RETRY_TIMEOUT: 1000*60
+    MAX_BACKUPS: 100
   },
 }]};
