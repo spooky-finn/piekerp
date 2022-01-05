@@ -7,7 +7,8 @@
 3. Now probably should to delete our database fully if dump contains, in addition to data, also a scheme  `docker exec -i test-hasura_postgres_1 dropdb -p 61000 -U postgres postgres`
 and `docker exec -i test-hasura_postgres_1 createdb -p 61000 -U postgres postgres`
 
-If the postgres was using the standart port you didnt need to specify the port in next command \n
+If the postgres was using the standart port you didnt need to specify the port in next command
+
 4. Restore database into the docker container `cat dump.sql | docker exec -i test-hasura_postgres_1 psql -U postgres -d postgres -p 61000`
 
 
