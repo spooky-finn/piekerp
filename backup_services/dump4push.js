@@ -66,4 +66,4 @@ function dump4push() {
   })
 }
 
-setInterval(dump4push, 1000*60*60*12)
+setInterval(dump4push, process.env.RETRY_TIMEOUT)
