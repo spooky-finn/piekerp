@@ -1,1 +1,1 @@
-#The step by step tytorial to restore database from backup
+# The step by step tytorial to restore database from backup
