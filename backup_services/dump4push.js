@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 require('dotenv').config(); 
-const { readFile } = 'fs';
-const { exec } = 'child_process';
-const { S3 } = 'aws-sdk';
+import { readFile } from 'fs';
+import { exec } from 'child_process';
+import { S3 } from 'aws-sdk';
 
 const s3 = new S3({
     accessKeyId: process.env.S3_ACCESS_KEY_ID,
