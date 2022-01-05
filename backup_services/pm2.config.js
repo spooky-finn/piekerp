@@ -1,6 +1,6 @@
 module.exports = { apps : [{
   name      : 'backup-service',
-  script    : 'postgres_backup_service.js',
+  script    : 'dump4push.js',
   env       : {
     NODE_ENV: 'production',
     S3_ACCESS_KEY_ID: '_cj2xyDZCfVDtmbb7ULh',
