@@ -9,6 +9,6 @@ and `docker exec -i test-hasura_postgres_1 createdb -p 61000 -U postgres postgre
 
 If the postgres was using the standart port you didnt need to specify the port in next command
 
-4. Restore database into the docker container `cat dump.sql | docker exec -i test-hasura_postgres_1 psql -U postgres -d postgres -p 61000`
+5. Restore database into the docker container `cat dump.sql | docker exec -i test-hasura_postgres_1 psql -U postgres -d postgres -p 61000`
 
 
