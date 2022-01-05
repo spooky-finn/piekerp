@@ -63,4 +63,4 @@ function intervalFunc() {
   })
 }
 
-setInterval(intervalFunc, 1000*60*60*12)
+setInterval(intervalFunc, process.env.RETRY_TIMEOUT)
