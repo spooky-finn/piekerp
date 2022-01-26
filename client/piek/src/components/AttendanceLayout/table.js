@@ -16,16 +16,17 @@ export function generateColumns(selectedMonth, timeDeduction){
     {
       Header: 'Итого',
       Cell: row => {
-        var hours = 0;
+        var total_t = 0;
         const duration = row.row.original.intervals
+        
         duration.forEach( interval => {
-          hours += interval.dur 
+          total_t += ((interval.dur / 60) - timeDeduction) / 60
         });
 
         //вычетаем время на обед
-        hours -= timeDeduction/60 * duration.length
-
-        return <div>{hours.toFixed(0)}</div>
+        // total_t -= timeDeduction/60 * duration.length
+        if (total_t < 0) return 0;
+        return <div>{total_t.toFixed(0)}</div>
       }
     }
   ]

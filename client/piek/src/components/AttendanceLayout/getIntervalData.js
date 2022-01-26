@@ -1,12 +1,13 @@
 export function getIntervalData(day, intervals, timeDeduction){
 
   // конвертация float в часы и минуты
-  function convertInterval(number, timeDeduction){
+  function convertInterval(t, timeDeduction){
       //вычетаем время на обед
-      number -= timeDeduction/60
+      t -= timeDeduction * 60
 
-      var hour = Math.floor(number);
-      var decpart = number - hour;
+      t = t / 60 / 60;
+      var hour = Math.floor(t);
+      var decpart = t - hour;
       var min = 1 / 60;
 
       // Round to nearest minute
@@ -40,9 +41,7 @@ export function getIntervalData(day, intervals, timeDeduction){
       if (e.ext) {
         exit = _exit.getHours()+':'+ getMinutes(_exit);
         interval = convertInterval(e.dur, timeDeduction)
-
       }
-
 
       return [entrance, exit, interval]
   }   else return [null, null, null]
