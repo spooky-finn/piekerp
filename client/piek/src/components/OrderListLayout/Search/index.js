@@ -1,6 +1,6 @@
 import sass from './search.module.sass'
 import { FormControl, Select, MenuItem, Box } from '@mui/material';
-import TableSearch from '../../_core/mui/TableSearch'
+import TableSearch from '../../_core/mui/TableSearch/'
 
 import { search_alg } from '../Search/filter';
 

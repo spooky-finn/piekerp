@@ -1,5 +1,5 @@
 
-import { monthAdd } from "./functions";
+import { monthAdd } from "./time_ helpers";
 
 const ReportConfigurator = ({ state, dispatch }) => {
     const date = new Date()
@@ -20,7 +20,7 @@ const ReportConfigurator = ({ state, dispatch }) => {
     const chooseMonth = () => {
         const m = []
         
-        for (var i=0; i< 6; i++) {
+        for (var i=0; i < 9; i++) {
             const suitable = monthAdd(date, -i)
             m.push(
                 <div 
