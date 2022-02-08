@@ -11,10 +11,10 @@ query MyQuery($gte: timestamp!, $lte: timestamp!) {
       firstname
       lastname
       intervals(where: {ent: {_gte: $gte,  _lte: $lte}}) {
+        id 
         ent
         ext
         card
-        dur
       }
     }
   }

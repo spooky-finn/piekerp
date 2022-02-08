@@ -20,7 +20,7 @@ import Select from '@mui/material/Select';
 import OS from '../../_core/OrderStatus'
 import moment from 'moment'
 
-import TableSearch from '../../_core/mui/TableSearch'
+import TableSearch from '../../_core/mui/TableSearch/'
 import { Box } from '@mui/system';
 
 function reducer(state, action) {

@@ -4,17 +4,17 @@ import  { useMemo, useReducer } from 'react'
 import { useQuery } from '@apollo/client'
 import { GET_USERS } from './queries/getUsers' 
 
-import Table, { generateColumns } from './table'
+import Table, { generateColumns } from './Table.jsx'
 import { getVarsForSubscription, search_alg } from './functions'
 
 import './sass/index.sass'
 import ReportConfigurator from './ReportConfigurator'
 import { UilConstructor } from '@iconscout/react-unicons'
 import sass from './sass/attendance.module.sass'
-import TableSearch from '../_core/mui/TableSearch'
+import TableSearch from '../_core/mui/TableSearch/'
 import { Typography } from '@mui/material'
 
-import { monthAdd } from './functions'
+import { monthAdd } from './time_ helpers'
 
 // учет рабочего времени
 const Attendance = props => {
