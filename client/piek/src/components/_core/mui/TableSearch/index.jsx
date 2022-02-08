@@ -1,36 +1,15 @@
 import { UilSearch } from '@iconscout/react-unicons'
 import PropTypes from 'prop-types';
+import sass from './table_search.module.sass'
 
-const styles = {
-  wrapper: {
-    display: 'flex',
-    height: '50px',
-    alignItems: 'center',
-  },
-  svg : {
-    padding: '0 12px',
-    width: '18px',
-    color: 'var(--highContrast)',
-    opacity: .3,
-  },
-  input : {
-    border: 'none',
-    flexGrow: '1',
-    background: 'transparent',
-    color: 'var(--highContrast)',
-    fontSize: '.9rem',
-    fontWeight: 600
-  }
-}  
 
 const TableSearch = (props) => {
   const {placeholder, onChange, defaultValue, disableAutoFocus} = props
    return (
-    <div style={styles.wrapper}>
-      <UilSearch style={styles.svg}/>
+    <div className={sass.table_search_wrapper}>
+      <UilSearch/>
       
       <input 
-      style={styles.input} 
       type='text' 
       placeholder={placeholder} 
       onChange={onChange} 
