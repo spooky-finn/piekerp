@@ -1,0 +1,54 @@
+.filter
+    margin-left: auto
+    display: flex
+    align-items: center
+    margin-right: 1em
+    .filterPlaceholder
+        color: var(--lowContrast)
+        font-size: .8rem
+        font-weight: 300
+        padding: 0 8px 
+
+
+.filterIndicator
+    position: relative
+    font-size: .8rem
+    padding-left: 1em
+    margin-left: 2.1em
+    color: var(--accent)
+    p
+        margin-top: 0
+    .circle 
+        width: 7px
+        height: 7px
+        background-color: var(--accent)
+        border-radius: 50%
+        position: absolute
+        top: 50%
+        transform: translateY(-50%)
+        left: 0
+        animation: pulsate 1.5s ease-out
+        animation-iteration-count: infinite
+    
+    @keyframes pulsate 
+        0% 
+            opacity: 0.0
+        50% 
+            opacity: 1.0
+        100% 
+            opacity: 0.0
+    
+.adjacentSearchWrap
+    display: flex
+    align-items: center
+    align-self: center
+    justify-content: center
+    padding: .5rem .7rem
+    margin: 0 .3rem
+    background: var(--accent)
+    color: var(--textInvert)
+    font-weight: 600
+    font-size: .8rem
+    border-radius: var(--br)
+    &:hover
+        background: var(--accent-hover)

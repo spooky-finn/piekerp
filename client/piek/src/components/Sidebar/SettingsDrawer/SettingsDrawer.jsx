@@ -18,7 +18,7 @@ import {
 } from '@mui/material/';
 
 import sass from './index.module.sass'
-import { SystemPreferTheme } from '../../_core/SystemPreferTheme';
+import { SystemPreferTheme } from '../../../utils/SystemPreferTheme';
 
 
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
