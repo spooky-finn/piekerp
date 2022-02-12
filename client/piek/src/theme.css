@@ -37,7 +37,7 @@ html{
     --blurFilter: blur(20px) saturate(160%) contrast(85%) brightness(170%);
 } 
 html.dark {
-    --LI: rgb(38 39 43);
+    --LI: rgb(17, 17, 19);
     --L0: rgb(30 30 30);
     --L1: rgb(38 38 38);  
     --L2: rgb(66 66 66);
