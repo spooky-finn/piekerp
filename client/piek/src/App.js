@@ -8,10 +8,9 @@ import BaseLayout from './components/BaseLayout';
 import Sidebar from './components/Sidebar/Sidebar';
 
 
-import {getCookie, SystemPreferTheme} from './components/_core/SystemPreferTheme'
+import {getCookie, SystemPreferTheme} from './utils/SystemPreferTheme'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { muicomponents } from './materialStyles'
-import { normalizeUnits } from 'moment';
 
 function App() {  
   const { store } = useContext(Context);

@@ -1,0 +1,49 @@
+.reportConfigurator
+
+    background: var(--L2)
+    border: var(--border)
+    margin: 0 .5rem .5rem
+    padding: .2rem
+    border-radius: var(--br)
+    width: fit-content
+
+    display: flex
+    align-items: center
+    font-size: 14px
+
+
+    .chooseMonth
+        padding: 5px
+        display: flex
+        height: fit-content
+        border-bottom: 2px solid transparent
+        div
+            margin: 5px 7px 
+            color: var(--lowContrast)
+            width: fit-content
+
+        .active
+            color: var(--accent)
+            border-bottom: 2px solid var(--accent)
+
+    .arguments
+        display: grid
+        grid-auto-flow: column
+        font-size: .9em
+  
+        .wrap
+            border-left: var(--border)
+            border-radius: 0
+            padding: 15px 1rem 
+            span
+                color: var(--lowContrast)
+            input 
+                margin: 0 7px
+                box-sizing: border-box
+                background: inherit
+                border: none
+                font-weight: 600
+                color: var(--accent)
+                height: 100%
+                width: 25px
+                outline: none !important

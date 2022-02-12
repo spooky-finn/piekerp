@@ -1,0 +1,27 @@
+.managerFilter-indicator
+    position: relative
+    font-size: .8rem
+    margin: 1rem
+    padding-left: 1rem
+    color: var(--accent)
+    p
+        margin-bottom: 0
+    .circle 
+        width: 7px
+        height: 7px
+        background-color: var(--accent)
+        border-radius: 50%
+        position: absolute
+        top: 50%
+        transform: translateY(-50%)
+        left: 0
+        animation: pulsate 1.5s ease-out
+        animation-iteration-count: infinite
+    
+    @keyframes pulsate 
+        0% 
+            opacity: 0.0
+        50% 
+            opacity: 1.0
+        100% 
+            opacity: 0.0

@@ -1,0 +1,104 @@
+.tableRow
+    display: table-row !important
+    text-decoration: none
+    div
+        vertical-align: middle
+
+.table
+    display: table 
+.tbody
+    display: table-row-group 
+.thead
+    display: table-header-group
+.tr
+    display: table-row
+.td
+    display: table-cell
+.th
+    display: table-cell
+
+.tableWrapper 
+    display: table
+    width: 100%
+    margin-bottom: 2em
+    box-sizing: border-box
+    .tableFooter
+        padding: .7em
+        background: var(--L0)
+    .table .thead
+        border-top: var(--border)
+    .table .td:first-of-type
+        border-left: none !important
+    .table .td:last-of-type
+        border-right: none !important
+  
+.tableMain
+    border-top: var(--border)
+    width: 100%
+    border-spacing: 0
+    .thead .th
+        color: var(--lowContrast)
+        font-size: .7rem
+        font-weight: 500
+        text-align: left
+        padding: 10px 0
+    .thead .th:last-of-type
+        padding: 0 
+
+    .tbody .td:first-of-type
+        text-align: center
+        font-size: .7rem
+
+    .tbody .td
+        padding: 6px 5px
+        color: var(--lowContrast)
+        border-bottom: var(--border)
+        font-size: .9rem
+   
+    .tbody a .td:nth-of-type(2),
+    .tbody a .td:nth-of-type(3)
+        opacity: .94
+        font-family: 'IBM Plex Mono'
+        text-decoration: none
+        color: var(--highContrast)
+        font-size: 1rem
+    
+    .td:nth-of-type(4),
+    .th:nth-of-type(4)
+        border-left: var(--border)
+        padding-left: 15px
+    .td:nth-of-type(4)
+        color: var(--highContrast)
+    .tbody a:hover
+        background: var(--LI)
+    
+
+.awaitingDispatch,
+.needAttention,
+.unpaidOrder
+    position: relative
+    .td:first-of-type::before
+        content: ''
+        position: absolute
+        top: 0
+        bottom: 0
+        left: 0
+        width: 4px
+        
+
+.awaitingDispatch
+    .td:first-of-type::before
+        background: var(--awaitingDispatch) !important
+
+.needAttention
+    .td:first-of-type::before
+        background: var(--needAttention) !important
+
+.unpaidOrder
+     .td:first-of-type::before
+        background: #ffd000
+  
+
+.customerTableInfo
+    div:first-of-type
+        color: var(--highContrast)

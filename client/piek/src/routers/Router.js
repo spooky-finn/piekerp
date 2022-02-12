@@ -1,11 +1,11 @@
 import {Switch, Route, Redirect} from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
 
-import LoginForm from '../components/LoginForm';
-import OrderListLayout from "../components/OrderListLayout";
-import OrderLayout from "../components/OrderLayout";
-import Attendance from '../components/AttendanceLayout'
-import Reclamation from "../components/ReclamationLayout";
+import LoginForm from '../pages/LoginPage';
+import OrderListLayout from "../pages/OrderListPage";
+import OrderLayout from "../pages/OrderDetailPage";
+import Attendance from '../pages/AttendancePage'
+import Reclamation from "../pages/ReclamationPage";
 
 const AppRouter = () => {
     return(
