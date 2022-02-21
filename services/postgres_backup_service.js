@@ -59,10 +59,8 @@ function main() {
 
     exec(execCont, (err, stdout, stderr) => {
         if (err || stderr) console.log(err, stderr)
-
         else{
             console.log('pg dump created.');
-            uploadFile('dump.sql')
             
             // Выгружаем дамп в объектное хранилище
             fs.readFile('dump.sql', { encoding: 'utf-8' }, (err, data) => {
