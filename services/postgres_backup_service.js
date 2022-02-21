@@ -13,6 +13,7 @@ const s3 = new AWS.S3({
 });
 
 const uploadFile = (fileName) => {
+   console.log(process.env.S3_BUCKET);
   fs.readFile(fileName, {encoding: 'utf-8'}, (err, data) => {
      if (err) throw err;
      console.log(data);
