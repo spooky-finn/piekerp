@@ -1,5 +1,4 @@
-const dotenv = require('dotenv');
-dotenv.config({ path: `../.env` });
+require('dotenv').config();
 
 console.log("Express tsarted on with: ", process.env.S3_BUCKET)
 
