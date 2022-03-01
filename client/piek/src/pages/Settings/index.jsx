@@ -55,6 +55,10 @@ const Settings = (props) => {
             </div>
         </GridCard>
 
+        <GridCard title="Источники данных">
+            <div>"gql_endpoint:" {process.env.REACT_APP_HASURA_ENDPOINT}</div>
+        </GridCard>
+
     </div>)
 }
 
