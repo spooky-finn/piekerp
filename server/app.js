@@ -1,7 +1,7 @@
 const dotenv = require('dotenv');
 dotenv.config({ path: `../.env` });
 
-console.log("Express tsarted on with: ", process.env.S3_BUCKET)
+console.log("Express tsarted on with: ", process.env.NODE_ENV)
 
 var express = require('express');
 var path = require('path');
