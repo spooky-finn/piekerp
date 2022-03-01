@@ -6,6 +6,7 @@ import {observer} from 'mobx-react-lite';
 
 import BaseLayout from './components/BaseLayout';
 import Sidebar from './components/Sidebar/Sidebar';
+import { ReactNotifications } from 'react-notifications-component'
 
 
 import {getCookie, SystemPreferTheme} from './utils/SystemPreferTheme'
@@ -73,7 +74,8 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
-        
+        <ReactNotifications/>
+
         { store.inMemoryToken && <Sidebar/> }
           <BaseLayout/>
         

@@ -18,25 +18,26 @@ const PreOrders = ({ state, dispatch }) => {
     const data = state.preOrders
     const [mutationOrderStatus] = useMutation(MUTATE_ORDER_STATUS);
 
-    const onClickTransfer = (order) => {
-        data.splice(data.indexOf(order), 1)
-        dispatch({ type: 'preOrders', payload: data })
+    // const onClickTransfer = (order) => {
+    //     data.splice(data.indexOf(order), 1)
+    //     dispatch({ type: 'preOrders', payload: data })
 
-        mutationOrderStatus({ variables: { 
-            OrderID: order.OrderID, 
-            AcceptanceDate: new Date().toLocaleString("en-US", {timeZone: "Europe/Moscow"}) } 
-        })
-    }
+    //     const res = mutationOrderStatus({ variables: { 
+    //         OrderID: order.OrderID, 
+    //         AcceptanceDate: new Date().toLocaleString("en-US", {timeZone: "Europe/Moscow"}) } 
+    //     })
+    //     console.log(res);
+    // }
 
     var newColumnList = [...columnsList];
     const filtredData = filter(data, state.searchKeyword)
     
-    newColumnList.push({
-        Header: 'Принять',
-        accessor: data => 
-        <Button onClick={() => onClickTransfer(data)} variant='iconic'><UilFileCheck/></Button>
-        ,
-      })
+    // newColumnList.push({
+    //     Header: 'Принять',
+    //     accessor: data => 
+    //     <Button onClick={() => onClickTransfer(data)} variant='iconic'><UilFileCheck/></Button>
+    //     ,
+    //   })
    
     return(
     <div className={`${mainsass.tableWrapper} ${sass.preOrdersTableWrapper}`}>

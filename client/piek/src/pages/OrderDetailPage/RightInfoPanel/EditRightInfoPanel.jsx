@@ -66,7 +66,7 @@ const EditableInfo = ({ data, orderID, refetch, users }) => {
 
 
       if (fields.PaidAmount) insertPayment({ variables: {
-          Date: new Date,
+          Date: new Date(),
           OrderID: orderID,
           PaidAmount: fields.PaidAmount
         }})

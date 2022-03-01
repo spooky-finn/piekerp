@@ -95,7 +95,7 @@ const OrderComposition = props => {
         FullName: state.fullName, }}).then( () => { dispatch({ type: 'reset'}); refetch() })    
   }
   
-    return(<>     
+    return(<div className='Composition'>     
         {data.map( (el, index) => 
         <div
           key={el.OrderItemID}
@@ -161,7 +161,7 @@ const OrderComposition = props => {
               }}>Закрыть</Button></Box>
         </DialogActions>
       </Dialog>
-    </>)
+    </div>)
 }
 
 export default OrderComposition

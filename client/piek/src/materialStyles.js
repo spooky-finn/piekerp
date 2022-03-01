@@ -116,6 +116,18 @@ export const muicomponents = (theme) => ({
         autoComplete: 'off',
       }
     },
+    MuiAutocomplete: {
+      styleOverrides: {
+        root: {
+          borderRadius: 'var(--br) !important',
+        },
+        paper: {
+          background: 'var(--L0) !important',
+          fontSize: '13px',
+          // color: 'var(--lowContrast)',
+        }
+      }
+    },
     MuiInputLabel: {
       styleOverrides: {
         root: {

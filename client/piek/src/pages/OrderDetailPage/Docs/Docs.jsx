@@ -1,5 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
-import { Context } from '../../../index'
+import { useState, useEffect } from 'react';
 
 //apollo
 import { useMutation } from '@apollo/client';
@@ -8,10 +7,9 @@ import { DELETE_ORDER_FILE } from '../queries/MutationOrderDocs';
 import './docs.sass'
 
 import ConfirmDialog from './ConfirmDialog';
-
+import S3Service from '../../../services/S3Service';
 
 const Docs = ({ data, onUpload, editState, refetch }) => {
-    const { store } = useContext(Context)
     const [open, setOpen] = useState(false);
     const [fileOnDelete, setFileOnDelete] = useState();
     const [deleteFileMutation] = useMutation(DELETE_ORDER_FILE)
@@ -36,7 +34,7 @@ const Docs = ({ data, onUpload, editState, refetch }) => {
     const deleteFile = async () => {
         //close modal window
         handleClose();
-        await store.deleteFile(fileOnDelete.Key, deleteFileMutation)
+        await S3Service.deleteFile(fileOnDelete.Key, deleteFileMutation)
         refetch()
     }
 
@@ -51,7 +49,7 @@ const Docs = ({ data, onUpload, editState, refetch }) => {
             )
              // opne file
             else return (
-                <a href={`${process.env.REACT_APP_API_URL}/s3/get/${file.Key}`}
+                <a href={`${process.env.REACT_APP_API_URL}/s3/${file.Key}`}
                     key={file.Key}
                     target='_blank'
                     rel="noreferrer"
@@ -63,13 +61,14 @@ const Docs = ({ data, onUpload, editState, refetch }) => {
         <div className="Docs" >
             <div className='filesContainer'>
                 {attachedFiles}
+                
                 {onUploadFiles()}
             </div>
           
 
             <div>
 
-            <ConfirmDialog 
+                <ConfirmDialog 
                 filename={fileOnDelete?.FileName} 
                 open={open}  
                 handleClose={handleClose}
