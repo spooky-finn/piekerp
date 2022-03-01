@@ -1,12 +1,6 @@
-import {
-  MenuItem,
-  ListItemIcon,
-  ListItemText
-} from '@mui/material/';
+import { MenuItem, ListItemIcon, ListItemText } from '@mui/material/';
 
-import { 
-  UilTrashAlt, 
-} from '@iconscout/react-unicons'
+import { UilTrashAlt } from '@iconscout/react-unicons'
 
 import TransferOrderConfirmDialog from '../Dialogs/TransferOrderConfirmDialog';
 import OS from '../../../../utils/OrderStatus';

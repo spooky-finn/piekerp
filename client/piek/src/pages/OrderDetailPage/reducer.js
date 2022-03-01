@@ -9,5 +9,9 @@ export function reducer(state, action){
 
     case 'reset':
       return initialState
+      
+    default:
+      return initialState
   }
+ 
 }

@@ -1,6 +1,7 @@
 html
     background: var(--L0) !important
-    color: var(--lowContrast)
+    color: var(--highContrast)
+    // font-size: 15px
     @media (max-width: 1000px)
         font-size: .9rem
     
@@ -53,31 +54,6 @@ input[type=number]
     border-right: var(--border)
 
 
-.action-block
-    display: flex
-    justify-content: flex-end
-    margin-left: auto
-    z-index: 100
-    div
-        padding: 10px
-
-.action-icon.active
-    color: var(--accent)
-.action-icon
-    color: var(--highContrast)
-    &:hover
-        color: var(--accent)
-    svg
-      width: 22px
-
-    @media (max-width: 900px)
-        svg
-            width: 20px
-            height: 20px 
-           
-
-
-
 .page-header
     display: flex
     padding: 10px 0
@@ -93,22 +69,6 @@ input[type=number]
         padding-right: 1em
             
 
-.square-button
-    width: 30px
-    height: 30px
-    background: var(--accentLight)
-    border-radius: 7px
-    display: flex
-    justify-content: center
-    align-items: center
-    margin: 0 auto
-    transition: background 50ms linear
-    svg
-        width: 20px
-        color: var(--lowContrast)
-    &:hover  
-        svg 
-            color: var(--accent)
 
 .pageLayout__header
   display: flex

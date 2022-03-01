@@ -2,7 +2,6 @@ import { useState, useContext } from 'react';
 import { Context } from '../../index';
 import { useHistory } from "react-router-dom";
 
-import ReactNotification from 'react-notifications-component'
 import { TextField, Button } from '@mui/material';
 import './LoginForm.sass'
 import { notif } from '../../utils/notification'
@@ -28,7 +27,6 @@ const LoginForm = () => {
     }
 
     return(<>
-      <ReactNotification />
       <div className='loginCard'>
         <TextField
         className='loginInput'

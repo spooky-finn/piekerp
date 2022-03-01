@@ -65,8 +65,6 @@ async getTokens() {
   return responseData.data.erp_Tokens;
 }
 
-
-
 async createToken(UserID, refreshToken) {
   var query = `mutation myMytation($UserID: Int!, $refreshToken: String!){
     insert_erp_Tokens(objects: {UserID: $UserID, RefreshToken: $refreshToken}) {
@@ -141,7 +139,7 @@ async updateToken(tokenID, refreshToken) {
             query: query, 
             variables: {tokenID, refreshToken},
         })
-      })
+      })  
         .then(result => result.json())
         .then(data=> data);
     return responseData;

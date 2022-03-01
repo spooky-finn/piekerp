@@ -105,31 +105,6 @@ export default class Store {
         }
     }
 
-    async uploadFile(acceptedFiles){
-        const formData = new FormData()
-        acceptedFiles.map(file => formData.append('files', file))
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/s3/upload`, formData, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            }
-          });
-        return res
-    }
-
-    async downloadFile(file){
-        await fetch(`${process.env.REACT_APP_API_URL}/s3/get/${file.Key}`)
-    }
-
-    async deleteFile(key, deleteFileMutation){
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/s3/delete/${key}`);
-
-        if (res.status === 200){
-            const hasuraRes = await deleteFileMutation({variables: {
-                'key': key,
-            }})
-            console.log(hasuraRes.data)
-        }
-    }
 
     pageParams = [
         {

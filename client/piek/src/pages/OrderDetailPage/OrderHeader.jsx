@@ -52,8 +52,8 @@ const OrderHeader = (props) => {
           }
 
         </Box>
-
-        <Box ml='10px' className='orderActions_box noprint'>
+        {/* locker */}
+        <Box ml='10px' className='orderActions_box noprint' >
           {[ US.general, US.management , US.bookkeeping ].includes(store.user.AccessLevelID) && 
             <Button 
             variant = "iconic" 
