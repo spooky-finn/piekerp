@@ -24,11 +24,13 @@ COPY --from=client /app/client/build/ ./client/build/
 WORKDIR /app/server/
 COPY server/package*.json ./
 
-COPY .env/ ./
+
 
 RUN npm install npm@latest -g
 RUN npm install 
 COPY server/ ./
+
+COPY .env/ /app/
 
 
 
