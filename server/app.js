@@ -1,6 +1,8 @@
 const dotenv = require('dotenv');
 dotenv.config({ path: `../.env` });
 
+console.log("Express tsarted on with: ", process.env.S3_BUCKET)
+
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -13,6 +15,7 @@ const errorMiddleware = require('./middlewares/error-middleware');
 const CLIENT_BUILD_PATH = '/app/client/build';
 
 var indexRouter = require('./routes/index');
+const e = require('express');
 
 
 var app = express();
