@@ -1,5 +1,5 @@
 const userService = require("../service/user-service");
-const hasuraQuery = require("../hasura-queries/users")
+
 const {validationResult} = require('express-validator');
 const ApiError = require("../exceptions/api-error");
 

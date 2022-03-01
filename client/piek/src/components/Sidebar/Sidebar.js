@@ -1,7 +1,7 @@
 import { NavLink} from 'react-router-dom';
 import './index.sass';
 
-import { UilSortAmountDown, UilWrench, UilConstructor, UilBell} from '@iconscout/react-unicons';
+import { UilSortAmountDown, UilWrench, UilConstructor,  UilSetting} from '@iconscout/react-unicons';
 import NotificationCenter from './NotificationCenter';
 import SettingsDrawer from './SettingsDrawer/SettingsDrawer';
 
@@ -21,9 +21,10 @@ const Sidebar = () => {
           {wrap(<NotificationCenter/>)}
       </div>
 
-      <div className="link">
+      {/* <div className="link">
           {wrap(<SettingsDrawer/>)}
-      </div>
+      </div> */}
+      <NavLink  to='/settings' activeClassName='sidebar-active' className="link"> {wrap(<UilSetting/>) }</NavLink>
 
     </div>
   );

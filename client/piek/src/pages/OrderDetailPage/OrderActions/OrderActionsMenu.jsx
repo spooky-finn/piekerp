@@ -1,8 +1,12 @@
 import { useHistory } from "react-router-dom";
+import { notif } from "../../../utils/notification";
 
 import {
   Menu
 } from '@mui/material/';
+
+import { store } from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css'
 
 //apollo
 import { useMutation } from "@apollo/client"
@@ -97,16 +101,13 @@ const OrderActionsMenu = props => {
 
   // Перекидывает предзаказ в очередность 
   async function transferOrderToPriority(){
-    mutationMoveOrderToPriority({ variables: { 
+    const res = await mutationMoveOrderToPriority({ variables: { 
       OrderID,
       AcceptanceDate: new Date(),
-     }}).then(
-      (res) =>{
-        if (res.data.update_erp_Orders_by_pk.OrderID){
-          refetch()
-        }
-      }
-    )
+     }})
+     if (res.data.update_erp_Orders_by_pk.OrderID){
+      notif('success', 'Добавлен в очередность');
+    }
   }
   
   // для удаления заказа
@@ -147,7 +148,7 @@ const OrderActionsMenu = props => {
         transferOrderTo = {transferOrderToArchive}
         />
         <ReclamationActions
-        order = {order }
+        order = {order}
         transferOrderToArchive ={transferOrderToArchive}
         mutationDeleteOrderHandler ={mutationDeleteOrderHandler}
         />

@@ -1,5 +1,6 @@
-require('dotenv').config()
-var createError = require('http-errors');
+const dotenv = require('dotenv');
+dotenv.config({ path: `../.env` });
+
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');

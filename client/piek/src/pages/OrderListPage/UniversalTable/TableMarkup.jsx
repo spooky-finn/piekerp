@@ -42,9 +42,9 @@ export default function Table({columns, data, className, showUnpaid }){
           const { OrderID } = row.original
           return (
               <Link to={`/orders/${OrderID}`} className={`${statusHighlighting(row.original, showUnpaid)} ${mainsass.tableRow}`} {...row.getRowProps()}>
-              {row.cells.map((cell, i) => {
-                return <div  className={mainsass.td} {...cell.getCellProps()}>{cell.render('Cell')}</div>
-              })}
+                {row.cells.map((cell, i) => {
+                  return <div  className={mainsass.td} {...cell.getCellProps()}>{cell.render('Cell')}</div>
+                })}
               </Link>
           )
         })}
