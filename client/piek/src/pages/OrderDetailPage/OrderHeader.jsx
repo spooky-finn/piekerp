@@ -10,9 +10,9 @@ import OrderActionsMenu from "./OrderActions/OrderActionsMenu";
 
 function orderStatus(data){
   // add a note to the title if this is a pre-order
-  if (data.OrderStatusID === OS.ordRegistration) return ' | Предзаказ';
-  if (data.OrderStatusID === OS.ordArchived) return ' | В архиве';
-  if ([ OS.reclInbox, OS.reclDecision , OS.reclProduction, OS.reclArchived ].includes(data.OrderStatusID)) return ' | Рекламация';
+  if (data.OrderStatusID === OS.ordRegistration) return ' Предзаказ';
+  if (data.OrderStatusID === OS.ordArchived) return ' В архиве';
+  if ([ OS.reclInbox, OS.reclDecision , OS.reclProduction, OS.reclArchived ].includes(data.OrderStatusID)) return ' Рекламация';
 }
 
 const OrderHeader = (props) => {
@@ -27,7 +27,8 @@ const OrderHeader = (props) => {
     <div className="page-header">
         <Typography sx={{ fontWeight: 600, fontSize: '1rem'}}>
             {data.Entity} __ {data.City} 
-            <span className="preorderTitle">{orderStatus(data)}</span>
+
+            { orderStatus(data) ? <span className="preorderTitle">{orderStatus(data)}</span> : null}
         </Typography>
 
         {/* Показывать Кнопки редактирования заказа только для определенных групп юзеров */}
