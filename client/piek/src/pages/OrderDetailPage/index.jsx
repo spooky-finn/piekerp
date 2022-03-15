@@ -97,7 +97,7 @@ const OrderLayout = (props) => {
             <div className="Info">
                 { editState? <EditRightInfoPanel 
                 data      = {data.erp_Orders[0]} 
-                orderID   = {orderID} 
+                OrderID   = {orderID} 
                 refetch   = {refetch} 
                 users     = {users.erp_Users} /> : (
 
