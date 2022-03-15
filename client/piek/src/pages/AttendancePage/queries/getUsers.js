@@ -18,6 +18,9 @@ query MyQuery($gte: timestamp!, $lte: timestamp!) {
       }
     }
   }
+  attendance_config {
+    TimeDeduction
+  }
 }  
 `
 
