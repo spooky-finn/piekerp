@@ -79,7 +79,7 @@ const Search = ({ state, dispatch, users  }) => {
     return (
         <>
         <Box sx={{ display: 'flex' }}>
-            <TableSearch placeholder="Счет, юрлицо" onChange={searchHandler} defaultValue={state.searchKeyword}/>
+            <TableSearch placeholder="Счет, контрагент" onChange={searchHandler} defaultValue={state.searchKeyword}/>
             {briefSearch()}
 
             {/* filter data by manager */}
