@@ -96,7 +96,7 @@ const OrderComposition = props => {
   }
   
     return(<div className='Composition'>     
-        {data.map( (el, index) => 
+        {data.OrderItems.map( (el, index) => 
         <div
           key={el.OrderItemID}
           className={sass.Unit} 

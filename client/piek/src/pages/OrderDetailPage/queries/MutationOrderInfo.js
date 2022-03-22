@@ -4,6 +4,9 @@ export const UPDATE_ORDER_INFO = gql`
  mutation MyMutation($OrderID: Int!, $fields: erp_Orders_set_input) {
   update_erp_Orders_by_pk(pk_columns: {OrderID: $OrderID}, _set: $fields) {
 		OrderID
+    Entity
+    City
+    CreatingDate
   }
 }
 `;

@@ -84,7 +84,7 @@ const Search = ({ state, dispatch, users  }) => {
 
             {/* filter data by manager */}
             { users && (<div className={sass.filter}>
-            <span className={sass.filterPlaceholder}>manager</span>
+            <span className={sass.filterPlaceholder}>Менеджер</span>
 
                 <FormControl>
                   <Select

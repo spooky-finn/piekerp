@@ -134,6 +134,7 @@ const OrderListLayout = (props) => {
   
     const createOrderHandler = () => {
         createNewOrder().then( (res) => {
+            console.log(res)
             history.push(`/orders/${res.data.insert_erp_Orders.returning[0].OrderID}?edit=true`)
         })
     }

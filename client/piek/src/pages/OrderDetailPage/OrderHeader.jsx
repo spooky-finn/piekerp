@@ -17,11 +17,10 @@ function orderStatus(data){
 
 const OrderHeader = (props) => {
   const { data, editState, setEditState, setOIDialog, store, refetch } = props;
-
+    
     //OrderActions Dropdown menu
     const [OAMenu, setOAMenu] = useState(false);
     const OAMenuRef = useRef(null);
-
       
   return(
     <div className="page-header">
