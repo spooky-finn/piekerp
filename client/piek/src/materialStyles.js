@@ -79,6 +79,7 @@ export const muicomponents = (theme) => ({
         root: {
           fontSize: '.8rem',
           textTransform: 'none !important',
+          borderRadius: 'var(--br10)',
         },
         textInfo: {
           color: 'var(--lowContrast) !important',
