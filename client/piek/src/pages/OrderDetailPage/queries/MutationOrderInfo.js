@@ -35,7 +35,7 @@ mutation MyMutation($OrderID: Int!, $NeedAttention: String! ) {
 `
 
 export const MOVE_ORDER_TO_ARCHIVE = gql`
-  mutation MyMutation($OrderID: Int!, $ActualShippingDate: timestamptz!, $OrderStatusID: Int!) {
+  mutation MyMutation($OrderID: Int!, $ActualShippingDate: timestamp!, $OrderStatusID: Int!) {
     update_erp_Orders_by_pk(
       pk_columns: {OrderID: $OrderID}, 
       _set: {
@@ -50,7 +50,7 @@ export const MOVE_ORDER_TO_ARCHIVE = gql`
 `;
 
 export const MOVE_ORDER_TO_PRIORITY = gql`
-    mutation MyMutation($OrderID: Int!, $AcceptanceDate: timestamptz!){
+    mutation MyMutation($OrderID: Int!, $AcceptanceDate: timestamp!){
     update_erp_Orders_by_pk(
       pk_columns: {OrderID: $OrderID},
        _set: {

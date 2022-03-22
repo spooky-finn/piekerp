@@ -5,9 +5,6 @@ import {
   Menu
 } from '@mui/material/';
 
-import { store } from 'react-notifications-component';
-import 'react-notifications-component/dist/theme.css'
-
 //apollo
 import { useMutation } from "@apollo/client"
 import { 
@@ -93,7 +90,7 @@ const OrderActionsMenu = props => {
      }}).then(
       (res) =>{
         if (res.data.update_erp_Orders_by_pk.OrderID){
-          history.push(baseurl())
+          notif('success', 'Заказ перенесен в архив')
         }
       }
     )
@@ -106,7 +103,7 @@ const OrderActionsMenu = props => {
       AcceptanceDate: new Date(),
      }})
      if (res.data.update_erp_Orders_by_pk.OrderID){
-      notif('success', 'Добавлен в очередность');
+      notif('success', 'Заказ внесен в очередность выполнения');
     }
   }
   

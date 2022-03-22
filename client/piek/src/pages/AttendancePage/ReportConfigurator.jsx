@@ -58,7 +58,7 @@ const ReportConfigurator = ({ state, dispatch }) => {
                  <input type='number' defaultValue={state.timeDeduction} ref={timedeductionRef} />
             </div>
 
-            <Button onClick={timeDeductionHandler} variant='contained'>Сохранить</Button>
+            <Button onClick={timeDeductionHandler} variant='outlined'>Сохранить</Button>
             
         </div>
     </div>
