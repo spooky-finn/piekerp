@@ -134,6 +134,7 @@ const OrderListLayout = (props) => {
   
     const createOrderHandler = () => {
         createNewOrder().then( (res) => {
+            console.log(res)
             history.push(`/orders/${res.data.insert_erp_Orders.returning[0].OrderID}?edit=true`)
         })
     }
@@ -150,7 +151,7 @@ const OrderListLayout = (props) => {
         <>
         <StyledTabs value={selectedTab} onChange={tabHandler} aria-label="simple tabs example">
             <StyledTab label="Предзаказы" {...a11yProps(0)} />
-            <StyledTab label="Очередость" {...a11yProps(1)} />
+            <StyledTab label="Очередность" {...a11yProps(1)} />
             <StyledTab label="Недавние"   {...a11yProps(2)} />
             <StyledTab label='Архив'      {...a11yProps(3)} />
 

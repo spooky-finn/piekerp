@@ -1,4 +1,4 @@
-import { daysInMonth, getTimedelta, convertInterval } from "./time_ helpers";
+import { daysInMonth, getTimedelta, convertInterval, sec2hours } from "./time_ helpers";
 import moment from "moment";
 import sass from './sass/attendance.module.sass'
 
@@ -16,49 +16,49 @@ export function getVarsForSubscription(selectedMonth){
   return {gte, lte}
 }
 
-export function search_alg(user, keyword){
-  if (user.lastname.toLowerCase().startsWith(keyword.toLowerCase())) return true
-  else if (user.firstname.toLowerCase().startsWith(keyword.toLowerCase())) return true
-  else return false
-}
+// export function search_alg(user, keyword){
+//   if (user.lastname.toLowerCase().startsWith(keyword.toLowerCase())) return true
+//   else if (user.firstname.toLowerCase().startsWith(keyword.toLowerCase())) return true
+//   else return false
+// }
 
 export function calc_hours_for_mounth(row, {timeDeduction, selectedMonth}){
-  var total_t = 0;
-  var with_human_mistakes = 0
-  for (var day=1; day<= daysInMonth(selectedMonth); day++){
+    var total_t = 0;
+    var with_human_mistakes = 0
+    for (var day=1; day<= daysInMonth(selectedMonth); day++){
 
-    const findedIntervalsForCurrentDay = row.row.original.intervals.filter(each =>  new Date(each.ent).getDate() == day)
+      const findedIntervalsForCurrentDay = row.row.original.intervals.filter(each =>  new Date(each.ent).getDate() == day)
 
-    // Для каждого интревала в текщем дне
-    for (const property in findedIntervalsForCurrentDay){
-      const each = findedIntervalsForCurrentDay[property];
-      const dur = parseFloat(getTimedelta(each.ent, each.ext));
-      if (!dur) continue;
-      total_t += dur;
+      // Для каждого интревала в текщем дне
+      for (const property in findedIntervalsForCurrentDay){
+        const each = findedIntervalsForCurrentDay[property];
+        const dur = parseFloat(getTimedelta(each.ent, each.ext));
+        if (!dur) continue;
+        total_t += dur;
 
+      }
+
+      // вычетаем время на обед
+      if (findedIntervalsForCurrentDay.length > 0){
+        total_t -= timeDeduction * 60
+
+        // with_human_mistakes += total_t  
+        if (findedIntervalsForCurrentDay[0]?.ext == null){
+          with_human_mistakes += 4*3600
+        }
+      };
     }
 
-    // вычетаем время на обед
-    if (findedIntervalsForCurrentDay.length > 0){
-      total_t -= timeDeduction * 60
+    total_t = sec2hours(total_t);
+    with_human_mistakes = total_t + sec2hours(with_human_mistakes)
+  
+    if (!total_t) return '';
 
-      // with_human_mistakes += total_t  
-      if (findedIntervalsForCurrentDay[0]?.ext == null){
-        with_human_mistakes += 4*3600
-      }
-    };
-  }
+    const human_mistakes = () => {
+      if (with_human_mistakes !== total_t) return <div className={sass.intervalred}>{with_human_mistakes.toFixed(0)}</div>
+    }
 
-  total_t = total_t / 60 / 60;
-  with_human_mistakes = total_t + (with_human_mistakes / 60 /60)
- 
-  if (!total_t) return '';
-
-  const human_mistakes = () => {
-    if (with_human_mistakes !== total_t) return <div className={sass.intervalred}>{with_human_mistakes.toFixed(0)}</div>
-  }
-
-  return <div>{total_t.toFixed(0)} {human_mistakes()}</div>
+    return <div>{total_t.toFixed(0)} {human_mistakes()}</div>
 }
 
 export function fill_columns(row, {timeDeduction}){

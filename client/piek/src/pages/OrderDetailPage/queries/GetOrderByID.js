@@ -5,53 +5,53 @@ query MyQuery($OrderID: Int!) {
   erp_Orders(
     where: {OrderID: {_eq: $OrderID}}
     ){
+    # visual statuses
+    NeedAttention
     AwaitingDispatch
+    OrderStatusID
+
+    # dates
     ActualShippingDate
     AcceptanceDate
-    OrderID
-    ManagerID
-    OrderStatusID
-    City
     ShippingDate
     CreatingDate
+
+    OrderID
+    ManagerID
+    
+    City
+    
     Comment
     Entity
     InvoiceNumber
-    NeedAttention
+    
     OrderNumber
-    PaidAmount
-    TotalAmount
     User {
       FirstName
       LastName
       UserID
     }
     OrderItems(order_by: {OrderItemID: asc}) {
-      Fitter
       Name
       FullName
       OrderItemID
-      OrderID
       Quantity
-      SerialStarts
-      SerialEnds
-    }
-    CheckListUnits(order_by: {CheckListUnitID: desc}) {
-      CheckListUnitID
-      OrderID
-      IsComplited
-      Point
     }
     Docs {
       Key
       FileName
     }
+
+    # finances
+    PaidAmount
+    TotalAmount
     PaymentHistories(
       where: {PaidAmount: {_neq: 0}}
     ){
       PaidAmount
       Date
     }
+
   }
 }
 `
