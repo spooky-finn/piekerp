@@ -1,14 +1,16 @@
+import moment  from 'moment'
 import { useEffect } from 'react';
-import './EditRightInfoPanel.sass'
-
 import { useMutation } from '@apollo/client';
+
+import NumberFormat from 'react-number-format';
+import { TextField, Autocomplete } from '@mui/material';
+
 import { UPDATE_ORDER_INFO } from '../queries/MutationOrderInfo'
 import { INSERT_PAYMENT } from '../queries/MutationPaymentHistory'
 
-import NumberFormat from 'react-number-format';
-import moment  from 'moment'
+import { notif } from '../../../utils/notification'
+import './EditRightInfoPanel.sass'
 
-import { TextField, Autocomplete } from '@mui/material';
 let fields = {}
 
 function DateFormatCustom(props) {
@@ -57,22 +59,31 @@ const EditableInfo = ({ data, orderID, refetch, users }) => {
     const [updateOrderInfo] = useMutation(UPDATE_ORDER_INFO);
     const [insertPayment] = useMutation(INSERT_PAYMENT)
   
-    function saveChanges(){
-      console.log('doing mutation for order', orderID, fields)
-      updateOrderInfo({variables: {
-        OrderID: orderID,
-        fields,
-      }})
+    async function saveChanges(){
+        if (!Object.keys(fields).length) return;
 
+        try {
+            const res = await updateOrderInfo({variables: {
+                OrderID: orderID,
+                fields,
+            }})
+            
+            if (res.data)
+                notif('info', 'Заказ поправлен')
 
-      if (fields.PaidAmount) insertPayment({ variables: {
-          Date: new Date(),
-          OrderID: orderID,
-          PaidAmount: fields.PaidAmount
-        }})
-      
-      refetch()
+            if (fields.PaidAmount) insertPayment({ variables: {
+                Date: new Date(),
+                OrderID: orderID,
+                PaidAmount: fields.PaidAmount
+                }})
+            
+            refetch()
+        } catch (error) {
+            console.log(error);
+            notif('danger', 'Что-то пошло не так...', JSON.stringify(error), 0)
+        }
     }
+
     useEffect(() => {
         fields = {};
         return () => {
@@ -81,9 +92,9 @@ const EditableInfo = ({ data, orderID, refetch, users }) => {
     }, []);
 
     function findSelectedManeger(users, managerID){
-      if (!users) return null
-      const index = users.indexOf(users.find(user => user.UserID === managerID))
-      return users[index]
+        if (!users) return null
+        const index = users.indexOf(users.find(user => user.UserID === managerID))
+        return users[index]
     }
 
   return(
@@ -131,7 +142,7 @@ const EditableInfo = ({ data, orderID, refetch, users }) => {
         />
 
          <TextField
-          label="Юр лицо"
+          label="Контрагент"
           name='Entity'
           defaultValue={data.Entity}
           onChange={addField}

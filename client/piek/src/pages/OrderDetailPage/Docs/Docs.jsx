@@ -9,7 +9,9 @@ import './docs.sass'
 import ConfirmDialog from './ConfirmDialog';
 import S3Service from '../../../services/S3Service';
 
-const Docs = ({ data, onUpload, editState, refetch }) => {
+const Docs = props => {
+    const { data, onUpload, editState, refetch } = props;
+    
     const [open, setOpen] = useState(false);
     const [fileOnDelete, setFileOnDelete] = useState();
     const [deleteFileMutation] = useMutation(DELETE_ORDER_FILE)
@@ -38,7 +40,7 @@ const Docs = ({ data, onUpload, editState, refetch }) => {
         refetch()
     }
 
-    const attachedFiles = data.map(
+    const attachedFiles = data.Docs.map(
         file => {
             // delite file
             if (editState) return(

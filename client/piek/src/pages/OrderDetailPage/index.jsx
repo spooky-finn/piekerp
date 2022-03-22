@@ -55,7 +55,13 @@ const OrderLayout = (props) => {
     const { data: users = []} = useQuery(GET_USERS);
     
     const { getRootProps, isDragActive } = useDropzone({className: 'dropzone', onDrop: fileUploader });
+
+    if (!data.erp_Orders) return <></>
     
+    const childrens_props = { editState, store, refetch, orderID, 
+        data: data.erp_Orders[0]
+    }
+
     return(
     <div> 
         {isFileOnDropzone(isDragActive)}
@@ -65,46 +71,36 @@ const OrderLayout = (props) => {
             <div className='LeftSideContent'>
 
                 <OrderHeader
-                data = {data.erp_Orders[0]}
-                editState = {editState}
+                { ...childrens_props}
                 setEditState = {setEditState}
                 setOIDialog = {setOIDialog}
-                store = {store}
-                refetch = {refetch}
                 />
 
                 <Composition 
-                data        = {data.erp_Orders[0].OrderItems} 
-                editState   = {editState}
-                refetch     = {refetch}
+                { ...childrens_props}
                 OIDialog    = {OIDialog}
                 setOIDialog = {setOIDialog}
-                orderID     = {orderID} /> 
+                 /> 
 
                 <CommentsList 
-                orderID = {orderID} 
+                { ...childrens_props}
                 user    = {store.user} 
-                data    = {data.erp_Orders[0].Comments}/> 
+                /> 
 
                 <Docs 
-                data      = {data.erp_Orders[0].Docs} 
+                { ...childrens_props}
                 onUpload  = {onUploadFiles} 
-                editState = {editState} 
-                refetch   = {refetch} />
+                />
 
             </div>
 
             <div className="Info">
                 { editState? <EditRightInfoPanel 
-                data      = {data.erp_Orders[0]} 
-                OrderID   = {orderID} 
-                refetch   = {refetch} 
+                { ...childrens_props} 
                 users     = {users.erp_Users} /> : (
 
                 <RightInfoPanel 
-                data      = {data.erp_Orders[0]} 
-                editState = {editState} 
-                orderID   = {orderID} 
+                { ...childrens_props}
                 />
                 )}
             </div>
