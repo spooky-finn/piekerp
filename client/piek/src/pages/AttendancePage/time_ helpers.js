@@ -45,3 +45,8 @@ export function daysInMonth (selectedMonth) {
     const [month, year] = selectedMonth
     return new Date(year, month+1, 0).getDate();
 }
+
+export function sec2hours(seconds){
+  return seconds / 3600
+}
+

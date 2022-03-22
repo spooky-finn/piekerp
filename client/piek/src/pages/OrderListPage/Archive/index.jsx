@@ -72,7 +72,7 @@ const Archive = () => {
   return(
     <>
       <TableSearch
-      placeholder='Cчет, юрлицо'
+      placeholder='Cчет, контрагент'
       onChange={searchHandler}
       />
 
