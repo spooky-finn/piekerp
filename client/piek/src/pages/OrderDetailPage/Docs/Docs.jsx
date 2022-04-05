@@ -67,9 +67,7 @@ const Docs = props => {
                 {onUploadFiles()}
             </div>
           
-
             <div>
-
                 <ConfirmDialog 
                 filename={fileOnDelete?.FileName} 
                 open={open}  
