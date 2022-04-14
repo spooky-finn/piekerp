@@ -48,8 +48,9 @@ class S3Controller {
         S3_HasuraQuery.addFileInformation(array_of_files)
         .then(data => data.json())
         .then( data => {
+            console.error(data);
+
             if (data.errors){
-                console.error(data.error);
                 // If it is not possible to add metadata about the file to the database,
                 //  then we will execute a request to object storage to delete files
                 array_of_files.map(each => {
