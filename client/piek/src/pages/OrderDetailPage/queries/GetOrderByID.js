@@ -40,6 +40,8 @@ query MyQuery($OrderID: Int!) {
     Docs {
       Key
       FileName
+      Size
+      UploadingDate
     }
 
     # finances
