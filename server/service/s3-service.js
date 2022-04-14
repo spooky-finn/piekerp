@@ -4,7 +4,7 @@ const querystring = require('querystring');
 
 class S3Service {
 
-    async deleteObjecttt(key){
+    async deleteObject(key){
         const params = { Bucket: process.env.S3_BUCKET, Key: key };
         
         return awsClient.deleteObject(params, function(err, data){
