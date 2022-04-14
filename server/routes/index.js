@@ -15,13 +15,13 @@ router.get('/refresh', userController.refresh);
 // Yandex Cloud Object Storage
 
 // Upload
-router.put('/s3', [authMiddleware, multerMiddleware, S3Controller.uploadBinaryFiles]);
+router.put('/s3', [multerMiddleware, S3Controller.uploadBinaryFiles]);
 
 // GetFile
 router.get('/s3/:key', S3Controller.getBinaryFile);
 
 // DeleteFile
-router.delete('/s3/:key', authMiddleware, S3Controller.removeSingleFile)
+router.delete('/s3/:key', S3Controller.removeSingleFile)
 
 // Get database backup
 router.get('/s3/get-backup/:key', (req, res) => {
