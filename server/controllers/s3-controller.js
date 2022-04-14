@@ -11,7 +11,7 @@ class S3Controller {
         * hasuraUpload method adds file metadata into database using graphql server.
         */
         const key = req.params.key;
-        S3Service.deleteObjecttt(key).then(s3_responce => {
+        S3Service.deleteObject(key).then(s3_responce => {
             S3_HasuraQuery.removeFileInformation(key)
             .then(data => {
                 if (data.errors){
