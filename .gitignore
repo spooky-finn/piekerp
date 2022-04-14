@@ -7,3 +7,4 @@ client/piek/build/env-config.js
 client/piek/public/env-config.js
 client/piek/public/env-config.js
 .vscode/
+.trunk/out

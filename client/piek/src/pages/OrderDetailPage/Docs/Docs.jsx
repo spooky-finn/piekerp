@@ -4,16 +4,21 @@ import { useState, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
 import { DELETE_ORDER_FILE } from '../queries/MutationOrderDocs';
 
-import './docs.sass'
+// import './docs.sass'
 
+import DocumentUnit from './DocumentUnit';
 import ConfirmDialog from './ConfirmDialog';
 import S3Service from '../../../services/S3Service';
+
+import { Button, Typography } from '@mui/material';
+import sass from './docs.module.sass'
 
 const Docs = props => {
     const { data, onUpload, editState, refetch } = props;
     
     const [open, setOpen] = useState(false);
     const [fileOnDelete, setFileOnDelete] = useState();
+    const [isVisible, setisVisible] = useState(true)
     const [deleteFileMutation] = useMutation(DELETE_ORDER_FILE)
 
     const handleClickOpen = (file) => {
@@ -23,12 +28,7 @@ const Docs = props => {
     
     const handleClose = () => setOpen(false)
 
-    const onUploadFiles = () => {
-        if (onUpload.length === 0) return null
-        const files = onUpload.map(file => <div key={file.path}>{file.path}</div> )
-
-        return <div className="onUploadIcon">{files}</div>
-    } 
+  
     useEffect(() => {
         setOpen(false)
     }, [editState]);
@@ -39,41 +39,58 @@ const Docs = props => {
         await S3Service.deleteFile(fileOnDelete.Key, deleteFileMutation)
         refetch()
     }
-
-    const attachedFiles = data.Docs.map(
-        file => {
-            // delite file
-            if (editState) return(
-                <div key={file.Key}>
-                    <div onClick={ () => handleClickOpen(file)} 
-                        className='file-name delete-file'> {file.FileName} </div>
-                </div>
-            )
-             // opne file
-            else return (
-                <a href={`${process.env.REACT_APP_API_URL}/s3/${file.Key}`}
-                    key={file.Key}
-                    target='_blank'
-                    rel="noreferrer"
-                    className='file-name'> {file.FileName} </a>
-            )
-        })
      
+    function switchDocsVisibility(){
+        setisVisible(!isVisible)
+    }
+
+   
+    useEffect(() => {
+        onUpload.map( file => ({ ...file, FileName: file.name}) )
+    
+      
+    }, [onUpload])
+    
     return (        
         <div className="Docs" >
+
+            <div className={sass.sectionHead}>
+                <Typography variant='subtitle1'>Документы [{data.Docs.length}]</Typography>
+
+                <Button className={sass.expandBtn} onClick={switchDocsVisibility}>
+                   { isVisible?  "Свернуть" : "Развернуть"}
+                </Button>
+            </div>
+
+            
             <div className='filesContainer'>
-                {attachedFiles}
+                {isVisible && data.Docs.map(file => (
+                    <DocumentUnit 
+                        key = {file.Key}
+                        file = {file} 
+                        canDelete = {editState} 
+                        deleteFileCb = {handleClickOpen}
+                    />
+                ))}
                 
-                {onUploadFiles()}
+                {/* {onUploadFiles()} */}
+                {!!onUpload.length && onUpload.map( file => (
+                    <DocumentUnit 
+                        file = {{...file, FileName: file.name }} 
+                        key = {file.name}
+                        canDelete = {editState} 
+                        deleteFileCb = {handleClickOpen}
+                        onUpload = {true}
+                    />
+                ))}
+
             </div>
           
-            <div>
-                <ConfirmDialog 
+            <ConfirmDialog 
                 filename={fileOnDelete?.FileName} 
                 open={open}  
                 handleClose={handleClose}
                 onConfirmF={deleteFile}/>
-            </div>
 
         </div>
     )
