@@ -8,3 +8,4 @@ export default class OrderStatus {
   static reclProduction = 12
   static reclArchived = 13
 }
+

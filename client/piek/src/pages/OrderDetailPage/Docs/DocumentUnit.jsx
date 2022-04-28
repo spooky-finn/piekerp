@@ -34,7 +34,7 @@ import { Button } from '@mui/material'
                 
                 { getIcon(file.FileName) } 
                 <div className={sass.name} >{file.FileName}</div>
-                <div className={sass.date}> {humanFileSize(file.Size)} {moment(file.UploadingDate).format('LLLL')}</div>
+                <div className={sass.date}> {humanFileSize(file.Size)} | {moment(file.UploadingDate).format('D MMMM')}</div>
             </a>
 
             {canDelete && <Button variant='iconic' className={sass.deleteBtn} onClick={() => deleteFileCb(file) }> <UilTimes/> </Button>}

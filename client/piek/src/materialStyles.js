@@ -93,7 +93,7 @@ export const muicomponents = (theme) => ({
           },
           'path': {
             color: theme.palette.text.secondary,
-            strokeWidth: .4,
+            strokeWidth: .2,
             stroke: 'var(--L0)'
           },
           '&:hover': {

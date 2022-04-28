@@ -1,5 +1,5 @@
 import { useTable } from 'react-table'
-import mainsass from '../main.module.sass'
+import mainsass from '../sass/main.module.sass'
 import { Link } from 'react-router-dom'
 
 function statusHighlighting(order, showUnpaid){
@@ -10,6 +10,7 @@ function statusHighlighting(order, showUnpaid){
   else if (order.AwaitingDispatch) return mainsass.awaitingDispatch
   else return ''
 }
+
 export default function Table({columns, data, className, showUnpaid }){
     const {
         getTableProps,
