@@ -12,6 +12,7 @@ import { ReactNotifications } from 'react-notifications-component'
 import {getCookie, SystemPreferTheme} from './utils/SystemPreferTheme'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { muicomponents } from './materialStyles'
+import ReactTooltip from 'react-tooltip';
 
 function App() {  
   const { store } = useContext(Context);
@@ -48,6 +49,7 @@ function App() {
     typography: {
       fontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',sans-serif`,
       subtitle1: {
+        // Акцентный подзаголовок
         fontSize: '.7rem',
         textTransform: 'uppercase',
         fontWeight: 600,
@@ -55,11 +57,13 @@ function App() {
         color: 'var(--accent) !important',
       },
       subtitle2: {
-        fontSize: '.8rem',
-        fontWeight: 'normal',
-        color: 'var(--lowContrast) !important',
+        // Нейтральный подзаголовок
+        fontWeight: 600,
+        textTransform: 'uppercase',
+        fontSize: '.65rem'
       },
       subtitle3: {
+         // Полупрозрачный подзаголовок
         fontSize: '.7rem',
         color: 'var(--lowContrast) !important',
         textTransform: 'uppercase',
@@ -73,13 +77,14 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
-        <ReactNotifications/>
-
-        { store.inMemoryToken && <Sidebar/> }
-          <BaseLayout/>
         
-      </div>
+        <div className="App">
+            <ReactTooltip className='reactTooltips' delayShow={300}/>
+            <ReactNotifications/>
+            { store.inMemoryToken && <Sidebar/> }
+            
+            <BaseLayout/>
+        </div>
     </ThemeProvider>
 
   );

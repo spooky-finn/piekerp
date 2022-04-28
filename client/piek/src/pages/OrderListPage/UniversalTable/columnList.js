@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import  moment  from 'moment';
-import sass from '../main.module.sass'
+import sass from '../sass/main.module.sass'
 
 const setPaidPercent = (total, paid) => {
     if (!total || !paid) return ' - 0%'

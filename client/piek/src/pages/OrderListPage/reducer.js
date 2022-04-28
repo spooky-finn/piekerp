@@ -1,16 +1,14 @@
-export const initialState = (selectedTab, cachedOrders, cachedPreOrders) => ({
-    orders: cachedOrders || [],
-    preOrders: cachedPreOrders || [],
-    selectedTab : selectedTab,
+export const initialState = (store) => ({
+    orders: store.cachedOrders || [],
+    preOrders: store.cachedPreOrders || [],
+    selectedTab : store.selectedTab,
 
-    searchKeyword: '',
     managerFilter: 0,
-
 
     search : {
         // search in adjacent groups as an additional information
         // поиск в смежных разделах для вывода, как справочной информации
-        keyword: '',
+        keyword: store.orderListLastSearckKeyword,
         brief: {
             orders : 0,
             preOrders: 0,
@@ -31,7 +29,7 @@ export function reducer(state, action) {
             return {...state, [action.type]: action.payload };
 
         case 'resetFilters': 
-            return {...state, searchKeyword: '', managerFilter: 0, search: { ...state.search, keyword: '' }}
+            return {...state, managerFilter: 0, search: { ...state.search, keyword: '' }}
 
 
         case 'search.brief': 

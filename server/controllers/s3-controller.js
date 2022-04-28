@@ -48,7 +48,7 @@ class S3Controller {
         S3_HasuraQuery.addFileInformation(array_of_files)
         .then(data => data.json())
         .then( data => {
-            console.error(data, req.headers.orderid);
+            console.error(data, req.headers.orderid);               
 
             if (data.errors){
                 // If it is not possible to add metadata about the file to the database,

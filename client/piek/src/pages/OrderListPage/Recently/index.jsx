@@ -1,4 +1,3 @@
-import {  useMemo } from 'react';
 import Table from '../UniversalTable/TableMarkup'
 
 import { columnsList } from '../UniversalTable/columnList';
@@ -7,11 +6,6 @@ import { spread } from './spreadOrders';
 import { Typography } from '@mui/material'
 
 const styles = {
-  heading :{
-    display: 'flex',
-    flexDirection: 'row',
-    padding: '0 10px'
-  },
   secondary: {
     color: 'var(--lowContrast)',
     fontSize: '.8rem',
@@ -24,16 +18,11 @@ const styles = {
 }
 
 const Recently = ({ state }) => {
-
     const sortedData = state.orders.sort(function(a,b){
         return new Date(b.AcceptanceDate) - new Date(a.AcceptanceDate);
       });
 
     const spreadData = spread(sortedData);
-
-    const columns = useMemo(() => columnsList, [] )
-
-   
 
     function ifNothing(data){
         if (data.length === 0) return <Typography style={styles.secondary}>ничего не было добавлено</Typography>
@@ -42,15 +31,14 @@ const Recently = ({ state }) => {
     return(
         <>
             <Typography 
-            style   = {styles.heading} 
             variant = "subtitle1" 
-            m       = '10px 0'>
+            m       = '10px 10px'>
             Сегодня {ifNothing(spreadData[0].objs)} 
             </Typography>
 
             { spreadData[0].objs.length ? ( <>
               <Table 
-              columns = {columns} 
+              columns = {columnsList} 
               data    = {spreadData[0].objs} 
               style   = {styles.table} />
               </>): 
@@ -58,15 +46,14 @@ const Recently = ({ state }) => {
 
 
             <Typography  
-            style={styles.heading} 
             variant="subtitle1" 
-            m='10px 0'>
+            m='10px 10px'>
             Вчера {ifNothing(spreadData[1].objs)} 
             </Typography>
 
             { spreadData[1].objs.length ? ( <>
               <Table 
-                columns = {columns} 
+                columns = {columnsList} 
                 data    = {spreadData[1].objs} 
                 style   = {styles.table} />
             </>): null}

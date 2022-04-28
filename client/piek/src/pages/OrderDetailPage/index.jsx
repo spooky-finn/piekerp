@@ -1,4 +1,4 @@
-import { useContext, useCallback, useState } from "react";
+import { useContext, useCallback, useState, useEffect} from "react";
 import { Context } from "../..";
 import {useDropzone} from 'react-dropzone'
 import { useParams, useLocation } from "react-router-dom"
@@ -17,6 +17,7 @@ import CommentsList from "./Comments/CommentsList";
 import OrderHeader from "./OrderHeader"
 
 import { isFileOnDropzone } from "./Dropzone";
+import ReactTooltip from "react-tooltip";
 
 //ui
 import './sass/index.sass';
@@ -26,6 +27,10 @@ import S3Service from "../../services/S3Service";
 const OrderLayout = (props) => {
     const {store} = useContext(Context);
     const [onUploadFiles, setOnUploadFiles] = useState([])
+
+    useEffect(() => {
+        ReactTooltip.rebuild();
+    });
 
     const editStateQueryArg = new URLSearchParams(useLocation().search).get('edit')
     const [editState, setEditState] = useState(editStateQueryArg)
@@ -64,6 +69,7 @@ const OrderLayout = (props) => {
 
     return(
     <div> 
+        
         {isFileOnDropzone(isDragActive)}
         { data.erp_Orders && users.erp_Users ? (<>
         <section className='OrderLayout' {...getRootProps()} id='dropzone'>

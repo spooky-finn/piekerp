@@ -1,4 +1,4 @@
-import { useContext, useReducer } from 'react'
+import { useContext, useReducer, useEffect } from 'react'
 import { useHistory } from "react-router-dom";
 
 import { Context } from '../../index'
@@ -60,7 +60,7 @@ const StyledTab = styled((props) => <Tab {...props} />)(
 
 const OrderListLayout = (props) => {
     const { store } = useContext(Context);
-    const [state, dispatch] = useReducer(reducer, initialState( store.priorityTab, store.cachedOrders, store.cachedPreOrders ));
+    const [state, dispatch] = useReducer(reducer, initialState(store));
     const { selectedTab } = state; 
 
     const history = useHistory();
@@ -98,7 +98,7 @@ const OrderListLayout = (props) => {
     const tabHandler = (event, newValue) => {
         dispatch({ type: 'selectedTab', payload: newValue })
         dispatch({ type: 'resetFilters'})
-        store.setPriorutyTab(newValue)
+        store.selectedTab = newValue
     };
 
     function TabPanel(props) {
@@ -147,6 +147,8 @@ const OrderListLayout = (props) => {
         alignSelf: 'center',
       }
     }
+
+
     return(
         <>
         <StyledTabs value={selectedTab} onChange={tabHandler} aria-label="simple tabs example">
