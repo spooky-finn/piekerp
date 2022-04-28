@@ -11,7 +11,7 @@ import { useMutation } from '@apollo/client';
 //UI
 import { UilFileCheck} from '@iconscout/react-unicons';
 import sass from './preorders.module.sass'
-import mainsass from '../main.module.sass'
+import mainsass from '../sass/main.module.sass'
 import { Button } from '@mui/material';
 
 const PreOrders = ({ state, dispatch }) => {
@@ -30,7 +30,7 @@ const PreOrders = ({ state, dispatch }) => {
     // }
 
     var newColumnList = [...columnsList];
-    const filtredData = filter(data, state.searchKeyword)
+    const filtredData = filter(data, state.search.keyword)
     
     // newColumnList.push({
     //     Header: 'Принять',

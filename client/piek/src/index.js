@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Store from './store/store';
-// import 'react-notifications/lib/notifications.css';
+
 import { BrowserRouter } from 'react-router-dom';
 //UI
 import './theme.css';

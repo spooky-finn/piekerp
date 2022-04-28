@@ -12,13 +12,18 @@ import S3Service from '../../../services/S3Service';
 
 import { Button, Typography } from '@mui/material';
 import sass from './docs.module.sass'
+import { getCookie, setUnexpiredCookie } from '../../../utils/cookies';
 
 const Docs = props => {
     const { data, onUpload, editState, refetch } = props;
-    
+
     const [open, setOpen] = useState(false);
     const [fileOnDelete, setFileOnDelete] = useState();
-    const [isVisible, setisVisible] = useState(true)
+
+   
+    const initShowDocs = (getCookie("orderDetailShowDocs") !== "false" );
+    const [isVisible, setisVisible] = useState(initShowDocs)
+
     const [deleteFileMutation] = useMutation(DELETE_ORDER_FILE)
 
     const handleClickOpen = (file) => {
@@ -28,7 +33,6 @@ const Docs = props => {
     
     const handleClose = () => setOpen(false)
 
-  
     useEffect(() => {
         setOpen(false)
     }, [editState]);
@@ -41,6 +45,7 @@ const Docs = props => {
     }
      
     function switchDocsVisibility(){
+        setUnexpiredCookie("orderDetailShowDocs", !isVisible)
         setisVisible(!isVisible)
     }
 
@@ -55,13 +60,11 @@ const Docs = props => {
         <div className="Docs" >
 
             <div className={sass.sectionHead}>
-                <Typography variant='subtitle1'>Документы [{data.Docs.length}]</Typography>
-
+                <Typography variant='subtitle2'>Документы [{data.Docs.length}]</Typography>
                 <Button className={sass.expandBtn} onClick={switchDocsVisibility}>
                    { isVisible?  "Свернуть" : "Развернуть"}
                 </Button>
             </div>
-
             
             <div className='filesContainer'>
                 {isVisible && data.Docs.map(file => (

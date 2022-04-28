@@ -3,10 +3,16 @@ import { FormControl, Select, MenuItem, Box } from '@mui/material';
 import TableSearch from '../../..//components/TableSearch'
 
 import { search_alg } from '../Search/filter';
+import { useContext } from 'react';
+import { Context } from '../../..';
+
 
 const Search = ({ state, dispatch, users  }) => {
-    const searchHandler = (e) => {
+    const { store } = useContext(Context)
+   
 
+    const searchHandler = (e) => {
+        const val = e.target.value.trim()
         var arr = [];
         var breifname;
 
@@ -19,8 +25,7 @@ const Search = ({ state, dispatch, users  }) => {
             breifname = 'preOrders'
         }
        
-
-        const adjacentSearch = search_alg(arr, e.target.value)
+        const adjacentSearch = search_alg(arr, val)
        
         dispatch({ 
             type: 'search.brief', payload: {
@@ -29,8 +34,8 @@ const Search = ({ state, dispatch, users  }) => {
             }
         })
 
-        dispatch({ type: 'searchKeyword', payload: e.target.value }) 
-        dispatch({ type: 'search.keyword', payload: e.target.value }) 
+        store.orderListLastSearckKeyword = val
+        dispatch({ type: 'search.keyword', payload: val }) 
     }
 
     const managerHandler = (e) => {
@@ -75,11 +80,11 @@ const Search = ({ state, dispatch, users  }) => {
             </div> )
         })
     )
-
+    
     return (
         <>
         <Box sx={{ display: 'flex' }}>
-            <TableSearch placeholder="Счет, контрагент" onChange={searchHandler} defaultValue={state.searchKeyword}/>
+            <TableSearch placeholder="Счет, контрагент" onChange={searchHandler} defaultValue={state.search.keyword}/>
             {briefSearch()}
 
             {/* filter data by manager */}

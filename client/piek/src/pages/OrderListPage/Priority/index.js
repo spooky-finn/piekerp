@@ -1,7 +1,7 @@
-import { useMemo } from 'react'
-
+import { useMemo, useContext } from 'react'
+import { Context } from '../../..'
 // ui 
-import mainsass from '../main.module.sass'
+import mainsass from '../sass/main.module.sass'
 
 import Search from '../Search'
 import { filter } from '../Search/filter'
@@ -11,6 +11,8 @@ import Table from '../UniversalTable/TableMarkup'
 
 
 const Priority = ({ users, state, dispatch }) => {
+    const {store} = useContext(Context)
+
     const columns = useMemo(
         () => columnsList, []
     )
@@ -20,7 +22,7 @@ const Priority = ({ users, state, dispatch }) => {
     })
 
     const filtredData = filter(sortedData, state.search.keyword, state.managerFilter)
-
+    
     return(
         <div className={mainsass.tableWrapper}>
             {users && <Search state={state} dispatch={dispatch} users={ users.filter(e => [1,2].includes(e?.AccessLevelID)) }/>}

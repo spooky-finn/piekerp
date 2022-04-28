@@ -14,9 +14,11 @@ export default class Store {
     };
     inMemoryToken = undefined;
 
-    priorityTab = 1;
+    selectedTab = 1;
     cachedOrders = [];
     cachedPreOrders = [];
+    
+    orderListLastSearckKeyword = "";
     
     constructor(){
         makeAutoObservable(this);
@@ -37,10 +39,7 @@ export default class Store {
     setInMemoryToken(token){
         this.inMemoryToken = token
     }
-    setPriorutyTab(number){
-        this.priorityTab = number
-    }
-
+  
     setCachedOrders(array){
         this.cachedOrders = array
     }
@@ -50,6 +49,7 @@ export default class Store {
     setUItheme(state, dispatch){
         this.UItheme = { state, dispatch }
     }
+   
     async login(email, password){
         try {
             const res = await AuthService.login(email, password)

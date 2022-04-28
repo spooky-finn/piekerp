@@ -9,12 +9,8 @@ const OrderInfoCard = (props) => {
   return (
     <Box className="OrderInfoCard" sx={{ color: 'text.primary' }}>
     <div className='row'>
-      <div className='heading'>
-        {heading}
-      </div>
-      <div className='secondaryHeading noprint'>
-        {secondaryHeading}
-      </div>
+      <Typography variant='subtitle2'>{heading}</Typography>
+      <Typography variant='subtitle3' className='noprint secondaryHeadingAnimation'>{secondaryHeading}</Typography>
     </div>
 
     <div className='body'>

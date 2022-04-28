@@ -44,6 +44,11 @@ input[type=number]
   @media print
     height: auto !important
 
+.reactTooltips
+  font-size: .75rem !important
+  padding: 5px 8px !important
+  border-radius: var(--br10) !important
+  
 
 .base-container
   overflow-y: auto !important
@@ -59,6 +64,7 @@ input[type=number]
     display: flex
     padding: 10px 0
     align-items: center
+    position: relative
     color: var(--highContrast)
     height: 50px
     h2
@@ -87,3 +93,7 @@ input[type=number]
   .pageLayout__actions
     margin-left: auto
 
+.iconBtnPressed
+  background: var(--accentLight) !important
+  path
+    color: var(--highContrast) !important
