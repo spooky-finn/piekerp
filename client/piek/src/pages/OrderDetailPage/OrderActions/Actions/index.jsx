@@ -62,6 +62,8 @@ const OrderActions = props => {
     const OrderID = order.OrderID
     const { store } = useContext(Context);
 
+    const isHaveFullRight = [ US.general, US.management, US.bookkeeping].includes(store.user.AccessLevelID)
+
     const [mutationMoveOrderToArchive] = useMutation(MOVE_ORDER_TO_ARCHIVE);
     const [mutationMoveOrderToPriority] = useMutation(MOVE_ORDER_TO_PRIORITY);
     const [mutationDeleteOrder] = useMutation(DELETE_ORDER);
@@ -116,40 +118,40 @@ const OrderActions = props => {
             tip: 'В очередность',
             handler: transferOrderToPriority,
             icon: UilFileCheck,
-            requirement: [OS.ordRegistration].includes(order.OrderStatusID),
+            requirement: isHaveFullRight && [OS.ordRegistration].includes(order.OrderStatusID),
         },
         {
             dialog: TransferOrderDialog,
             dialogHandler: () => transferOrderToArchive(3),
             tip: 'Закрыть заказ',
             icon: UilTruck,
-            requirement:  [ OS.ordProduction ].includes(order.OrderStatusID),
+            requirement: [ OS.ordProduction ].includes(order.OrderStatusID),
         },
         {
             dialog: TransferOrderDialog,
             dialogHandler: () => transferOrderToArchive(13),
             tip: 'Закрыть рекламацию',
             icon: UilTruck,
-            requirement:  [ OS.reclProduction].includes(order.OrderStatusID),
+            requirement: [ OS.reclProduction].includes(order.OrderStatusID),
         },
         {
             dialog: DeleteOrderDialog,
             dialogHandler: mutationDeleteOrderHandler,
             tip: 'Удалить заказ',
             icon: UilTrashAlt,
-            requirement: [OS.ordRegistration, OS.reclInbox, OS.reclDecision, OS.reclInbox].includes(order.OrderStatusID),
+            requirement: isHaveFullRight && [OS.ordRegistration, OS.ordProduction, OS.reclInbox, OS.reclDecision, OS.reclInbox].includes(order.OrderStatusID),
         },
         {
             tip: 'Добавить позицию',
             handler: () => setOIDialog(true),
             icon: UilPlus,
-            requirement: ![OS.ordArchived, OS.reclArchived].includes(order.OrderStatusID),
+            requirement: isHaveFullRight && ![OS.ordArchived, OS.reclArchived].includes(order.OrderStatusID),
         },
         {
             tip: 'Поменять что-то',
             handler: () => setEditState(!editState),
             icon: editState ? UilUnlock : UilLock,
-            requirement: [ US.general, US.management , US.bookkeeping ].includes(store.user.AccessLevelID),
+            requirement: isHaveFullRight,
         }
     ]
 
