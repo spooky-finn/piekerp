@@ -7,3 +7,4 @@ client/piek/build/env-config.js
 .trunk/out
 *.env
 *.rest
+*.sql
