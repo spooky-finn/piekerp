@@ -22,9 +22,11 @@ const InputForm = props => {
   const [anchorULP, setAnchorULP] = useState(null)
 
   function inputHandler(e){
-    if (e.target.innerText.trim() === '/'){
+    const innerText = e.target.innerText.trim()
+
+    if (innerText[innerText.length-1] === '/'){
       setAnchorEl(e.target)
-      e.target.innerHTML = ''
+      e.target.innerText = innerText.slice(0, innerText.length-1) + ' '
     }
     if (e.target.innerText.trim() === '@'){
       setAnchorULP(e.target)
