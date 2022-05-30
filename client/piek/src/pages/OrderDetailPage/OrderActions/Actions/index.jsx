@@ -46,7 +46,7 @@ function renderAlg(arrayOfBtns){
                     <each.icon/>
                 </Button>
 
-            if (each.dialog) return <each.dialog handler={each.dialogHandler} key={each}> {btnComponent} </each.dialog>
+            if (each.dialog) return <each.dialog handler={each.dialogHandler} key={each.tip}> {btnComponent} </each.dialog>
             else return btnComponent
         }
     })

@@ -51,9 +51,10 @@ const CommentsList = (props) => {
   }
 
   function updateComment(id, newText){
+    console.log(newText);
     updateOrderCommentMutation({ variables: {
       CommentID: id,
-      Text: newText,
+      Text: newText.trim(),
     }})
   }
 
