@@ -8,3 +8,4 @@ client/piek/build/env-config.js
 *.env
 *.rest
 *.sql
+/meta
