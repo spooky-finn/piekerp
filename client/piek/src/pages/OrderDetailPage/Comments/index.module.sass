@@ -98,11 +98,16 @@
   color: var(--highContrast) !important
   font-size: 14px !important
   background: var(--L0)
+  outline: none !important
+
   p,span, div
     background: var(--L0) !important
     font-size: 14px !important
     color: var(--highContrast) !important
-
+  &:focus 
+    background: var(--L1) !important
+    & * 
+      background: var(--L1) !important
     
 .commentHeader
   display: flex
