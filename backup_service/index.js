@@ -1,24 +1,6 @@
 
 // Pull out the postgress backup from docker container and send it to S3.
-
-// Script must run using pm.comfig.js in order to connect process enviropment
-// pm.comfig.js  looks something like that
-
-// module.exports = { apps : [{
-//     name      : 'backup-service',
-//     script    : 'postgres_backup_service.js',
-//     env       : {
-//       NODE_ENV: 'production',
-//       S3_ACCESS_KEY_ID: '',
-//       S3_SECRET_ACCESS_KEY: '',
-//       S3_ENDPOINT: 's3.yandexcloud.net',
-//       S3_BUCKET: ''
-//       MAX_BACKUPS: 100,
-//       RETRY_TIMEOUT: 36000
-//     },
-//   }]};
   
-
 require('dotenv').config(); 
 const fs = require('fs');
 const { exec } = require('child_process');
