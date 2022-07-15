@@ -1,4 +1,4 @@
-# The step by step tutorial to restore database from backup
+# Guidlines for restoring database from backup in docker
 
 1. Download backup on local machine
 2. Move backup to the server using ssh `sudo scp -i ~/.ssh/piek ~/Downloads/dumpname.sql piekuser@45.10.110.58:~/`
