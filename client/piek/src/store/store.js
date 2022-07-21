@@ -1,9 +1,9 @@
 
-import {makeAutoObservable} from 'mobx';
+import { makeAutoObservable } from 'mobx';
 import AuthService from '../services/AuthService';
 import axios from 'axios';
 import { API_URL } from '../http';
-import { UilWrench, UilConstructor} from '@iconscout/react-unicons';
+import { UilWrench, UilConstructor } from '@iconscout/react-unicons';
 
 export default class Store {
     user = {};
@@ -15,67 +15,69 @@ export default class Store {
     inMemoryToken = undefined;
 
     selectedTab = 1;
-    cachedOrders = [];
-    cachedPreOrders = [];
-    
+    cachedOrders = []
+
     orderListLastSearckKeyword = "";
-    
-    constructor(){
+
+    constructor() {
         makeAutoObservable(this);
     }
 
-    setAuth(bool){
+    setAuth(bool) {
         this.isAuth = bool;
     }
 
-    setUser(user){
+    setUser(user) {
         this.user = user;
     }
 
-    setLoading(bool){
+    setLoading(bool) {
         this.isLoading = bool;
     }
 
-    setInMemoryToken(token){
+    setInMemoryToken(token) {
         this.inMemoryToken = token
     }
-  
-    setCachedOrders(array){
+
+    setCachedOrders(array) {
         this.cachedOrders = array
     }
-    setCachedPreOrders(array){
+    setCachedPreOrders(array) {
         this.cachedPreOrders = array
     }
-    setUItheme(state, dispatch){
+    setUItheme(state, dispatch) {
         this.UItheme = { state, dispatch }
     }
-   
-    async login(email, password){
+
+    setSelectedTab(newValue) {
+        this.selectedTab = newValue
+    }
+    async login(email, password) {
         try {
             const res = await AuthService.login(email, password)
-            if (res.status === 200){
-              this.setInMemoryToken(res.data.accessToken)
-              this.setUser(res.data.user);
-              return res
+            if (res.status === 200) {
+                this.setInMemoryToken(res.data.accessToken)
+                this.setUser(res.data.user);
+                return res
             }
-            
+
         } catch (e) {
             console.log(e);
         }
     }
 
-    async logout(){
+    async logout() {
         try {
             await AuthService.logout();
             this.setInMemoryToken(null)
             this.setUser({});
         } catch (e) {
             console.log(e.response?.data?.message);
-            
+
         }
     }
 
-    async getNewToken(){
+    async getNewToken() {
         return await axios.get(`${API_URL}/refresh`, { withCredentials: true }).then(
             (r) => {
                 if (r.status !== 200) new Error('Invalid response while trying to get new access token')
@@ -85,17 +87,17 @@ export default class Store {
         );
     }
 
-    
+
     async checkAuth() {
         this.setLoading(true);
         try {
-            await axios.get(`${API_URL}/refresh`, {withCredentials: true}).then(
-              (res) => {
-                if (res.status === 200){
-                  this.setUser(res.data.user);
-                  this.setInMemoryToken(res.data.accessToken)      
+            await axios.get(`${API_URL}/refresh`, { withCredentials: true }).then(
+                (res) => {
+                    if (res.status === 200) {
+                        this.setUser(res.data.user);
+                        this.setInMemoryToken(res.data.accessToken)
+                    }
                 }
-              }
             )
         } catch (e) {
             console.log(e)
@@ -108,18 +110,18 @@ export default class Store {
 
     pageParams = [
         {
-            'url' : '/reclamation',
-            'icon': <UilWrench/>,
+            'url': '/reclamation',
+            'icon': <UilWrench />,
             'title': 'Рекламация',
         },
         {
-            'url' : '/attendance',
-            'icon': <UilConstructor/>,
+            'url': '/attendance',
+            'icon': <UilConstructor />,
             'title': 'Рабочее время',
         },
     ];
 
-    getPageParams(url){
+    getPageParams(url) {
         const page = this.pageParams.find((el) => el.url === url)
         return page
     }

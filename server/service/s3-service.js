@@ -1,31 +1,31 @@
-const awsClient = require('../S3/s3-client')
+const awsClient = require('../lib/s3-client')
 const querystring = require('querystring');
 
 
 class S3Service {
 
-    async deleteObject(key){
-        const params = { Bucket: process.env.S3_BUCKET, Key: key };
-        
-        return awsClient.deleteObject(params, function(err, data){
-            if (err) return err;
+    async deleteObject(key, bucket) {
+        const params = { Bucket: bucket, Key: key };
+
+        return awsClient.deleteObject(params, function (err, data) {
+            if (err) throw new Error(`Could not delete file from S3: ${err.message}`)
             return data;
         })
     }
 
-    getObject(key){
+    async getObject(key) {
         const params = { Bucket: process.env.S3_BUCKET, Key: key };
 
-        return awsClient.getObject(params).promise()
-        .then( data => {
+        try {
+            const data = await awsClient.getObject(params).promise();
             data.Metadata.originalname = querystring.unescape(data.Metadata.originalname);
-            return data
-        })
-        .catch( e => {
-            throw new Error(`Could not retrieve file from S3: ${e.message}`)
-        })
+            return data;
+        } catch (e) {
+            throw new Error(`Could not retrieve file from S3: ${e.message}`);
+        }
 
     }
+
 }
 
 module.exports = new S3Service();

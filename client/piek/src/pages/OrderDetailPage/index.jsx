@@ -1,6 +1,6 @@
-import { useContext, useCallback, useState, useEffect} from "react";
+import { useContext, useCallback, useState, useEffect } from "react";
 import { Context } from "../..";
-import {useDropzone} from 'react-dropzone'
+import { useDropzone } from 'react-dropzone'
 import { useParams, useLocation } from "react-router-dom"
 
 //apollo
@@ -23,9 +23,10 @@ import ReactTooltip from "react-tooltip";
 import './sass/index.sass';
 
 import S3Service from "../../services/S3Service";
+import PaperL1 from "../../components/wrappers/PaperL1";
 
 const OrderLayout = (props) => {
-    const {store} = useContext(Context);
+    const { store } = useContext(Context);
     const [onUploadFiles, setOnUploadFiles] = useState([])
 
     useEffect(() => {
@@ -45,7 +46,7 @@ const OrderLayout = (props) => {
 
         const res = await S3Service.uploadFile(acceptedFiles, orderID);
 
-        if (res.status === 200){
+        if (res.status === 200) {
             refetch();
         }
         else {
@@ -54,66 +55,67 @@ const OrderLayout = (props) => {
         };
 
         setOnUploadFiles([])
-      }, [])
+    }, [])
 
-    var { data = [], refetch } = useQuery(GET_ORDER_BY_ID, { variables: { OrderID: orderID} });
-    const { data: users = []} = useQuery(GET_USERS);
-    
-    const { getRootProps, isDragActive } = useDropzone({className: 'dropzone', onDrop: fileUploader });
+    var { data = [], refetch } = useQuery(GET_ORDER_BY_ID, { variables: { OrderID: orderID } });
+    const { data: users = [] } = useQuery(GET_USERS);
+
+    const { getRootProps, isDragActive } = useDropzone({ className: 'dropzone', onDrop: fileUploader });
 
     if (!data.erp_Orders) return <></>
-    
-    const childrens_props = { editState, store, refetch, orderID, 
+
+    const childrens_props = {
+        editState, store, refetch, orderID,
         data: data.erp_Orders[0]
     }
 
-    return(
-    <div> 
-        
-        {isFileOnDropzone(isDragActive)}
-        { data.erp_Orders && users.erp_Users ? (<>
-        <section className='OrderLayout' {...getRootProps()} id='dropzone'>
+    return (
+        <PaperL1>
 
-            <div className='LeftSideContent'>
+            {isFileOnDropzone(isDragActive)}
+            {data.erp_Orders && users.erp_Users ? (<>
+                <section className='OrderLayout' {...getRootProps()} id='dropzone'>
 
-                <OrderHeader
-                { ...childrens_props}
-                setEditState = {setEditState}
-                setOIDialog = {setOIDialog}
-                />
+                    <div className='LeftSideContent'>
 
-                <Composition 
-                { ...childrens_props}
-                OIDialog    = {OIDialog}
-                setOIDialog = {setOIDialog}
-                 /> 
+                        <OrderHeader
+                            {...childrens_props}
+                            setEditState={setEditState}
+                            setOIDialog={setOIDialog}
+                        />
 
-                <CommentsList 
-                { ...childrens_props}
-                user    = {store.user} 
-                /> 
+                        <Composition
+                            {...childrens_props}
+                            OIDialog={OIDialog}
+                            setOIDialog={setOIDialog}
+                        />
 
-                <Docs 
-                { ...childrens_props}
-                onUpload  = {onUploadFiles} 
-                />
+                        <CommentsList
+                            {...childrens_props}
+                            user={store.user}
+                        />
 
-            </div>
+                        <Docs
+                            {...childrens_props}
+                            onUpload={onUploadFiles}
+                        />
 
-            <div className="Info">
-                { editState? <EditRightInfoPanel 
-                { ...childrens_props} 
-                users     = {users.erp_Users} /> : (
+                    </div>
 
-                <RightInfoPanel 
-                { ...childrens_props}
-                />
-                )}
-            </div>
-            
-        </section> 
-        </>): null }
-    </div>
+                    <div className="Info">
+                        {editState ? <EditRightInfoPanel
+                            {...childrens_props}
+                            users={users.erp_Users} /> : (
+
+                            <RightInfoPanel
+                                {...childrens_props}
+                            />
+                        )}
+                    </div>
+
+                </section>
+            </>) : null}
+        </PaperL1>
     )
 }
 

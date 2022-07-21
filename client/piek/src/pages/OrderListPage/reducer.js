@@ -1,14 +1,15 @@
-export const initialState = (store) => ({
-    orders: store.cachedOrders || [],
-    preOrders: store.cachedPreOrders || [],
-    selectedTab : store.selectedTab,
+import OS from "../../utils/OrderStatus";
 
-    managerFilter: 0,
+export const initialState = (store) => ({
+    requiredManagerFilterID: 0,
+
+    archive_requiredOrderStatus: OS.ordArchived,
+    search_keyword: '',
 
     search : {
         // search in adjacent groups as an additional information
         // поиск в смежных разделах для вывода, как справочной информации
-        keyword: store.orderListLastSearckKeyword,
+        // keyword: store.orderListLastSearckKeyword,
         brief: {
             orders : 0,
             preOrders: 0,
@@ -18,33 +19,12 @@ export const initialState = (store) => ({
     }
 })
 
-export function reducer(state, action) {
+export function reducer(state, action){
     switch (action.type) {
-        case 'orders':
-        case 'preOrders': 
-        case 'selectedTab': 
-        case 'searchKeyword': 
-        case 'searchResult': 
-        case 'managerFilter': 
-            return {...state, [action.type]: action.payload };
+      case action.type:
+        return {...state, [action.type]: action.payload };
 
-        case 'resetFilters': 
-            return {...state, managerFilter: 0, search: { ...state.search, keyword: '' }}
-
-
-        case 'search.brief': 
-            return {...state, search: {
-                ...state.search,
-                brief: action.payload
-            }}
-        case 'search.keyword':
-            return {...state, search: {
-                ...state.search,
-                keyword: action.payload
-            }  }
-
-
-        default: 
-            return {...state}
+      default:
+        throw new Error(`Unknown action type: ${action.type}`);
     }
-}
+};
