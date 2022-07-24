@@ -18,13 +18,13 @@ FROM node:13.12.0-alpine  as client
 WORKDIR /app/client/
 COPY client/piek/package*.json ./
 
-# RUN npm install npm@latest -g
-# RUN npm install 
+RUN npm install npm@latest -g
+RUN npm install 
 
 COPY client/piek ./
 
 #recomended build on local machine
-# RUN npm run build
+RUN npm run build
 
 
 
