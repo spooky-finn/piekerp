@@ -13,7 +13,6 @@
 
 .docsItem
     padding: 8px 10px
-    border-bottom: var(--border)
     font-size: .9rem
     display: flex
     a
@@ -22,6 +21,11 @@
         grid-template-columns: auto 1fr
         grid-template-areas: 'svg name' 'svg date'
         text-decoration: none
+        svg, .name
+            transition: all .1s ease
+        &:hover
+            svg, .name
+                color: var(--accent)
         .svg
             grid-area: svg
             color: var(--lowContrast)
@@ -32,6 +36,7 @@
         .name
             grid-area: name
             color: var(--highContrast)
+
         .date
             grid-area: date
             color: var(--lowContrast)
@@ -39,4 +44,3 @@
 
     .deleteBtn
         padding: 0px 4px
-

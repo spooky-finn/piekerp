@@ -15,6 +15,7 @@ const СommandsPopover = props => {
     handleClose();
     setAnchorULP(inputRef.current)
   }
+
   return (
     <Menu
         id="Comments__commandMenu"

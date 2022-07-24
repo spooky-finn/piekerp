@@ -1,18 +1,21 @@
 module.exports = class ApiError extends Error {
     status;
-    errors;
 
-    constructor(status, message, errors = []){
+    constructor(status, message, detail) {
         super(message);
         this.status = status;
-        this.errors = errors;
+        this.detail = detail;
     }
 
-    static UnauthorizedError(){
-        return new ApiError(401, 'You are  unauthorized. sorry _');
+    static UnauthorizedError(message) {
+        return new ApiError(401, message);
     }
 
-    static BadRequest(message, errors = []){
-        return new ApiError(400, message, errors);
+    static BadRequest(message) {
+        return new ApiError(400, message);
+    }
+
+    static HasuraServiceError(message, detail) {
+        return new ApiError(500, message, detail);
     }
 }

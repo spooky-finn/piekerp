@@ -5,7 +5,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 
 export default function ConfirmDialog(props) {
-  const { filename, open, handleClose, onConfirmF} = props
+  const { filename, open, handleClose } = props
   return (
     <div>
       <Dialog
@@ -18,21 +18,21 @@ export default function ConfirmDialog(props) {
       >
         <DialogContent>
           <DialogContentText id="alert-dialog-description" sx={{
-          color: 'var(--lowContrast) !important',
-          'span': {
-            color: 'var(--highContrast) !important'
-          }
-        }}>
+            color: 'var(--lowContrast) !important',
+            'span': {
+              color: 'var(--highContrast) !important'
+            }
+          }}>
             Удалить <span>{filename}</span> ?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button color='info' onClick={handleClose}>Отменить</Button>
-          <Button color='secondary' onClick={()=> {
+          <Button color='secondary' onClick={() => {
             handleClose()
             props.onConfirmF()
           }}>
-            Удалить 
+            Удалить
           </Button>
         </DialogActions>
       </Dialog>

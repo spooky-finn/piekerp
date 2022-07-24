@@ -5,9 +5,9 @@
         vertical-align: middle
 
 .table
-    display: table 
+    display: table
 .tbody
-    display: table-row-group 
+    display: table-row-group
 .thead
     display: table-header-group
 .tr
@@ -17,7 +17,7 @@
 .th
     display: table-cell
 
-.tableWrapper 
+.tableWrapper
     display: table
     width: 100%
     margin-bottom: 2em
@@ -31,9 +31,9 @@
         border-left: none !important
     .table .td:last-of-type
         border-right: none !important
-  
+
 .tableMain
-    border-top: var(--border)
+    // border-top: var(--border)
     width: 100%
     border-spacing: 0
     .thead .th
@@ -42,8 +42,10 @@
         font-weight: 500
         text-align: left
         padding: 10px 0
+        border-bottom: var(--border)
+
     .thead .th:last-of-type
-        padding: 0 
+        padding: 0
 
     .tbody .td:first-of-type
         position: relative !important
@@ -55,7 +57,7 @@
         color: var(--lowContrast)
         border-bottom: var(--border)
         font-size: .9rem
-   
+
     .tbody a .td:nth-of-type(2),
     .tbody a .td:nth-of-type(3)
         opacity: .94
@@ -63,7 +65,7 @@
         text-decoration: none
         color: var(--highContrast)
         font-size: 1rem
-    
+
     .td:nth-of-type(4),
     .th:nth-of-type(4)
         border-left: var(--border)
@@ -71,8 +73,7 @@
     .td:nth-of-type(4)
         color: var(--highContrast)
     .tbody a:hover
-        background: var(--LI)
-    
+        background: var(--L2)
 
 .awaitingDispatch,
 .needAttention,
@@ -85,7 +86,6 @@
         bottom: 0
         left: 0
         width: 4px
-        
 
 .awaitingDispatch
     .td:first-of-type::before
@@ -96,9 +96,8 @@
         background: var(--needAttention) !important
 
 .unpaidOrder
-     .td:first-of-type::before
+    .td:first-of-type::before
         background: #ffd000
-  
 
 .customerTableInfo
     div:first-of-type

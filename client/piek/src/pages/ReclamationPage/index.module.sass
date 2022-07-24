@@ -1,21 +1,17 @@
 .reclatationLayout
   position: relative
-  height: calc(100vh - 40px)
 
 .columnWrapper
-  position: absolute
-  top: 60px
+  margin: 0 20px
   bottom: 0
   display: grid !important
   grid-template-columns: 1fr 1fr 1fr
-  width: 100%
+  gap: 15px
+  .reclColumn
+    background: var(--L1)
+    border-radius: var(--br)
+    padding-bottom: 20px
 
-  border-top: var(--border)
-  border-bottom: var(--border)
-
-
-  .reclColumn:not(:first-of-type)
-    border-left: var(--border)
   .draggableWrapper
     display: flex
     flex-grow: 1
@@ -27,22 +23,21 @@
     font-size: .9rem
     font-weight: 600
 
-
 .item
   display: grid
-  grid-template-columns: 2fr 1fr 
+  grid-template-columns: 2fr 1fr
   text-decoration: none !important
   align-items: center
   position: relative
   border-bottom: 1px solid var(--border-colorLight)
-  padding: 30px 10px 
-  grid-gap: 13px 
+  padding: 30px 10px
+  grid-gap: 13px
   &:hover
-    background: var(--LI)
+    background: var(--L2)
   .orderItem
     font-family: 'IBM Plex Mono'
     color: var(--highContrast)
-    font-size: 1rem 
+    font-size: 1rem
 
   .customerInfo
     div:first-of-type
@@ -52,8 +47,7 @@
   div
     color: var(--lowContrast)
 
-
-.needAttention, 
+.needAttention,
 .awaitingDispatch
   &::before
     content: ''
@@ -68,4 +62,3 @@
 .awaitingDispatch
   &::before
     background: var(--awaitingDispatch)
-

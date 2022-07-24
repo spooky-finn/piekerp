@@ -1,0 +1,15 @@
+{
+  "short_name": "ПЭК.Производство",
+  "name": "ПЭК.Производство",
+  "start_url": "index.html",
+  "icons": [
+    {
+      "src": "factory_icon.png",
+      "sizes": "832x832",
+      "type": "image/png"
+    }
+  ],
+  "display": "standalone",
+  "theme_color": "#FF0000",
+  "background_color": "#FF0000"
+}

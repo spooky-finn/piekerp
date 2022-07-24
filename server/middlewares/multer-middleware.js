@@ -3,7 +3,7 @@ var multerS3 = require('multer-s3');
 const uuidv4 = require('uuid/v4');
 const querystring = require('querystring');
 
-const awsClient = require('../S3/s3-client')
+const awsClient = require('../lib/s3-client')
 
 const multerMiddleware = multer({
     storage: multerS3({

@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@450;500;600;700&display=swap');
+
+html {
+    --LI: rgb(220 220 220);
+    --L0: rgb(235 235 235);
+    --L1: rgb(245 245 245);
+    --L2: rgb(250 250 250);
+
+    --L0-glass: rgba(255, 255, 255, 0.2);
+    --L1-glass: rgba(250, 250, 250, 0.5);
+    --L2-glass: rgba(255, 255, 255, .5);
+
+    --highContrast: rgba(0, 0, 0, 0.87);
+    --lowContrast: rgba(0, 0, 0, .6);
+    --disabled: rgba(0, 0, 0, .38);
+
+    --textInvert: rgba(233, 233, 233);
+
+    --accent: #4361e4;
+    --accent-hover: #3953c5;
+    --danger: #e5534b;
+    --accentLight: #E7E9FB;
+
+    --shadow-color: #e0e2e7;
+    --border: 1px solid #d7dadf;
+    --border-color: #d7dadf;
+    --border-colorLight: #e9ebf1de;
+
+
+    --br10: 10px;
+    --br: 15px;
+    --shadow-color: #ccccce;
+
+    --awaitingDispatch: #66cf03;
+    --needAttention: #e60909;
+
+    --blurFilter: blur(20px) saturate(160%) contrast(85%) brightness(170%);
+}
+
+html.dark {
+    --LI: rgb(10, 10, 15);
+    --L0: rgba(25 25 25);
+    --L1: rgba(35 35 35);
+    --L2: rgba(45 45 45);
+
+    --L0-glass: rgba(0, 0, 0, .2);
+    --L1-glass: rgba(30, 30, 30, .9);
+    --L2-glass: rgba(50, 50, 50, .9);
+
+
+
+    --highContrast: #d9e4f0;
+    --lowContrast: #adadad;
+    --textInvert: rgb(0, 0, 0);
+
+
+    --accent: #a2b3ff;
+    --accent-hover: #8897d6;
+    --accentLight: #43435c;
+
+    --border: 1px solid rgba(255, 255, 255, .08);
+    --border-color: rgba(255, 255, 255, .06);
+    --border-colorLight: rgba(255, 255, 255, .04);
+    --shadow-color: #1a1a1a;
+
+    --awaitingDispatch: #94c165;
+    --needAttention: #a70c0d;
+
+    --blurFilter: blur(20px) saturate(160%) contrast(85%) brightness(60%);
+}
