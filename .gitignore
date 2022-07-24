@@ -24,8 +24,8 @@ chrome-user-data
 *.swp
 *.swo
 *.sql
+*.env
 
-<<<<<<< HEAD
 packages/react-devtools-core/dist
 packages/react-devtools-extensions/chrome/build
 packages/react-devtools-extensions/chrome/*.crx
@@ -38,15 +38,4 @@ packages/react-devtools-extensions/.tempUserDataDir
 packages/react-devtools-inline/dist
 packages/react-devtools-shell/dist
 packages/react-devtools-timeline/dist
-=======
-*/node_modules/
-# Ignore Mac DS_Store files
-**/.DS_Store
-client/piek/build/env-config.js
-.vscode/
-.trunk/out
-*.env
-*.rest
-*.sql
-/meta
->>>>>>> 0a633261762a81047eca966234adca9d6d7b79fb
+
