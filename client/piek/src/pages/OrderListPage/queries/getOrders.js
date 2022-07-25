@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'; 
+import gql from 'graphql-tag';
 
 // Выбираем заказы находящиеся только в Прездаказах и в производстве 
 //   OrderStatusID 
@@ -9,7 +9,7 @@ import gql from 'graphql-tag';
 
 export const GetOrdersSubscription = gql`
 subscription{
-    erp_Orders(where: {OrderStatusID: {_in: [1,2]} }) {
+    erp_Orders(where: {OrderStatusID: {_in: [1,2]} }, order_by: {ShippingDate: asc_nulls_first}) {
       OrderID
       Entity
       InvoiceNumber

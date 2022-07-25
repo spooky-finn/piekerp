@@ -27,7 +27,7 @@ class UserService {
         if (!user)
             throw ApiError.UnauthorizedError('user-not-found')
         else if (password !== user["Password"])
-            throw ApiError.UnauthorizedError("invalid-password")
+            throw ApiError.UnauthorizedError("wrong-password")
 
         ///нужно проверить есть ли просроченные токены у этого юзера
 

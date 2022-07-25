@@ -1,7 +1,17 @@
+const { execSync } = require("child_process");
+const { networkInterfaces } = require('os');
+
 const dotenv = require('dotenv');
 dotenv.config({ path: `../.env` });
 
-console.log("Express tsarted on with: ", process.env.NODE_ENV)
+
+console.log("🛫 Express running in", process.env.NODE_ENV, 'mode.')
+
+if (process.env.NODE_ENV == 'development') {
+  const local_IPv4 = execSync("ifconfig | grep  'inet '").toString();
+  console.log(`Your local network settings: \n ${local_IPv4}`)
+  // console.dir(');
+}
 
 var express = require('express');
 var path = require('path');
