@@ -4,7 +4,7 @@ import FormControl from "@mui/material/FormControl"
 import FormHelperText from '@mui/material/FormHelperText';
 import { css } from '@emotion/react'
 
-export default function CustomSelectWrapper({ children, helpText, isActive }){
+export default function CustomSelectWrapper({ children, helpText, isActive }) {
 
     const Wrap = styled.div`
     display: flex;
@@ -16,6 +16,7 @@ export default function CustomSelectWrapper({ children, helpText, isActive }){
     color: var(--lowContrast);
     position: relative;
     margin: 0;
+
 
     span {
         color: var(--lowContrast);
@@ -41,17 +42,18 @@ export default function CustomSelectWrapper({ children, helpText, isActive }){
             align-items: center;
             gap: 10px;
         `}>
-      
+
             <FormHelperText css={css`
                 margin-left: 15px;
                 margin-top: 0;
+                color: var(--lowContrast);
             `}>{helpText}</FormHelperText>
 
             <Wrap className={isActive ? 'active' : null} >
                 <FormControl fullWidth>
-                {children}
+                    {children}
                 </FormControl>
             </Wrap>
-     </div>
+        </div>
     )
 }

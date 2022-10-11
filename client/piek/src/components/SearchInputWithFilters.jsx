@@ -24,7 +24,7 @@ const SearchInputWithFilters = ({ value, onChange, children }) => {
             gap: 10px;
             svg {
                 width: 18px;
-                color: var(--highContrast);
+                /* color: var(--highContrast); */
                 opacity: .3;
                 transition: opacity .2s ease;
             }
@@ -33,7 +33,7 @@ const SearchInputWithFilters = ({ value, onChange, children }) => {
                 flex-grow: 1;
                 height: 100%;
                 background: transparent;
-                color: var(--highContrast);
+                /* color: var(--highContrast); */
                 font-size: .9rem;
                 font-weight: 600;
             }
