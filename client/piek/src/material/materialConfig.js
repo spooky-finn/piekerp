@@ -51,6 +51,7 @@ const materialConfig = (theme) => ({
     MuiMenuItem: {
       styleOverrides: {
         root: {
+          color: 'var(--highContrast)',
           fontSize: '.8rem',
           padding: '4px 15px !important'
         }
@@ -216,10 +217,6 @@ const materialConfig = (theme) => ({
       styleOverrides: {
         paper: {
           background: 'var(--L0-glass)',
-          // margin: '.6rem',
-          // height: '98%',
-          // border: 'var(--lowContrast)',
-          // borderRadius: 'var(--br)',
         }
       }
     }

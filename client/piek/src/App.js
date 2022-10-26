@@ -22,9 +22,9 @@ function App() {
   const [appTheme, setAppTheme] = useState(() => getCookie('theme'))
   store.setUItheme(appTheme, setAppTheme)
   const { mode } = SystemPreferTheme(appTheme, setAppTheme)
-  var theme = useMemo(() => createTheme(getPalette(mode)), [mode]);
+  var theme = createTheme(getPalette(mode));
   theme = createTheme(theme, materialConfig(theme));
-
+  console.log(theme);
   return (
     <ThemeProvider theme={theme}>
 

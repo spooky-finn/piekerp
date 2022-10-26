@@ -1,0 +1,122 @@
+query GetAllUsers {
+  erp_Users {
+    FirstName
+    LastName
+    UserID
+  }
+}
+
+mutation InsertNotification($CommentID: Int!, $MentionedUser: Int!, $OrderID: Int!) {
+  insert_erp_Notifications(
+    objects: { CommentID: $CommentID, MentionedUser: $MentionedUser, OrderID: $OrderID }
+  ) {
+    returning {
+      MentionedUser
+      ID
+    }
+  }
+}
+
+# DOCS
+mutation InsertDocumentsArray($objects: [erp_Docs_insert_input!]!) {
+  insert_erp_Docs(objects: $objects) {
+    returning {
+      ID
+    }
+  }
+}
+
+mutation InsertPayment($PaidAmount: numeric!, $Date: timestamp!, $OrderID: Int!) {
+  insert_erp_PaymentHistory_one(
+    object: { PaidAmount: $PaidAmount, OrderID: $OrderID, Date: $Date }
+  ) {
+    ID
+    OrderID
+  }
+}
+
+mutation DeleteOrder($OrderID: Int!) {
+  delete_erp_Orders_by_pk(OrderID: $OrderID) {
+    OrderID
+  }
+}
+
+mutation InsertOrderItem($name: String!, $orderID: Int!, $quantity: Int!, $fullName: String!) {
+  insert_erp_OrderItems_one(
+    object: { OrderID: $orderID, Name: $name, FullName: $fullName, Quantity: $quantity }
+  ) {
+    OrderItemID
+    OrderID
+  }
+}
+
+mutation DeleteOrderItemByPk($id: Int!) {
+  delete_erp_OrderItems_by_pk(OrderItemID: $id) {
+    OrderItemID
+  }
+}
+
+mutation UpdateOrderItemByPk($id: Int!, $FullName: String!, $Name: String!, $Quantity: Int!) {
+  update_erp_OrderItems_by_pk(
+    pk_columns: { OrderItemID: $id }
+    _set: { FullName: $FullName, Name: $Name, Quantity: $Quantity }
+  ) {
+    Name
+    FullName
+    OrderItemID
+    Quantity
+  }
+}
+
+mutation MoveOrderToPriority($OrderID: Int!, $AcceptanceDate: timestamp!) {
+  update_erp_Orders_by_pk(
+    pk_columns: { OrderID: $OrderID }
+    _set: { OrderStatusID: 2, AcceptanceDate: $AcceptanceDate }
+  ) {
+    OrderID
+    OrderStatusID
+  }
+}
+
+mutation MoveOrderToArchive($OrderID: Int!, $ActualShippingDate: timestamp!, $OrderStatusID: Int!) {
+  update_erp_Orders_by_pk(
+    pk_columns: { OrderID: $OrderID }
+    _set: {
+      OrderStatusID: $OrderStatusID
+      AwaitingDispatch: false
+      ActualShippingDate: $ActualShippingDate
+    }
+  ) {
+    OrderID
+    OrderStatusID
+  }
+}
+
+mutation UpdateNeedAttention($OrderID: Int!, $NeedAttention: String!) {
+  update_erp_Orders_by_pk(
+    pk_columns: { OrderID: $OrderID }
+    _set: { NeedAttention: $NeedAttention }
+  ) {
+    OrderID
+    NeedAttention
+  }
+}
+
+mutation UpdateAwaitingDispatch($OrderID: Int!, $AwaitingDispatch: Boolean!) {
+  update_erp_Orders_by_pk(
+    pk_columns: { OrderID: $OrderID }
+    _set: { AwaitingDispatch: $AwaitingDispatch }
+  ) {
+    OrderID
+    AwaitingDispatch
+  }
+}
+
+mutation UpdateOrderInfo($OrderID: Int!, $fields: erp_Orders_set_input) {
+  update_erp_Orders_by_pk(pk_columns: { OrderID: $OrderID }, _set: $fields) {
+    OrderID
+    Entity
+    City
+    CreatingDate
+  }
+}
