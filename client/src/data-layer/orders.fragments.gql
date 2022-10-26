@@ -1,0 +1,30 @@
+fragment Order on erp_Orders {
+  OrderID
+  Entity
+  InvoiceNumber
+  City
+  ShippingDate
+  ActualShippingDate
+  AcceptanceDate
+  PaidAmount
+  TotalAmount
+  AwaitingDispatch
+  NeedAttention
+  CreatingDate
+  ManagerID
+  OrderStatusID
+  OrderStatus {
+    Name
+    ID
+  }
+  OrderItems(order_by: { OrderItemID: asc }) {
+    Quantity
+    OrderItemID
+    Name
+    OrderID
+  }
+  User {
+    FirstName
+    LastName
+  }
+}

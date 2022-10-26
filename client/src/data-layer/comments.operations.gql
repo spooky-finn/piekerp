@@ -1,0 +1,40 @@
+# COMMENTS
+
+subscription Comments($OrderID: Int!) {
+  erp_Comments(where: { OrderID: { _eq: $OrderID } }, order_by: { CommentID: desc }) {
+    CommentID
+    Text
+    Timestamp
+    User {
+      UserID
+      FirstName
+      LastName
+    }
+  }
+}
+
+mutation InsertComment($OrderID: Int!, $Text: String!, $UserID: Int!) {
+  insert_erp_Comments_one(object: { OrderID: $OrderID, Text: $Text, UserID: $UserID }) {
+    CommentID
+    OrderID
+    Text
+    Timestamp
+    UserID
+  }
+}
+
+mutation DeleteComment($CommentID: Int!) {
+  delete_erp_Comments_by_pk(CommentID: $CommentID) {
+    CommentID
+  }
+}
+
+mutation UpdateComment($CommentID: Int!, $Text: String!) {
+  update_erp_Comments_by_pk(pk_columns: { CommentID: $CommentID }, _set: { Text: $Text }) {
+    OrderID
+    Text
+    Timestamp
+    UserID
+    CommentID
+  }
+}

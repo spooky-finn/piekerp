@@ -1,0 +1,103 @@
+query getOrdersByStatus($ShippingDate: order_by = asc_nulls_first, $orderStatus: Int!) {
+  erp_Orders(
+    where: { OrderStatusID: { _eq: $orderStatus } }
+    order_by: { ShippingDate: $ShippingDate }
+  ) {
+    ...Order
+  }
+}
+
+query getOrdersArchivedBySearchKeyword($keyword: String!, $OrderStatus: Int!) {
+  erp_Orders(
+    order_by: { ActualShippingDate: desc_nulls_last }
+    where: {
+      _or: [
+        { Entity: { _ilike: $keyword } }
+        { InvoiceNumber: { _ilike: $keyword } }
+        # { OrderItems: {_and: [{SerialStarts: {_lte: $keyword}}, {SerialEnds: {_gte: $keyword }}] } },
+      ]
+      # ManagerID: { _eq: $ManagerID }
+      OrderStatusID: { _eq: $OrderStatus }
+    }
+  ) {
+    ...Order
+  }
+}
+
+query GetOrdersArchivedByInterval($_lte: timestamp!, $_gte: timestamp!) {
+  erp_Orders(
+    where: { ActualShippingDate: { _lte: $_lte, _gte: $_gte } }
+    order_by: { ActualShippingDate: asc }
+  ) {
+    ...Order
+  }
+}
+
+query GetManagers {
+  erp_Users(where: { AccessLevel: { AccessLevelID: { _lte: 2 } } }) {
+    FirstName
+    LastName
+    UserID
+    AccessLevelID
+  }
+}
+
+query GetOrderByPK($OrderID: Int!) {
+  erp_Orders(where: { OrderID: { _eq: $OrderID } }) {
+    # visual statuses
+    NeedAttention
+    AwaitingDispatch
+    OrderStatusID
+
+    # dates
+    ActualShippingDate
+    AcceptanceDate
+    ShippingDate
+    CreatingDate
+
+    OrderID
+    ManagerID
+
+    City
+
+    Comment
+    Entity
+    InvoiceNumber
+
+    OrderNumber
+    User {
+      FirstName
+      LastName
+      UserID
+    }
+    OrderItems(order_by: { OrderItemID: asc }) {
+      Name
+      FullName
+      OrderItemID
+      Quantity
+    }
+    Docs {
+      ID
+      Key
+      FileName
+      Size
+      UploadingDate
+    }
+
+    # finances
+    PaidAmount
+    TotalAmount
+    PaymentHistories(where: { PaidAmount: { _neq: 0 } }) {
+      PaidAmount
+      Date
+    }
+  }
+}
+
+mutation InsertOrder($orderStatusID: Int!) {
+  insert_erp_Orders(objects: { OrderStatusID: $orderStatusID }) {
+    returning {
+      OrderID
+    }
+  }
+}

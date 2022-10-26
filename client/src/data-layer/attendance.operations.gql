@@ -1,0 +1,26 @@
+query GetEmployeeList($gte: timestamp!, $lte: timestamp!) {
+  attendance_users_aggregate(order_by: { lastname: asc }) {
+    nodes {
+      id
+      card
+      firstname
+      lastname
+      intervals(where: { ent: { _gte: $gte, _lte: $lte } }) {
+        id
+        ent
+        ext
+        card
+      }
+    }
+  }
+  attendance_config {
+    TimeDeduction
+  }
+}
+
+mutation UpdateTimeDeduction($TimeDeduction: numeric!, $ID: Int!) {
+  update_attendance_config_by_pk(pk_columns: { ID: $ID }, _set: { TimeDeduction: $TimeDeduction }) {
+    TimeDeduction
+    ID
+  }
+}

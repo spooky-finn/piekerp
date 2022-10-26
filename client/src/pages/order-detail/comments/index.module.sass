@@ -1,0 +1,102 @@
+.commentInputForm
+  display: flex
+  align-items: center
+  padding: 0px 10px
+  white-space: pre-wrap
+  color: var(--highContrast) !important
+  border-bottom: var(--border)
+  background: var(--L2)
+  div:first-of-type
+    flex-grow: 1
+    outline: none
+    p, span, div, li, td
+      color: var(--highContrast) !important
+  .checklistUnit:hover
+    background: transparent !important
+
+.checklistUnit
+  position: relative
+  padding: .2em 2em
+  width: fit-content !important
+  cursor: pointer
+  text-decoration: none
+  min-height: 20px
+
+  &:hover
+    background: var(--border-color) !important
+    border-radius: 5px
+  &::after
+    content: ''
+    top: 50%
+    transform: translateY(-50%)
+    left: 10px
+    position: absolute
+    width: 10px
+    height: 10px
+    border-radius: 3px
+    border: 1px solid var(--accent)
+.checklistUnit_complited
+  // text-decoration: line-through 
+  color: var(--lowContrast)
+  &::after
+    background: var(--accent)
+
+.mentionedUserHiglight
+  background: var(--accentLight)
+  width: fit-content
+  padding: 3px
+  border-radius: var(--br)
+
+
+.commentUnit
+  margin: 10px 10px 15px
+  border: var(--border)
+  line-height: 1.4
+  border-radius: var(--br)
+  overflow: hidden
+  white-space: pre-wrap
+  &:hover
+    .actions
+      opacity: 1
+
+.commentContent
+  padding: 10px 15px 10px
+  color: var(--highContrast) !important
+  font-size: 1rem !important
+  outline: none !important
+  p,span, div
+    background: var(--L1) !important
+    font-size: 1rem !important
+    color: var(--highContrast) !important
+  &:focus
+    background: var(--L0) !important
+    outline: 2px solid var(--accent) !important
+    & *
+      background: var(--L0) !important
+
+.commentHeader
+  display: flex
+  background: var(--L2)
+  padding: .3rem 10px
+  border-bottom: var(--border)
+  .sender
+    color: var(--highContrast)
+    font-weight: 500
+  .time
+    color: var(--lowContrast)
+    font-size: .9rem
+
+
+  .actions
+    display: flex
+    opacity: 0
+    transition: opacity .1s ease
+    color: var(--lowContrast)
+    font-size: .9rem
+    div
+      padding: 0 5px
+      &:hover
+        text-decoration: underline
+
+  div:nth-last-of-type(2)
+    margin-left: auto

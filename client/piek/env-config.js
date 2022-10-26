@@ -1,8 +1,0 @@
-window._env_ = {
-  REACT_APP_NODE_ENV: "development",
-  REACT_APP_NODE_ENV: "development",
-  REACT_APP_API_URL: "http://localhost:9000/api",
-  REACT_APP_HASURA_ENDPOINT: "reserve.hasura.piek.ru/v1/graphql",
-  REACT_APP_HASURA_ENDPOINT: "reserve.hasura.piek.ru/v1/graphql",
-  REACT_APP_RU_DATE_FORMAT: "'DD.MM.YY'",
-}
