@@ -7,7 +7,7 @@ import DialogTitle from '@mui/material/DialogTitle'
 import { ReactNode, useState } from 'react'
 // extrnalСomponent is the whichever component which will be go out
 // like as icon or textButton or something else
-interface IConfirmDialogProps {
+interface ConfirmDialogProps {
   title: string
   body: string
   confirmButtonLabel: string
@@ -15,6 +15,7 @@ interface IConfirmDialogProps {
   isDangerous?: boolean
   children?: ReactNode
 }
+
 export default function ConfirmDialog({
   confirmButtonLabel: confirmLabel,
   confirmButtonHandler: onCloseComplete,
@@ -22,7 +23,7 @@ export default function ConfirmDialog({
   title,
   body,
   children
-}: IConfirmDialogProps) {
+}: ConfirmDialogProps) {
   const [open, setOpen] = useState(false)
 
   const handleClickOpen = () => {

@@ -1,7 +1,6 @@
-import { useContext } from "react";
-import { Context } from "../index";
+import { useContext } from 'react'
+import { Context } from '../index'
 
-
-export default function useAppContext() {
-    return useContext(Context)
+export function useAppContext() {
+  return useContext(Context)
 }

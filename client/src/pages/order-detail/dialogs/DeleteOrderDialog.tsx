@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import ConfirmDialog from '../../../components/muiCustom/mui/ConfirmDialog'
+import ConfirmDialog from '../../../components/ConfirmDialog'
 
 interface IDeleteOrderDialogProps {
   handler: () => void

@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useEffect } from 'react'
-import $api from '../api-clients'
+import { $api } from 'src/api'
 
-export default function useFetch(url: string) {
+export function useFetch(url: string) {
   // TODO ADD TOKEN VERIFICATION
   const [data, setData] = useState()
   const [loading, setLoading] = useState(true)

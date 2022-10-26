@@ -13,7 +13,7 @@ interface IOrderListPageStore {
   managerFilterHandler(e: SelectChangeEvent<any>): void
 }
 
-const useOrderListPageStore = create<IOrderListPageStore>(set => ({
+export const useOrderListPageStore = create<IOrderListPageStore>(set => ({
   managerId: 0,
   orderStatusId: OrderStatus.ordArchived,
   searchTerm: '',
@@ -35,5 +35,3 @@ const useOrderListPageStore = create<IOrderListPageStore>(set => ({
     set({ searchTerm: e.target.value })
   }
 }))
-
-export default useOrderListPageStore

@@ -1,8 +1,8 @@
 import { ApolloClient, InMemoryCache, from } from '@apollo/client'
 import { split } from '@apollo/client'
 import { getMainDefinition } from '@apollo/client/utilities'
-import { wsRetryLink, wsErrorLink, webSocketLink } from './wsLinks'
-import { httpErrorLink, httpAuthLink, httpLink } from './httpLinks'
+import { wsRetryLink, wsErrorLink, webSocketLink } from './apollo-ws-links'
+import { httpErrorLink, httpAuthLink, httpLink } from './apollo-http-links'
 
 const splitLink = split(
   ({ query }) => {

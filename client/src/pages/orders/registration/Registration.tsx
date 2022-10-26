@@ -1,8 +1,6 @@
-import useApplyFilters from 'src/hooks/useApplyFilters'
 import CreateRecordButton from 'src/components/CreateRecordButton'
 import OrdersNavigationBar from 'src/components/OrdersNavigationBar'
 import { useGetOrdersByStatusQuery, useInsertOrderMutation } from 'src/types/graphql-shema'
-import useOrderListPageStore from 'src/hooks/useOrderListPageStore'
 import { useMemo } from 'react'
 import PaperL1 from 'src/components/wrappers/PaperL1'
 import { columnsList, Table } from '../table'
@@ -11,6 +9,7 @@ import ManagerFilter from 'src/components/ManagerFilter'
 import SearchInputWithFilters from 'src/components/SearchInputWithFilters'
 import { OrderStatus } from 'src/types/global'
 import Typography from '@mui/material/Typography'
+import { useApplyFilters, useOrderListPageStore } from 'src/hooks'
 
 export default function Registration() {
   const store = useOrderListPageStore()

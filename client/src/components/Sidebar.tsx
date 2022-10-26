@@ -3,7 +3,7 @@ import { css } from '@emotion/react'
 import { UilConstructor, UilSetting, UilSortAmountDown, UilWrench } from '@iconscout/react-unicons'
 import { NavLink } from 'react-router-dom'
 import { AppRoutes } from 'src/routers/Router'
-import NotificationsContainer from '../NotificationCenter/NotificationsContainer'
+import NotificationsContainer from './notification-center/NotificationsContainer'
 
 export default function Sidebar() {
   const styles = css`

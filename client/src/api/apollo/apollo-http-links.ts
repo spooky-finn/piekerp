@@ -2,7 +2,8 @@ import { onError } from '@apollo/client/link/error'
 import { setContext } from '@apollo/client/link/context'
 import { HttpLink, Observable } from '@apollo/client'
 
-import { getInMemoryToken, getNewInMemoryToken } from '../../index'
+import { getNewInMemoryToken } from '../../index'
+import { getInMemoryToken } from '../..'
 
 const http_protocol = process.env.REACT_APP_NODE_ENV === 'development' ? 'http://' : 'https://'
 

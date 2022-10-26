@@ -1,4 +1,4 @@
-const RuMonths = [
+export const RuMonths = [
   'январь',
   'февраль',
   'март',
@@ -12,4 +12,3 @@ const RuMonths = [
   'ноябрь',
   'декабрь'
 ]
-export default RuMonths

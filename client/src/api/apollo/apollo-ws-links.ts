@@ -1,8 +1,7 @@
 import { onError } from '@apollo/client/link/error'
 import { RetryLink } from '@apollo/client/link/retry'
 import { WebSocketLink } from '@apollo/client/link/ws'
-
-import { getInMemoryToken } from '../../index'
+import { getInMemoryToken } from '../..'
 
 const ws_protocol = process.env.REACT_APP_NODE_ENV === 'development' ? 'ws://' : 'wss://'
 

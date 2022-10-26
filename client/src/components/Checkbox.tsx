@@ -1,18 +1,18 @@
 import FormGroup from '@mui/material/FormGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
-import Checkbox from '@mui/material/Checkbox'
+import MuiCheckbox from '@mui/material/Checkbox'
 
-export interface ICheckBoxProps {
+export interface CheckboxProps {
   title: string
   value: boolean
   onClick: () => void
 }
 
-export default function CheckBox(props: ICheckBoxProps) {
+export default function Checkbox(props: CheckboxProps) {
   return (
     <FormGroup>
       <FormControlLabel
-        control={<Checkbox value={props.value} onClick={props.onClick} />}
+        control={<MuiCheckbox value={props.value} onClick={props.onClick} />}
         label={props.title}
       />
     </FormGroup>

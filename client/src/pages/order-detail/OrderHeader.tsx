@@ -1,30 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { Box, Typography } from '@mui/material'
-import { OrderStatus, TOrder } from 'src/types/global'
-import OrderActions from './OrderActions/OrderActions'
-
-function orderStatus(order: TOrder) {
-  // add a note to the title if this is a pre-order
-  if (order.OrderStatusID === OrderStatus.ordRegistration) return ' Предзаказ'
-  if (order.OrderStatusID === OrderStatus.ordArchived) return ' В архиве'
-  if (
-    [
-      OrderStatus.reclInbox,
-      OrderStatus.reclDecision,
-      OrderStatus.reclProduction,
-      OrderStatus.reclArchived
-    ].includes(order.OrderStatusID)
-  )
-    return ' Рекламация'
-}
-
-function orderStatusHighlighting(order: TOrder) {
-  // Выделение заказов требующих внимания имеют приоритет
-  if (order.NeedAttention?.split(',')[0] === 'true') return 'needAttention'
-  else if (order.AwaitingDispatch) return 'awaitingDispatch'
-  else return ''
-}
+import { TOrder } from 'src/types/global'
+import OrderActions from './actions/OrderActions'
+import { orderStatus, orderStatusHighlighting } from 'src/utils/order-status'
 
 interface IOrderHeaderProps {
   order: TOrder
