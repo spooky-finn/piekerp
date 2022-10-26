@@ -14,7 +14,7 @@ interface ICommentsListProps {
   user: TUser
 }
 
-export default function CommentsList({ user }: ICommentsListProps) {
+export default function CommentList({ user }: ICommentsListProps) {
   const { orderId } = useOrderDetailStore()
 
   if (!orderId) throw Error('Null OrderId at the local store')

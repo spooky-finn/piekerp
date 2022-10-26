@@ -1,4 +1,4 @@
-import { OrderStatus, TOrder } from 'src/types/global'
+import { OrderStatus, TOrder, TReclamationOrder } from 'src/types/global'
 
 export function orderStatus(order: TOrder) {
   // add a note to the title if this is a pre-order
@@ -15,7 +15,7 @@ export function orderStatus(order: TOrder) {
     return ' Рекламация'
 }
 
-export function orderStatusHighlighting(order: TOrder) {
+export function orderStatusHighlighting(order: TOrder | TReclamationOrder) {
   // Выделение заказов требующих внимания имеют приоритет
   if (order.NeedAttention?.split(',')[0] === 'true') return 'needAttention'
   else if (order.AwaitingDispatch) return 'awaitingDispatch'

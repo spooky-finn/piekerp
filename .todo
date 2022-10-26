@@ -1,5 +1,5 @@
 1) Add email validation on login route
 2) add erorr to login page
+
 3) Изменить типо поля needAttention to bollean
-refactor OrderStatusIndicator component
-get rid of custom drawer
+4) refactor OrderStatusIndicator component

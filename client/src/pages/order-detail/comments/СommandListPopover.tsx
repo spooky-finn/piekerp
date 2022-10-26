@@ -1,4 +1,4 @@
-import { UilListOl, UilListOlAlt, UilListUiAlt, UilListUl, UilUser } from '@iconscout/react-unicons'
+import { UilListUl, UilUser } from '@iconscout/react-unicons'
 import { ListItemIcon, Menu, MenuItem } from '@mui/material'
 import sass from './index.module.sass'
 
@@ -10,7 +10,7 @@ interface IСommandsPopoverProps {
   setAnchorULP: React.Dispatch<React.SetStateAction<Element | null>>
 }
 
-export default function СommandsPopover({
+export default function СommandListPopover({
   anchorEl,
   open,
   handleClose,

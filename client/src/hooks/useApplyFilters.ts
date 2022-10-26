@@ -1,7 +1,7 @@
 import { OrderStatus, TOrderColumnData } from 'src/types/global'
-import keywordComparator from '../utils/keyword-comparator'
+import keywordComparator from '../utils/Comparators'
 
-interface IUseApplyFiltersProps {
+interface UseApplyFiltersProps {
   orders: TOrderColumnData[]
   options: Options
 }
@@ -16,7 +16,7 @@ type FilterHandler = {
   [key: string]: (order: TOrderColumnData) => boolean
 }
 
-export function useApplyFilters({ orders, options }: IUseApplyFiltersProps) {
+export function useApplyFilters({ orders, options }: UseApplyFiltersProps) {
   const { managerId, searchKeyword, orderStatusId } = options
 
   const handlers: FilterHandler = {

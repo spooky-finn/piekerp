@@ -2,12 +2,13 @@ import { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { useLocation, useParams } from 'react-router-dom'
 import ReactTooltip from 'react-tooltip'
+
 import PaperL1 from 'src/components/wrappers/PaperL1'
 import { useOrderDetailStore } from 'src/hooks/useOrderDetailStore'
 import { useGetManagersQuery, useGetOrderByPkQuery } from 'src/types/graphql-shema'
 import FileService from '../../services/FileService'
-import CommentsList from './comments/CommentsList'
-import DialogAddEditOrderItem from './dialogs/DialogAddEditOrderItem'
+import CommentList from './comments/CommentList'
+import DialogAddEditOrderItem from './dialogs/AddEditOrderItemDialog'
 import Docs from './docs/Docs'
 import { isFileOnDropzone } from './utils.dropzone'
 import OrderItemList from './order-items/OrderItemList'
@@ -75,7 +76,7 @@ export default function OrderDetail() {
             <div className="LeftSideContent">
               <OrderHeader order={data.erp_Orders[0]} />
               <OrderItemList data={data.erp_Orders[0].OrderItems} refetch={refetch} />
-              <CommentsList user={store.user} />
+              <CommentList user={store.user} />
               <Docs data={data.erp_Orders[0].Docs} onUpload={onUploadFiles} refetch={refetch} />
             </div>
 

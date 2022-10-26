@@ -1,5 +1,5 @@
 import { TOrder } from 'src/types/global'
-import { formatDateWithTime, formatOnlyDate } from 'src/utils/date_helper'
+import { formatDateWithTime, formatOnlyDate } from 'src/utils/Date'
 import { OrderInfoCard } from '.'
 
 export interface IAboutOrderProps {

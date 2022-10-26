@@ -5,7 +5,7 @@ import Button from '@mui/material/Button'
 import { ReactNode } from 'react'
 
 import { useUpdateTimeDeductionMutation } from 'src/types/graphql-shema'
-import { monthAdd } from 'src/utils/date_helper'
+import { monthAdd } from 'src/utils/Date'
 import { State } from './Attendance'
 import Checkbox from 'src/components/Checkbox'
 

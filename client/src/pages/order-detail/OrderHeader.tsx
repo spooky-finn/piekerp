@@ -3,7 +3,7 @@ import { css } from '@emotion/react'
 import { Box, Typography } from '@mui/material'
 import { TOrder } from 'src/types/global'
 import OrderActions from './actions/OrderActions'
-import { orderStatus, orderStatusHighlighting } from 'src/utils/order-status'
+import { orderStatus, orderStatusHighlighting } from 'src/utils/OrderColorIndication'
 
 interface IOrderHeaderProps {
   order: TOrder
