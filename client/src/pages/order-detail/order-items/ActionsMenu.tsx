@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import { UilEdit, UilEditAlt, UilEllipsisV, UilTrash } from '@iconscout/react-unicons'
+import { UilEdit, UilEllipsisV, UilTrash } from '@iconscout/react-unicons'
 import { Button, ListItemIcon, Menu, MenuItem } from '@mui/material'
 import React, { useState } from 'react'
 

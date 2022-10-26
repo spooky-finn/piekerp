@@ -17,8 +17,6 @@ export default function NotificationsContainer() {
   }>({ unviewed: [], viewed: [] })
   const [state, setState] = useState(false)
 
-  // const [updateViewedMutration] = useUpdateViewedMutation()
-
   const { data, loading } = useGetNotificationsSubscription({
     onData(options) {
       if (!options.data.data) throw Error(options.data.error?.stack)
