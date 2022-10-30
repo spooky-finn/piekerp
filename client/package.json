@@ -80,6 +80,7 @@
     "@typescript-eslint/parser": "^5.40.1",
     "babel-jest": "^29.2.2",
     "eslint": "^8.25.0",
+    "eslint-config-react": "^1.1.7",
     "eslint-plugin-mobx": "^0.0.9",
     "react-test-renderer": "^17.0.1",
     "typescript": "^4.8.4"

@@ -1,10 +1,10 @@
 {
-  "name": "api",
-  "version": "0.0.0",
-  "private": true,
+  "name": "piekerp-backend",
+  "version": "1.0.0",
+  "main": "dist/server.js",
   "scripts": {
-    "start": "nodemon ./bin/www",
-    "dev": "nodemon ./bin/www"
+    "start": "nodemon ./server.js",
+    "dev": "nodemon  --experimental-specifier-resolution=node ./server.ts "
   },
   "dependencies": {
     "aws-sdk": "^2.944.0",
@@ -30,5 +30,11 @@
     "querystring": "^0.2.0",
     "utf8": "^3.0.0",
     "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.14",
+    "@types/node": "^18.11.7",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.4"
   }
 }
