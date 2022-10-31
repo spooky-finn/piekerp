@@ -1,16 +1,14 @@
 import { Router } from 'express'
-import userController from '../controllers/user-controller'
-import S3Controller from '../controllers/s3-controller'
 import { body } from 'express-validator'
 import authMiddleware from '../middlewares/auth-middleware'
 import multerMiddleware from '../middlewares/multer-middleware'
-import orderController from '../controllers/order-controller'
+import { OrderController, UserController, S3Controller } from '../controllers/'
 
 export const router = Router()
 
-router.post('/login', body('email').isEmail(), userController.login)
-router.post('/logout', userController.logout)
-router.get('/refresh', userController.refresh)
+router.post('/login', body('email').isEmail(), UserController.login)
+router.post('/logout', UserController.logout)
+router.get('/refresh', UserController.refresh)
 
 // Yandex Cloud Object Storage
 
@@ -23,4 +21,4 @@ router.delete('/s3/:key', authMiddleware, S3Controller.removeSingleFile)
 
 router.get('/backup/:key', S3Controller.getHasuraBackup)
 
-router.get('/orders/unpaid', orderController.getUnpaidOrders)
+router.get('/orders/unpaid', OrderController.getUnpaidOrders)

@@ -18,7 +18,7 @@ class HasuraS3Service extends HasuraClient {
     return res.data.insert_erp_Docs.returning
   }
 
-  async removeFileInformation(Key) {
+  async removeFileInformation(Key: string) {
     const query = `
         mutation MyMutation($Key: String!) {
             delete_erp_Docs(where: {Key: {_eq: $Key} }) {

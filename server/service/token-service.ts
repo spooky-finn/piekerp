@@ -1,13 +1,14 @@
 import jwt from 'jsonwebtoken'
+import { config } from '../config/config'
 import hasuraService from './hasura-auth-service'
 
 class TokenService {
   generateTokens(payload: any) {
-    const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_SECRET, {
-      expiresIn: process.env.JWT_ACCESS_SECRET_EXPIRES
+    const accessToken = jwt.sign(payload, config.JWT_ACCESS_SECRET, {
+      expiresIn: config.JWT_ACCESS_SECRET_EXPIRES
     })
-    const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_SECRET, {
-      expiresIn: process.env.JWT_REFRESH_SECRET_EXPIRES
+    const refreshToken = jwt.sign(payload, config.JWT_REFRESH_SECRET, {
+      expiresIn: config.JWT_REFRESH_SECRET_EXPIRES
     })
     return {
       accessToken,
@@ -17,7 +18,7 @@ class TokenService {
 
   validateAccessToken(token: string) {
     try {
-      const userData = jwt.verify(token, process.env.JWT_ACCESS_SECRET)
+      const userData = jwt.verify(token, config.JWT_ACCESS_SECRET)
       return userData
     } catch (error) {
       return null
@@ -26,7 +27,7 @@ class TokenService {
 
   validateRefreshToken(token: string) {
     try {
-      const userData = jwt.verify(token, process.env.JWT_REFRESH_SECRET)
+      const userData = jwt.verify(token, config.JWT_REFRESH_SECRET)
       return userData
     } catch (error) {
       return null

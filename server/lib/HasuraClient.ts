@@ -1,10 +1,9 @@
 import fetch from 'node-fetch'
 import ApiError from '../exceptions/api-error'
-import * as dotenv from 'dotenv'
-dotenv.config({ path: `../.env` })
+import { config } from '../config/config'
 
 class HasuraClient {
-  endpoint = process.env.HASURA_ENDPOINT
+  endpoint = config.HASURA_ENDPOINT
 
   constructor() {
     if (this.constructor == HasuraClient) {
@@ -12,12 +11,12 @@ class HasuraClient {
     }
   }
 
-  async _send(query, variables?) {
-    let responseData = await fetch(this.endpoint, {
+  protected async _send(query, variables?) {
+    const responseData = await fetch(this.endpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET
+        'x-hasura-admin-secret': config.HASURA_ADMIN_SECRET
       },
       body: JSON.stringify({ query: query, variables: variables })
     })

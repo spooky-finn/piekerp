@@ -1,21 +1,22 @@
-export default class ApiError extends Error {
-  status
+import StatusCodes from 'http-status-codes'
 
-  constructor(status: Number, message: string) {
+export default class ApiError extends Error {
+  status: number
+
+  constructor(status: number, message: string) {
     super(message)
     this.status = status
-    // this.detail = detail
   }
 
   static UnauthorizedError(message: string) {
-    return new ApiError(401, message)
+    return new ApiError(StatusCodes.UNAUTHORIZED, message)
   }
 
   static BadRequest(message: string) {
-    return new ApiError(400, message)
+    return new ApiError(StatusCodes.BAD_REQUEST, message)
   }
 
   static HasuraServiceError(message: string) {
-    return new ApiError(500, message)
+    return new ApiError(StatusCodes.INTERNAL_SERVER_ERROR, message)
   }
 }
