@@ -1,0 +1,7 @@
+mutation MyMutation($Key: String!) {
+  delete_erp_Docs(where: { Key: { _eq: $Key } }) {
+    returning {
+      Key
+    }
+  }
+}

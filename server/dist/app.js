@@ -27,33 +27,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.app = void 0;
-const dotenv = __importStar(require("dotenv"));
-dotenv.config({ path: `../.env` });
-// console.log("CORS", process.env.CORS_CLIENT_URL)
+const cookie_parser_1 = __importDefault(require("cookie-parser"));
+const cors_1 = __importDefault(require("cors"));
 const express_1 = __importStar(require("express"));
 const path_1 = require("path");
-const cookie_parser_1 = __importDefault(require("cookie-parser"));
-const morgan_1 = __importDefault(require("morgan"));
-const cors_1 = __importDefault(require("cors"));
-const error_middleware_js_1 = __importDefault(require("./middlewares/error-middleware.js"));
-//prod
+const config_1 = require("./config/config");
+const routes_1 = require("./routes");
 const CLIENT_BUILD_PATH = '../client/build';
-const index_1 = __importDefault(require("./routes/index"));
 exports.app = (0, express_1.default)();
 // Static files
 exports.app.use((0, express_1.static)(CLIENT_BUILD_PATH));
-exports.app.use((0, morgan_1.default)('dev'));
 exports.app.use((0, express_1.urlencoded)({ extended: false }));
 //Middlewares
 exports.app.use((0, express_1.json)());
 exports.app.use((0, cookie_parser_1.default)());
 exports.app.use((0, cors_1.default)({
     credentials: true,
-    origin: process.env.CORS_CLIENT_URL
+    origin: config_1.config.CORS_CLIENT_URL
 }));
-console.log('sdfsdfsdf');
-exports.app.use(error_middleware_js_1.default);
-exports.app.use('/api', index_1.default);
+// app.use(errorMiddleware)
+exports.app.use('/api', routes_1.router);
 // All remaining requests return the React app, so it can handle routing.
 exports.app.get('*', function (request, response) {
     response.sendFile((0, path_1.join)(CLIENT_BUILD_PATH, 'index.html'));
