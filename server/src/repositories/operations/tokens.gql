@@ -1,0 +1,36 @@
+query AllTokensQuery {
+  erp_Tokens {
+    ID
+    RefreshToken
+    User {
+      UserID
+      FirstName
+      LastName
+      Email
+      AccessLevelID
+    }
+  }
+}
+
+mutation InsertTokenMutation($UserID: Int!, $refreshToken: String!) {
+  insert_erp_Tokens(objects: { UserID: $UserID, RefreshToken: $refreshToken }) {
+    returning {
+      UserID
+    }
+  }
+}
+
+mutation DeleteTokenMutation($refreshToken: String!) {
+  delete_erp_Tokens(where: { RefreshToken: { _eq: $refreshToken } }) {
+    returning {
+      UserID
+    }
+  }
+}
+
+mutation UpdateTokenMutation($tokenID: Int!, $refreshToken: String!) {
+  update_erp_Tokens_by_pk(pk_columns: { ID: $tokenID }, _set: { RefreshToken: $refreshToken }) {
+    ID
+    UserID
+  }
+}

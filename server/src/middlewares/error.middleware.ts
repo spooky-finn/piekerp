@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from 'express'
+import { StatusCodes } from 'http-status-codes'
 import ApiError from '../exceptions/api.error'
+import { StaticStringKeys } from '../lib/constants'
 
 export default function (err: ApiError, req: Request, res: Response, next: NextFunction) {
-  // next()
-  // console.log('error middleware')
   if (err instanceof ApiError) {
     return res.status(err.status).json({
       error: {
@@ -13,5 +13,7 @@ export default function (err: ApiError, req: Request, res: Response, next: NextF
     })
   }
 
-  return res.send('some fuck')
+  return res
+    .status(StatusCodes.INTERNAL_SERVER_ERROR)
+    .send(StaticStringKeys.UNKNOWN_ERROR_TRY_AGAIN)
 }

@@ -1,9 +1,10 @@
-import ApiError from '../exceptions/api.error'
 import { NextFunction, Request, Response } from 'express'
-import hasuraS3Service from '../repositories/docs.repository'
-import S3Service from '../service/s3.service'
-import { backupS3Client } from '../lib/s3-clients'
 import { config } from '../config/config'
+import ApiError from '../exceptions/api.error'
+import { database } from '../lib/graphql-client'
+import { backupS3Client } from '../lib/s3-clients'
+// import hasuraS3Service from '../repositories/docs.repository'
+import S3Service from '../service/s3.service'
 
 class S3Controller {
   async removeSingleFile(req: Request, res: Response, next: NextFunction) {
@@ -16,8 +17,9 @@ class S3Controller {
      */
     try {
       const key = req.params.key
+
       const data = await S3Service.deleteObject(key, config.S3_BUCKET).then(async s3_responce => {
-        return await hasuraS3Service.removeFileInformation(key)
+        return await database.DeleteDocsMutation({ Key: key })
       })
 
       res.json(data)
@@ -37,12 +39,14 @@ class S3Controller {
     try {
       const array_of_files = req.files.map(each => ({
         Key: each.key,
-        OrderID: req.headers.orderid,
+        OrderID: parseInt(req.headers.orderid[0]),
         FileName: each.originalname,
         Size: each.size
       }))
 
-      const data = await hasuraS3Service.addFileInformation(array_of_files)
+      const data = (await database.InsertDocsArrayMutation({ objects: array_of_files }))
+        .insert_erp_Docs.returning
+
       res.send(data)
     } catch (error) {
       next(error)
@@ -63,12 +67,14 @@ class S3Controller {
 
   async getHasuraBackup(req: Request, res: Response, next: NextFunction) {
     try {
-      const hasuraAdminSectret = req.query.hasura_admin_secret
+      const hasuraAdminSecret = req.query.hasura_admin_secret
       const key = req.params.key
 
-      if (!hasuraAdminSectret) throw ApiError.BadRequest('query-didnt-contain-hasura_admin_secret')
+      if (!hasuraAdminSecret) {
+        throw ApiError.BadRequest('query-didnt-contain-hasura_admin_secret')
+      }
 
-      if (hasuraAdminSectret != config.HASURA_ADMIN_SECRET)
+      if (hasuraAdminSecret != config.HASURA_ADMIN_SECRET)
         throw ApiError.BadRequest('wrong-hasura_admin_secret-in-query')
 
       const data = await backupS3Client

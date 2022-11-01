@@ -1,6 +1,6 @@
 import ApiError from '../exceptions/api.error'
 import { StaticStringKeys } from '../lib/constants'
-import hasuraService from '../repositories/auth.repository'
+import { database } from '../lib/graphql-client'
 import tokenService from './token.service'
 
 class AuthService {
@@ -19,7 +19,7 @@ class AuthService {
   }
 
   async login(email: string, password: string) {
-    const users = await hasuraService.getUsers()
+    const users = (await database.AllUsersQuery()).erp_Users
 
     const user = users.find(el => el.Email === email)
 
@@ -38,13 +38,12 @@ class AuthService {
       Email: user.Email,
       AccessLevelID: user.AccessLevelID
     }
-    await hasuraService.createToken(user.UserID, tokens.refreshToken)
+    await database.InsertTokenMutation({ refreshToken: tokens.refreshToken, UserID: user.UserID })
     return { ...tokens, user: userCredentials }
   }
 
-  async logout(refreshToken: string) {
-    const userID = await hasuraService.deleteToken(refreshToken)
-    return userID
+  async logout(refreshToken: string): Promise<void> {
+    await database.DeleteTokenMutation({ refreshToken })
   }
 
   async refresh(refreshToken: string) {
@@ -61,7 +60,12 @@ class AuthService {
     const user = this.formPayload(tokenFromDb.User)
 
     const newTokens = tokenService.generateTokens(user)
-    await hasuraService.updateToken(tokenFromDb.ID, newTokens.refreshToken)
+
+    await database.UpdateTokenMutation({
+      refreshToken: newTokens.refreshToken,
+      tokenID: tokenFromDb.ID
+    })
+
     return { ...newTokens, user }
   }
 }

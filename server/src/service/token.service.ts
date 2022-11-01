@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import { config } from '../config/config'
-import hasuraService from '../repositories/auth.repository'
+import { database } from '../lib/graphql-client'
 
 class TokenService {
   generateTokens(payload: any) {
@@ -35,7 +35,8 @@ class TokenService {
   }
 
   async findToken(refreshToken: string) {
-    const tokens = await hasuraService.getTokens()
+    const tokens = (await database.AllTokensQuery()).erp_Tokens
+
     const obj = tokens.find(el => el.RefreshToken === refreshToken)
     return obj
   }

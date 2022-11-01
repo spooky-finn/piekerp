@@ -1,7 +1,10 @@
-mutation MyMutation($Key: String!) {
-  delete_erp_Docs(where: { Key: { _eq: $Key } }) {
-    returning {
-      Key
-    }
+query AllUsersQuery {
+  erp_Users {
+    UserID
+    FirstName
+    LastName
+    Email
+    Password
+    AccessLevelID
   }
 }

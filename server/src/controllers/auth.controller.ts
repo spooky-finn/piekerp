@@ -8,8 +8,6 @@ import { database } from '../lib/graphql-client'
 class UserController {
   async login(req: Request, res: Response, next: NextFunction) {
     try {
-      // const responseData = await database.MyMutation({ Key: 'sdf' })
-
       const errors = validationResult(req)
 
       if (!errors.isEmpty() && errors.array().every(each => each.param == 'email')) {

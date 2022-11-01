@@ -5881,16 +5881,79 @@ export type Timestamptz_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['timestamptz']>>;
 };
 
-export type MyMutationMutationVariables = Exact<{
+export type InsertDocsArrayMutationMutationVariables = Exact<{
+  objects: Array<Erp_Docs_Insert_Input> | Erp_Docs_Insert_Input;
+}>;
+
+
+export type InsertDocsArrayMutationMutation = { __typename?: 'mutation_root', insert_erp_Docs?: { __typename?: 'erp_Docs_mutation_response', returning: Array<{ __typename?: 'erp_Docs', ID: number, Key: string }> } | null };
+
+export type DeleteDocsMutationMutationVariables = Exact<{
   Key: Scalars['String'];
 }>;
 
 
-export type MyMutationMutation = { __typename?: 'mutation_root', delete_erp_Docs?: { __typename?: 'erp_Docs_mutation_response', returning: Array<{ __typename?: 'erp_Docs', Key: string }> } | null };
+export type DeleteDocsMutationMutation = { __typename?: 'mutation_root', delete_erp_Docs?: { __typename?: 'erp_Docs_mutation_response', returning: Array<{ __typename?: 'erp_Docs', Key: string }> } | null };
+
+export type AllOrdersPaymentsDataQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export const MyMutationDocument = gql`
-    mutation MyMutation($Key: String!) {
+export type AllOrdersPaymentsDataQueryQuery = { __typename?: 'query_root', erp_Orders: Array<{ __typename?: 'erp_Orders', OrderID: number, PaidAmount?: any | null, TotalAmount?: any | null }> };
+
+export type UnpaidOrdersQueryQueryVariables = Exact<{
+  unpaidIDs?: InputMaybe<Array<Scalars['Int']> | Scalars['Int']>;
+  OrderStatus: Scalars['Int'];
+}>;
+
+
+export type UnpaidOrdersQueryQuery = { __typename?: 'query_root', erp_Orders: Array<{ __typename?: 'erp_Orders', OrderID: number, Entity?: string | null, InvoiceNumber?: string | null, City?: string | null, OrderStatusID: number, ShippingDate?: any | null, PaidAmount?: any | null, TotalAmount?: any | null, AwaitingDispatch: boolean, ActualShippingDate?: any | null, CreatingDate: any, ManagerID?: number | null, OrderItems: Array<{ __typename?: 'erp_OrderItems', Quantity: number, OrderItemID: number, Name: string }>, User?: { __typename?: 'erp_Users', FirstName?: string | null } | null }> };
+
+export type AllTokensQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllTokensQueryQuery = { __typename?: 'query_root', erp_Tokens: Array<{ __typename?: 'erp_Tokens', ID: number, RefreshToken: string, User: { __typename?: 'erp_Users', UserID: number, FirstName?: string | null, LastName?: string | null, Email?: string | null, AccessLevelID?: number | null } }> };
+
+export type InsertTokenMutationMutationVariables = Exact<{
+  UserID: Scalars['Int'];
+  refreshToken: Scalars['String'];
+}>;
+
+
+export type InsertTokenMutationMutation = { __typename?: 'mutation_root', insert_erp_Tokens?: { __typename?: 'erp_Tokens_mutation_response', returning: Array<{ __typename?: 'erp_Tokens', UserID: number }> } | null };
+
+export type DeleteTokenMutationMutationVariables = Exact<{
+  refreshToken: Scalars['String'];
+}>;
+
+
+export type DeleteTokenMutationMutation = { __typename?: 'mutation_root', delete_erp_Tokens?: { __typename?: 'erp_Tokens_mutation_response', returning: Array<{ __typename?: 'erp_Tokens', UserID: number }> } | null };
+
+export type UpdateTokenMutationMutationVariables = Exact<{
+  tokenID: Scalars['Int'];
+  refreshToken: Scalars['String'];
+}>;
+
+
+export type UpdateTokenMutationMutation = { __typename?: 'mutation_root', update_erp_Tokens_by_pk?: { __typename?: 'erp_Tokens', ID: number, UserID: number } | null };
+
+export type AllUsersQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllUsersQueryQuery = { __typename?: 'query_root', erp_Users: Array<{ __typename?: 'erp_Users', UserID: number, FirstName?: string | null, LastName?: string | null, Email?: string | null, Password?: string | null, AccessLevelID?: number | null }> };
+
+
+export const InsertDocsArrayMutationDocument = gql`
+    mutation InsertDocsArrayMutation($objects: [erp_Docs_insert_input!]!) {
+  insert_erp_Docs(objects: $objects) {
+    returning {
+      ID
+      Key
+    }
+  }
+}
+    `;
+export const DeleteDocsMutationDocument = gql`
+    mutation DeleteDocsMutation($Key: String!) {
   delete_erp_Docs(where: {Key: {_eq: $Key}}) {
     returning {
       Key
@@ -5898,11 +5961,128 @@ export const MyMutationDocument = gql`
   }
 }
     `;
+export const AllOrdersPaymentsDataQueryDocument = gql`
+    query AllOrdersPaymentsDataQuery {
+  erp_Orders(where: {OrderStatusID: {_eq: 3}}, order_by: {OrderID: desc}) {
+    OrderID
+    PaidAmount
+    TotalAmount
+  }
+}
+    `;
+export const UnpaidOrdersQueryDocument = gql`
+    query UnpaidOrdersQuery($unpaidIDs: [Int!], $OrderStatus: Int!) {
+  erp_Orders(
+    where: {OrderStatusID: {_eq: $OrderStatus}, OrderID: {_in: $unpaidIDs}}
+  ) {
+    OrderID
+    Entity
+    InvoiceNumber
+    City
+    OrderStatusID
+    ShippingDate
+    PaidAmount
+    TotalAmount
+    AwaitingDispatch
+    ActualShippingDate
+    CreatingDate
+    ManagerID
+    OrderItems {
+      Quantity
+      OrderItemID
+      Name
+    }
+    User {
+      FirstName
+    }
+  }
+}
+    `;
+export const AllTokensQueryDocument = gql`
+    query AllTokensQuery {
+  erp_Tokens {
+    ID
+    RefreshToken
+    User {
+      UserID
+      FirstName
+      LastName
+      Email
+      AccessLevelID
+    }
+  }
+}
+    `;
+export const InsertTokenMutationDocument = gql`
+    mutation InsertTokenMutation($UserID: Int!, $refreshToken: String!) {
+  insert_erp_Tokens(objects: {UserID: $UserID, RefreshToken: $refreshToken}) {
+    returning {
+      UserID
+    }
+  }
+}
+    `;
+export const DeleteTokenMutationDocument = gql`
+    mutation DeleteTokenMutation($refreshToken: String!) {
+  delete_erp_Tokens(where: {RefreshToken: {_eq: $refreshToken}}) {
+    returning {
+      UserID
+    }
+  }
+}
+    `;
+export const UpdateTokenMutationDocument = gql`
+    mutation UpdateTokenMutation($tokenID: Int!, $refreshToken: String!) {
+  update_erp_Tokens_by_pk(
+    pk_columns: {ID: $tokenID}
+    _set: {RefreshToken: $refreshToken}
+  ) {
+    ID
+    UserID
+  }
+}
+    `;
+export const AllUsersQueryDocument = gql`
+    query AllUsersQuery {
+  erp_Users {
+    UserID
+    FirstName
+    LastName
+    Email
+    Password
+    AccessLevelID
+  }
+}
+    `;
 export type Requester<C = {}, E = unknown> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<R> | AsyncIterable<R>
 export function getSdk<C, E>(requester: Requester<C, E>) {
   return {
-    MyMutation(variables: MyMutationMutationVariables, options?: C): Promise<MyMutationMutation> {
-      return requester<MyMutationMutation, MyMutationMutationVariables>(MyMutationDocument, variables, options) as Promise<MyMutationMutation>;
+    InsertDocsArrayMutation(variables: InsertDocsArrayMutationMutationVariables, options?: C): Promise<InsertDocsArrayMutationMutation> {
+      return requester<InsertDocsArrayMutationMutation, InsertDocsArrayMutationMutationVariables>(InsertDocsArrayMutationDocument, variables, options) as Promise<InsertDocsArrayMutationMutation>;
+    },
+    DeleteDocsMutation(variables: DeleteDocsMutationMutationVariables, options?: C): Promise<DeleteDocsMutationMutation> {
+      return requester<DeleteDocsMutationMutation, DeleteDocsMutationMutationVariables>(DeleteDocsMutationDocument, variables, options) as Promise<DeleteDocsMutationMutation>;
+    },
+    AllOrdersPaymentsDataQuery(variables?: AllOrdersPaymentsDataQueryQueryVariables, options?: C): Promise<AllOrdersPaymentsDataQueryQuery> {
+      return requester<AllOrdersPaymentsDataQueryQuery, AllOrdersPaymentsDataQueryQueryVariables>(AllOrdersPaymentsDataQueryDocument, variables, options) as Promise<AllOrdersPaymentsDataQueryQuery>;
+    },
+    UnpaidOrdersQuery(variables: UnpaidOrdersQueryQueryVariables, options?: C): Promise<UnpaidOrdersQueryQuery> {
+      return requester<UnpaidOrdersQueryQuery, UnpaidOrdersQueryQueryVariables>(UnpaidOrdersQueryDocument, variables, options) as Promise<UnpaidOrdersQueryQuery>;
+    },
+    AllTokensQuery(variables?: AllTokensQueryQueryVariables, options?: C): Promise<AllTokensQueryQuery> {
+      return requester<AllTokensQueryQuery, AllTokensQueryQueryVariables>(AllTokensQueryDocument, variables, options) as Promise<AllTokensQueryQuery>;
+    },
+    InsertTokenMutation(variables: InsertTokenMutationMutationVariables, options?: C): Promise<InsertTokenMutationMutation> {
+      return requester<InsertTokenMutationMutation, InsertTokenMutationMutationVariables>(InsertTokenMutationDocument, variables, options) as Promise<InsertTokenMutationMutation>;
+    },
+    DeleteTokenMutation(variables: DeleteTokenMutationMutationVariables, options?: C): Promise<DeleteTokenMutationMutation> {
+      return requester<DeleteTokenMutationMutation, DeleteTokenMutationMutationVariables>(DeleteTokenMutationDocument, variables, options) as Promise<DeleteTokenMutationMutation>;
+    },
+    UpdateTokenMutation(variables: UpdateTokenMutationMutationVariables, options?: C): Promise<UpdateTokenMutationMutation> {
+      return requester<UpdateTokenMutationMutation, UpdateTokenMutationMutationVariables>(UpdateTokenMutationDocument, variables, options) as Promise<UpdateTokenMutationMutation>;
+    },
+    AllUsersQuery(variables?: AllUsersQueryQueryVariables, options?: C): Promise<AllUsersQueryQuery> {
+      return requester<AllUsersQueryQuery, AllUsersQueryQueryVariables>(AllUsersQueryDocument, variables, options) as Promise<AllUsersQueryQuery>;
     }
   };
 }

@@ -1,0 +1,16 @@
+mutation InsertDocsArrayMutation($objects: [erp_Docs_insert_input!]!) {
+  insert_erp_Docs(objects: $objects) {
+    returning {
+      ID
+      Key
+    }
+  }
+}
+
+mutation DeleteDocsMutation($Key: String!) {
+  delete_erp_Docs(where: { Key: { _eq: $Key } }) {
+    returning {
+      Key
+    }
+  }
+}

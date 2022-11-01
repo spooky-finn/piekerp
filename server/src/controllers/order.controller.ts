@@ -5,7 +5,7 @@ class OrderController {
   // Return array of unpaid orders ids.
   async getUnpaidOrders(req: Request, res: Response, next: NextFunction) {
     try {
-      const data = await OrderService.getUnpaidOrdersIDs()
+      const data = await OrderService.getUnpaidOrders()
 
       return res.json(data)
     } catch (error) {
