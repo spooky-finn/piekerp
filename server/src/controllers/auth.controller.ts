@@ -1,9 +1,8 @@
-import AuthService from '../service/auth.service'
+import { NextFunction, Request, Response } from 'express'
 import { validationResult } from 'express-validator'
 import ApiError from '../exceptions/api.error'
-import { Request, Response, NextFunction } from 'express'
 import { StaticStringKeys } from '../lib/constants'
-import { database } from '../lib/graphql-client'
+import AuthService from '../service/auth.service'
 
 class UserController {
   async login(req: Request, res: Response, next: NextFunction) {

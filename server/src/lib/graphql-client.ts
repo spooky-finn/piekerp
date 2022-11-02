@@ -31,7 +31,7 @@ const resolver: Requester = async <RData, Vars>(doc: DocumentNode, vars?: Vars):
     .then(json => {
       if (json.errors) {
         console.error(JSON.stringify(json.errors))
-        throw ApiError.HasuraServiceError('hasura-service-error')
+        throw ApiError.HasuraServiceError('hasura-service-error', JSON.stringify(json.errors))
       }
       return json.data
     })

@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from 'express'
 import { config } from '../config/config'
 import ApiError from '../exceptions/api.error'
+import { StaticStringKeys } from '../lib/constants'
 import { database } from '../lib/graphql-client'
 import { backupS3Client } from '../lib/s3-clients'
-// import hasuraS3Service from '../repositories/docs.repository'
 import S3Service from '../service/s3.service'
 
 class S3Controller {
@@ -28,7 +28,11 @@ class S3Controller {
     }
   }
 
-  async uploadBinaryFiles(req: Request & { files: any[] }, res: Response, next: NextFunction) {
+  async uploadBinaryFiles(
+    req: Request & { files: any[]; headers: { orderid: string } },
+    res: Response,
+    next: NextFunction
+  ) {
     /**
      * Incoming request must contain a 'orderid'(integer) parameter in request headers.
      * The `Request` object will be populated with a `files` object containing
@@ -36,10 +40,15 @@ class S3Controller {
      *
      * hasuraUpload method adds file metadata into database using graphql server.
      */
+
+    if (!req.headers.orderid) {
+      throw ApiError.BadRequest(StaticStringKeys.MISSING_ORDERID_HEADER)
+    }
+
     try {
       const array_of_files = req.files.map(each => ({
         Key: each.key,
-        OrderID: parseInt(req.headers.orderid[0]),
+        OrderID: parseInt(req.headers.orderid),
         FileName: each.originalname,
         Size: each.size
       }))
