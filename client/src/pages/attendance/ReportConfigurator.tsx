@@ -3,10 +3,11 @@
 import { css } from '@emotion/react'
 import Button from '@mui/material/Button'
 import { ReactNode } from 'react'
-import CheckBox from 'src/components/muiCustom/mui/CheckBox'
+
 import { useUpdateTimeDeductionMutation } from 'src/types/graphql-shema'
-import { monthAdd } from 'src/utils/date_helper'
+import { monthAdd } from 'src/utils/Date'
 import { State } from './Attendance'
+import Checkbox from 'src/components/Checkbox'
 
 const months = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек']
 
@@ -126,7 +127,7 @@ export default function ReportConfigurator({ state, setState }: IReportConfigura
         </Button>
       </div>
 
-      <CheckBox
+      <Checkbox
         title="Показывать время прихода и ухода"
         value={state.showFullInfo}
         onClick={handleShowFullInfo}

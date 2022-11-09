@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx'
 import AuthService from '../services/AuthService'
 import axios from 'axios'
-import { API_URL } from '../api-clients'
+import { API_URL } from '../api/axios'
 import { AppColorTheme, TUser } from 'src/types/global'
 import React from 'react'
 

@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { useGetAllUsersQuery } from 'src/types/graphql-shema'
 import sass from './index.module.sass'
 import UserListPopover from './UserListPopover'
-import СommandsPopover from './СommandsPopover'
+import СommandListPopover from './СommandListPopover'
 
 interface InputFormProps {
   insertComment: () => void
@@ -36,7 +36,7 @@ export default function InputForm({ insertComment, inputRef }: InputFormProps) {
 
   return (
     <div className={`${sass.commentInputForm} noprint`}>
-      <СommandsPopover
+      <СommandListPopover
         setAnchorULP={setAnchorULP}
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}

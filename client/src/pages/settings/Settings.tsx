@@ -5,7 +5,7 @@ import Button from '@mui/material/Button'
 import { Box } from '@mui/system'
 import { ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
-import useAppContext from 'src/hooks/useAppContext'
+import { useAppContext } from 'src/hooks'
 import { AppColorTheme } from 'src/types/global'
 import { SystemPreferTheme } from '../../utils/SystemPreferTheme'
 

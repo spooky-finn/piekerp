@@ -1,4 +1,4 @@
-import $api from '../api-clients'
+import { $api } from 'src/api'
 
 export default class FileService {
   static s3_url = '/s3/'

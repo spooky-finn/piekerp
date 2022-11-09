@@ -2,7 +2,7 @@
 import { css } from '@emotion/react'
 import { CellProps, Column, useTable } from 'react-table'
 import { PreparedEmployeeDto } from 'src/types/global'
-import { sec2hours } from 'src/utils/date_helper'
+import { sec2hours } from 'src/utils/Date'
 import { State } from './Attendance'
 import { ArrayFromDaysInMonth } from './utils'
 interface ITableProps {

@@ -4,7 +4,7 @@ export interface IuseLocalStorageStateProps {
   defaultValue: any
 }
 
-export default function useLocalStorageState({
+export function useLocalStorageState({
   name,
   defaultValue
 }: IuseLocalStorageStateProps): [any, (newState: any) => void] {

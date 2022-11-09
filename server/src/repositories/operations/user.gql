@@ -1,0 +1,10 @@
+query AllUsersQuery {
+  erp_Users {
+    UserID
+    FirstName
+    LastName
+    Email
+    Password
+    AccessLevelID
+  }
+}

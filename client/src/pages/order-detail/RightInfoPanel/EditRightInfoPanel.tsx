@@ -6,7 +6,7 @@ import React, { useEffect } from 'react'
 import NumberFormat, { InputAttributes } from 'react-number-format'
 import { TOrder, TUser } from 'src/types/global'
 import { useInsertPaymentMutation, useUpdateOrderInfoMutation } from 'src/types/graphql-shema'
-import { formatOnlyDate } from 'src/utils/date_helper'
+import { formatOnlyDate } from 'src/utils/Date'
 
 enum FieldNames {
   InvoiceNumber = 'InvoiceNumber',

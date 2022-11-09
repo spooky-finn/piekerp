@@ -3,11 +3,7 @@ import { css } from '@emotion/react'
 import { Link } from 'react-router-dom'
 import { AppRoutes } from 'src/routers/Router'
 import { TReclamationOrder } from 'src/types/global'
-
-function getOrderStatus(order: TReclamationOrder) {
-  if (order.NeedAttention && order.NeedAttention.split(',')[0] === 'true') return 'needAttention'
-  if (order.AwaitingDispatch) return 'awaitingDispatch'
-}
+import { orderStatusHighlighting } from 'src/utils/OrderColorIndication'
 
 export interface IReclamationItemProps {
   order: TReclamationOrder
@@ -68,7 +64,7 @@ export default function ReclamationItem({ order }: IReclamationItemProps) {
     <Link
       to={AppRoutes.order_detail + order.OrderID}
       css={styles}
-      className={getOrderStatus(order)}
+      className={orderStatusHighlighting(order)}
     >
       <div>
         {order.OrderItems.length ? (

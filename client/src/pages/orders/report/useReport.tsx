@@ -1,7 +1,6 @@
 import moment from 'moment'
+import { useApplyFilters, useOrderListPageStore } from 'src/hooks'
 import { useGetOrdersArchivedByIntervalQuery } from 'src/types/graphql-shema'
-import useApplyFilters from '../../../hooks/useApplyFilters'
-import useOrderListPageStore from '../../../hooks/useOrderListPageStore'
 
 export default function useReport() {
   const store: any = useOrderListPageStore()

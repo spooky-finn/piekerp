@@ -1,0 +1,32 @@
+query AllOrdersPaymentsDataQuery {
+  erp_Orders(where: { OrderStatusID: { _eq: 3 } }, order_by: { OrderID: desc }) {
+    OrderID
+    PaidAmount
+    TotalAmount
+  }
+}
+
+query UnpaidOrdersQuery($unpaidIDs: [Int!], $OrderStatus: Int!) {
+  erp_Orders(where: { OrderStatusID: { _eq: $OrderStatus }, OrderID: { _in: $unpaidIDs } }) {
+    OrderID
+    Entity
+    InvoiceNumber
+    City
+    OrderStatusID
+    ShippingDate
+    PaidAmount
+    TotalAmount
+    AwaitingDispatch
+    ActualShippingDate
+    CreatingDate
+    ManagerID
+    OrderItems {
+      Quantity
+      OrderItemID
+      Name
+    }
+    User {
+      FirstName
+    }
+  }
+}

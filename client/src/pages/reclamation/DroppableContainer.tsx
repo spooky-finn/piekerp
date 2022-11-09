@@ -22,6 +22,7 @@ export default function DroppableContainer({
     background: var(--L1);
     padding-bottom: 20px;
     border-radius: var(--br);
+    overflow: hidden;
 
     .heading {
       color: var(--accent);
@@ -29,6 +30,8 @@ export default function DroppableContainer({
       font-weight: 600;
     }
     .list {
+      min-height: 600px;
+      height: 100%;
       display: flex;
       flex-grow: 1;
       flex-direction: column;
