@@ -8,6 +8,13 @@ import {
   OrderFragment
 } from './graphql-shema'
 
+export type ServerErrorResponse = {
+  error: {
+    message: string
+    code: number
+  }
+}
+
 export enum OrderStatus {
   ordRegistration = 1,
   ordProduction = 2,

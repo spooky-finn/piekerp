@@ -13,7 +13,10 @@ export default function (err: ApiError, req: Request, res: Response, next: NextF
     })
   }
 
-  return res
-    .status(StatusCodes.INTERNAL_SERVER_ERROR)
-    .send(StaticStringKeys.UNKNOWN_ERROR_TRY_AGAIN)
+  return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+    error: {
+      message: StaticStringKeys.UNKNOWN_ERROR_TRY_AGAIN,
+      code: StatusCodes.INTERNAL_SERVER_ERROR
+    }
+  })
 }
