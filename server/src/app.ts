@@ -1,13 +1,13 @@
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import express, { json, static as ExpressStatic, urlencoded } from 'express'
-import { join } from 'path'
+import path from 'path'
 import { config } from './config/config'
 import errorMiddleware from './middlewares/error.middleware'
 import { router as indexRouter } from './routes'
 
-const CLIENT_BUILD_PATH = '../client/build'
-
+const CLIENT_BUILD_PATH =
+  config.NODE_ENV === 'production' ? '/app/client/build' : '../../../client/build'
 export const app = express()
 
 // Static files
@@ -33,5 +33,6 @@ app.use(errorMiddleware)
 
 // All remaining requests return the React app, so it can handle routing.
 app.get('*', function (request, response) {
-  response.sendFile(join(CLIENT_BUILD_PATH, 'index.html'))
+  console.log('path to', path.join(__dirname, CLIENT_BUILD_PATH))
+  response.sendFile(path.join(__dirname, CLIENT_BUILD_PATH, 'index.html'))
 })
