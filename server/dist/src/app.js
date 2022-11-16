@@ -34,7 +34,7 @@ const path_1 = __importDefault(require("path"));
 const config_1 = require("./config/config");
 const error_middleware_1 = __importDefault(require("./middlewares/error.middleware"));
 const routes_1 = require("./routes");
-const CLIENT_BUILD_PATH = config_1.config.NODE_ENV === 'production' ? '/app/client/build' : '../../../client/build';
+const CLIENT_BUILD_PATH = config_1.config.NODE_ENV === 'production' ? '/app/client/build' : '../bundle';
 exports.app = (0, express_1.default)();
 // Static files
 exports.app.use((0, express_1.static)(CLIENT_BUILD_PATH));
@@ -50,7 +50,6 @@ exports.app.use('/api', routes_1.router);
 exports.app.use(error_middleware_1.default);
 // All remaining requests return the React app, so it can handle routing.
 exports.app.get('*', function (request, response) {
-    console.log('path to', path_1.default.join(__dirname, CLIENT_BUILD_PATH));
     response.sendFile(path_1.default.join(__dirname, CLIENT_BUILD_PATH, 'index.html'));
 });
 //# sourceMappingURL=app.js.map

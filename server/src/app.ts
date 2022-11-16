@@ -6,8 +6,7 @@ import { config } from './config/config'
 import errorMiddleware from './middlewares/error.middleware'
 import { router as indexRouter } from './routes'
 
-const CLIENT_BUILD_PATH =
-  config.NODE_ENV === 'production' ? '/app/client/build' : '../../../client/build'
+const CLIENT_BUILD_PATH = config.NODE_ENV === 'production' ? '/app/client/build' : '../bundle'
 export const app = express()
 
 // Static files
@@ -33,6 +32,5 @@ app.use(errorMiddleware)
 
 // All remaining requests return the React app, so it can handle routing.
 app.get('*', function (request, response) {
-  console.log('path to', path.join(__dirname, CLIENT_BUILD_PATH))
   response.sendFile(path.join(__dirname, CLIENT_BUILD_PATH, 'index.html'))
 })
