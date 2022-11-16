@@ -50,6 +50,7 @@ exports.app.use('/api', routes_1.router);
 exports.app.use(error_middleware_1.default);
 // All remaining requests return the React app, so it can handle routing.
 exports.app.get('*', function (request, response) {
+    console.log('path to bundler is', path_1.default.join(__dirname, CLIENT_BUILD_PATH, 'index.html'));
     response.sendFile(path_1.default.join(__dirname, CLIENT_BUILD_PATH, 'index.html'));
 });
 //# sourceMappingURL=app.js.map

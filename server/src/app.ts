@@ -32,5 +32,6 @@ app.use(errorMiddleware)
 
 // All remaining requests return the React app, so it can handle routing.
 app.get('*', function (request, response) {
+  console.log('path to bundler is', path.join(__dirname, CLIENT_BUILD_PATH, 'index.html'))
   response.sendFile(path.join(__dirname, CLIENT_BUILD_PATH, 'index.html'))
 })
