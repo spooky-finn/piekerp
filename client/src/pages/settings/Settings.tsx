@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
+import { UilPalette } from '@iconscout/react-unicons'
 import { FormControl, InputLabel, MenuItem, Select, Typography } from '@mui/material'
 import Button from '@mui/material/Button'
 import { Box } from '@mui/system'
@@ -58,8 +59,9 @@ export default function Settings() {
       padding: 10px 20px 20px;
     }
 
-    .selectThemeWrapper {
+    .theme {
       display: flex;
+      align-items: center;
       column-gap: 15px;
     }
   `
@@ -78,17 +80,20 @@ export default function Settings() {
       </GridCard>
 
       <GridCard title="">
-        <FormControl fullWidth>
-          <InputLabel>Тема</InputLabel>
-          <Select
-            defaultValue={store.UItheme?.state}
-            onChange={e => changeTheme(e.target.value as AppColorTheme)}
-          >
-            {themeVariants.map(each => (
-              <MenuItem value={each.value}>{each.title}</MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        <div className="theme">
+          <UilPalette />
+          <FormControl fullWidth>
+            <InputLabel>Тема</InputLabel>
+            <Select
+              defaultValue={store.UItheme?.state}
+              onChange={e => changeTheme(e.target.value as AppColorTheme)}
+            >
+              {themeVariants.map(each => (
+                <MenuItem value={each.value}>{each.title}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </div>
       </GridCard>
 
       <GridCard title="Data Provider">
