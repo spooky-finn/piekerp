@@ -6,7 +6,7 @@ import { config } from './config/config'
 import errorMiddleware from './middlewares/error.middleware'
 import { router as indexRouter } from './routes'
 
-const CLIENT_BUILD_PATH = '../bundle'
+const CLIENT_BUILD_PATH = config.NODE_ENV === 'production' ? '../../bundle' : '../bundle'
 export const app = express()
 
 // Static files
@@ -32,6 +32,5 @@ app.use(errorMiddleware)
 
 // All remaining requests return the React app, so it can handle routing.
 app.get('*', function (request, response) {
-  console.log('path to bundler is', path.join(__dirname, CLIENT_BUILD_PATH, 'index.html'))
   response.sendFile(path.join(__dirname, CLIENT_BUILD_PATH, 'index.html'))
 })
