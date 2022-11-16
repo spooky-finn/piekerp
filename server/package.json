@@ -3,10 +3,9 @@
   "version": "2.0.0",
   "main": "dist/server.js",
   "scripts": {
-    "start": "node ./dist/src/server.js",
+    "start": "ts-node ./src/server.ts",
     "dev": "nodemon  --experimental-specifier-resolution=node ./src/server.ts ",
-    "codegen": "graphql-codegen --config codegen.config.ts",
-    "build": "tsc"
+    "codegen": "graphql-codegen --config codegen.config.ts"
   },
   "dependencies": {
     "aws-sdk": "^2.944.0",
