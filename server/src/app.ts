@@ -6,7 +6,7 @@ import { config } from './config/config'
 import errorMiddleware from './middlewares/error.middleware'
 import { router as indexRouter } from './routes'
 
-const CLIENT_BUILD_PATH = config.NODE_ENV === 'production' ? '/app/client/build' : '../bundle'
+const CLIENT_BUILD_PATH = '../bundle'
 export const app = express()
 
 // Static files
