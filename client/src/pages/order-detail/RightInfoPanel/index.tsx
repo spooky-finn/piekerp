@@ -21,6 +21,7 @@ export const OrderInfoCard = ({ heading, children }: IOrderInfoCardProps) => {
     padding: 0.7rem 1rem;
     line-height: 1.5;
     .body {
+      white-space: break-spaces;
       width: 100%;
       padding-top: 8px;
     }

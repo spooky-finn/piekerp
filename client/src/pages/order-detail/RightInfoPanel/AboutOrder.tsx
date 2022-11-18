@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react'
 import { TOrder } from 'src/types/global'
 import { formatDateWithTime, formatOnlyDate } from 'src/utils/Date'
 import { OrderInfoCard } from '.'
@@ -30,21 +32,25 @@ export default function AboutOrder({ data }: IAboutOrderProps) {
     }
   ]
 
+  const styles = css`
+    display: flex;
+    flex-direction: 'row';
+    gap: 10px;
+    span:first-child {
+      color: var(--lowContrast);
+    }
+  `
   return (
     <OrderInfoCard heading="О заказе">
-      <table>
-        <tbody>
-          {columns.map(el => {
-            if (!el.data || el.data === 'Invalid date') return null
-            return (
-              <tr key={`${el.heading} ${el.data}`}>
-                <td>{el.heading}</td>
-                <td>{el.data}</td>
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
+      {columns.map(el => {
+        if (!el.data || el.data === 'Invalid date') return null
+        return (
+          <div key={el.heading} css={styles}>
+            <span>{el.heading}</span>
+            <span>{el.data}</span>
+          </div>
+        )
+      })}
     </OrderInfoCard>
   )
 }

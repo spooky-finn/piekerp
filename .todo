@@ -1,3 +1,5 @@
 3) Изменить типо поля needAttention to bollean
 4) refactor OrderStatusIndicator componen
 5) 'hasura-service-error' add detailed errorr
+Добавить в тест attendance/utils поддержу измененния константы BROKEN_INTERVAL_TIME
+Из раза в раз перестают работать тултипы
