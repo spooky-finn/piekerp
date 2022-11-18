@@ -15,15 +15,12 @@ interface ITableProps {
 export const genColumns = (state: State) => {
   const columns: Column<PreparedEmployeeDto>[] = [
     {
-      Header: 'Сотрудник',
-      columns: [
-        {
-          accessor: 'firstname'
-        },
-        {
-          accessor: 'lastname'
-        }
-      ]
+      Header: 'Имя',
+      accessor: 'firstname'
+    },
+    {
+      Header: 'Фамиллия',
+      accessor: 'lastname'
     },
     {
       Header: 'Итого',
@@ -89,7 +86,7 @@ export default function Table({ columns, data, className }: ITableProps) {
     }
     tbody td {
       border: var(--border) !important;
-      padding: 2px;
+      padding: 2px 5px;
       min-width: 30px;
     }
     .monthlyWithRetention {
@@ -98,7 +95,7 @@ export default function Table({ columns, data, className }: ITableProps) {
     .monthlyWithRetentionResolved,
     .resolved {
       color: var(--accent);
-      font-weight: 600;
+      font-weight: 700;
     }
   `
   return (
@@ -112,18 +109,22 @@ export default function Table({ columns, data, className }: ITableProps) {
           </tr>
         ))}
       </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map((row, i) => {
-          prepareRow(row)
-          return (
-            <tr {...row.getRowProps()}>
-              {row.cells.map((cell, i) => {
-                return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-              })}
-            </tr>
-          )
-        })}
-      </tbody>
+      {data.length ? (
+        <tbody {...getTableBodyProps()}>
+          {rows.map((row, i) => {
+            prepareRow(row)
+            return (
+              <tr {...row.getRowProps()}>
+                {row.cells.map((cell, i) => {
+                  return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                })}
+              </tr>
+            )
+          })}
+        </tbody>
+      ) : (
+        <div style={{ padding: '10px' }}>Нет данных</div>
+      )}
     </table>
   )
 }
