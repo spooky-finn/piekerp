@@ -10,11 +10,11 @@ jobs:
 
     steps:
     - name: Create annotation for build error
-      run: echo "${{ secrets.SSH_HEXCORE_KEY }}"
+      run: echo "${{ env.SSH_HEXCORE_KEY }}"
     - name: Deploy to Staging server
       uses: easingthemes/ssh-deploy@main
       env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_HEXCORE_KEY }}
+        SSH_PRIVATE_KEY: ${{ env.SSH_HEXCORE_KEY }}
         ARGS: "-v --stats --progress"
-        REMOTE_HOST: ${{ secrets.SSH_HOST }}
-        REMOTE_USER: ${{ secrets.SSH_USER }}
+        REMOTE_HOST: ${{ env.SSH_HOST }}
+        REMOTE_USER: ${{ env.SSH_USER }}
