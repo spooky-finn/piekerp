@@ -13,7 +13,8 @@ jobs:
     
     steps:
       - name: Checkout to the repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+      - working-directory: ./client
         
       - name: Set up NodeJS environment
         uses: actions/setup-node@v2
@@ -24,14 +25,14 @@ jobs:
           node-version: 16
          
       - name: Install client`s package dependencies
-        run: yarn --cwd ./client/ install
+        run: yarn install
         
       - name: Create client`s test build
-        run: yarn --cwd ./client/ build
+        run: yarn build
         
       # Run test cases and this could ensure minimum coverage as well if set
       - name: Execute client`s test cases
-        run: yarn --cwd ./client/ test
+        run: yarn test
     
       
     
