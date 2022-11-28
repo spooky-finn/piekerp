@@ -12,7 +12,7 @@ jobs:
     - name: Deploy to Staging server
       uses: easingthemes/ssh-deploy@main
       env:
-        SSH_PRIVATE_KEY: ${{ env.SSH_HEXCORE_KEY }}
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_HEXCORE_KEY }}
         ARGS: "-v --stats --progress"
         SOURCE: "."
         REMOTE_HOST: ${{ secrets.SSH_HOST }}
