@@ -1,0 +1,16 @@
+name: Docker Image CD
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    # Defines the type of runner the job runs on
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Install SSH Key
+      uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.SSH_HEXCORE_KEY }} 
+        known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
