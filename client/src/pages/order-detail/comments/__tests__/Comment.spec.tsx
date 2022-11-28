@@ -26,10 +26,10 @@ function setup(userID: number) {
   }
 }
 
-test('snapshot test', () => {
-  const { asFragment } = setup(15)
-  expect(asFragment()).toMatchSnapshot()
-})
+// test('snapshot test', () => {
+//   const { asFragment } = setup(15)
+//   expect(asFragment()).toMatchSnapshot()
+// })
 
 test('should show delete button if user is the owner of comment', () => {
   setup(15)
