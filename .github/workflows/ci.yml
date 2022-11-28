@@ -18,12 +18,11 @@ jobs:
       - name: Set up NodeJS environment
         uses: actions/setup-node@v2
         with:
-          working-directory: ./client      
           # Reads the node version from the .nvmrc file itself
           # node-version-file: '.nvmrc'
           # The node version can be hard-coded
           node-version: 16
-          cache: 'yarn'
+          cache: 'yarn --cwd ./client/'
           
           
 
