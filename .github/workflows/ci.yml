@@ -25,14 +25,14 @@ jobs:
         
        
       - name: Install package dependencies
-        run: yarn install
+        run: yarn --cwd ./client/ install
       
       
       # Run test cases and this could ensure minimum coverage as well if set
       - name: Execute test cases
-        run: yarn test
+        run: yarn --cwd ./client/ test
         
       - name: Create test build
-        run: yarn build
+        run: yarn --cwd ./client/ build
       
     
