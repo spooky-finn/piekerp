@@ -23,10 +23,15 @@ jobs:
           # The node version can be hard-coded 
           node-version: 16
          
-      - name: Install client's package dependencies
+      - name: Install client`s package dependencies
         run: yarn --cwd ./client/ install
         
-      - name: Create client's test build
+      - name: Create client`s test build
         run: yarn --cwd ./client/ build
+        
+      # Run test cases and this could ensure minimum coverage as well if set
+      - name: Execute client`s test cases
+        run: yarn --cwd ./client/ test
+    
       
     
