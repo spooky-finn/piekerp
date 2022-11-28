@@ -23,6 +23,8 @@ jobs:
           # The node version can be hard-coded
           node-version: 16
           cache: 'yarn'
+          working-directory: ./client
+          
 
       - name: Install client`s package dependencies
         working-directory: ./client
