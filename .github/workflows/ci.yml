@@ -12,10 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - uses: actions/checkout@v2
       - name: Checkout to the repository
-        working-directory: ./client
-        
+        uses: actions/checkout@v2
+      
       - name: Set up NodeJS environment
         uses: actions/setup-node@v2
         with:
@@ -25,13 +24,16 @@ jobs:
           node-version: 16
          
       - name: Install client`s package dependencies
+        working-directory: ./client
         run: yarn install
         
       - name: Create client`s test build
+        working-directory: ./client
         run: yarn build
         
       # Run test cases and this could ensure minimum coverage as well if set
       - name: Execute client`s test cases
+        working-directory: ./client
         run: yarn test
     
       
