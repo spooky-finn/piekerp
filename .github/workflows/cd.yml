@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  deploy:
     # Defines the type of runner the job runs on
     runs-on: ubuntu-latest
 
@@ -14,3 +14,9 @@ jobs:
       with:
         key: ${{ secrets.SSH_HEXCORE_KEY }} 
         known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
+        
+    - name: Adding Known Hosts
+      run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+      
+    - name: Deploy with rsync
+      run: rsync -avz ./dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/zellwk/zellwk.com/dist/
