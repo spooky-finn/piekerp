@@ -13,6 +13,6 @@ jobs:
       uses: easingthemes/ssh-deploy@main
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_HEXCORE_KEY }}
-        ARGS: "-rltgoDzvO"
+        ARGS: "-v --stats --progress"
         REMOTE_HOST: ${{ secrets.SSH_HOST }}
         REMOTE_USER: ${{ secrets.SSH_USER }}
