@@ -2,39 +2,37 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ['main']
   pull_request:
-    branches: [ "main" ]
-  
+    branches: ['main']
+
 jobs:
   build:
     # Defines the type of runner the job runs on
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout to the repository
         uses: actions/checkout@v2
-      
+
       - name: Set up NodeJS environment
         uses: actions/setup-node@v2
         with:
-          # Reads the node version from the .nvmrc file itself 
+          # Reads the node version from the .nvmrc file itself
           # node-version-file: '.nvmrc'
-          # The node version can be hard-coded 
+          # The node version can be hard-coded
           node-version: 16
-         
+          cache: 'yarn'
+
       - name: Install client`s package dependencies
         working-directory: ./client
         run: yarn install
-        
+
       - name: Create client`s test build
         working-directory: ./client
         run: yarn build
-        
+
       # Run test cases and this could ensure minimum coverage as well if set
       - name: Execute client`s test cases
         working-directory: ./client
         run: yarn test
-    
-      
-    
