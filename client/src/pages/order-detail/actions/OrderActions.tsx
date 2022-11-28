@@ -17,7 +17,7 @@ import {
   useMoveOrderToArchiveMutation,
   useMoveOrderToPriorityMutation
 } from 'src/types/graphql-shema'
-import { notif } from 'src/utils/Notification'
+import { notif } from 'src/utils/notification'
 
 import DeleteOrderDialog from '../dialogs/DeleteOrderDialog'
 import TransferOrderDialog from '../dialogs/TransferOrderDialog'
