@@ -22,17 +22,11 @@ jobs:
           # node-version-file: '.nvmrc'
           # The node version can be hard-coded 
           node-version: 16
-        
-       
-      - name: Install package dependencies
+         
+      - name: Install client's package dependencies
         run: yarn --cwd ./client/ install
-      
-      
-      # Run test cases and this could ensure minimum coverage as well if set
-      - name: Execute test cases
-        run: yarn --cwd ./client/ test
         
-      - name: Create test build
+      - name: Create client's test build
         run: yarn --cwd ./client/ build
       
     
