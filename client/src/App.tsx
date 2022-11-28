@@ -9,7 +9,7 @@ import { useLocalStorageState } from './hooks'
 import { Context } from './index'
 import { customizedTheme } from './material/customizedTheme'
 import AppRouter from './routers/Router'
-import { SystemPreferTheme } from './utils/SystemPreferTheme'
+import { SystemPreferTheme } from './utils/systemPreferTheme'
 
 function App() {
   const { store } = useContext(Context)

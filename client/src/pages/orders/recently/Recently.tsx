@@ -8,7 +8,7 @@ import { columnsList, Table } from '../table'
 import moment from 'moment'
 import { OrderStatus } from 'src/types/global'
 import { useGetOrdersByStatusQuery } from 'src/types/graphql-shema'
-import { formatOnlyDate } from 'src/utils/Date'
+import { formatOnlyDate } from 'src/utils/date'
 
 export default function Recently() {
   const { data } = useGetOrdersByStatusQuery({

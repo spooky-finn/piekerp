@@ -3,7 +3,7 @@ import { css } from '@emotion/react'
 import { Link } from 'react-router-dom'
 import { AppRoutes } from 'src/routers/Router'
 import { TReclamationOrder } from 'src/types/global'
-import { orderStatusHighlighting } from 'src/utils/OrderColorIndication'
+import { orderStatusHighlighting } from 'src/utils/orderColorIndication'
 
 export interface IReclamationItemProps {
   order: TReclamationOrder

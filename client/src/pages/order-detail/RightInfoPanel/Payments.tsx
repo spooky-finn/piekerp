@@ -1,5 +1,5 @@
 import { TOrder } from 'src/types/global'
-import { formatOnlyDate } from 'src/utils/Date'
+import { formatOnlyDate } from 'src/utils/date'
 import { OrderInfoCard } from '.'
 
 export interface IPaymnetHistoryProps {

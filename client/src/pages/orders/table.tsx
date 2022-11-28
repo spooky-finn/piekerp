@@ -3,7 +3,7 @@ import { Column, useTable } from 'react-table'
 import styles from './table.module.sass'
 import moment from 'moment'
 import { AppRoutes } from 'src/routers/Router'
-import { percentage } from 'src/utils/Formatting'
+import { percentage } from 'src/utils/formatting'
 import { TOrderColumnData } from 'src/types/global'
 
 function statusHighlighting(order: TOrderColumnData) {

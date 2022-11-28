@@ -1,6 +1,6 @@
 import { Menu, MenuItem } from '@mui/material'
 import sass from './index.module.sass'
-import placeCaretAtEnd from 'src/utils/PlaceCaretAtEnd'
+import placeCaretAtEnd from 'src/utils/placeCaretAtEnd'
 import { TUser } from 'src/types/global'
 
 interface IUserListPopoverProps {

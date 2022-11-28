@@ -1,5 +1,5 @@
 import { OrderStatus, TOrderColumnData } from 'src/types/global'
-import keywordComparator from '../utils/Comparators'
+import keywordComparator from '../utils/comparators'
 
 interface UseApplyFiltersProps {
   orders: TOrderColumnData[]

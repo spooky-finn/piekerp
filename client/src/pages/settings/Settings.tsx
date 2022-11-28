@@ -8,7 +8,7 @@ import { ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAppContext } from 'src/hooks'
 import { AppColorTheme } from 'src/types/global'
-import { SystemPreferTheme } from '../../utils/SystemPreferTheme'
+import { SystemPreferTheme } from '../../utils/systemPreferTheme'
 
 export default function Settings() {
   const { store } = useAppContext()

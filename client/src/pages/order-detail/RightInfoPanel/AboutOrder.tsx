@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { TOrder } from 'src/types/global'
-import { formatDateWithTime, formatOnlyDate } from 'src/utils/Date'
+import { formatDateWithTime, formatOnlyDate } from 'src/utils/date'
 import { OrderInfoCard } from '.'
 
 export interface IAboutOrderProps {
