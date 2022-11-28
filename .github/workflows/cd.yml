@@ -16,4 +16,3 @@ jobs:
         ARGS: "-rltgoDzvO"
         REMOTE_HOST: ${{ secrets.SSH_HOST }}
         REMOTE_USER: ${{ secrets.SSH_USER }}
-        EXCLUDE: "/dist/, /node_modules/"
