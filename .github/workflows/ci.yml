@@ -21,6 +21,8 @@ jobs:
           # Reads the node version from the .nvmrc file itself
           # node-version-file: '.nvmrc'
           # The node version can be hard-coded
+          cache: 'yarn'
+          cache-dependency-path: './client'
           node-version: 16
         
       - name: Install client`s package dependencies
