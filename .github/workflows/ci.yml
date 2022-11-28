@@ -22,10 +22,7 @@ jobs:
           # node-version-file: '.nvmrc'
           # The node version can be hard-coded
           node-version: 16
-          cache: 'yarn --cwd ./client/'
-          
-          
-
+        
       - name: Install client`s package dependencies
         working-directory: ./client
         run: yarn install
