@@ -22,7 +22,7 @@ jobs:
           # node-version-file: '.nvmrc'
           # The node version can be hard-coded
           cache: 'yarn'
-          cache-dependency-path: './client'
+          cache-dependency-path: client/yarn.lock
           node-version: 16
         
       - name: Install client`s package dependencies
