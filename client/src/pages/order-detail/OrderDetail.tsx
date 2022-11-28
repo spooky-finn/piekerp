@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { useLocation, useParams } from 'react-router-dom'

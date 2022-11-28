@@ -23,6 +23,7 @@ const RequireAuth = (props: IRequireAuthProps) => {
   useEffect(() => {
     if (token) setisLoaded(true)
     else getToken()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   if (!isLoaded) return <>Authentication</>

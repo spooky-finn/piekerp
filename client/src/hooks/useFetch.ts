@@ -19,7 +19,7 @@ export function useFetch(url: string) {
         console.error(error)
         setError(error)
       })
-  }, [])
+  }, [url])
 
   return { data, loading, error }
 }
