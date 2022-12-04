@@ -9,13 +9,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Deploy to Staging server
-      uses: easingthemes/ssh-deploy@main
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_HEXCORE_KEY }}
-        ARGS: "-v --stats --progress"
-        SOURCE: "."
-        REMOTE_HOST: ${{ secrets.SSH_HOST }}
-        REMOTE_USER: ${{ secrets.SSH_USER }}
-        TARGET: "~/rsync/"
-        EXCLUDE: "/dist/, /node_modules/"
+    - name: Deploy using ssh
+      uses: appleboy/ssh-action@master
+      with:
+        key: ${{ secrets.SSH_HEXCORE_KEY }}
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        port: 22
+        script: |
+          cd ~/erp 
+          ls
