@@ -12,7 +12,7 @@
 # -------------------------------------------------------------
 
 # Setup the server
-FROM node:13.12.0-alpine 
+FROM node:16-alpine 
 
 WORKDIR /app/
 COPY ./client/build/ ./client/build/
