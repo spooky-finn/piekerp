@@ -17,5 +17,6 @@ jobs:
         username: ${{ secrets.SSH_USER }}
         port: 22
         script: |
-          cd ~/erp 
-          ls
+          cd ~/erp/
+          git pull
+          docker-compose up --build
