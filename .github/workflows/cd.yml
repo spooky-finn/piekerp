@@ -1,4 +1,4 @@
-name: Deploy from main
+name: Deployment
 
 on:
   workflow_dispatch
