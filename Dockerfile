@@ -1,29 +1,9 @@
-# The complited app directory in the container looks like that:
-# -------------------------------------------------------------
-# app/
-#     clien/
-#         build/
-#             .....
-#     server/
-#         app.js
-#         controllers/
-#         ....
-#     .env
-# -------------------------------------------------------------
-
-# Setup the server
 FROM node:16-alpine 
 
-WORKDIR /app/
-COPY ./client/build/ ./client/build/
+COPY ./client/build/ /app/client/build/
 
-WORKDIR /app/server/
-COPY ./server/package*.json ./
-
-RUN yarn install
-COPY ./server/ ./
-
+COPY ./server/dist/index.js /app/
 # Copy a file with enviroments for an express server and a postgress backup service
-COPY .env/ /app/
+COPY .env .
 
-CMD ["yarn", "start"]
+CMD node /app/index.js
