@@ -20,4 +20,3 @@ jobs:
           cd ~/erp/
           git pull
           docker-compose up -d --force-recreate --build
-          docker images -q -a | xargs docker inspect --format='{{.Id}}{{range $rt := .RepoTags}} {{$rt}} {{end}}'|grep -v ':'
