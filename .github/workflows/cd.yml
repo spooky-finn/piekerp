@@ -19,4 +19,4 @@ jobs:
         script: |
           cd ~/erp/
           git pull
-          docker-compose up --build
+          docker-compose up --build -d
