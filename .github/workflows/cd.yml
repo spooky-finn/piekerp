@@ -22,3 +22,4 @@ jobs:
           docker-compose build --no-cache
           docker-compose up -d 
           docker-compose rm -fs
+          docker image prune
