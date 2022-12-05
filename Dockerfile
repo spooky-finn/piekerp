@@ -15,13 +15,13 @@
 FROM node:13.12.0-alpine 
 
 WORKDIR /app/
-COPY ./client/build/ /app/client/build/
+COPY ./client/build/ ./client/build/
 
 WORKDIR /app/server/
-COPY /app/server/package*.json ./
+COPY ./server/package*.json ./
 
 RUN yarn install
-COPY server/ ./
+COPY ./server/ ./
 
 # Copy a file with enviroments for an express server and a postgress backup service
 COPY .env/ /app/
