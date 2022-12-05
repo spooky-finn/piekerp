@@ -2,7 +2,11 @@ import path from 'path'
 import dotenv from 'dotenv'
 
 // Parsing the env file.
-dotenv.config({ path: path.resolve(process.cwd(), '../.env') })
+if (process.env.NODE_ENV === 'production') {
+  dotenv.config({ path: './.env' })
+} else {
+  dotenv.config({ path: path.resolve(process.cwd(), '../.env') })
+}
 
 interface Config {
   PORT: number
