@@ -15,14 +15,8 @@ export default function OrderItem({ sequence_number, orderItem, children }: IOrd
     position: relative;
     padding: 1.3em;
     display: grid;
-    grid-template-columns: 0.3fr 15fr 1fr auto;
+    grid-template-columns: 15fr 1fr auto;
 
-    .index {
-      color: var(--lowContrast);
-      display: flex;
-      align-self: center;
-      padding-right: 10px;
-    }
     .name,
     .quantity {
       font-family: 'IBM Plex Mono' !important;
@@ -35,8 +29,8 @@ export default function OrderItem({ sequence_number, orderItem, children }: IOrd
     }
 
     .fullName {
-      grid-column-start: 2;
-      grid-column-end: 4;
+      grid-column-start: 1;
+      grid-column-end: 3;
       color: var(--lowContrast) !important;
       font-weight: normal;
       padding-top: 5px;
@@ -45,7 +39,6 @@ export default function OrderItem({ sequence_number, orderItem, children }: IOrd
 
   return (
     <div key={orderItem.OrderItemID} css={styles}>
-      <span className="index">{sequence_number}</span>
       <Typography className="name">{orderItem.Name}</Typography>
       <span className="quantity"> {orderItem.Quantity} шт.</span>
 
