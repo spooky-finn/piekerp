@@ -19,5 +19,5 @@ jobs:
         script: |
           cd ~/erp/
           git pull
-          docker-compose build --no-cache
-          docker-compose up -d
+          docker-compose up -d --force-recreate --build
+          docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
