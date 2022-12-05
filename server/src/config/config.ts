@@ -2,6 +2,7 @@ require('dotenv').config({ path: require('find-config')('.env') })
 
 interface Config {
   PORT: number
+  BUILD_PATH: string
   NODE_ENV: string
   HASURA_ENDPOINT: string
   S3_ENDPOINT: string
@@ -44,6 +45,7 @@ export const config = getSanitzedConfig({
   NODE_ENV: process.env.NODE_ENV,
 
   PORT: process.env.Port ? Number(process.env.PORT) : 9000,
+  BUILD_PATH: process.env.BUILD_PATH,
   CORS_CLIENT_URL: process.env.CORS_CLIENT_URL,
 
   HASURA_ADMIN_SECRET: process.env.HASURA_ADMIN_SECRET,

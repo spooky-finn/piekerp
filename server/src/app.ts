@@ -6,7 +6,7 @@ import { config } from './config/config'
 import errorMiddleware from './middlewares/error.middleware'
 import { router as indexRouter } from './routes'
 
-const clientBuild = path.join(__dirname, '../../client/build')
+const clientBuild = config.BUILD_PATH
 
 export const app = express()
 
