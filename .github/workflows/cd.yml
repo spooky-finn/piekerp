@@ -20,3 +20,4 @@ jobs:
           cd ~/erp/
           git pull
           docker-compose up -d --force-recreate --build
+          docker image rm -f $(docker images -f dangling=true -q)
