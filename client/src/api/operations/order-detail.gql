@@ -6,6 +6,14 @@ query GetAllUsers {
   }
 }
 
+query GetOrderPayments($_eq: Int!) {
+  erp_PaymentHistory(where: { OrderID: { _eq: $_eq } }, order_by: { Date: asc }) {
+    Date
+    ID
+    PaidAmount
+  }
+}
+
 mutation InsertNotification($CommentID: Int!, $MentionedUser: Int!, $OrderID: Int!) {
   insert_erp_Notifications(
     objects: { CommentID: $CommentID, MentionedUser: $MentionedUser, OrderID: $OrderID }
@@ -32,6 +40,12 @@ mutation InsertPayment($PaidAmount: numeric!, $Date: timestamp!, $OrderID: Int!)
   ) {
     ID
     OrderID
+  }
+}
+
+mutation DeletePayment($ID: Int!) {
+  delete_erp_PaymentHistory_by_pk(ID: $ID) {
+    ID
   }
 }
 

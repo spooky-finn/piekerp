@@ -88,6 +88,7 @@ query GetOrderByPK($OrderID: Int!) {
     PaidAmount
     TotalAmount
     PaymentHistories(where: { PaidAmount: { _neq: 0 } }) {
+      ID
       PaidAmount
       Date
     }

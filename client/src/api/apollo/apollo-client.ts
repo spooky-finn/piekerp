@@ -29,6 +29,9 @@ export const apolloClient = new ApolloClient({
       },
       erp_Docs: {
         keyFields: ['ID']
+      },
+      erp_PaymentHistory: {
+        keyFields: ['ID']
       }
     }
   })

@@ -36,7 +36,7 @@ export default function AboutOrder({ data }: IAboutOrderProps) {
     display: flex;
     flex-direction: 'row';
     gap: 10px;
-    span:first-child {
+    span:first-of-type {
       color: var(--lowContrast);
     }
   `

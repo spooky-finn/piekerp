@@ -5950,6 +5950,13 @@ export type GetAllUsersQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetAllUsersQuery = { __typename?: 'query_root', erp_Users: Array<{ __typename?: 'erp_Users', FirstName?: string | null, LastName?: string | null, UserID: number }> };
 
+export type GetOrderPaymentsQueryVariables = Exact<{
+  _eq: Scalars['Int'];
+}>;
+
+
+export type GetOrderPaymentsQuery = { __typename?: 'query_root', erp_PaymentHistory: Array<{ __typename?: 'erp_PaymentHistory', Date: any, ID: number, PaidAmount: any }> };
+
 export type InsertNotificationMutationVariables = Exact<{
   CommentID: Scalars['Int'];
   MentionedUser: Scalars['Int'];
@@ -5974,6 +5981,13 @@ export type InsertPaymentMutationVariables = Exact<{
 
 
 export type InsertPaymentMutation = { __typename?: 'mutation_root', insert_erp_PaymentHistory_one?: { __typename?: 'erp_PaymentHistory', ID: number, OrderID: number } | null };
+
+export type DeletePaymentMutationVariables = Exact<{
+  ID: Scalars['Int'];
+}>;
+
+
+export type DeletePaymentMutation = { __typename?: 'mutation_root', delete_erp_PaymentHistory_by_pk?: { __typename?: 'erp_PaymentHistory', ID: number } | null };
 
 export type DeleteOrderMutationVariables = Exact<{
   OrderID: Scalars['Int'];
@@ -6084,7 +6098,7 @@ export type GetOrderByPkQueryVariables = Exact<{
 }>;
 
 
-export type GetOrderByPkQuery = { __typename?: 'query_root', erp_Orders: Array<{ __typename?: 'erp_Orders', NeedAttention?: string | null, AwaitingDispatch: boolean, OrderStatusID: number, ActualShippingDate?: any | null, AcceptanceDate?: any | null, ShippingDate?: any | null, CreatingDate: any, OrderID: number, ManagerID?: number | null, City?: string | null, Comment?: string | null, Entity?: string | null, InvoiceNumber?: string | null, OrderNumber?: string | null, PaidAmount?: any | null, TotalAmount?: any | null, User?: { __typename?: 'erp_Users', FirstName?: string | null, LastName?: string | null, UserID: number } | null, OrderItems: Array<{ __typename?: 'erp_OrderItems', Name: string, FullName?: string | null, OrderItemID: number, Quantity: number }>, Docs: Array<{ __typename?: 'erp_Docs', ID: number, Key: string, FileName: string, Size?: number | null, UploadingDate?: any | null }>, PaymentHistories: Array<{ __typename?: 'erp_PaymentHistory', PaidAmount: any, Date: any }> }> };
+export type GetOrderByPkQuery = { __typename?: 'query_root', erp_Orders: Array<{ __typename?: 'erp_Orders', NeedAttention?: string | null, AwaitingDispatch: boolean, OrderStatusID: number, ActualShippingDate?: any | null, AcceptanceDate?: any | null, ShippingDate?: any | null, CreatingDate: any, OrderID: number, ManagerID?: number | null, City?: string | null, Comment?: string | null, Entity?: string | null, InvoiceNumber?: string | null, OrderNumber?: string | null, PaidAmount?: any | null, TotalAmount?: any | null, User?: { __typename?: 'erp_Users', FirstName?: string | null, LastName?: string | null, UserID: number } | null, OrderItems: Array<{ __typename?: 'erp_OrderItems', Name: string, FullName?: string | null, OrderItemID: number, Quantity: number }>, Docs: Array<{ __typename?: 'erp_Docs', ID: number, Key: string, FileName: string, Size?: number | null, UploadingDate?: any | null }>, PaymentHistories: Array<{ __typename?: 'erp_PaymentHistory', ID: number, PaidAmount: any, Date: any }> }> };
 
 export type InsertOrderMutationVariables = Exact<{
   orderStatusID: Scalars['Int'];
@@ -6502,6 +6516,43 @@ export function useGetAllUsersLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type GetAllUsersQueryHookResult = ReturnType<typeof useGetAllUsersQuery>;
 export type GetAllUsersLazyQueryHookResult = ReturnType<typeof useGetAllUsersLazyQuery>;
 export type GetAllUsersQueryResult = Apollo.QueryResult<GetAllUsersQuery, GetAllUsersQueryVariables>;
+export const GetOrderPaymentsDocument = gql`
+    query GetOrderPayments($_eq: Int!) {
+  erp_PaymentHistory(where: {OrderID: {_eq: $_eq}}, order_by: {Date: asc}) {
+    Date
+    ID
+    PaidAmount
+  }
+}
+    `;
+
+/**
+ * __useGetOrderPaymentsQuery__
+ *
+ * To run a query within a React component, call `useGetOrderPaymentsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetOrderPaymentsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetOrderPaymentsQuery({
+ *   variables: {
+ *      _eq: // value for '_eq'
+ *   },
+ * });
+ */
+export function useGetOrderPaymentsQuery(baseOptions: Apollo.QueryHookOptions<GetOrderPaymentsQuery, GetOrderPaymentsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetOrderPaymentsQuery, GetOrderPaymentsQueryVariables>(GetOrderPaymentsDocument, options);
+      }
+export function useGetOrderPaymentsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetOrderPaymentsQuery, GetOrderPaymentsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetOrderPaymentsQuery, GetOrderPaymentsQueryVariables>(GetOrderPaymentsDocument, options);
+        }
+export type GetOrderPaymentsQueryHookResult = ReturnType<typeof useGetOrderPaymentsQuery>;
+export type GetOrderPaymentsLazyQueryHookResult = ReturnType<typeof useGetOrderPaymentsLazyQuery>;
+export type GetOrderPaymentsQueryResult = Apollo.QueryResult<GetOrderPaymentsQuery, GetOrderPaymentsQueryVariables>;
 export const InsertNotificationDocument = gql`
     mutation InsertNotification($CommentID: Int!, $MentionedUser: Int!, $OrderID: Int!) {
   insert_erp_Notifications(
@@ -6615,6 +6666,39 @@ export function useInsertPaymentMutation(baseOptions?: Apollo.MutationHookOption
 export type InsertPaymentMutationHookResult = ReturnType<typeof useInsertPaymentMutation>;
 export type InsertPaymentMutationResult = Apollo.MutationResult<InsertPaymentMutation>;
 export type InsertPaymentMutationOptions = Apollo.BaseMutationOptions<InsertPaymentMutation, InsertPaymentMutationVariables>;
+export const DeletePaymentDocument = gql`
+    mutation DeletePayment($ID: Int!) {
+  delete_erp_PaymentHistory_by_pk(ID: $ID) {
+    ID
+  }
+}
+    `;
+export type DeletePaymentMutationFn = Apollo.MutationFunction<DeletePaymentMutation, DeletePaymentMutationVariables>;
+
+/**
+ * __useDeletePaymentMutation__
+ *
+ * To run a mutation, you first call `useDeletePaymentMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeletePaymentMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deletePaymentMutation, { data, loading, error }] = useDeletePaymentMutation({
+ *   variables: {
+ *      ID: // value for 'ID'
+ *   },
+ * });
+ */
+export function useDeletePaymentMutation(baseOptions?: Apollo.MutationHookOptions<DeletePaymentMutation, DeletePaymentMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeletePaymentMutation, DeletePaymentMutationVariables>(DeletePaymentDocument, options);
+      }
+export type DeletePaymentMutationHookResult = ReturnType<typeof useDeletePaymentMutation>;
+export type DeletePaymentMutationResult = Apollo.MutationResult<DeletePaymentMutation>;
+export type DeletePaymentMutationOptions = Apollo.BaseMutationOptions<DeletePaymentMutation, DeletePaymentMutationVariables>;
 export const DeleteOrderDocument = gql`
     mutation DeleteOrder($OrderID: Int!) {
   delete_erp_Orders_by_pk(OrderID: $OrderID) {
@@ -7144,6 +7228,7 @@ export const GetOrderByPkDocument = gql`
     PaidAmount
     TotalAmount
     PaymentHistories(where: {PaidAmount: {_neq: 0}}) {
+      ID
       PaidAmount
       Date
     }

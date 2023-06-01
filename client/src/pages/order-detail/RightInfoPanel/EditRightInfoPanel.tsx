@@ -4,10 +4,10 @@ import { css } from '@emotion/react'
 import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material'
 import moment from 'moment'
 import React, { useEffect } from 'react'
-import NumberFormat, { InputAttributes } from 'react-number-format'
 import { TOrder, TUser } from 'src/types/global'
-import { useInsertPaymentMutation, useUpdateOrderInfoMutation } from 'src/types/graphql-shema'
+import { useUpdateOrderInfoMutation } from 'src/types/graphql-shema'
 import { formatOnlyDate } from 'src/utils/date'
+import { DateFormatCustom, MoneyFormatCustom } from './CutomFormattedInputs'
 
 enum FieldNames {
   InvoiceNumber = 'InvoiceNumber',
@@ -25,11 +25,6 @@ type FieldsValuesMap = {
   [key in FieldNames]: any
 }
 
-interface CustomProps {
-  onChange: (event: { target: { name: string; value: string } }) => void
-  name: string
-}
-
 interface IEditableInfoProps {
   data: TOrder
   refetch(): void
@@ -38,57 +33,11 @@ interface IEditableInfoProps {
 
 let fields: Partial<FieldsValuesMap> = {}
 
-const DateFormatCustom = React.forwardRef<NumberFormat<InputAttributes>, CustomProps>(
-  function NumberFormatCustom(props, ref) {
-    const { onChange, ...other } = props
-
-    return (
-      <NumberFormat
-        {...other}
-        getInputRef={ref}
-        onValueChange={values => {
-          onChange({
-            target: {
-              name: props.name,
-              value: values.value
-            }
-          })
-        }}
-        format="##.##.##"
-      />
-    )
-  }
-)
-
-const MoneyFormatCustom = React.forwardRef<NumberFormat<InputAttributes>, CustomProps>(
-  function NumberFormatCustom(props, ref) {
-    const { onChange, ...other } = props
-
-    return (
-      <NumberFormat
-        {...other}
-        getInputRef={ref}
-        onValueChange={values => {
-          onChange({
-            target: {
-              name: props.name,
-              value: values.value
-            }
-          })
-        }}
-        prefix={'₽ '}
-        thousandSeparator={true}
-      />
-    )
-  }
-)
-
 export default function EditableInfo({ data, refetch, users }: IEditableInfoProps) {
   const addField = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     (fields[e.target.name as FieldNames] = e.target.value)
 
   const [updateOrderInfo] = useUpdateOrderInfoMutation()
-  const [insertPayment] = useInsertPaymentMutation()
 
   async function saveChanges() {
     if (!Object.keys(fields).length) return
@@ -99,15 +48,6 @@ export default function EditableInfo({ data, refetch, users }: IEditableInfoProp
           fields
         }
       })
-
-      if (fields.PaidAmount)
-        insertPayment({
-          variables: {
-            Date: new Date(),
-            OrderID: data.OrderID,
-            PaidAmount: fields.PaidAmount
-          }
-        })
 
       refetch()
     } catch (error) {
@@ -199,16 +139,6 @@ export default function EditableInfo({ data, refetch, users }: IEditableInfoProp
         name={FieldNames.TotalAmount}
         InputProps={{
           defaultValue: data.TotalAmount,
-          onChange: addField,
-          inputComponent: MoneyFormatCustom as any
-        }}
-      />
-
-      <TextField
-        label="Оплачено"
-        name={FieldNames.PaidAmount}
-        InputProps={{
-          defaultValue: data.PaidAmount,
           onChange: addField,
           inputComponent: MoneyFormatCustom as any
         }}

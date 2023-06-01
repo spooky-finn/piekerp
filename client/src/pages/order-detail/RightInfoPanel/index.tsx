@@ -34,7 +34,11 @@ export const OrderInfoCard = ({ heading, children }: IOrderInfoCardProps) => {
   )
 }
 
-export default function OrderMeta({ data }: { data: TOrder }) {
+interface OrderMetaProps {
+  data: TOrder
+}
+
+export default function OrderMeta({ data }: OrderMetaProps) {
   const styles = css`
     border-left: var(--border);
     height: 100%;
