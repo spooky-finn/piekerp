@@ -126,7 +126,11 @@ export const columnsList: Column<TOrderColumnData>[] = [
   },
   {
     Header: 'Оплата',
-    accessor: data => percentage(data.TotalAmount, data.PaidAmount)
+    accessor: data => {
+      // Transition from old to new data structure
+      const paidAmount = data.PaidAmount || data.PaymentHistories[0]?.PaidAmount
+      return percentage(data.TotalAmount, paidAmount)
+    }
   },
   {
     Header: 'Менеджер',

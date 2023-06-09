@@ -27,4 +27,9 @@ fragment Order on erp_Orders {
     FirstName
     LastName
   }
+  PaymentHistories(limit: 1, order_by: { PaidAmount: desc }) {
+    ID
+    PaidAmount
+    Date
+  }
 }
