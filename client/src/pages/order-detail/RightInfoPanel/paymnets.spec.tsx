@@ -99,4 +99,56 @@ describe('order detail right info panel payments', () => {
     // check if element to present in the DOM
     expect(await screen.findByText('Добавить')).toBeInTheDocument()
   })
+
+  it('verify that can add new paymnet', async () => {
+    render(
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <PaymnetHistory data={{ OrderID: 1, TotalAmount: 2950000 }} />
+      </MockedProvider>
+    )
+
+    fireEvent.click(await screen.findByText('Добавить'))
+
+    // select input and type value
+    fireEvent.change(await screen.findByLabelText('Дата'), {
+      target: {
+        value: '14.08.22'
+      }
+    })
+    // select and type value get
+    fireEvent.change(await screen.findByLabelText('Уже оплачено'), {
+      target: {
+        value: 2_100_000
+      }
+    })
+
+    // click on save button
+    fireEvent.click(await screen.findByText('Сохранить'))
+
+    // verify that new payment is rendered
+    // expect(await screen.findByText('14.08.22')).toBeInTheDocument()
+    expect(await screen.findByText('68%')).toBeInTheDocument()
+  })
+
+  it('verify that can add new paymnet with default date', async () => {
+    render(
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <PaymnetHistory data={{ OrderID: 1, TotalAmount: 2_100_000 }} />
+      </MockedProvider>
+    )
+
+    fireEvent.click(await screen.findByText('Добавить'))
+    fireEvent.change(await screen.findByLabelText('Уже оплачено'), {
+      target: {
+        value: 2_100_000
+      }
+    })
+
+    // click on save button
+    fireEvent.click(await screen.findByText('Сохранить'))
+
+    // verify that new payment is rendered
+    // expect(await screen.findByText('15.08.21')).toBeInTheDocument()
+    expect(await screen.findByText('100%')).toBeInTheDocument()
+  })
 })

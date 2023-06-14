@@ -85,7 +85,7 @@ export default function OrderMeta({ data }: OrderMetaProps) {
           {'№ ' +
             (data.InvoiceNumber || '') +
             ' - ' +
-            percentage(data.TotalAmount, data.PaidAmount)}
+            percentage(data.PaymentHistories[0]?.PaidAmount, data.TotalAmount)}
         </div>
       </Box>
 

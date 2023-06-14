@@ -129,7 +129,7 @@ export const columnsList: Column<TOrderColumnData>[] = [
     accessor: data => {
       // Transition from old to new data structure
       const paidAmount = data.PaidAmount || data.PaymentHistories[0]?.PaidAmount
-      return percentage(data.TotalAmount, paidAmount)
+      return percentage(paidAmount, data.TotalAmount)
     }
   },
   {
