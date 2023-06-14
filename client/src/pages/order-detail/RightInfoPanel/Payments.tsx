@@ -14,10 +14,15 @@ import {
 import { formatOnlyDate } from 'src/utils/date'
 import { OrderInfoCard } from '.'
 import { DateFormatCustom, MoneyFormatCustom } from './CutomFormattedInputs'
+import * as formatter from 'src/utils/formatting'
+
+type Order = Pick<TOrder, 'TotalAmount' | 'OrderID'>
 
 export interface IPaymnetHistoryProps {
-  data: TOrder
+  data: Order
 }
+
+export const NO_TOTAL_AMOUNT_MESSAGE = 'Не задана сумма заказа'
 
 export default function PaymnetHistory({ data }: IPaymnetHistoryProps) {
   const [deletePayment] = useDeletePaymentMutation()
@@ -42,7 +47,7 @@ export default function PaymnetHistory({ data }: IPaymnetHistoryProps) {
   ].includes(store?.user?.AccessLevelID)
 
   return (
-    <OrderInfoCard heading="Платежи">
+    <OrderInfoCard heading="История оплаты">
       {data.TotalAmount ? (
         <Stack direction="column" width="100%">
           {payments?.erp_PaymentHistory.map(payment => (
@@ -59,9 +64,8 @@ export default function PaymnetHistory({ data }: IPaymnetHistoryProps) {
               })}
               key={payment.Date + payment.PaidAmount}
             >
-              <Box width="25%">{((payment.PaidAmount / data.TotalAmount) * 100).toFixed(0)} % </Box>
+              <Box width="25%">{formatter.percentage(payment.PaidAmount, data.TotalAmount)}</Box>
               <div>{formatOnlyDate(payment.Date)}</div>
-
               {isHaveFullRight && (
                 <Button
                   variant="outlined"
@@ -82,13 +86,13 @@ export default function PaymnetHistory({ data }: IPaymnetHistoryProps) {
           ))}
         </Stack>
       ) : (
-        <Typography variant="body1">Не задана сумма заказа</Typography>
+        <Typography variant="body1">{NO_TOTAL_AMOUNT_MESSAGE}</Typography>
       )}
       {isHaveFullRight && (
         <AddNewPayment
+          order={data}
           refetch={refetch}
-          orderID={data.OrderID}
-          defaultValues={{ date: formatOnlyDate(new Date().toString()) }}
+          defaultValues={{ date: new Date().toISOString() }}
         />
       )}
     </OrderInfoCard>
@@ -96,21 +100,21 @@ export default function PaymnetHistory({ data }: IPaymnetHistoryProps) {
 }
 
 interface AddNewPaymentProps {
-  orderID: number
   defaultValues: {
     date?: string | null
     amount?: number
   }
   refetch(): void
+  order: Order
 }
 
-function AddNewPayment({ defaultValues, orderID, refetch }: AddNewPaymentProps) {
+function AddNewPayment(props: AddNewPaymentProps) {
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null)
   const [insertPayment] = useInsertPaymentMutation()
   const [data, setData] = React.useState<{
     date?: string | null
     amount?: number
-  }>(defaultValues)
+  }>(props.defaultValues)
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget)
@@ -127,21 +131,20 @@ function AddNewPayment({ defaultValues, orderID, refetch }: AddNewPaymentProps) 
     if (!data.date || !data.amount) {
       throw Error('data is not valid')
     }
-
     await insertPayment({
       variables: {
-        Date: data.date,
-        OrderID: orderID,
+        Date: moment(data.date).toISOString(),
+        OrderID: props.order.OrderID,
         PaidAmount: data.amount
       }
     })
 
     handleClose()
-    refetch()
+    props.refetch()
   }
 
   function handleDateChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setData({ ...data, date: moment(e.target.value, 'DD-MM-YY').format('YYYY-MM-DD') })
+    setData({ ...data, date: moment(e.target.value, 'DDMMYY').toISOString() })
   }
 
   function handleAmountChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -176,19 +179,24 @@ function AddNewPayment({ defaultValues, orderID, refetch }: AddNewPaymentProps) 
             placeholder="dd.mm.yy"
             InputProps={{
               onChange: handleDateChange,
-              defaultValue: defaultValues?.date,
+              defaultValue: moment(props.defaultValues?.date).format('DD.MM.YY'),
               inputComponent: DateFormatCustom as any
             }}
           />
-          <TextField
-            label="Сумма платежа"
-            autoFocus
-            InputProps={{
-              defaultValue: defaultValues?.amount,
-              onChange: handleAmountChange,
-              inputComponent: MoneyFormatCustom as any
-            }}
-          />
+          <Box display={'flex'} alignItems={'center'} gap={1}>
+            <TextField
+              label="Уже оплачено"
+              autoFocus
+              InputProps={{
+                defaultValue: props.defaultValues?.amount,
+                onChange: handleAmountChange,
+                inputComponent: MoneyFormatCustom as any
+              }}
+            />
+            <Typography variant="body2" color="textSecondary">
+              из {formatter.money(props.order.TotalAmount)}
+            </Typography>
+          </Box>
           <Button onClick={handleSave}>Сохранить</Button>
         </Stack>
       </Popover>
