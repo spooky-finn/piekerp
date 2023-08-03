@@ -39,7 +39,7 @@ export const genColumns = (state: State) => {
       return {
         Header: day.toString(),
         Cell: (props: CellProps<PreparedEmployeeDto>) => {
-          const data = props.row.original.intervals[day]
+          const data = props.row.original.intervals[day - 1]
           if (!data) return <></>
 
           return (
