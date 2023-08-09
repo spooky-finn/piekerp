@@ -266,9 +266,10 @@ export type Attendance_Intervals = {
   __typename?: 'attendance_intervals';
   card: Scalars['String'];
   database?: Maybe<Scalars['String']>;
-  ent?: Maybe<Scalars['timestamp']>;
+  ent: Scalars['timestamp'];
+  ent_event_id: Scalars['Int'];
   ext?: Maybe<Scalars['timestamp']>;
-  id: Scalars['Int'];
+  ext_event_id?: Maybe<Scalars['Int']>;
   /** An object relationship */
   user: Attendance_Users;
 };
@@ -328,12 +329,14 @@ export type Attendance_Intervals_Arr_Rel_Insert_Input = {
 /** aggregate avg on columns */
 export type Attendance_Intervals_Avg_Fields = {
   __typename?: 'attendance_intervals_avg_fields';
-  id?: Maybe<Scalars['Float']>;
+  ent_event_id?: Maybe<Scalars['Float']>;
+  ext_event_id?: Maybe<Scalars['Float']>;
 };
 
 /** order by avg() on columns of table "attendance.intervals" */
 export type Attendance_Intervals_Avg_Order_By = {
-  id?: InputMaybe<Order_By>;
+  ent_event_id?: InputMaybe<Order_By>;
+  ext_event_id?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "attendance.intervals". All fields are combined with a logical 'AND'. */
@@ -344,22 +347,22 @@ export type Attendance_Intervals_Bool_Exp = {
   card?: InputMaybe<String_Comparison_Exp>;
   database?: InputMaybe<String_Comparison_Exp>;
   ent?: InputMaybe<Timestamp_Comparison_Exp>;
+  ent_event_id?: InputMaybe<Int_Comparison_Exp>;
   ext?: InputMaybe<Timestamp_Comparison_Exp>;
-  id?: InputMaybe<Int_Comparison_Exp>;
+  ext_event_id?: InputMaybe<Int_Comparison_Exp>;
   user?: InputMaybe<Attendance_Users_Bool_Exp>;
 };
 
 /** unique or primary key constraints on table "attendance.intervals" */
 export enum Attendance_Intervals_Constraint {
   /** unique or primary key constraint */
-  IntervalsPkey = 'Intervals_pkey',
-  /** unique or primary key constraint */
-  IntervalsIdKey = 'intervals_id_key'
+  IntervalsPkey = 'intervals_pkey'
 }
 
 /** input type for incrementing numeric columns in table "attendance.intervals" */
 export type Attendance_Intervals_Inc_Input = {
-  id?: InputMaybe<Scalars['Int']>;
+  ent_event_id?: InputMaybe<Scalars['Int']>;
+  ext_event_id?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "attendance.intervals" */
@@ -367,8 +370,9 @@ export type Attendance_Intervals_Insert_Input = {
   card?: InputMaybe<Scalars['String']>;
   database?: InputMaybe<Scalars['String']>;
   ent?: InputMaybe<Scalars['timestamp']>;
+  ent_event_id?: InputMaybe<Scalars['Int']>;
   ext?: InputMaybe<Scalars['timestamp']>;
-  id?: InputMaybe<Scalars['Int']>;
+  ext_event_id?: InputMaybe<Scalars['Int']>;
   user?: InputMaybe<Attendance_Users_Obj_Rel_Insert_Input>;
 };
 
@@ -378,8 +382,9 @@ export type Attendance_Intervals_Max_Fields = {
   card?: Maybe<Scalars['String']>;
   database?: Maybe<Scalars['String']>;
   ent?: Maybe<Scalars['timestamp']>;
+  ent_event_id?: Maybe<Scalars['Int']>;
   ext?: Maybe<Scalars['timestamp']>;
-  id?: Maybe<Scalars['Int']>;
+  ext_event_id?: Maybe<Scalars['Int']>;
 };
 
 /** order by max() on columns of table "attendance.intervals" */
@@ -387,8 +392,9 @@ export type Attendance_Intervals_Max_Order_By = {
   card?: InputMaybe<Order_By>;
   database?: InputMaybe<Order_By>;
   ent?: InputMaybe<Order_By>;
+  ent_event_id?: InputMaybe<Order_By>;
   ext?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
+  ext_event_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -397,8 +403,9 @@ export type Attendance_Intervals_Min_Fields = {
   card?: Maybe<Scalars['String']>;
   database?: Maybe<Scalars['String']>;
   ent?: Maybe<Scalars['timestamp']>;
+  ent_event_id?: Maybe<Scalars['Int']>;
   ext?: Maybe<Scalars['timestamp']>;
-  id?: Maybe<Scalars['Int']>;
+  ext_event_id?: Maybe<Scalars['Int']>;
 };
 
 /** order by min() on columns of table "attendance.intervals" */
@@ -406,8 +413,9 @@ export type Attendance_Intervals_Min_Order_By = {
   card?: InputMaybe<Order_By>;
   database?: InputMaybe<Order_By>;
   ent?: InputMaybe<Order_By>;
+  ent_event_id?: InputMaybe<Order_By>;
   ext?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
+  ext_event_id?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "attendance.intervals" */
@@ -431,14 +439,16 @@ export type Attendance_Intervals_Order_By = {
   card?: InputMaybe<Order_By>;
   database?: InputMaybe<Order_By>;
   ent?: InputMaybe<Order_By>;
+  ent_event_id?: InputMaybe<Order_By>;
   ext?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
+  ext_event_id?: InputMaybe<Order_By>;
   user?: InputMaybe<Attendance_Users_Order_By>;
 };
 
 /** primary key columns input for table: attendance_intervals */
 export type Attendance_Intervals_Pk_Columns_Input = {
-  id: Scalars['Int'];
+  card: Scalars['String'];
+  ent: Scalars['timestamp'];
 };
 
 /** select columns of table "attendance.intervals" */
@@ -450,9 +460,11 @@ export enum Attendance_Intervals_Select_Column {
   /** column name */
   Ent = 'ent',
   /** column name */
+  EntEventId = 'ent_event_id',
+  /** column name */
   Ext = 'ext',
   /** column name */
-  Id = 'id'
+  ExtEventId = 'ext_event_id'
 }
 
 /** input type for updating data in table "attendance.intervals" */
@@ -460,52 +472,61 @@ export type Attendance_Intervals_Set_Input = {
   card?: InputMaybe<Scalars['String']>;
   database?: InputMaybe<Scalars['String']>;
   ent?: InputMaybe<Scalars['timestamp']>;
+  ent_event_id?: InputMaybe<Scalars['Int']>;
   ext?: InputMaybe<Scalars['timestamp']>;
-  id?: InputMaybe<Scalars['Int']>;
+  ext_event_id?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate stddev on columns */
 export type Attendance_Intervals_Stddev_Fields = {
   __typename?: 'attendance_intervals_stddev_fields';
-  id?: Maybe<Scalars['Float']>;
+  ent_event_id?: Maybe<Scalars['Float']>;
+  ext_event_id?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev() on columns of table "attendance.intervals" */
 export type Attendance_Intervals_Stddev_Order_By = {
-  id?: InputMaybe<Order_By>;
+  ent_event_id?: InputMaybe<Order_By>;
+  ext_event_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
 export type Attendance_Intervals_Stddev_Pop_Fields = {
   __typename?: 'attendance_intervals_stddev_pop_fields';
-  id?: Maybe<Scalars['Float']>;
+  ent_event_id?: Maybe<Scalars['Float']>;
+  ext_event_id?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_pop() on columns of table "attendance.intervals" */
 export type Attendance_Intervals_Stddev_Pop_Order_By = {
-  id?: InputMaybe<Order_By>;
+  ent_event_id?: InputMaybe<Order_By>;
+  ext_event_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
 export type Attendance_Intervals_Stddev_Samp_Fields = {
   __typename?: 'attendance_intervals_stddev_samp_fields';
-  id?: Maybe<Scalars['Float']>;
+  ent_event_id?: Maybe<Scalars['Float']>;
+  ext_event_id?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_samp() on columns of table "attendance.intervals" */
 export type Attendance_Intervals_Stddev_Samp_Order_By = {
-  id?: InputMaybe<Order_By>;
+  ent_event_id?: InputMaybe<Order_By>;
+  ext_event_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate sum on columns */
 export type Attendance_Intervals_Sum_Fields = {
   __typename?: 'attendance_intervals_sum_fields';
-  id?: Maybe<Scalars['Int']>;
+  ent_event_id?: Maybe<Scalars['Int']>;
+  ext_event_id?: Maybe<Scalars['Int']>;
 };
 
 /** order by sum() on columns of table "attendance.intervals" */
 export type Attendance_Intervals_Sum_Order_By = {
-  id?: InputMaybe<Order_By>;
+  ent_event_id?: InputMaybe<Order_By>;
+  ext_event_id?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "attendance.intervals" */
@@ -517,48 +538,57 @@ export enum Attendance_Intervals_Update_Column {
   /** column name */
   Ent = 'ent',
   /** column name */
+  EntEventId = 'ent_event_id',
+  /** column name */
   Ext = 'ext',
   /** column name */
-  Id = 'id'
+  ExtEventId = 'ext_event_id'
 }
 
 /** aggregate var_pop on columns */
 export type Attendance_Intervals_Var_Pop_Fields = {
   __typename?: 'attendance_intervals_var_pop_fields';
-  id?: Maybe<Scalars['Float']>;
+  ent_event_id?: Maybe<Scalars['Float']>;
+  ext_event_id?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_pop() on columns of table "attendance.intervals" */
 export type Attendance_Intervals_Var_Pop_Order_By = {
-  id?: InputMaybe<Order_By>;
+  ent_event_id?: InputMaybe<Order_By>;
+  ext_event_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
 export type Attendance_Intervals_Var_Samp_Fields = {
   __typename?: 'attendance_intervals_var_samp_fields';
-  id?: Maybe<Scalars['Float']>;
+  ent_event_id?: Maybe<Scalars['Float']>;
+  ext_event_id?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_samp() on columns of table "attendance.intervals" */
 export type Attendance_Intervals_Var_Samp_Order_By = {
-  id?: InputMaybe<Order_By>;
+  ent_event_id?: InputMaybe<Order_By>;
+  ext_event_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
 export type Attendance_Intervals_Variance_Fields = {
   __typename?: 'attendance_intervals_variance_fields';
-  id?: Maybe<Scalars['Float']>;
+  ent_event_id?: Maybe<Scalars['Float']>;
+  ext_event_id?: Maybe<Scalars['Float']>;
 };
 
 /** order by variance() on columns of table "attendance.intervals" */
 export type Attendance_Intervals_Variance_Order_By = {
-  id?: InputMaybe<Order_By>;
+  ent_event_id?: InputMaybe<Order_By>;
+  ext_event_id?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "attendance.users" */
 export type Attendance_Users = {
   __typename?: 'attendance_users';
   card?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamp']>;
   firstname?: Maybe<Scalars['String']>;
   id: Scalars['Int'];
   /** An array relationship */
@@ -630,6 +660,7 @@ export type Attendance_Users_Bool_Exp = {
   _not?: InputMaybe<Attendance_Users_Bool_Exp>;
   _or?: InputMaybe<Array<Attendance_Users_Bool_Exp>>;
   card?: InputMaybe<String_Comparison_Exp>;
+  created_at?: InputMaybe<Timestamp_Comparison_Exp>;
   firstname?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Int_Comparison_Exp>;
   intervals?: InputMaybe<Attendance_Intervals_Bool_Exp>;
@@ -652,6 +683,7 @@ export type Attendance_Users_Inc_Input = {
 /** input type for inserting data into table "attendance.users" */
 export type Attendance_Users_Insert_Input = {
   card?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamp']>;
   firstname?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['Int']>;
   intervals?: InputMaybe<Attendance_Intervals_Arr_Rel_Insert_Input>;
@@ -662,6 +694,7 @@ export type Attendance_Users_Insert_Input = {
 export type Attendance_Users_Max_Fields = {
   __typename?: 'attendance_users_max_fields';
   card?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamp']>;
   firstname?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
   lastname?: Maybe<Scalars['String']>;
@@ -671,6 +704,7 @@ export type Attendance_Users_Max_Fields = {
 export type Attendance_Users_Min_Fields = {
   __typename?: 'attendance_users_min_fields';
   card?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamp']>;
   firstname?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
   lastname?: Maybe<Scalars['String']>;
@@ -702,6 +736,7 @@ export type Attendance_Users_On_Conflict = {
 /** Ordering options when selecting data from "attendance.users". */
 export type Attendance_Users_Order_By = {
   card?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
   firstname?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   intervals_aggregate?: InputMaybe<Attendance_Intervals_Aggregate_Order_By>;
@@ -718,6 +753,8 @@ export enum Attendance_Users_Select_Column {
   /** column name */
   Card = 'card',
   /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
   Firstname = 'firstname',
   /** column name */
   Id = 'id',
@@ -728,6 +765,7 @@ export enum Attendance_Users_Select_Column {
 /** input type for updating data in table "attendance.users" */
 export type Attendance_Users_Set_Input = {
   card?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamp']>;
   firstname?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['Int']>;
   lastname?: InputMaybe<Scalars['String']>;
@@ -761,6 +799,8 @@ export type Attendance_Users_Sum_Fields = {
 export enum Attendance_Users_Update_Column {
   /** column name */
   Card = 'card',
+  /** column name */
+  CreatedAt = 'created_at',
   /** column name */
   Firstname = 'firstname',
   /** column name */
@@ -4540,7 +4580,8 @@ export type Mutation_RootDelete_Attendance_IntervalsArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Attendance_Intervals_By_PkArgs = {
-  id: Scalars['Int'];
+  card: Scalars['String'];
+  ent: Scalars['timestamp'];
 };
 
 
@@ -5219,7 +5260,8 @@ export type Query_RootAttendance_Intervals_AggregateArgs = {
 
 
 export type Query_RootAttendance_Intervals_By_PkArgs = {
-  id: Scalars['Int'];
+  card: Scalars['String'];
+  ent: Scalars['timestamp'];
 };
 
 
@@ -5600,7 +5642,8 @@ export type Subscription_RootAttendance_Intervals_AggregateArgs = {
 
 
 export type Subscription_RootAttendance_Intervals_By_PkArgs = {
-  id: Scalars['Int'];
+  card: Scalars['String'];
+  ent: Scalars['timestamp'];
 };
 
 
@@ -5888,7 +5931,7 @@ export type GetEmployeeListQueryVariables = Exact<{
 }>;
 
 
-export type GetEmployeeListQuery = { __typename?: 'query_root', attendance_users_aggregate: { __typename?: 'attendance_users_aggregate', nodes: Array<{ __typename?: 'attendance_users', id: number, card?: string | null, firstname?: string | null, lastname?: string | null, intervals: Array<{ __typename?: 'attendance_intervals', id: number, ent?: any | null, ext?: any | null, card: string }> }> }, attendance_config: Array<{ __typename?: 'attendance_config', TimeDeduction: any }> };
+export type GetEmployeeListQuery = { __typename?: 'query_root', attendance_users_aggregate: { __typename?: 'attendance_users_aggregate', nodes: Array<{ __typename?: 'attendance_users', id: number, card?: string | null, firstname?: string | null, lastname?: string | null, intervals: Array<{ __typename?: 'attendance_intervals', ent: any, ext?: any | null, card: string }> }> }, attendance_config: Array<{ __typename?: 'attendance_config', TimeDeduction: any }> };
 
 export type UpdateTimeDeductionMutationVariables = Exact<{
   TimeDeduction: Scalars['numeric'];
@@ -6168,7 +6211,6 @@ export const GetEmployeeListDocument = gql`
       firstname
       lastname
       intervals(where: {ent: {_gte: $gte, _lte: $lte}}) {
-        id
         ent
         ext
         card
