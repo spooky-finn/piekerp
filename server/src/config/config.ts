@@ -19,11 +19,6 @@ interface Config {
 
   S3_ACCESS_KEY_ID: string
   S3_SECRET_ACCESS_KEY: string
-
-  // backups
-  S3_BACKUP_SERVICE_BUCKET: string
-  S3_BACKUP_SERVICE_ACCESS_KEY_ID: string
-  S3_BACKUP_SERVICE_SECRET_ACCESS_KEY: string
 }
 
 // Throwing an Error if any field was undefined we don't
@@ -59,9 +54,5 @@ export const config = getSanitzedConfig({
   S3_ACCESS_KEY_ID: process.env.S3_ACCESS_KEY_ID,
   S3_SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY,
   S3_BUCKET: process.env.S3_BUCKET ?? 'factory-piek-test',
-  S3_ENDPOINT: process.env.S3_ENDPOINT ?? 's3.yandexcloud.net',
-
-  S3_BACKUP_SERVICE_BUCKET: process.env.S3_BACKUP_SERVICE_BUCKET,
-  S3_BACKUP_SERVICE_ACCESS_KEY_ID: process.env.S3_BACKUP_SERVICE_ACCESS_KEY_ID,
-  S3_BACKUP_SERVICE_SECRET_ACCESS_KEY: process.env.S3_BACKUP_SERVICE_SECRET_ACCESS_KEY
+  S3_ENDPOINT: process.env.S3_ENDPOINT ?? 's3.yandexcloud.net'
 })

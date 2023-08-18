@@ -20,6 +20,4 @@ router.get('/s3/:key', S3Controller.getBinaryFile)
 // DeleteFile
 router.delete('/s3/:key', authMiddleware, S3Controller.removeSingleFile)
 
-router.get('/backup/:key', S3Controller.getHasuraBackup)
-
 router.get('/orders/unpaid', OrderController.getUnpaidOrders)
