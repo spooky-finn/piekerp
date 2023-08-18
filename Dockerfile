@@ -1,11 +1,11 @@
 FROM node:16-alpine as frontend
-COPY .client/ /app/
+COPY .client/ /app/client/
 WORKDIR /app/client
 RUN yarn install --frozen-lockfile
 RUN yarn run build
 
 FROM node:16-alpine as backend
-COPY .server/ /app/
+COPY .server/ /app/server/
 WORKDIR /app/server
 RUN yarn install --frozen-lockfile
 RUN yarn run build
