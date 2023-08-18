@@ -39,7 +39,7 @@ jobs:
       #   run: yarn test
       - name: Build image and save it as tar
         run: |
-          docker build . piekerp:latest
+          docker build . -t piekerp:latest
           docker save piekerp:latest -o piekerp.tar
 
       - name: Send tar image to the prod host machine
