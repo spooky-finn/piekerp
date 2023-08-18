@@ -43,13 +43,14 @@ jobs:
           docker save -o piekerp-latest.tar piekerp:latest
 
       - name: Send tar image to the prod host machine using rsync
-        uses: appleboy/rsync-action@master
+        uses: burnett01/rsync-deployments@6.0.0
         with:
-          args: -avz --delete
-          flags: -e
-          src: piekerp-latest.tar
-          dest: ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/piekerp.tar
-          key: ${{ secrets.SSH_HEXCORE_KEY }}
+          switches: -avzr --delete
+          remote_path: ~/
+          remote_host: ${{ secrets.SSH_HOST }}
+          remote_user: ${{ secrets.SSH_USER }}
+          remote_key: ${{ secrets.SSH_HEXCORE_KEY }}
+          path: ./piekerp-latest.tar
       # - name: Login to Github container registry
       #   uses: docker/login-action@v2
       #   with:
