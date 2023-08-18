@@ -47,7 +47,7 @@ jobs:
         with:
           args: -avz --delete
           flags: -e
-          src: piekerp.tar
+          src: piekerp-latest.tar
           dest: ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/piekerp.tar
           key: ${{ secrets.SSH_HEXCORE_KEY }}
       # - name: Login to Github container registry
