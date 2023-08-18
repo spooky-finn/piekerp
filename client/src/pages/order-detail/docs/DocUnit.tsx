@@ -56,7 +56,7 @@ export default function DocUnit({ file, handleOnDelete, uploading, editState }: 
   return (
     <div css={styles}>
       <a href={`${process.env.REACT_APP_API_URL}/s3/${file.Key}`} target="_blank" rel="noreferrer">
-        {formatAssociatedIcon(file.FileName)}
+        {formatAssociatedIcon(file.FileName ?? '')}
         <div className="name">{file.FileName}</div>
 
         <div className="date" data-testid="filemeta">

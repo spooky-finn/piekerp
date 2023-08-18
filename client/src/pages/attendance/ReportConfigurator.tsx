@@ -122,8 +122,8 @@ export default function ReportConfigurator({ state, setState }: IReportConfigura
           />
         </div>
 
-        <Button onClick={handleOnRetentionSave} variant="outlined" size="small">
-          Сохранить
+        <Button onClick={handleOnRetentionSave} variant="text" size="small">
+          Обновить
         </Button>
       </div>
 

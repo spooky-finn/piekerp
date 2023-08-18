@@ -266,7 +266,7 @@ export type Attendance_Intervals = {
   __typename?: 'attendance_intervals';
   card: Scalars['String'];
   database?: Maybe<Scalars['String']>;
-  ent: Scalars['timestamp'];
+  ent?: Maybe<Scalars['timestamp']>;
   ent_event_id: Scalars['Int'];
   ext?: Maybe<Scalars['timestamp']>;
   ext_event_id?: Maybe<Scalars['Int']>;
@@ -355,6 +355,8 @@ export type Attendance_Intervals_Bool_Exp = {
 
 /** unique or primary key constraints on table "attendance.intervals" */
 export enum Attendance_Intervals_Constraint {
+  /** unique or primary key constraint */
+  EntEventId = 'ent_event_id',
   /** unique or primary key constraint */
   IntervalsPkey = 'intervals_pkey'
 }
@@ -448,7 +450,7 @@ export type Attendance_Intervals_Order_By = {
 /** primary key columns input for table: attendance_intervals */
 export type Attendance_Intervals_Pk_Columns_Input = {
   card: Scalars['String'];
-  ent: Scalars['timestamp'];
+  ent_event_id: Scalars['Int'];
 };
 
 /** select columns of table "attendance.intervals" */
@@ -669,6 +671,8 @@ export type Attendance_Users_Bool_Exp = {
 
 /** unique or primary key constraints on table "attendance.users" */
 export enum Attendance_Users_Constraint {
+  /** unique or primary key constraint */
+  UniqueCard = 'unique_card',
   /** unique or primary key constraint */
   UsersCardKey = 'users_card_key',
   /** unique or primary key constraint */
@@ -1416,7 +1420,7 @@ export type Erp_Comments_Variance_Order_By = {
 /** columns and relationships of "erp.Docs" */
 export type Erp_Docs = {
   __typename?: 'erp_Docs';
-  FileName: Scalars['String'];
+  FileName?: Maybe<Scalars['String']>;
   ID: Scalars['Int'];
   Key: Scalars['String'];
   /** An object relationship */
@@ -3984,9 +3988,9 @@ export type Erp_Users = {
   Orders_aggregate: Erp_Orders_Aggregate;
   Password?: Maybe<Scalars['String']>;
   /** An array relationship */
-  Tokrns: Array<Erp_Tokens>;
+  Tokens: Array<Erp_Tokens>;
   /** An aggregate relationship */
-  Tokrns_aggregate: Erp_Tokens_Aggregate;
+  Tokens_aggregate: Erp_Tokens_Aggregate;
   UserID: Scalars['Int'];
 };
 
@@ -4052,7 +4056,7 @@ export type Erp_UsersOrders_AggregateArgs = {
 
 
 /** columns and relationships of "erp.Users" */
-export type Erp_UsersTokrnsArgs = {
+export type Erp_UsersTokensArgs = {
   distinct_on?: InputMaybe<Array<Erp_Tokens_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
@@ -4062,7 +4066,7 @@ export type Erp_UsersTokrnsArgs = {
 
 
 /** columns and relationships of "erp.Users" */
-export type Erp_UsersTokrns_AggregateArgs = {
+export type Erp_UsersTokens_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Erp_Tokens_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
@@ -4146,7 +4150,7 @@ export type Erp_Users_Bool_Exp = {
   Notifications?: InputMaybe<Erp_Notifications_Bool_Exp>;
   Orders?: InputMaybe<Erp_Orders_Bool_Exp>;
   Password?: InputMaybe<String_Comparison_Exp>;
-  Tokrns?: InputMaybe<Erp_Tokens_Bool_Exp>;
+  Tokens?: InputMaybe<Erp_Tokens_Bool_Exp>;
   UserID?: InputMaybe<Int_Comparison_Exp>;
   _and?: InputMaybe<Array<Erp_Users_Bool_Exp>>;
   _not?: InputMaybe<Erp_Users_Bool_Exp>;
@@ -4176,7 +4180,7 @@ export type Erp_Users_Insert_Input = {
   Notifications?: InputMaybe<Erp_Notifications_Arr_Rel_Insert_Input>;
   Orders?: InputMaybe<Erp_Orders_Arr_Rel_Insert_Input>;
   Password?: InputMaybe<Scalars['String']>;
-  Tokrns?: InputMaybe<Erp_Tokens_Arr_Rel_Insert_Input>;
+  Tokens?: InputMaybe<Erp_Tokens_Arr_Rel_Insert_Input>;
   UserID?: InputMaybe<Scalars['Int']>;
 };
 
@@ -4256,7 +4260,7 @@ export type Erp_Users_Order_By = {
   Notifications_aggregate?: InputMaybe<Erp_Notifications_Aggregate_Order_By>;
   Orders_aggregate?: InputMaybe<Erp_Orders_Aggregate_Order_By>;
   Password?: InputMaybe<Order_By>;
-  Tokrns_aggregate?: InputMaybe<Erp_Tokens_Aggregate_Order_By>;
+  Tokens_aggregate?: InputMaybe<Erp_Tokens_Aggregate_Order_By>;
   UserID?: InputMaybe<Order_By>;
 };
 
@@ -4581,7 +4585,7 @@ export type Mutation_RootDelete_Attendance_IntervalsArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Attendance_Intervals_By_PkArgs = {
   card: Scalars['String'];
-  ent: Scalars['timestamp'];
+  ent_event_id: Scalars['Int'];
 };
 
 
@@ -5261,7 +5265,7 @@ export type Query_RootAttendance_Intervals_AggregateArgs = {
 
 export type Query_RootAttendance_Intervals_By_PkArgs = {
   card: Scalars['String'];
-  ent: Scalars['timestamp'];
+  ent_event_id: Scalars['Int'];
 };
 
 
@@ -5643,7 +5647,7 @@ export type Subscription_RootAttendance_Intervals_AggregateArgs = {
 
 export type Subscription_RootAttendance_Intervals_By_PkArgs = {
   card: Scalars['String'];
-  ent: Scalars['timestamp'];
+  ent_event_id: Scalars['Int'];
 };
 
 
@@ -5931,7 +5935,7 @@ export type GetEmployeeListQueryVariables = Exact<{
 }>;
 
 
-export type GetEmployeeListQuery = { __typename?: 'query_root', attendance_users_aggregate: { __typename?: 'attendance_users_aggregate', nodes: Array<{ __typename?: 'attendance_users', id: number, card?: string | null, firstname?: string | null, lastname?: string | null, intervals: Array<{ __typename?: 'attendance_intervals', ent: any, ext?: any | null, card: string }> }> }, attendance_config: Array<{ __typename?: 'attendance_config', TimeDeduction: any }> };
+export type GetEmployeeListQuery = { __typename?: 'query_root', attendance_users_aggregate: { __typename?: 'attendance_users_aggregate', nodes: Array<{ __typename?: 'attendance_users', id: number, card?: string | null, firstname?: string | null, lastname?: string | null, intervals: Array<{ __typename?: 'attendance_intervals', ent?: any | null, ext?: any | null, card: string }> }> }, attendance_config: Array<{ __typename?: 'attendance_config', TimeDeduction: any }> };
 
 export type UpdateTimeDeductionMutationVariables = Exact<{
   TimeDeduction: Scalars['numeric'];
@@ -6141,7 +6145,7 @@ export type GetOrderByPkQueryVariables = Exact<{
 }>;
 
 
-export type GetOrderByPkQuery = { __typename?: 'query_root', erp_Orders: Array<{ __typename?: 'erp_Orders', NeedAttention?: string | null, AwaitingDispatch: boolean, OrderStatusID: number, ActualShippingDate?: any | null, AcceptanceDate?: any | null, ShippingDate?: any | null, CreatingDate: any, OrderID: number, ManagerID?: number | null, City?: string | null, Comment?: string | null, Entity?: string | null, InvoiceNumber?: string | null, OrderNumber?: string | null, PaidAmount?: any | null, TotalAmount?: any | null, User?: { __typename?: 'erp_Users', FirstName?: string | null, LastName?: string | null, UserID: number } | null, OrderItems: Array<{ __typename?: 'erp_OrderItems', Name: string, FullName?: string | null, OrderItemID: number, Quantity: number }>, Docs: Array<{ __typename?: 'erp_Docs', ID: number, Key: string, FileName: string, Size?: number | null, UploadingDate?: any | null }>, PaymentHistories: Array<{ __typename?: 'erp_PaymentHistory', ID: number, PaidAmount: any, Date: any }> }> };
+export type GetOrderByPkQuery = { __typename?: 'query_root', erp_Orders: Array<{ __typename?: 'erp_Orders', NeedAttention?: string | null, AwaitingDispatch: boolean, OrderStatusID: number, ActualShippingDate?: any | null, AcceptanceDate?: any | null, ShippingDate?: any | null, CreatingDate: any, OrderID: number, ManagerID?: number | null, City?: string | null, Comment?: string | null, Entity?: string | null, InvoiceNumber?: string | null, OrderNumber?: string | null, PaidAmount?: any | null, TotalAmount?: any | null, User?: { __typename?: 'erp_Users', FirstName?: string | null, LastName?: string | null, UserID: number } | null, OrderItems: Array<{ __typename?: 'erp_OrderItems', Name: string, FullName?: string | null, OrderItemID: number, Quantity: number }>, Docs: Array<{ __typename?: 'erp_Docs', ID: number, Key: string, FileName?: string | null, Size?: number | null, UploadingDate?: any | null }>, PaymentHistories: Array<{ __typename?: 'erp_PaymentHistory', ID: number, PaidAmount: any, Date: any }> }> };
 
 export type InsertOrderMutationVariables = Exact<{
   orderStatusID: Scalars['Int'];
