@@ -21,7 +21,7 @@ jobs:
           HOST: ${{ secrets.SSH_HOST }}
           KEY: ${{ secrets.SSH_HEXCORE_KEY }}
           # PASSWORD: ${{secrets.DEPLOY_SSH_PASSWORD}} # it's less secure, using KEY instead
-          # TARGET: /app/hello-service/
+          TARGET: ~/
 
           VERBOSE: true
           USER: ${{ secrets.SSH_USER }}
