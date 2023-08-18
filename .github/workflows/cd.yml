@@ -1,4 +1,4 @@
-name: Deployment
+name: Deploy to production
 
 on: workflow_dispatch
 
@@ -20,4 +20,4 @@ jobs:
             docker pull ghcr.io/spooky-finn/piekerp:latest
             docker stop piekerp
             docker rm piekerp
-            docker run -d --name piekerp -p 9000:9000 ghcr.io/spooky-finn/piekerp:latest
+            docker run -d --name piekerp -p 9000:9000 --env-file ~/erp/.env ghcr.io/spooky-finn/piekerp:latest
