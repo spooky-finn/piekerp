@@ -1,7 +1,6 @@
 name: Deployment
 
-on:
-  workflow_dispatch
+on: workflow_dispatch
 
 jobs:
   deploy:
@@ -9,15 +8,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Deploy using ssh
-      uses: appleboy/ssh-action@master
-      with:
-        key: ${{ secrets.SSH_HEXCORE_KEY }}
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USER }}
-        port: 22
-        script: |
-          cd ~/erp/
-          git pull
-          docker-compose up -d --force-recreate --build
-          docker image rm -f $(docker images -f dangling=true -q)
+      - name: Deploy using ssh
+        uses: appleboy/ssh-action@master
+        with:
+          key: ${{ secrets.SSH_HEXCORE_KEY }}
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          port: 22
+          script: |
+            docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.CR_TOKEN }}
+            docker pull ghcr.io/spooky-finn/piekerp:latest
+            docker stop piekerp
+            docker rm piekerp
+            docker run -d --name piekerp -p 9000:9000 ghcr.io/spooky-finn/piekerp:latest
