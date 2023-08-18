@@ -29,7 +29,7 @@ jobs:
           ARGS: -az --exclude=/.git/
           SSH_ARGS: '-p 22 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
           # SOURCE: ./public/
-
+          RUN_SCRIPT_ON: source
           PRE_SCRIPT: |
             echo start at:
             date -u
