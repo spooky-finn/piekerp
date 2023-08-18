@@ -1,4 +1,7 @@
-.vscode
+.dockerignore
+.git
+.gitignore
+.prettierrc
+**/node_modules
 .github
-.backup_service
-.todo
+.vscode

@@ -1,7 +1,6 @@
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import express from 'express'
-import path from 'path'
 import { config } from './config/config'
 import errorMiddleware from './middlewares/error.middleware'
 import { router as indexRouter } from './routes'

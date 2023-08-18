@@ -24,7 +24,7 @@ jobs:
           cache: 'yarn'
           cache-dependency-path: client/yarn.lock
           node-version: 16
-        
+
       - name: Install client`s package dependencies
         working-directory: ./client
         run: yarn install
@@ -37,3 +37,18 @@ jobs:
       - name: Execute client`s test cases
         working-directory: ./client
         run: yarn test
+
+      - name: Login to Github container registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.CR_PAT }}
+
+      - name: Push image to Github container registry
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ghcr.io/${{ github.repository }}:latest
