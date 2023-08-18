@@ -15,26 +15,16 @@ jobs:
       - name: Checkout to the repository
         uses: actions/checkout@v3
 
-      - name: rsync deployments
-        uses: up9cloud/action-rsync@master
-        env:
-          HOST: ${{ secrets.SSH_HOST }}
-          KEY: ${{ secrets.SSH_HEXCORE_KEY }}
-          # PASSWORD: ${{secrets.DEPLOY_SSH_PASSWORD}} # it's less secure, using KEY instead
-          TARGET: ~/
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_HEXCORE_KEY }}
+          known_hosts: 'placeholder'
 
-          VERBOSE: true
-          USER: ${{ secrets.SSH_USER }}
-          # PORT: 2222 # no need to set this, because of $SSH_ARGS
-          ARGS: -az --exclude=/.git/
-          SSH_ARGS: '-p 22 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
-          # SOURCE: ./public/
-          RUN_SCRIPT_ON: source
-          PRE_SCRIPT: |
-            echo start at:
-            date -u
-          POST_SCRIPT: 'echo done at: && date -u'
+      - name: Genetate auth known_hosts
+        run: ssh-keyscan -t rsa ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
+      - run: rsync --archive --verbose --compress --progress . ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/
       # - name: Set up NodeJS environment
       #   uses: actions/setup-node@v2
       #   with:
