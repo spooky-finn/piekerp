@@ -43,3 +43,5 @@ packages/react-devtools-timeline/dist
 
 server/build
 **/.DS_Store
+*.tar
+*.tar.gz
