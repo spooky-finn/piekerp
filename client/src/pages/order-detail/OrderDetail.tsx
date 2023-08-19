@@ -28,6 +28,8 @@ export default function OrderDetail() {
   const queryParams = useParams<{ id: string }>()
   const orderId = parseInt(queryParams.id || '')
 
+  if (!orderId) throw Error('Null OrderId at the local store')
+
   const { editMode, initialize } = useOrderDetailStore()
 
   useEffect(() => {
@@ -36,7 +38,7 @@ export default function OrderDetail() {
 
   useLayoutEffect(() => {
     initialize(orderId, defaultEditMode)
-  }, [])
+  }, [orderId])
 
   const handleFileOnDrop = useCallback(async (acceptedFiles: File[]) => {
     setOnUploadFiles(acceptedFiles)

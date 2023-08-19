@@ -30,7 +30,7 @@ export default class Store {
     this.isLoading = bool
   }
 
-  setInMemoryToken(token: typeof Store.prototype.inMemoryToken) {
+  setInMemoryToken(token: string | null) {
     this.inMemoryToken = token
   }
 
@@ -79,7 +79,7 @@ export default class Store {
         }
       })
     } catch (e) {
-      console.log(e)
+      console.error(e)
     } finally {
       this.setLoading(false)
       return this.inMemoryToken

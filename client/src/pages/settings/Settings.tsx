@@ -89,7 +89,9 @@ export default function Settings() {
               onChange={e => changeTheme(e.target.value as AppColorTheme)}
             >
               {themeVariants.map(each => (
-                <MenuItem value={each.value}>{each.title}</MenuItem>
+                <MenuItem value={each.value} key={each.value}>
+                  {each.title}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
