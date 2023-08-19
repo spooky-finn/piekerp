@@ -40,8 +40,10 @@ packages/react-devtools-inline/dist
 packages/react-devtools-shell/dist
 packages/react-devtools-timeline/dist
 
+**/build/
+**/dist/
 
-server/build
+
 **/.DS_Store
 *.tar
 *.tar.gz
