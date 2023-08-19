@@ -8,27 +8,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-      - name: rsync deployments
-        uses: burnett01/rsync-deployments@6.0.0
-        with:
-          switches: -avzr --delete --exclude="" --include="" --filter=""
-          path: client/
-          remote_path: ~/temp/
-          remote_host: ${{ secrets.SSH_HOST }}
-          remote_port: 22
-          remote_user: ${{ secrets.SSH_USER }}
-          remote_key: ${{ secrets.SSH_HEXCORE_KEY }}
-      # - name: Deploy using ssh
-      #   uses: appleboy/ssh-action@master
+      # - uses: actions/checkout@v3
+      # - name: rsync deployments
+      #   uses: burnett01/rsync-deployments@6.0.0
       #   with:
-      #     key: ${{ secrets.SSH_HEXCORE_KEY }}
-      #     host: ${{ secrets.SSH_HOST }}
-      #     username: ${{ secrets.SSH_USER }}
-      #     port: 22
-      #     script: |
-      #       docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.CR_TOKEN }}
-      #       docker pull ghcr.io/spooky-finn/piekerp:latest
-      #       docker stop piekerp
-      #       docker rm piekerp
-      #       docker run -d --name piekerp -p 9000:9000 --env-file ~/erp/.env ghcr.io/spooky-finn/piekerp:latest
+      #     switches: -avzr --delete --exclude="" --include="" --filter=""
+      #     path: client/
+      #     remote_path: ~/temp/
+      #     remote_host: ${{ secrets.SSH_HOST }}
+      #     remote_port: 22
+      #     remote_user: ${{ secrets.SSH_USER }}
+      #     remote_key: ${{ secrets.SSH_HEXCORE_KEY }}
+      - name: Deploy using ssh
+        uses: appleboy/ssh-action@master
+        with:
+          key: ${{ secrets.SSH_HEXCORE_KEY }}
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          port: 22
+          script: |
+            docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.CR_TOKEN }}
+            docker pull ghcr.io/spooky-finn/piekerp:latest
+            docker stop piekerp
+            docker rm piekerp
+            docker run -d --name piekerp -p 9000:9000 --env-file ~/erp/.env ghcr.io/spooky-finn/piekerp:latest
