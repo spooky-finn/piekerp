@@ -15,8 +15,8 @@ jobs:
       - name: send files to the remote server using scp
         uses: appleboy/scp-action@master
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
+          host: 45.10.110.58
+          username: piekuser
           key: ${{ secrets.SSH_HEXCORE_KEY }}
           port: 22
           source: ./
