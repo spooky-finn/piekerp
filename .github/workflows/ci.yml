@@ -18,6 +18,7 @@ jobs:
       - name: Install ssh key
         uses: shimataro/ssh-key-action@v2
         with:
+          name: github-actions
           key: ${{ secrets.SSH_HEXCORE_KEY }}
           known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
 
