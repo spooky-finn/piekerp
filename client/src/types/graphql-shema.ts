@@ -133,7 +133,7 @@ export type Attendance_Config_Bool_Exp = {
 
 /** unique or primary key constraints on table "attendance.config" */
 export enum Attendance_Config_Constraint {
-  /** unique or primary key constraint */
+  /** unique or primary key constraint on columns "ID" */
   ConfigPkey = 'config_pkey'
 }
 
@@ -172,7 +172,7 @@ export type Attendance_Config_Mutation_Response = {
   returning: Array<Attendance_Config>;
 };
 
-/** on conflict condition type for table "attendance.config" */
+/** on_conflict condition type for table "attendance.config" */
 export type Attendance_Config_On_Conflict = {
   constraint: Attendance_Config_Constraint;
   update_columns?: Array<Attendance_Config_Update_Column>;
@@ -185,7 +185,7 @@ export type Attendance_Config_Order_By = {
   TimeDeduction?: InputMaybe<Order_By>;
 };
 
-/** primary key columns input for table: attendance_config */
+/** primary key columns input for table: attendance.config */
 export type Attendance_Config_Pk_Columns_Input = {
   ID: Scalars['Int'];
 };
@@ -225,6 +225,20 @@ export type Attendance_Config_Stddev_Samp_Fields = {
   TimeDeduction?: Maybe<Scalars['Float']>;
 };
 
+/** Streaming cursor of the table "attendance_config" */
+export type Attendance_Config_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Attendance_Config_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Attendance_Config_Stream_Cursor_Value_Input = {
+  ID?: InputMaybe<Scalars['Int']>;
+  TimeDeduction?: InputMaybe<Scalars['numeric']>;
+};
+
 /** aggregate sum on columns */
 export type Attendance_Config_Sum_Fields = {
   __typename?: 'attendance_config_sum_fields';
@@ -239,6 +253,15 @@ export enum Attendance_Config_Update_Column {
   /** column name */
   TimeDeduction = 'TimeDeduction'
 }
+
+export type Attendance_Config_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Attendance_Config_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Attendance_Config_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Attendance_Config_Bool_Exp;
+};
 
 /** aggregate var_pop on columns */
 export type Attendance_Config_Var_Pop_Fields = {
@@ -279,6 +302,17 @@ export type Attendance_Intervals_Aggregate = {
   __typename?: 'attendance_intervals_aggregate';
   aggregate?: Maybe<Attendance_Intervals_Aggregate_Fields>;
   nodes: Array<Attendance_Intervals>;
+};
+
+export type Attendance_Intervals_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Attendance_Intervals_Aggregate_Bool_Exp_Count>;
+};
+
+export type Attendance_Intervals_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Attendance_Intervals_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Attendance_Intervals_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "attendance.intervals" */
@@ -322,7 +356,7 @@ export type Attendance_Intervals_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "attendance.intervals" */
 export type Attendance_Intervals_Arr_Rel_Insert_Input = {
   data: Array<Attendance_Intervals_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Attendance_Intervals_On_Conflict>;
 };
 
@@ -355,9 +389,9 @@ export type Attendance_Intervals_Bool_Exp = {
 
 /** unique or primary key constraints on table "attendance.intervals" */
 export enum Attendance_Intervals_Constraint {
-  /** unique or primary key constraint */
+  /** unique or primary key constraint on columns "ent_event_id" */
   EntEventId = 'ent_event_id',
-  /** unique or primary key constraint */
+  /** unique or primary key constraint on columns "ent_event_id", "card" */
   IntervalsPkey = 'intervals_pkey'
 }
 
@@ -429,7 +463,7 @@ export type Attendance_Intervals_Mutation_Response = {
   returning: Array<Attendance_Intervals>;
 };
 
-/** on conflict condition type for table "attendance.intervals" */
+/** on_conflict condition type for table "attendance.intervals" */
 export type Attendance_Intervals_On_Conflict = {
   constraint: Attendance_Intervals_Constraint;
   update_columns?: Array<Attendance_Intervals_Update_Column>;
@@ -447,7 +481,7 @@ export type Attendance_Intervals_Order_By = {
   user?: InputMaybe<Attendance_Users_Order_By>;
 };
 
-/** primary key columns input for table: attendance_intervals */
+/** primary key columns input for table: attendance.intervals */
 export type Attendance_Intervals_Pk_Columns_Input = {
   card: Scalars['String'];
   ent_event_id: Scalars['Int'];
@@ -518,6 +552,24 @@ export type Attendance_Intervals_Stddev_Samp_Order_By = {
   ext_event_id?: InputMaybe<Order_By>;
 };
 
+/** Streaming cursor of the table "attendance_intervals" */
+export type Attendance_Intervals_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Attendance_Intervals_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Attendance_Intervals_Stream_Cursor_Value_Input = {
+  card?: InputMaybe<Scalars['String']>;
+  database?: InputMaybe<Scalars['String']>;
+  ent?: InputMaybe<Scalars['timestamp']>;
+  ent_event_id?: InputMaybe<Scalars['Int']>;
+  ext?: InputMaybe<Scalars['timestamp']>;
+  ext_event_id?: InputMaybe<Scalars['Int']>;
+};
+
 /** aggregate sum on columns */
 export type Attendance_Intervals_Sum_Fields = {
   __typename?: 'attendance_intervals_sum_fields';
@@ -546,6 +598,15 @@ export enum Attendance_Intervals_Update_Column {
   /** column name */
   ExtEventId = 'ext_event_id'
 }
+
+export type Attendance_Intervals_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Attendance_Intervals_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Attendance_Intervals_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Attendance_Intervals_Bool_Exp;
+};
 
 /** aggregate var_pop on columns */
 export type Attendance_Intervals_Var_Pop_Fields = {
@@ -666,16 +727,17 @@ export type Attendance_Users_Bool_Exp = {
   firstname?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Int_Comparison_Exp>;
   intervals?: InputMaybe<Attendance_Intervals_Bool_Exp>;
+  intervals_aggregate?: InputMaybe<Attendance_Intervals_Aggregate_Bool_Exp>;
   lastname?: InputMaybe<String_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "attendance.users" */
 export enum Attendance_Users_Constraint {
-  /** unique or primary key constraint */
+  /** unique or primary key constraint on columns "card" */
   UniqueCard = 'unique_card',
-  /** unique or primary key constraint */
+  /** unique or primary key constraint on columns "card" */
   UsersCardKey = 'users_card_key',
-  /** unique or primary key constraint */
+  /** unique or primary key constraint on columns "id" */
   UsersPkey = 'users_pkey'
 }
 
@@ -726,11 +788,11 @@ export type Attendance_Users_Mutation_Response = {
 /** input type for inserting object relation for remote table "attendance.users" */
 export type Attendance_Users_Obj_Rel_Insert_Input = {
   data: Attendance_Users_Insert_Input;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Attendance_Users_On_Conflict>;
 };
 
-/** on conflict condition type for table "attendance.users" */
+/** on_conflict condition type for table "attendance.users" */
 export type Attendance_Users_On_Conflict = {
   constraint: Attendance_Users_Constraint;
   update_columns?: Array<Attendance_Users_Update_Column>;
@@ -747,7 +809,7 @@ export type Attendance_Users_Order_By = {
   lastname?: InputMaybe<Order_By>;
 };
 
-/** primary key columns input for table: attendance_users */
+/** primary key columns input for table: attendance.users */
 export type Attendance_Users_Pk_Columns_Input = {
   id: Scalars['Int'];
 };
@@ -793,6 +855,23 @@ export type Attendance_Users_Stddev_Samp_Fields = {
   id?: Maybe<Scalars['Float']>;
 };
 
+/** Streaming cursor of the table "attendance_users" */
+export type Attendance_Users_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Attendance_Users_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Attendance_Users_Stream_Cursor_Value_Input = {
+  card?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamp']>;
+  firstname?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['Int']>;
+  lastname?: InputMaybe<Scalars['String']>;
+};
+
 /** aggregate sum on columns */
 export type Attendance_Users_Sum_Fields = {
   __typename?: 'attendance_users_sum_fields';
@@ -813,6 +892,15 @@ export enum Attendance_Users_Update_Column {
   Lastname = 'lastname'
 }
 
+export type Attendance_Users_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Attendance_Users_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Attendance_Users_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Attendance_Users_Bool_Exp;
+};
+
 /** aggregate var_pop on columns */
 export type Attendance_Users_Var_Pop_Fields = {
   __typename?: 'attendance_users_var_pop_fields';
@@ -830,6 +918,14 @@ export type Attendance_Users_Variance_Fields = {
   __typename?: 'attendance_users_variance_fields';
   id?: Maybe<Scalars['Float']>;
 };
+
+/** ordering argument of a cursor */
+export enum Cursor_Ordering {
+  /** ascending ordering of the cursor */
+  Asc = 'ASC',
+  /** descending ordering of the cursor */
+  Desc = 'DESC'
+}
 
 /** Boolean expression to compare columns of type "date". All fields are combined with logical 'AND'. */
 export type Date_Comparison_Exp = {
@@ -916,6 +1012,7 @@ export type Erp_AccessLevels_Bool_Exp = {
   AccessLevelID?: InputMaybe<Int_Comparison_Exp>;
   Name?: InputMaybe<String_Comparison_Exp>;
   Users?: InputMaybe<Erp_Users_Bool_Exp>;
+  Users_aggregate?: InputMaybe<Erp_Users_Aggregate_Bool_Exp>;
   _and?: InputMaybe<Array<Erp_AccessLevels_Bool_Exp>>;
   _not?: InputMaybe<Erp_AccessLevels_Bool_Exp>;
   _or?: InputMaybe<Array<Erp_AccessLevels_Bool_Exp>>;
@@ -923,7 +1020,7 @@ export type Erp_AccessLevels_Bool_Exp = {
 
 /** unique or primary key constraints on table "erp.AccessLevels" */
 export enum Erp_AccessLevels_Constraint {
-  /** unique or primary key constraint */
+  /** unique or primary key constraint on columns "AccessLevelID" */
   AccessLevelsPkey = 'AccessLevels_pkey'
 }
 
@@ -965,11 +1062,11 @@ export type Erp_AccessLevels_Mutation_Response = {
 /** input type for inserting object relation for remote table "erp.AccessLevels" */
 export type Erp_AccessLevels_Obj_Rel_Insert_Input = {
   data: Erp_AccessLevels_Insert_Input;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Erp_AccessLevels_On_Conflict>;
 };
 
-/** on conflict condition type for table "erp.AccessLevels" */
+/** on_conflict condition type for table "erp.AccessLevels" */
 export type Erp_AccessLevels_On_Conflict = {
   constraint: Erp_AccessLevels_Constraint;
   update_columns?: Array<Erp_AccessLevels_Update_Column>;
@@ -983,7 +1080,7 @@ export type Erp_AccessLevels_Order_By = {
   Users_aggregate?: InputMaybe<Erp_Users_Aggregate_Order_By>;
 };
 
-/** primary key columns input for table: erp_AccessLevels */
+/** primary key columns input for table: erp.AccessLevels */
 export type Erp_AccessLevels_Pk_Columns_Input = {
   AccessLevelID: Scalars['Int'];
 };
@@ -1020,6 +1117,20 @@ export type Erp_AccessLevels_Stddev_Samp_Fields = {
   AccessLevelID?: Maybe<Scalars['Float']>;
 };
 
+/** Streaming cursor of the table "erp_AccessLevels" */
+export type Erp_AccessLevels_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Erp_AccessLevels_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Erp_AccessLevels_Stream_Cursor_Value_Input = {
+  AccessLevelID?: InputMaybe<Scalars['Int']>;
+  Name?: InputMaybe<Scalars['String']>;
+};
+
 /** aggregate sum on columns */
 export type Erp_AccessLevels_Sum_Fields = {
   __typename?: 'erp_AccessLevels_sum_fields';
@@ -1033,6 +1144,15 @@ export enum Erp_AccessLevels_Update_Column {
   /** column name */
   Name = 'Name'
 }
+
+export type Erp_AccessLevels_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Erp_AccessLevels_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Erp_AccessLevels_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Erp_AccessLevels_Bool_Exp;
+};
 
 /** aggregate var_pop on columns */
 export type Erp_AccessLevels_Var_Pop_Fields = {
@@ -1097,6 +1217,17 @@ export type Erp_Comments_Aggregate = {
   nodes: Array<Erp_Comments>;
 };
 
+export type Erp_Comments_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Erp_Comments_Aggregate_Bool_Exp_Count>;
+};
+
+export type Erp_Comments_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Erp_Comments_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Erp_Comments_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "erp.Comments" */
 export type Erp_Comments_Aggregate_Fields = {
   __typename?: 'erp_Comments_aggregate_fields';
@@ -1138,7 +1269,7 @@ export type Erp_Comments_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "erp.Comments" */
 export type Erp_Comments_Arr_Rel_Insert_Input = {
   data: Array<Erp_Comments_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Erp_Comments_On_Conflict>;
 };
 
@@ -1161,6 +1292,7 @@ export type Erp_Comments_Avg_Order_By = {
 export type Erp_Comments_Bool_Exp = {
   CommentID?: InputMaybe<Int_Comparison_Exp>;
   Notifications?: InputMaybe<Erp_Notifications_Bool_Exp>;
+  Notifications_aggregate?: InputMaybe<Erp_Notifications_Aggregate_Bool_Exp>;
   Order?: InputMaybe<Erp_Orders_Bool_Exp>;
   OrderID?: InputMaybe<Int_Comparison_Exp>;
   Text?: InputMaybe<String_Comparison_Exp>;
@@ -1174,7 +1306,7 @@ export type Erp_Comments_Bool_Exp = {
 
 /** unique or primary key constraints on table "erp.Comments" */
 export enum Erp_Comments_Constraint {
-  /** unique or primary key constraint */
+  /** unique or primary key constraint on columns "CommentID" */
   CommentsPkey = 'Comments_pkey'
 }
 
@@ -1247,11 +1379,11 @@ export type Erp_Comments_Mutation_Response = {
 /** input type for inserting object relation for remote table "erp.Comments" */
 export type Erp_Comments_Obj_Rel_Insert_Input = {
   data: Erp_Comments_Insert_Input;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Erp_Comments_On_Conflict>;
 };
 
-/** on conflict condition type for table "erp.Comments" */
+/** on_conflict condition type for table "erp.Comments" */
 export type Erp_Comments_On_Conflict = {
   constraint: Erp_Comments_Constraint;
   update_columns?: Array<Erp_Comments_Update_Column>;
@@ -1270,7 +1402,7 @@ export type Erp_Comments_Order_By = {
   UserID?: InputMaybe<Order_By>;
 };
 
-/** primary key columns input for table: erp_Comments */
+/** primary key columns input for table: erp.Comments */
 export type Erp_Comments_Pk_Columns_Input = {
   CommentID: Scalars['Int'];
 };
@@ -1343,6 +1475,23 @@ export type Erp_Comments_Stddev_Samp_Order_By = {
   UserID?: InputMaybe<Order_By>;
 };
 
+/** Streaming cursor of the table "erp_Comments" */
+export type Erp_Comments_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Erp_Comments_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Erp_Comments_Stream_Cursor_Value_Input = {
+  CommentID?: InputMaybe<Scalars['Int']>;
+  OrderID?: InputMaybe<Scalars['Int']>;
+  Text?: InputMaybe<Scalars['String']>;
+  Timestamp?: InputMaybe<Scalars['timestamptz']>;
+  UserID?: InputMaybe<Scalars['Int']>;
+};
+
 /** aggregate sum on columns */
 export type Erp_Comments_Sum_Fields = {
   __typename?: 'erp_Comments_sum_fields';
@@ -1371,6 +1520,15 @@ export enum Erp_Comments_Update_Column {
   /** column name */
   UserId = 'UserID'
 }
+
+export type Erp_Comments_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Erp_Comments_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Erp_Comments_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Erp_Comments_Bool_Exp;
+};
 
 /** aggregate var_pop on columns */
 export type Erp_Comments_Var_Pop_Fields = {
@@ -1437,6 +1595,17 @@ export type Erp_Docs_Aggregate = {
   nodes: Array<Erp_Docs>;
 };
 
+export type Erp_Docs_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Erp_Docs_Aggregate_Bool_Exp_Count>;
+};
+
+export type Erp_Docs_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Erp_Docs_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Erp_Docs_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "erp.Docs" */
 export type Erp_Docs_Aggregate_Fields = {
   __typename?: 'erp_Docs_aggregate_fields';
@@ -1478,7 +1647,7 @@ export type Erp_Docs_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "erp.Docs" */
 export type Erp_Docs_Arr_Rel_Insert_Input = {
   data: Array<Erp_Docs_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Erp_Docs_On_Conflict>;
 };
 
@@ -1513,11 +1682,11 @@ export type Erp_Docs_Bool_Exp = {
 
 /** unique or primary key constraints on table "erp.Docs" */
 export enum Erp_Docs_Constraint {
-  /** unique or primary key constraint */
+  /** unique or primary key constraint on columns "ID" */
   DocsIdKey = 'Docs_ID_key',
-  /** unique or primary key constraint */
+  /** unique or primary key constraint on columns "Key" */
   DocsKeyKey = 'Docs_Key_key',
-  /** unique or primary key constraint */
+  /** unique or primary key constraint on columns "ID" */
   DocsPkey = 'Docs_pkey'
 }
 
@@ -1590,7 +1759,7 @@ export type Erp_Docs_Mutation_Response = {
   returning: Array<Erp_Docs>;
 };
 
-/** on conflict condition type for table "erp.Docs" */
+/** on_conflict condition type for table "erp.Docs" */
 export type Erp_Docs_On_Conflict = {
   constraint: Erp_Docs_Constraint;
   update_columns?: Array<Erp_Docs_Update_Column>;
@@ -1608,7 +1777,7 @@ export type Erp_Docs_Order_By = {
   UploadingDate?: InputMaybe<Order_By>;
 };
 
-/** primary key columns input for table: erp_Docs */
+/** primary key columns input for table: erp.Docs */
 export type Erp_Docs_Pk_Columns_Input = {
   ID: Scalars['Int'];
 };
@@ -1684,6 +1853,24 @@ export type Erp_Docs_Stddev_Samp_Order_By = {
   Size?: InputMaybe<Order_By>;
 };
 
+/** Streaming cursor of the table "erp_Docs" */
+export type Erp_Docs_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Erp_Docs_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Erp_Docs_Stream_Cursor_Value_Input = {
+  FileName?: InputMaybe<Scalars['String']>;
+  ID?: InputMaybe<Scalars['Int']>;
+  Key?: InputMaybe<Scalars['String']>;
+  OrderID?: InputMaybe<Scalars['Int']>;
+  Size?: InputMaybe<Scalars['Int']>;
+  UploadingDate?: InputMaybe<Scalars['timestamp']>;
+};
+
 /** aggregate sum on columns */
 export type Erp_Docs_Sum_Fields = {
   __typename?: 'erp_Docs_sum_fields';
@@ -1714,6 +1901,15 @@ export enum Erp_Docs_Update_Column {
   /** column name */
   UploadingDate = 'UploadingDate'
 }
+
+export type Erp_Docs_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Erp_Docs_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Erp_Docs_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Erp_Docs_Bool_Exp;
+};
 
 /** aggregate var_pop on columns */
 export type Erp_Docs_Var_Pop_Fields = {
@@ -1783,6 +1979,33 @@ export type Erp_Notifications_Aggregate = {
   nodes: Array<Erp_Notifications>;
 };
 
+export type Erp_Notifications_Aggregate_Bool_Exp = {
+  bool_and?: InputMaybe<Erp_Notifications_Aggregate_Bool_Exp_Bool_And>;
+  bool_or?: InputMaybe<Erp_Notifications_Aggregate_Bool_Exp_Bool_Or>;
+  count?: InputMaybe<Erp_Notifications_Aggregate_Bool_Exp_Count>;
+};
+
+export type Erp_Notifications_Aggregate_Bool_Exp_Bool_And = {
+  arguments: Erp_Notifications_Select_Column_Erp_Notifications_Aggregate_Bool_Exp_Bool_And_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Erp_Notifications_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type Erp_Notifications_Aggregate_Bool_Exp_Bool_Or = {
+  arguments: Erp_Notifications_Select_Column_Erp_Notifications_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Erp_Notifications_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type Erp_Notifications_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Erp_Notifications_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Erp_Notifications_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "erp.Notifications" */
 export type Erp_Notifications_Aggregate_Fields = {
   __typename?: 'erp_Notifications_aggregate_fields';
@@ -1824,7 +2047,7 @@ export type Erp_Notifications_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "erp.Notifications" */
 export type Erp_Notifications_Arr_Rel_Insert_Input = {
   data: Array<Erp_Notifications_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Erp_Notifications_On_Conflict>;
 };
 
@@ -1862,7 +2085,7 @@ export type Erp_Notifications_Bool_Exp = {
 
 /** unique or primary key constraints on table "erp.Notifications" */
 export enum Erp_Notifications_Constraint {
-  /** unique or primary key constraint */
+  /** unique or primary key constraint on columns "ID" */
   NotificationsPkey = 'Notifications_pkey'
 }
 
@@ -1929,7 +2152,7 @@ export type Erp_Notifications_Mutation_Response = {
   returning: Array<Erp_Notifications>;
 };
 
-/** on conflict condition type for table "erp.Notifications" */
+/** on_conflict condition type for table "erp.Notifications" */
 export type Erp_Notifications_On_Conflict = {
   constraint: Erp_Notifications_Constraint;
   update_columns?: Array<Erp_Notifications_Update_Column>;
@@ -1948,7 +2171,7 @@ export type Erp_Notifications_Order_By = {
   Viewed?: InputMaybe<Order_By>;
 };
 
-/** primary key columns input for table: erp_Notifications */
+/** primary key columns input for table: erp.Notifications */
 export type Erp_Notifications_Pk_Columns_Input = {
   ID: Scalars['Int'];
 };
@@ -1963,6 +2186,18 @@ export enum Erp_Notifications_Select_Column {
   MentionedUser = 'MentionedUser',
   /** column name */
   OrderId = 'OrderID',
+  /** column name */
+  Viewed = 'Viewed'
+}
+
+/** select "erp_Notifications_aggregate_bool_exp_bool_and_arguments_columns" columns of table "erp.Notifications" */
+export enum Erp_Notifications_Select_Column_Erp_Notifications_Aggregate_Bool_Exp_Bool_And_Arguments_Columns {
+  /** column name */
+  Viewed = 'Viewed'
+}
+
+/** select "erp_Notifications_aggregate_bool_exp_bool_or_arguments_columns" columns of table "erp.Notifications" */
+export enum Erp_Notifications_Select_Column_Erp_Notifications_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns {
   /** column name */
   Viewed = 'Viewed'
 }
@@ -2027,6 +2262,23 @@ export type Erp_Notifications_Stddev_Samp_Order_By = {
   OrderID?: InputMaybe<Order_By>;
 };
 
+/** Streaming cursor of the table "erp_Notifications" */
+export type Erp_Notifications_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Erp_Notifications_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Erp_Notifications_Stream_Cursor_Value_Input = {
+  CommentID?: InputMaybe<Scalars['Int']>;
+  ID?: InputMaybe<Scalars['Int']>;
+  MentionedUser?: InputMaybe<Scalars['Int']>;
+  OrderID?: InputMaybe<Scalars['Int']>;
+  Viewed?: InputMaybe<Scalars['Boolean']>;
+};
+
 /** aggregate sum on columns */
 export type Erp_Notifications_Sum_Fields = {
   __typename?: 'erp_Notifications_sum_fields';
@@ -2057,6 +2309,15 @@ export enum Erp_Notifications_Update_Column {
   /** column name */
   Viewed = 'Viewed'
 }
+
+export type Erp_Notifications_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Erp_Notifications_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Erp_Notifications_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Erp_Notifications_Bool_Exp;
+};
 
 /** aggregate var_pop on columns */
 export type Erp_Notifications_Var_Pop_Fields = {
@@ -2131,6 +2392,17 @@ export type Erp_OrderItems_Aggregate = {
   nodes: Array<Erp_OrderItems>;
 };
 
+export type Erp_OrderItems_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Erp_OrderItems_Aggregate_Bool_Exp_Count>;
+};
+
+export type Erp_OrderItems_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Erp_OrderItems_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Erp_OrderItems_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "erp.OrderItems" */
 export type Erp_OrderItems_Aggregate_Fields = {
   __typename?: 'erp_OrderItems_aggregate_fields';
@@ -2172,7 +2444,7 @@ export type Erp_OrderItems_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "erp.OrderItems" */
 export type Erp_OrderItems_Arr_Rel_Insert_Input = {
   data: Array<Erp_OrderItems_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Erp_OrderItems_On_Conflict>;
 };
 
@@ -2209,7 +2481,7 @@ export type Erp_OrderItems_Bool_Exp = {
 
 /** unique or primary key constraints on table "erp.OrderItems" */
 export enum Erp_OrderItems_Constraint {
-  /** unique or primary key constraint */
+  /** unique or primary key constraint on columns "OrderItemID" */
   OrderItemsPkey = 'OrderItems_pkey'
 }
 
@@ -2292,7 +2564,7 @@ export type Erp_OrderItems_Mutation_Response = {
   returning: Array<Erp_OrderItems>;
 };
 
-/** on conflict condition type for table "erp.OrderItems" */
+/** on_conflict condition type for table "erp.OrderItems" */
 export type Erp_OrderItems_On_Conflict = {
   constraint: Erp_OrderItems_Constraint;
   update_columns?: Array<Erp_OrderItems_Update_Column>;
@@ -2312,7 +2584,7 @@ export type Erp_OrderItems_Order_By = {
   SerialStarts?: InputMaybe<Order_By>;
 };
 
-/** primary key columns input for table: erp_OrderItems */
+/** primary key columns input for table: erp.OrderItems */
 export type Erp_OrderItems_Pk_Columns_Input = {
   OrderItemID: Scalars['Int'];
 };
@@ -2394,6 +2666,26 @@ export type Erp_OrderItems_Stddev_Samp_Order_By = {
   Quantity?: InputMaybe<Order_By>;
 };
 
+/** Streaming cursor of the table "erp_OrderItems" */
+export type Erp_OrderItems_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Erp_OrderItems_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Erp_OrderItems_Stream_Cursor_Value_Input = {
+  Fitter?: InputMaybe<Scalars['String']>;
+  FullName?: InputMaybe<Scalars['String']>;
+  Name?: InputMaybe<Scalars['String']>;
+  OrderID?: InputMaybe<Scalars['Int']>;
+  OrderItemID?: InputMaybe<Scalars['Int']>;
+  Quantity?: InputMaybe<Scalars['Int']>;
+  SerialEnds?: InputMaybe<Scalars['String']>;
+  SerialStarts?: InputMaybe<Scalars['String']>;
+};
+
 /** aggregate sum on columns */
 export type Erp_OrderItems_Sum_Fields = {
   __typename?: 'erp_OrderItems_sum_fields';
@@ -2428,6 +2720,15 @@ export enum Erp_OrderItems_Update_Column {
   /** column name */
   SerialStarts = 'SerialStarts'
 }
+
+export type Erp_OrderItems_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Erp_OrderItems_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Erp_OrderItems_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Erp_OrderItems_Bool_Exp;
+};
 
 /** aggregate var_pop on columns */
 export type Erp_OrderItems_Var_Pop_Fields = {
@@ -2546,6 +2847,7 @@ export type Erp_OrderStatus_Bool_Exp = {
   ID?: InputMaybe<Int_Comparison_Exp>;
   Name?: InputMaybe<String_Comparison_Exp>;
   Orders?: InputMaybe<Erp_Orders_Bool_Exp>;
+  Orders_aggregate?: InputMaybe<Erp_Orders_Aggregate_Bool_Exp>;
   _and?: InputMaybe<Array<Erp_OrderStatus_Bool_Exp>>;
   _not?: InputMaybe<Erp_OrderStatus_Bool_Exp>;
   _or?: InputMaybe<Array<Erp_OrderStatus_Bool_Exp>>;
@@ -2553,7 +2855,7 @@ export type Erp_OrderStatus_Bool_Exp = {
 
 /** unique or primary key constraints on table "erp.OrderStatus" */
 export enum Erp_OrderStatus_Constraint {
-  /** unique or primary key constraint */
+  /** unique or primary key constraint on columns "ID" */
   OrderStatusPkey = 'OrderStatus_pkey'
 }
 
@@ -2595,11 +2897,11 @@ export type Erp_OrderStatus_Mutation_Response = {
 /** input type for inserting object relation for remote table "erp.OrderStatus" */
 export type Erp_OrderStatus_Obj_Rel_Insert_Input = {
   data: Erp_OrderStatus_Insert_Input;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Erp_OrderStatus_On_Conflict>;
 };
 
-/** on conflict condition type for table "erp.OrderStatus" */
+/** on_conflict condition type for table "erp.OrderStatus" */
 export type Erp_OrderStatus_On_Conflict = {
   constraint: Erp_OrderStatus_Constraint;
   update_columns?: Array<Erp_OrderStatus_Update_Column>;
@@ -2613,7 +2915,7 @@ export type Erp_OrderStatus_Order_By = {
   Orders_aggregate?: InputMaybe<Erp_Orders_Aggregate_Order_By>;
 };
 
-/** primary key columns input for table: erp_OrderStatus */
+/** primary key columns input for table: erp.OrderStatus */
 export type Erp_OrderStatus_Pk_Columns_Input = {
   ID: Scalars['Int'];
 };
@@ -2650,6 +2952,20 @@ export type Erp_OrderStatus_Stddev_Samp_Fields = {
   ID?: Maybe<Scalars['Float']>;
 };
 
+/** Streaming cursor of the table "erp_OrderStatus" */
+export type Erp_OrderStatus_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Erp_OrderStatus_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Erp_OrderStatus_Stream_Cursor_Value_Input = {
+  ID?: InputMaybe<Scalars['Int']>;
+  Name?: InputMaybe<Scalars['String']>;
+};
+
 /** aggregate sum on columns */
 export type Erp_OrderStatus_Sum_Fields = {
   __typename?: 'erp_OrderStatus_sum_fields';
@@ -2663,6 +2979,15 @@ export enum Erp_OrderStatus_Update_Column {
   /** column name */
   Name = 'Name'
 }
+
+export type Erp_OrderStatus_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Erp_OrderStatus_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Erp_OrderStatus_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Erp_OrderStatus_Bool_Exp;
+};
 
 /** aggregate var_pop on columns */
 export type Erp_OrderStatus_Var_Pop_Fields = {
@@ -2836,6 +3161,33 @@ export type Erp_Orders_Aggregate = {
   nodes: Array<Erp_Orders>;
 };
 
+export type Erp_Orders_Aggregate_Bool_Exp = {
+  bool_and?: InputMaybe<Erp_Orders_Aggregate_Bool_Exp_Bool_And>;
+  bool_or?: InputMaybe<Erp_Orders_Aggregate_Bool_Exp_Bool_Or>;
+  count?: InputMaybe<Erp_Orders_Aggregate_Bool_Exp_Count>;
+};
+
+export type Erp_Orders_Aggregate_Bool_Exp_Bool_And = {
+  arguments: Erp_Orders_Select_Column_Erp_Orders_Aggregate_Bool_Exp_Bool_And_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Erp_Orders_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type Erp_Orders_Aggregate_Bool_Exp_Bool_Or = {
+  arguments: Erp_Orders_Select_Column_Erp_Orders_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Erp_Orders_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type Erp_Orders_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Erp_Orders_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Erp_Orders_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "erp.Orders" */
 export type Erp_Orders_Aggregate_Fields = {
   __typename?: 'erp_Orders_aggregate_fields';
@@ -2877,7 +3229,7 @@ export type Erp_Orders_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "erp.Orders" */
 export type Erp_Orders_Arr_Rel_Insert_Input = {
   data: Array<Erp_Orders_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Erp_Orders_On_Conflict>;
 };
 
@@ -2911,21 +3263,26 @@ export type Erp_Orders_Bool_Exp = {
   City?: InputMaybe<String_Comparison_Exp>;
   Comment?: InputMaybe<String_Comparison_Exp>;
   Comments?: InputMaybe<Erp_Comments_Bool_Exp>;
+  Comments_aggregate?: InputMaybe<Erp_Comments_Aggregate_Bool_Exp>;
   CreatingDate?: InputMaybe<Timestamp_Comparison_Exp>;
   Docs?: InputMaybe<Erp_Docs_Bool_Exp>;
+  Docs_aggregate?: InputMaybe<Erp_Docs_Aggregate_Bool_Exp>;
   Entity?: InputMaybe<String_Comparison_Exp>;
   InvoiceNumber?: InputMaybe<String_Comparison_Exp>;
   IsReclamation?: InputMaybe<Boolean_Comparison_Exp>;
   ManagerID?: InputMaybe<Int_Comparison_Exp>;
   NeedAttention?: InputMaybe<String_Comparison_Exp>;
   Notifications?: InputMaybe<Erp_Notifications_Bool_Exp>;
+  Notifications_aggregate?: InputMaybe<Erp_Notifications_Aggregate_Bool_Exp>;
   OrderID?: InputMaybe<Int_Comparison_Exp>;
   OrderItems?: InputMaybe<Erp_OrderItems_Bool_Exp>;
+  OrderItems_aggregate?: InputMaybe<Erp_OrderItems_Aggregate_Bool_Exp>;
   OrderNumber?: InputMaybe<String_Comparison_Exp>;
   OrderStatus?: InputMaybe<Erp_OrderStatus_Bool_Exp>;
   OrderStatusID?: InputMaybe<Int_Comparison_Exp>;
   PaidAmount?: InputMaybe<Numeric_Comparison_Exp>;
   PaymentHistories?: InputMaybe<Erp_PaymentHistory_Bool_Exp>;
+  PaymentHistories_aggregate?: InputMaybe<Erp_PaymentHistory_Aggregate_Bool_Exp>;
   ShippingDate?: InputMaybe<Date_Comparison_Exp>;
   TotalAmount?: InputMaybe<Numeric_Comparison_Exp>;
   User?: InputMaybe<Erp_Users_Bool_Exp>;
@@ -2936,7 +3293,7 @@ export type Erp_Orders_Bool_Exp = {
 
 /** unique or primary key constraints on table "erp.Orders" */
 export enum Erp_Orders_Constraint {
-  /** unique or primary key constraint */
+  /** unique or primary key constraint on columns "OrderID" */
   OrdersPkey = 'Orders_pkey'
 }
 
@@ -3073,11 +3430,11 @@ export type Erp_Orders_Mutation_Response = {
 /** input type for inserting object relation for remote table "erp.Orders" */
 export type Erp_Orders_Obj_Rel_Insert_Input = {
   data: Erp_Orders_Insert_Input;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Erp_Orders_On_Conflict>;
 };
 
-/** on conflict condition type for table "erp.Orders" */
+/** on_conflict condition type for table "erp.Orders" */
 export type Erp_Orders_On_Conflict = {
   constraint: Erp_Orders_Constraint;
   update_columns?: Array<Erp_Orders_Update_Column>;
@@ -3113,7 +3470,7 @@ export type Erp_Orders_Order_By = {
   User?: InputMaybe<Erp_Users_Order_By>;
 };
 
-/** primary key columns input for table: erp_Orders */
+/** primary key columns input for table: erp.Orders */
 export type Erp_Orders_Pk_Columns_Input = {
   OrderID: Scalars['Int'];
 };
@@ -3156,6 +3513,22 @@ export enum Erp_Orders_Select_Column {
   ShippingDate = 'ShippingDate',
   /** column name */
   TotalAmount = 'TotalAmount'
+}
+
+/** select "erp_Orders_aggregate_bool_exp_bool_and_arguments_columns" columns of table "erp.Orders" */
+export enum Erp_Orders_Select_Column_Erp_Orders_Aggregate_Bool_Exp_Bool_And_Arguments_Columns {
+  /** column name */
+  AwaitingDispatch = 'AwaitingDispatch',
+  /** column name */
+  IsReclamation = 'IsReclamation'
+}
+
+/** select "erp_Orders_aggregate_bool_exp_bool_or_arguments_columns" columns of table "erp.Orders" */
+export enum Erp_Orders_Select_Column_Erp_Orders_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns {
+  /** column name */
+  AwaitingDispatch = 'AwaitingDispatch',
+  /** column name */
+  IsReclamation = 'IsReclamation'
 }
 
 /** input type for updating data in table "erp.Orders" */
@@ -3243,6 +3616,36 @@ export type Erp_Orders_Stddev_Samp_Order_By = {
   TotalAmount?: InputMaybe<Order_By>;
 };
 
+/** Streaming cursor of the table "erp_Orders" */
+export type Erp_Orders_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Erp_Orders_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Erp_Orders_Stream_Cursor_Value_Input = {
+  AcceptanceDate?: InputMaybe<Scalars['timestamp']>;
+  ActualShippingDate?: InputMaybe<Scalars['timestamp']>;
+  AwaitingDispatch?: InputMaybe<Scalars['Boolean']>;
+  CheckListTPLID?: InputMaybe<Scalars['Int']>;
+  City?: InputMaybe<Scalars['String']>;
+  Comment?: InputMaybe<Scalars['String']>;
+  CreatingDate?: InputMaybe<Scalars['timestamp']>;
+  Entity?: InputMaybe<Scalars['String']>;
+  InvoiceNumber?: InputMaybe<Scalars['String']>;
+  IsReclamation?: InputMaybe<Scalars['Boolean']>;
+  ManagerID?: InputMaybe<Scalars['Int']>;
+  NeedAttention?: InputMaybe<Scalars['String']>;
+  OrderID?: InputMaybe<Scalars['Int']>;
+  OrderNumber?: InputMaybe<Scalars['String']>;
+  OrderStatusID?: InputMaybe<Scalars['Int']>;
+  PaidAmount?: InputMaybe<Scalars['numeric']>;
+  ShippingDate?: InputMaybe<Scalars['date']>;
+  TotalAmount?: InputMaybe<Scalars['numeric']>;
+};
+
 /** aggregate sum on columns */
 export type Erp_Orders_Sum_Fields = {
   __typename?: 'erp_Orders_sum_fields';
@@ -3303,6 +3706,15 @@ export enum Erp_Orders_Update_Column {
   /** column name */
   TotalAmount = 'TotalAmount'
 }
+
+export type Erp_Orders_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Erp_Orders_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Erp_Orders_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Erp_Orders_Bool_Exp;
+};
 
 /** aggregate var_pop on columns */
 export type Erp_Orders_Var_Pop_Fields = {
@@ -3385,6 +3797,17 @@ export type Erp_PaymentHistory_Aggregate = {
   nodes: Array<Erp_PaymentHistory>;
 };
 
+export type Erp_PaymentHistory_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Erp_PaymentHistory_Aggregate_Bool_Exp_Count>;
+};
+
+export type Erp_PaymentHistory_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Erp_PaymentHistory_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Erp_PaymentHistory_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "erp.PaymentHistory" */
 export type Erp_PaymentHistory_Aggregate_Fields = {
   __typename?: 'erp_PaymentHistory_aggregate_fields';
@@ -3426,7 +3849,7 @@ export type Erp_PaymentHistory_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "erp.PaymentHistory" */
 export type Erp_PaymentHistory_Arr_Rel_Insert_Input = {
   data: Array<Erp_PaymentHistory_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Erp_PaymentHistory_On_Conflict>;
 };
 
@@ -3459,9 +3882,9 @@ export type Erp_PaymentHistory_Bool_Exp = {
 
 /** unique or primary key constraints on table "erp.PaymentHistory" */
 export enum Erp_PaymentHistory_Constraint {
-  /** unique or primary key constraint */
+  /** unique or primary key constraint on columns "ID" */
   PaymentHistoryIdKey = 'PaymentHistory_id_key',
-  /** unique or primary key constraint */
+  /** unique or primary key constraint on columns "ID" */
   PaymentHistoryPkey = 'PaymentHistory_pkey'
 }
 
@@ -3524,7 +3947,7 @@ export type Erp_PaymentHistory_Mutation_Response = {
   returning: Array<Erp_PaymentHistory>;
 };
 
-/** on conflict condition type for table "erp.PaymentHistory" */
+/** on_conflict condition type for table "erp.PaymentHistory" */
 export type Erp_PaymentHistory_On_Conflict = {
   constraint: Erp_PaymentHistory_Constraint;
   update_columns?: Array<Erp_PaymentHistory_Update_Column>;
@@ -3540,7 +3963,7 @@ export type Erp_PaymentHistory_Order_By = {
   PaidAmount?: InputMaybe<Order_By>;
 };
 
-/** primary key columns input for table: erp_PaymentHistory */
+/** primary key columns input for table: erp.PaymentHistory */
 export type Erp_PaymentHistory_Pk_Columns_Input = {
   ID: Scalars['Int'];
 };
@@ -3610,6 +4033,22 @@ export type Erp_PaymentHistory_Stddev_Samp_Order_By = {
   PaidAmount?: InputMaybe<Order_By>;
 };
 
+/** Streaming cursor of the table "erp_PaymentHistory" */
+export type Erp_PaymentHistory_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Erp_PaymentHistory_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Erp_PaymentHistory_Stream_Cursor_Value_Input = {
+  Date?: InputMaybe<Scalars['timestamp']>;
+  ID?: InputMaybe<Scalars['Int']>;
+  OrderID?: InputMaybe<Scalars['Int']>;
+  PaidAmount?: InputMaybe<Scalars['numeric']>;
+};
+
 /** aggregate sum on columns */
 export type Erp_PaymentHistory_Sum_Fields = {
   __typename?: 'erp_PaymentHistory_sum_fields';
@@ -3636,6 +4075,15 @@ export enum Erp_PaymentHistory_Update_Column {
   /** column name */
   PaidAmount = 'PaidAmount'
 }
+
+export type Erp_PaymentHistory_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Erp_PaymentHistory_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Erp_PaymentHistory_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Erp_PaymentHistory_Bool_Exp;
+};
 
 /** aggregate var_pop on columns */
 export type Erp_PaymentHistory_Var_Pop_Fields = {
@@ -3699,6 +4147,17 @@ export type Erp_Tokens_Aggregate = {
   nodes: Array<Erp_Tokens>;
 };
 
+export type Erp_Tokens_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Erp_Tokens_Aggregate_Bool_Exp_Count>;
+};
+
+export type Erp_Tokens_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Erp_Tokens_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Erp_Tokens_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "erp.Tokens" */
 export type Erp_Tokens_Aggregate_Fields = {
   __typename?: 'erp_Tokens_aggregate_fields';
@@ -3740,7 +4199,7 @@ export type Erp_Tokens_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "erp.Tokens" */
 export type Erp_Tokens_Arr_Rel_Insert_Input = {
   data: Array<Erp_Tokens_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Erp_Tokens_On_Conflict>;
 };
 
@@ -3770,7 +4229,7 @@ export type Erp_Tokens_Bool_Exp = {
 
 /** unique or primary key constraints on table "erp.Tokens" */
 export enum Erp_Tokens_Constraint {
-  /** unique or primary key constraint */
+  /** unique or primary key constraint on columns "ID" */
   TokrnsPkey = 'Tokrns_pkey'
 }
 
@@ -3827,7 +4286,7 @@ export type Erp_Tokens_Mutation_Response = {
   returning: Array<Erp_Tokens>;
 };
 
-/** on conflict condition type for table "erp.Tokens" */
+/** on_conflict condition type for table "erp.Tokens" */
 export type Erp_Tokens_On_Conflict = {
   constraint: Erp_Tokens_Constraint;
   update_columns?: Array<Erp_Tokens_Update_Column>;
@@ -3842,7 +4301,7 @@ export type Erp_Tokens_Order_By = {
   UserID?: InputMaybe<Order_By>;
 };
 
-/** primary key columns input for table: erp_Tokens */
+/** primary key columns input for table: erp.Tokens */
 export type Erp_Tokens_Pk_Columns_Input = {
   ID: Scalars['Int'];
 };
@@ -3903,6 +4362,21 @@ export type Erp_Tokens_Stddev_Samp_Order_By = {
   UserID?: InputMaybe<Order_By>;
 };
 
+/** Streaming cursor of the table "erp_Tokens" */
+export type Erp_Tokens_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Erp_Tokens_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Erp_Tokens_Stream_Cursor_Value_Input = {
+  ID?: InputMaybe<Scalars['Int']>;
+  RefreshToken?: InputMaybe<Scalars['String']>;
+  UserID?: InputMaybe<Scalars['Int']>;
+};
+
 /** aggregate sum on columns */
 export type Erp_Tokens_Sum_Fields = {
   __typename?: 'erp_Tokens_sum_fields';
@@ -3925,6 +4399,15 @@ export enum Erp_Tokens_Update_Column {
   /** column name */
   UserId = 'UserID'
 }
+
+export type Erp_Tokens_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Erp_Tokens_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Erp_Tokens_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Erp_Tokens_Bool_Exp;
+};
 
 /** aggregate var_pop on columns */
 export type Erp_Tokens_Var_Pop_Fields = {
@@ -3976,8 +4459,8 @@ export type Erp_Users = {
   /** An aggregate relationship */
   Comments_aggregate: Erp_Comments_Aggregate;
   Email?: Maybe<Scalars['String']>;
-  FirstName?: Maybe<Scalars['String']>;
-  LastName?: Maybe<Scalars['String']>;
+  FirstName: Scalars['String'];
+  LastName: Scalars['String'];
   /** An array relationship */
   Notifications: Array<Erp_Notifications>;
   /** An aggregate relationship */
@@ -4081,6 +4564,17 @@ export type Erp_Users_Aggregate = {
   nodes: Array<Erp_Users>;
 };
 
+export type Erp_Users_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Erp_Users_Aggregate_Bool_Exp_Count>;
+};
+
+export type Erp_Users_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Erp_Users_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Erp_Users_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "erp.Users" */
 export type Erp_Users_Aggregate_Fields = {
   __typename?: 'erp_Users_aggregate_fields';
@@ -4122,7 +4616,7 @@ export type Erp_Users_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "erp.Users" */
 export type Erp_Users_Arr_Rel_Insert_Input = {
   data: Array<Erp_Users_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Erp_Users_On_Conflict>;
 };
 
@@ -4144,13 +4638,17 @@ export type Erp_Users_Bool_Exp = {
   AccessLevel?: InputMaybe<Erp_AccessLevels_Bool_Exp>;
   AccessLevelID?: InputMaybe<Int_Comparison_Exp>;
   Comments?: InputMaybe<Erp_Comments_Bool_Exp>;
+  Comments_aggregate?: InputMaybe<Erp_Comments_Aggregate_Bool_Exp>;
   Email?: InputMaybe<String_Comparison_Exp>;
   FirstName?: InputMaybe<String_Comparison_Exp>;
   LastName?: InputMaybe<String_Comparison_Exp>;
   Notifications?: InputMaybe<Erp_Notifications_Bool_Exp>;
+  Notifications_aggregate?: InputMaybe<Erp_Notifications_Aggregate_Bool_Exp>;
   Orders?: InputMaybe<Erp_Orders_Bool_Exp>;
+  Orders_aggregate?: InputMaybe<Erp_Orders_Aggregate_Bool_Exp>;
   Password?: InputMaybe<String_Comparison_Exp>;
   Tokens?: InputMaybe<Erp_Tokens_Bool_Exp>;
+  Tokens_aggregate?: InputMaybe<Erp_Tokens_Aggregate_Bool_Exp>;
   UserID?: InputMaybe<Int_Comparison_Exp>;
   _and?: InputMaybe<Array<Erp_Users_Bool_Exp>>;
   _not?: InputMaybe<Erp_Users_Bool_Exp>;
@@ -4159,7 +4657,7 @@ export type Erp_Users_Bool_Exp = {
 
 /** unique or primary key constraints on table "erp.Users" */
 export enum Erp_Users_Constraint {
-  /** unique or primary key constraint */
+  /** unique or primary key constraint on columns "UserID" */
   UsersPkey = 'Users_pkey'
 }
 
@@ -4238,11 +4736,11 @@ export type Erp_Users_Mutation_Response = {
 /** input type for inserting object relation for remote table "erp.Users" */
 export type Erp_Users_Obj_Rel_Insert_Input = {
   data: Erp_Users_Insert_Input;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Erp_Users_On_Conflict>;
 };
 
-/** on conflict condition type for table "erp.Users" */
+/** on_conflict condition type for table "erp.Users" */
 export type Erp_Users_On_Conflict = {
   constraint: Erp_Users_Constraint;
   update_columns?: Array<Erp_Users_Update_Column>;
@@ -4264,7 +4762,7 @@ export type Erp_Users_Order_By = {
   UserID?: InputMaybe<Order_By>;
 };
 
-/** primary key columns input for table: erp_Users */
+/** primary key columns input for table: erp.Users */
 export type Erp_Users_Pk_Columns_Input = {
   UserID: Scalars['Int'];
 };
@@ -4334,6 +4832,24 @@ export type Erp_Users_Stddev_Samp_Order_By = {
   UserID?: InputMaybe<Order_By>;
 };
 
+/** Streaming cursor of the table "erp_Users" */
+export type Erp_Users_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Erp_Users_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Erp_Users_Stream_Cursor_Value_Input = {
+  AccessLevelID?: InputMaybe<Scalars['Int']>;
+  Email?: InputMaybe<Scalars['String']>;
+  FirstName?: InputMaybe<Scalars['String']>;
+  LastName?: InputMaybe<Scalars['String']>;
+  Password?: InputMaybe<Scalars['String']>;
+  UserID?: InputMaybe<Scalars['Int']>;
+};
+
 /** aggregate sum on columns */
 export type Erp_Users_Sum_Fields = {
   __typename?: 'erp_Users_sum_fields';
@@ -4362,6 +4878,15 @@ export enum Erp_Users_Update_Column {
   /** column name */
   UserId = 'UserID'
 }
+
+export type Erp_Users_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Erp_Users_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Erp_Users_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Erp_Users_Bool_Exp;
+};
 
 /** aggregate var_pop on columns */
 export type Erp_Users_Var_Pop_Fields = {
@@ -4513,54 +5038,80 @@ export type Mutation_Root = {
   update_attendance_config?: Maybe<Attendance_Config_Mutation_Response>;
   /** update single row of the table: "attendance.config" */
   update_attendance_config_by_pk?: Maybe<Attendance_Config>;
+  /** update multiples rows of table: "attendance.config" */
+  update_attendance_config_many?: Maybe<Array<Maybe<Attendance_Config_Mutation_Response>>>;
   /** update data of the table: "attendance.intervals" */
   update_attendance_intervals?: Maybe<Attendance_Intervals_Mutation_Response>;
   /** update single row of the table: "attendance.intervals" */
   update_attendance_intervals_by_pk?: Maybe<Attendance_Intervals>;
+  /** update multiples rows of table: "attendance.intervals" */
+  update_attendance_intervals_many?: Maybe<Array<Maybe<Attendance_Intervals_Mutation_Response>>>;
   /** update data of the table: "attendance.users" */
   update_attendance_users?: Maybe<Attendance_Users_Mutation_Response>;
   /** update single row of the table: "attendance.users" */
   update_attendance_users_by_pk?: Maybe<Attendance_Users>;
+  /** update multiples rows of table: "attendance.users" */
+  update_attendance_users_many?: Maybe<Array<Maybe<Attendance_Users_Mutation_Response>>>;
   /** update data of the table: "erp.AccessLevels" */
   update_erp_AccessLevels?: Maybe<Erp_AccessLevels_Mutation_Response>;
   /** update single row of the table: "erp.AccessLevels" */
   update_erp_AccessLevels_by_pk?: Maybe<Erp_AccessLevels>;
+  /** update multiples rows of table: "erp.AccessLevels" */
+  update_erp_AccessLevels_many?: Maybe<Array<Maybe<Erp_AccessLevels_Mutation_Response>>>;
   /** update data of the table: "erp.Comments" */
   update_erp_Comments?: Maybe<Erp_Comments_Mutation_Response>;
   /** update single row of the table: "erp.Comments" */
   update_erp_Comments_by_pk?: Maybe<Erp_Comments>;
+  /** update multiples rows of table: "erp.Comments" */
+  update_erp_Comments_many?: Maybe<Array<Maybe<Erp_Comments_Mutation_Response>>>;
   /** update data of the table: "erp.Docs" */
   update_erp_Docs?: Maybe<Erp_Docs_Mutation_Response>;
   /** update single row of the table: "erp.Docs" */
   update_erp_Docs_by_pk?: Maybe<Erp_Docs>;
+  /** update multiples rows of table: "erp.Docs" */
+  update_erp_Docs_many?: Maybe<Array<Maybe<Erp_Docs_Mutation_Response>>>;
   /** update data of the table: "erp.Notifications" */
   update_erp_Notifications?: Maybe<Erp_Notifications_Mutation_Response>;
   /** update single row of the table: "erp.Notifications" */
   update_erp_Notifications_by_pk?: Maybe<Erp_Notifications>;
+  /** update multiples rows of table: "erp.Notifications" */
+  update_erp_Notifications_many?: Maybe<Array<Maybe<Erp_Notifications_Mutation_Response>>>;
   /** update data of the table: "erp.OrderItems" */
   update_erp_OrderItems?: Maybe<Erp_OrderItems_Mutation_Response>;
   /** update single row of the table: "erp.OrderItems" */
   update_erp_OrderItems_by_pk?: Maybe<Erp_OrderItems>;
+  /** update multiples rows of table: "erp.OrderItems" */
+  update_erp_OrderItems_many?: Maybe<Array<Maybe<Erp_OrderItems_Mutation_Response>>>;
   /** update data of the table: "erp.OrderStatus" */
   update_erp_OrderStatus?: Maybe<Erp_OrderStatus_Mutation_Response>;
   /** update single row of the table: "erp.OrderStatus" */
   update_erp_OrderStatus_by_pk?: Maybe<Erp_OrderStatus>;
+  /** update multiples rows of table: "erp.OrderStatus" */
+  update_erp_OrderStatus_many?: Maybe<Array<Maybe<Erp_OrderStatus_Mutation_Response>>>;
   /** update data of the table: "erp.Orders" */
   update_erp_Orders?: Maybe<Erp_Orders_Mutation_Response>;
   /** update single row of the table: "erp.Orders" */
   update_erp_Orders_by_pk?: Maybe<Erp_Orders>;
+  /** update multiples rows of table: "erp.Orders" */
+  update_erp_Orders_many?: Maybe<Array<Maybe<Erp_Orders_Mutation_Response>>>;
   /** update data of the table: "erp.PaymentHistory" */
   update_erp_PaymentHistory?: Maybe<Erp_PaymentHistory_Mutation_Response>;
   /** update single row of the table: "erp.PaymentHistory" */
   update_erp_PaymentHistory_by_pk?: Maybe<Erp_PaymentHistory>;
+  /** update multiples rows of table: "erp.PaymentHistory" */
+  update_erp_PaymentHistory_many?: Maybe<Array<Maybe<Erp_PaymentHistory_Mutation_Response>>>;
   /** update data of the table: "erp.Tokens" */
   update_erp_Tokens?: Maybe<Erp_Tokens_Mutation_Response>;
   /** update single row of the table: "erp.Tokens" */
   update_erp_Tokens_by_pk?: Maybe<Erp_Tokens>;
+  /** update multiples rows of table: "erp.Tokens" */
+  update_erp_Tokens_many?: Maybe<Array<Maybe<Erp_Tokens_Mutation_Response>>>;
   /** update data of the table: "erp.Users" */
   update_erp_Users?: Maybe<Erp_Users_Mutation_Response>;
   /** update single row of the table: "erp.Users" */
   update_erp_Users_by_pk?: Maybe<Erp_Users>;
+  /** update multiples rows of table: "erp.Users" */
+  update_erp_Users_many?: Maybe<Array<Maybe<Erp_Users_Mutation_Response>>>;
 };
 
 
@@ -4920,6 +5471,12 @@ export type Mutation_RootUpdate_Attendance_Config_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootUpdate_Attendance_Config_ManyArgs = {
+  updates: Array<Attendance_Config_Updates>;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_Attendance_IntervalsArgs = {
   _inc?: InputMaybe<Attendance_Intervals_Inc_Input>;
   _set?: InputMaybe<Attendance_Intervals_Set_Input>;
@@ -4932,6 +5489,12 @@ export type Mutation_RootUpdate_Attendance_Intervals_By_PkArgs = {
   _inc?: InputMaybe<Attendance_Intervals_Inc_Input>;
   _set?: InputMaybe<Attendance_Intervals_Set_Input>;
   pk_columns: Attendance_Intervals_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Attendance_Intervals_ManyArgs = {
+  updates: Array<Attendance_Intervals_Updates>;
 };
 
 
@@ -4952,6 +5515,12 @@ export type Mutation_RootUpdate_Attendance_Users_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootUpdate_Attendance_Users_ManyArgs = {
+  updates: Array<Attendance_Users_Updates>;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_Erp_AccessLevelsArgs = {
   _inc?: InputMaybe<Erp_AccessLevels_Inc_Input>;
   _set?: InputMaybe<Erp_AccessLevels_Set_Input>;
@@ -4964,6 +5533,12 @@ export type Mutation_RootUpdate_Erp_AccessLevels_By_PkArgs = {
   _inc?: InputMaybe<Erp_AccessLevels_Inc_Input>;
   _set?: InputMaybe<Erp_AccessLevels_Set_Input>;
   pk_columns: Erp_AccessLevels_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Erp_AccessLevels_ManyArgs = {
+  updates: Array<Erp_AccessLevels_Updates>;
 };
 
 
@@ -4984,6 +5559,12 @@ export type Mutation_RootUpdate_Erp_Comments_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootUpdate_Erp_Comments_ManyArgs = {
+  updates: Array<Erp_Comments_Updates>;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_Erp_DocsArgs = {
   _inc?: InputMaybe<Erp_Docs_Inc_Input>;
   _set?: InputMaybe<Erp_Docs_Set_Input>;
@@ -4996,6 +5577,12 @@ export type Mutation_RootUpdate_Erp_Docs_By_PkArgs = {
   _inc?: InputMaybe<Erp_Docs_Inc_Input>;
   _set?: InputMaybe<Erp_Docs_Set_Input>;
   pk_columns: Erp_Docs_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Erp_Docs_ManyArgs = {
+  updates: Array<Erp_Docs_Updates>;
 };
 
 
@@ -5016,6 +5603,12 @@ export type Mutation_RootUpdate_Erp_Notifications_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootUpdate_Erp_Notifications_ManyArgs = {
+  updates: Array<Erp_Notifications_Updates>;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_Erp_OrderItemsArgs = {
   _inc?: InputMaybe<Erp_OrderItems_Inc_Input>;
   _set?: InputMaybe<Erp_OrderItems_Set_Input>;
@@ -5028,6 +5621,12 @@ export type Mutation_RootUpdate_Erp_OrderItems_By_PkArgs = {
   _inc?: InputMaybe<Erp_OrderItems_Inc_Input>;
   _set?: InputMaybe<Erp_OrderItems_Set_Input>;
   pk_columns: Erp_OrderItems_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Erp_OrderItems_ManyArgs = {
+  updates: Array<Erp_OrderItems_Updates>;
 };
 
 
@@ -5048,6 +5647,12 @@ export type Mutation_RootUpdate_Erp_OrderStatus_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootUpdate_Erp_OrderStatus_ManyArgs = {
+  updates: Array<Erp_OrderStatus_Updates>;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_Erp_OrdersArgs = {
   _inc?: InputMaybe<Erp_Orders_Inc_Input>;
   _set?: InputMaybe<Erp_Orders_Set_Input>;
@@ -5060,6 +5665,12 @@ export type Mutation_RootUpdate_Erp_Orders_By_PkArgs = {
   _inc?: InputMaybe<Erp_Orders_Inc_Input>;
   _set?: InputMaybe<Erp_Orders_Set_Input>;
   pk_columns: Erp_Orders_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Erp_Orders_ManyArgs = {
+  updates: Array<Erp_Orders_Updates>;
 };
 
 
@@ -5080,6 +5691,12 @@ export type Mutation_RootUpdate_Erp_PaymentHistory_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootUpdate_Erp_PaymentHistory_ManyArgs = {
+  updates: Array<Erp_PaymentHistory_Updates>;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_Erp_TokensArgs = {
   _inc?: InputMaybe<Erp_Tokens_Inc_Input>;
   _set?: InputMaybe<Erp_Tokens_Set_Input>;
@@ -5096,6 +5713,12 @@ export type Mutation_RootUpdate_Erp_Tokens_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootUpdate_Erp_Tokens_ManyArgs = {
+  updates: Array<Erp_Tokens_Updates>;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_Erp_UsersArgs = {
   _inc?: InputMaybe<Erp_Users_Inc_Input>;
   _set?: InputMaybe<Erp_Users_Set_Input>;
@@ -5108,6 +5731,12 @@ export type Mutation_RootUpdate_Erp_Users_By_PkArgs = {
   _inc?: InputMaybe<Erp_Users_Inc_Input>;
   _set?: InputMaybe<Erp_Users_Set_Input>;
   pk_columns: Erp_Users_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Erp_Users_ManyArgs = {
+  updates: Array<Erp_Users_Updates>;
 };
 
 /** Boolean expression to compare columns of type "numeric". All fields are combined with logical 'AND'. */
@@ -5529,78 +6158,104 @@ export type Subscription_Root = {
   attendance_config_aggregate: Attendance_Config_Aggregate;
   /** fetch data from the table: "attendance.config" using primary key columns */
   attendance_config_by_pk?: Maybe<Attendance_Config>;
+  /** fetch data from the table in a streaming manner: "attendance.config" */
+  attendance_config_stream: Array<Attendance_Config>;
   /** fetch data from the table: "attendance.intervals" */
   attendance_intervals: Array<Attendance_Intervals>;
   /** fetch aggregated fields from the table: "attendance.intervals" */
   attendance_intervals_aggregate: Attendance_Intervals_Aggregate;
   /** fetch data from the table: "attendance.intervals" using primary key columns */
   attendance_intervals_by_pk?: Maybe<Attendance_Intervals>;
+  /** fetch data from the table in a streaming manner: "attendance.intervals" */
+  attendance_intervals_stream: Array<Attendance_Intervals>;
   /** fetch data from the table: "attendance.users" */
   attendance_users: Array<Attendance_Users>;
   /** fetch aggregated fields from the table: "attendance.users" */
   attendance_users_aggregate: Attendance_Users_Aggregate;
   /** fetch data from the table: "attendance.users" using primary key columns */
   attendance_users_by_pk?: Maybe<Attendance_Users>;
+  /** fetch data from the table in a streaming manner: "attendance.users" */
+  attendance_users_stream: Array<Attendance_Users>;
   /** fetch data from the table: "erp.AccessLevels" */
   erp_AccessLevels: Array<Erp_AccessLevels>;
   /** fetch aggregated fields from the table: "erp.AccessLevels" */
   erp_AccessLevels_aggregate: Erp_AccessLevels_Aggregate;
   /** fetch data from the table: "erp.AccessLevels" using primary key columns */
   erp_AccessLevels_by_pk?: Maybe<Erp_AccessLevels>;
+  /** fetch data from the table in a streaming manner: "erp.AccessLevels" */
+  erp_AccessLevels_stream: Array<Erp_AccessLevels>;
   /** fetch data from the table: "erp.Comments" */
   erp_Comments: Array<Erp_Comments>;
   /** fetch aggregated fields from the table: "erp.Comments" */
   erp_Comments_aggregate: Erp_Comments_Aggregate;
   /** fetch data from the table: "erp.Comments" using primary key columns */
   erp_Comments_by_pk?: Maybe<Erp_Comments>;
+  /** fetch data from the table in a streaming manner: "erp.Comments" */
+  erp_Comments_stream: Array<Erp_Comments>;
   /** fetch data from the table: "erp.Docs" */
   erp_Docs: Array<Erp_Docs>;
   /** fetch aggregated fields from the table: "erp.Docs" */
   erp_Docs_aggregate: Erp_Docs_Aggregate;
   /** fetch data from the table: "erp.Docs" using primary key columns */
   erp_Docs_by_pk?: Maybe<Erp_Docs>;
+  /** fetch data from the table in a streaming manner: "erp.Docs" */
+  erp_Docs_stream: Array<Erp_Docs>;
   /** fetch data from the table: "erp.Notifications" */
   erp_Notifications: Array<Erp_Notifications>;
   /** fetch aggregated fields from the table: "erp.Notifications" */
   erp_Notifications_aggregate: Erp_Notifications_Aggregate;
   /** fetch data from the table: "erp.Notifications" using primary key columns */
   erp_Notifications_by_pk?: Maybe<Erp_Notifications>;
+  /** fetch data from the table in a streaming manner: "erp.Notifications" */
+  erp_Notifications_stream: Array<Erp_Notifications>;
   /** fetch data from the table: "erp.OrderItems" */
   erp_OrderItems: Array<Erp_OrderItems>;
   /** fetch aggregated fields from the table: "erp.OrderItems" */
   erp_OrderItems_aggregate: Erp_OrderItems_Aggregate;
   /** fetch data from the table: "erp.OrderItems" using primary key columns */
   erp_OrderItems_by_pk?: Maybe<Erp_OrderItems>;
+  /** fetch data from the table in a streaming manner: "erp.OrderItems" */
+  erp_OrderItems_stream: Array<Erp_OrderItems>;
   /** fetch data from the table: "erp.OrderStatus" */
   erp_OrderStatus: Array<Erp_OrderStatus>;
   /** fetch aggregated fields from the table: "erp.OrderStatus" */
   erp_OrderStatus_aggregate: Erp_OrderStatus_Aggregate;
   /** fetch data from the table: "erp.OrderStatus" using primary key columns */
   erp_OrderStatus_by_pk?: Maybe<Erp_OrderStatus>;
+  /** fetch data from the table in a streaming manner: "erp.OrderStatus" */
+  erp_OrderStatus_stream: Array<Erp_OrderStatus>;
   /** fetch data from the table: "erp.Orders" */
   erp_Orders: Array<Erp_Orders>;
   /** fetch aggregated fields from the table: "erp.Orders" */
   erp_Orders_aggregate: Erp_Orders_Aggregate;
   /** fetch data from the table: "erp.Orders" using primary key columns */
   erp_Orders_by_pk?: Maybe<Erp_Orders>;
+  /** fetch data from the table in a streaming manner: "erp.Orders" */
+  erp_Orders_stream: Array<Erp_Orders>;
   /** fetch data from the table: "erp.PaymentHistory" */
   erp_PaymentHistory: Array<Erp_PaymentHistory>;
   /** fetch aggregated fields from the table: "erp.PaymentHistory" */
   erp_PaymentHistory_aggregate: Erp_PaymentHistory_Aggregate;
   /** fetch data from the table: "erp.PaymentHistory" using primary key columns */
   erp_PaymentHistory_by_pk?: Maybe<Erp_PaymentHistory>;
+  /** fetch data from the table in a streaming manner: "erp.PaymentHistory" */
+  erp_PaymentHistory_stream: Array<Erp_PaymentHistory>;
   /** fetch data from the table: "erp.Tokens" */
   erp_Tokens: Array<Erp_Tokens>;
   /** fetch aggregated fields from the table: "erp.Tokens" */
   erp_Tokens_aggregate: Erp_Tokens_Aggregate;
   /** fetch data from the table: "erp.Tokens" using primary key columns */
   erp_Tokens_by_pk?: Maybe<Erp_Tokens>;
+  /** fetch data from the table in a streaming manner: "erp.Tokens" */
+  erp_Tokens_stream: Array<Erp_Tokens>;
   /** fetch data from the table: "erp.Users" */
   erp_Users: Array<Erp_Users>;
   /** fetch aggregated fields from the table: "erp.Users" */
   erp_Users_aggregate: Erp_Users_Aggregate;
   /** fetch data from the table: "erp.Users" using primary key columns */
   erp_Users_by_pk?: Maybe<Erp_Users>;
+  /** fetch data from the table in a streaming manner: "erp.Users" */
+  erp_Users_stream: Array<Erp_Users>;
 };
 
 
@@ -5624,6 +6279,13 @@ export type Subscription_RootAttendance_Config_AggregateArgs = {
 
 export type Subscription_RootAttendance_Config_By_PkArgs = {
   ID: Scalars['Int'];
+};
+
+
+export type Subscription_RootAttendance_Config_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Attendance_Config_Stream_Cursor_Input>>;
+  where?: InputMaybe<Attendance_Config_Bool_Exp>;
 };
 
 
@@ -5651,6 +6313,13 @@ export type Subscription_RootAttendance_Intervals_By_PkArgs = {
 };
 
 
+export type Subscription_RootAttendance_Intervals_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Attendance_Intervals_Stream_Cursor_Input>>;
+  where?: InputMaybe<Attendance_Intervals_Bool_Exp>;
+};
+
+
 export type Subscription_RootAttendance_UsersArgs = {
   distinct_on?: InputMaybe<Array<Attendance_Users_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -5671,6 +6340,13 @@ export type Subscription_RootAttendance_Users_AggregateArgs = {
 
 export type Subscription_RootAttendance_Users_By_PkArgs = {
   id: Scalars['Int'];
+};
+
+
+export type Subscription_RootAttendance_Users_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Attendance_Users_Stream_Cursor_Input>>;
+  where?: InputMaybe<Attendance_Users_Bool_Exp>;
 };
 
 
@@ -5697,6 +6373,13 @@ export type Subscription_RootErp_AccessLevels_By_PkArgs = {
 };
 
 
+export type Subscription_RootErp_AccessLevels_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Erp_AccessLevels_Stream_Cursor_Input>>;
+  where?: InputMaybe<Erp_AccessLevels_Bool_Exp>;
+};
+
+
 export type Subscription_RootErp_CommentsArgs = {
   distinct_on?: InputMaybe<Array<Erp_Comments_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -5717,6 +6400,13 @@ export type Subscription_RootErp_Comments_AggregateArgs = {
 
 export type Subscription_RootErp_Comments_By_PkArgs = {
   CommentID: Scalars['Int'];
+};
+
+
+export type Subscription_RootErp_Comments_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Erp_Comments_Stream_Cursor_Input>>;
+  where?: InputMaybe<Erp_Comments_Bool_Exp>;
 };
 
 
@@ -5743,6 +6433,13 @@ export type Subscription_RootErp_Docs_By_PkArgs = {
 };
 
 
+export type Subscription_RootErp_Docs_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Erp_Docs_Stream_Cursor_Input>>;
+  where?: InputMaybe<Erp_Docs_Bool_Exp>;
+};
+
+
 export type Subscription_RootErp_NotificationsArgs = {
   distinct_on?: InputMaybe<Array<Erp_Notifications_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -5763,6 +6460,13 @@ export type Subscription_RootErp_Notifications_AggregateArgs = {
 
 export type Subscription_RootErp_Notifications_By_PkArgs = {
   ID: Scalars['Int'];
+};
+
+
+export type Subscription_RootErp_Notifications_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Erp_Notifications_Stream_Cursor_Input>>;
+  where?: InputMaybe<Erp_Notifications_Bool_Exp>;
 };
 
 
@@ -5789,6 +6493,13 @@ export type Subscription_RootErp_OrderItems_By_PkArgs = {
 };
 
 
+export type Subscription_RootErp_OrderItems_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Erp_OrderItems_Stream_Cursor_Input>>;
+  where?: InputMaybe<Erp_OrderItems_Bool_Exp>;
+};
+
+
 export type Subscription_RootErp_OrderStatusArgs = {
   distinct_on?: InputMaybe<Array<Erp_OrderStatus_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -5809,6 +6520,13 @@ export type Subscription_RootErp_OrderStatus_AggregateArgs = {
 
 export type Subscription_RootErp_OrderStatus_By_PkArgs = {
   ID: Scalars['Int'];
+};
+
+
+export type Subscription_RootErp_OrderStatus_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Erp_OrderStatus_Stream_Cursor_Input>>;
+  where?: InputMaybe<Erp_OrderStatus_Bool_Exp>;
 };
 
 
@@ -5835,6 +6553,13 @@ export type Subscription_RootErp_Orders_By_PkArgs = {
 };
 
 
+export type Subscription_RootErp_Orders_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Erp_Orders_Stream_Cursor_Input>>;
+  where?: InputMaybe<Erp_Orders_Bool_Exp>;
+};
+
+
 export type Subscription_RootErp_PaymentHistoryArgs = {
   distinct_on?: InputMaybe<Array<Erp_PaymentHistory_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -5855,6 +6580,13 @@ export type Subscription_RootErp_PaymentHistory_AggregateArgs = {
 
 export type Subscription_RootErp_PaymentHistory_By_PkArgs = {
   ID: Scalars['Int'];
+};
+
+
+export type Subscription_RootErp_PaymentHistory_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Erp_PaymentHistory_Stream_Cursor_Input>>;
+  where?: InputMaybe<Erp_PaymentHistory_Bool_Exp>;
 };
 
 
@@ -5881,6 +6613,13 @@ export type Subscription_RootErp_Tokens_By_PkArgs = {
 };
 
 
+export type Subscription_RootErp_Tokens_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Erp_Tokens_Stream_Cursor_Input>>;
+  where?: InputMaybe<Erp_Tokens_Bool_Exp>;
+};
+
+
 export type Subscription_RootErp_UsersArgs = {
   distinct_on?: InputMaybe<Array<Erp_Users_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -5901,6 +6640,13 @@ export type Subscription_RootErp_Users_AggregateArgs = {
 
 export type Subscription_RootErp_Users_By_PkArgs = {
   UserID: Scalars['Int'];
+};
+
+
+export type Subscription_RootErp_Users_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Erp_Users_Stream_Cursor_Input>>;
+  where?: InputMaybe<Erp_Users_Bool_Exp>;
 };
 
 /** Boolean expression to compare columns of type "timestamp". All fields are combined with logical 'AND'. */
@@ -5950,7 +6696,7 @@ export type CommentsSubscriptionVariables = Exact<{
 }>;
 
 
-export type CommentsSubscription = { __typename?: 'subscription_root', erp_Comments: Array<{ __typename?: 'erp_Comments', CommentID: number, Text: string, Timestamp: any, User: { __typename?: 'erp_Users', UserID: number, FirstName?: string | null, LastName?: string | null } }> };
+export type CommentsSubscription = { __typename?: 'subscription_root', erp_Comments: Array<{ __typename?: 'erp_Comments', CommentID: number, Text: string, Timestamp: any, User: { __typename?: 'erp_Users', UserID: number, FirstName: string, LastName: string } }> };
 
 export type InsertCommentMutationVariables = Exact<{
   OrderID: Scalars['Int'];
@@ -5982,7 +6728,7 @@ export type GetNotificationsSubscriptionVariables = Exact<{
 }>;
 
 
-export type GetNotificationsSubscription = { __typename?: 'subscription_root', erp_Notifications: Array<{ __typename?: 'erp_Notifications', ID: number, Viewed: boolean, Comment: { __typename?: 'erp_Comments', CommentID: number, Text: string, Timestamp: any, User: { __typename?: 'erp_Users', UserID: number, FirstName?: string | null, LastName?: string | null } }, Order?: { __typename?: 'erp_Orders', OrderID: number, City?: string | null, Entity?: string | null } | null }> };
+export type GetNotificationsSubscription = { __typename?: 'subscription_root', erp_Notifications: Array<{ __typename?: 'erp_Notifications', ID: number, Viewed: boolean, Comment: { __typename?: 'erp_Comments', CommentID: number, Text: string, Timestamp: any, User: { __typename?: 'erp_Users', UserID: number, FirstName: string, LastName: string } }, Order?: { __typename?: 'erp_Orders', OrderID: number, City?: string | null, Entity?: string | null } | null }> };
 
 export type UpdateViewedMutationVariables = Exact<{
   ID: Scalars['Int'];
@@ -5995,7 +6741,7 @@ export type UpdateViewedMutation = { __typename?: 'mutation_root', update_erp_No
 export type GetAllUsersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAllUsersQuery = { __typename?: 'query_root', erp_Users: Array<{ __typename?: 'erp_Users', FirstName?: string | null, LastName?: string | null, UserID: number }> };
+export type GetAllUsersQuery = { __typename?: 'query_root', erp_Users: Array<{ __typename?: 'erp_Users', FirstName: string, LastName: string, UserID: number }> };
 
 export type GetOrderPaymentsQueryVariables = Exact<{
   _eq: Scalars['Int'];
@@ -6117,7 +6863,7 @@ export type GetOrdersByStatusQueryVariables = Exact<{
 }>;
 
 
-export type GetOrdersByStatusQuery = { __typename?: 'query_root', erp_Orders: Array<{ __typename?: 'erp_Orders', OrderID: number, Entity?: string | null, InvoiceNumber?: string | null, City?: string | null, ShippingDate?: any | null, ActualShippingDate?: any | null, AcceptanceDate?: any | null, PaidAmount?: any | null, TotalAmount?: any | null, AwaitingDispatch: boolean, NeedAttention?: string | null, CreatingDate: any, ManagerID?: number | null, OrderStatusID: number, OrderStatus: { __typename?: 'erp_OrderStatus', Name: string, ID: number }, OrderItems: Array<{ __typename?: 'erp_OrderItems', Quantity: number, OrderItemID: number, Name: string, OrderID: number }>, User?: { __typename?: 'erp_Users', FirstName?: string | null, LastName?: string | null } | null, PaymentHistories: Array<{ __typename?: 'erp_PaymentHistory', ID: number, PaidAmount: any, Date: any }> }> };
+export type GetOrdersByStatusQuery = { __typename?: 'query_root', erp_Orders: Array<{ __typename?: 'erp_Orders', OrderID: number, Entity?: string | null, InvoiceNumber?: string | null, City?: string | null, ShippingDate?: any | null, ActualShippingDate?: any | null, AcceptanceDate?: any | null, PaidAmount?: any | null, TotalAmount?: any | null, AwaitingDispatch: boolean, NeedAttention?: string | null, CreatingDate: any, ManagerID?: number | null, OrderStatusID: number, OrderStatus: { __typename?: 'erp_OrderStatus', Name: string, ID: number }, OrderItems: Array<{ __typename?: 'erp_OrderItems', Quantity: number, OrderItemID: number, Name: string, OrderID: number }>, User?: { __typename?: 'erp_Users', FirstName: string, LastName: string } | null, PaymentHistories: Array<{ __typename?: 'erp_PaymentHistory', ID: number, PaidAmount: any, Date: any }> }> };
 
 export type GetOrdersArchivedBySearchKeywordQueryVariables = Exact<{
   keyword: Scalars['String'];
@@ -6125,7 +6871,7 @@ export type GetOrdersArchivedBySearchKeywordQueryVariables = Exact<{
 }>;
 
 
-export type GetOrdersArchivedBySearchKeywordQuery = { __typename?: 'query_root', erp_Orders: Array<{ __typename?: 'erp_Orders', OrderID: number, Entity?: string | null, InvoiceNumber?: string | null, City?: string | null, ShippingDate?: any | null, ActualShippingDate?: any | null, AcceptanceDate?: any | null, PaidAmount?: any | null, TotalAmount?: any | null, AwaitingDispatch: boolean, NeedAttention?: string | null, CreatingDate: any, ManagerID?: number | null, OrderStatusID: number, OrderStatus: { __typename?: 'erp_OrderStatus', Name: string, ID: number }, OrderItems: Array<{ __typename?: 'erp_OrderItems', Quantity: number, OrderItemID: number, Name: string, OrderID: number }>, User?: { __typename?: 'erp_Users', FirstName?: string | null, LastName?: string | null } | null, PaymentHistories: Array<{ __typename?: 'erp_PaymentHistory', ID: number, PaidAmount: any, Date: any }> }> };
+export type GetOrdersArchivedBySearchKeywordQuery = { __typename?: 'query_root', erp_Orders: Array<{ __typename?: 'erp_Orders', OrderID: number, Entity?: string | null, InvoiceNumber?: string | null, City?: string | null, ShippingDate?: any | null, ActualShippingDate?: any | null, AcceptanceDate?: any | null, PaidAmount?: any | null, TotalAmount?: any | null, AwaitingDispatch: boolean, NeedAttention?: string | null, CreatingDate: any, ManagerID?: number | null, OrderStatusID: number, OrderStatus: { __typename?: 'erp_OrderStatus', Name: string, ID: number }, OrderItems: Array<{ __typename?: 'erp_OrderItems', Quantity: number, OrderItemID: number, Name: string, OrderID: number }>, User?: { __typename?: 'erp_Users', FirstName: string, LastName: string } | null, PaymentHistories: Array<{ __typename?: 'erp_PaymentHistory', ID: number, PaidAmount: any, Date: any }> }> };
 
 export type GetOrdersArchivedByIntervalQueryVariables = Exact<{
   _lte: Scalars['timestamp'];
@@ -6133,19 +6879,19 @@ export type GetOrdersArchivedByIntervalQueryVariables = Exact<{
 }>;
 
 
-export type GetOrdersArchivedByIntervalQuery = { __typename?: 'query_root', erp_Orders: Array<{ __typename?: 'erp_Orders', OrderID: number, Entity?: string | null, InvoiceNumber?: string | null, City?: string | null, ShippingDate?: any | null, ActualShippingDate?: any | null, AcceptanceDate?: any | null, PaidAmount?: any | null, TotalAmount?: any | null, AwaitingDispatch: boolean, NeedAttention?: string | null, CreatingDate: any, ManagerID?: number | null, OrderStatusID: number, OrderStatus: { __typename?: 'erp_OrderStatus', Name: string, ID: number }, OrderItems: Array<{ __typename?: 'erp_OrderItems', Quantity: number, OrderItemID: number, Name: string, OrderID: number }>, User?: { __typename?: 'erp_Users', FirstName?: string | null, LastName?: string | null } | null, PaymentHistories: Array<{ __typename?: 'erp_PaymentHistory', ID: number, PaidAmount: any, Date: any }> }> };
+export type GetOrdersArchivedByIntervalQuery = { __typename?: 'query_root', erp_Orders: Array<{ __typename?: 'erp_Orders', OrderID: number, Entity?: string | null, InvoiceNumber?: string | null, City?: string | null, ShippingDate?: any | null, ActualShippingDate?: any | null, AcceptanceDate?: any | null, PaidAmount?: any | null, TotalAmount?: any | null, AwaitingDispatch: boolean, NeedAttention?: string | null, CreatingDate: any, ManagerID?: number | null, OrderStatusID: number, OrderStatus: { __typename?: 'erp_OrderStatus', Name: string, ID: number }, OrderItems: Array<{ __typename?: 'erp_OrderItems', Quantity: number, OrderItemID: number, Name: string, OrderID: number }>, User?: { __typename?: 'erp_Users', FirstName: string, LastName: string } | null, PaymentHistories: Array<{ __typename?: 'erp_PaymentHistory', ID: number, PaidAmount: any, Date: any }> }> };
 
 export type GetManagersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetManagersQuery = { __typename?: 'query_root', erp_Users: Array<{ __typename?: 'erp_Users', FirstName?: string | null, LastName?: string | null, UserID: number, AccessLevelID?: number | null }> };
+export type GetManagersQuery = { __typename?: 'query_root', erp_Users: Array<{ __typename?: 'erp_Users', FirstName: string, LastName: string, UserID: number, AccessLevelID?: number | null }> };
 
 export type GetOrderByPkQueryVariables = Exact<{
   OrderID: Scalars['Int'];
 }>;
 
 
-export type GetOrderByPkQuery = { __typename?: 'query_root', erp_Orders: Array<{ __typename?: 'erp_Orders', NeedAttention?: string | null, AwaitingDispatch: boolean, OrderStatusID: number, ActualShippingDate?: any | null, AcceptanceDate?: any | null, ShippingDate?: any | null, CreatingDate: any, OrderID: number, ManagerID?: number | null, City?: string | null, Comment?: string | null, Entity?: string | null, InvoiceNumber?: string | null, OrderNumber?: string | null, PaidAmount?: any | null, TotalAmount?: any | null, User?: { __typename?: 'erp_Users', FirstName?: string | null, LastName?: string | null, UserID: number } | null, OrderItems: Array<{ __typename?: 'erp_OrderItems', Name: string, FullName?: string | null, OrderItemID: number, Quantity: number }>, Docs: Array<{ __typename?: 'erp_Docs', ID: number, Key: string, FileName?: string | null, Size?: number | null, UploadingDate?: any | null }>, PaymentHistories: Array<{ __typename?: 'erp_PaymentHistory', ID: number, PaidAmount: any, Date: any }> }> };
+export type GetOrderByPkQuery = { __typename?: 'query_root', erp_Orders: Array<{ __typename?: 'erp_Orders', NeedAttention?: string | null, AwaitingDispatch: boolean, OrderStatusID: number, ActualShippingDate?: any | null, AcceptanceDate?: any | null, ShippingDate?: any | null, CreatingDate: any, OrderID: number, ManagerID?: number | null, City?: string | null, Comment?: string | null, Entity?: string | null, InvoiceNumber?: string | null, OrderNumber?: string | null, PaidAmount?: any | null, TotalAmount?: any | null, User?: { __typename?: 'erp_Users', FirstName: string, LastName: string, UserID: number } | null, OrderItems: Array<{ __typename?: 'erp_OrderItems', Name: string, FullName?: string | null, OrderItemID: number, Quantity: number }>, Docs: Array<{ __typename?: 'erp_Docs', ID: number, Key: string, FileName?: string | null, Size?: number | null, UploadingDate?: any | null }>, PaymentHistories: Array<{ __typename?: 'erp_PaymentHistory', ID: number, PaidAmount: any, Date: any }> }> };
 
 export type InsertOrderMutationVariables = Exact<{
   orderStatusID: Scalars['Int'];
@@ -6154,7 +6900,7 @@ export type InsertOrderMutationVariables = Exact<{
 
 export type InsertOrderMutation = { __typename?: 'mutation_root', insert_erp_Orders?: { __typename?: 'erp_Orders_mutation_response', returning: Array<{ __typename?: 'erp_Orders', OrderID: number }> } | null };
 
-export type OrderFragment = { __typename?: 'erp_Orders', OrderID: number, Entity?: string | null, InvoiceNumber?: string | null, City?: string | null, ShippingDate?: any | null, ActualShippingDate?: any | null, AcceptanceDate?: any | null, PaidAmount?: any | null, TotalAmount?: any | null, AwaitingDispatch: boolean, NeedAttention?: string | null, CreatingDate: any, ManagerID?: number | null, OrderStatusID: number, OrderStatus: { __typename?: 'erp_OrderStatus', Name: string, ID: number }, OrderItems: Array<{ __typename?: 'erp_OrderItems', Quantity: number, OrderItemID: number, Name: string, OrderID: number }>, User?: { __typename?: 'erp_Users', FirstName?: string | null, LastName?: string | null } | null, PaymentHistories: Array<{ __typename?: 'erp_PaymentHistory', ID: number, PaidAmount: any, Date: any }> };
+export type OrderFragment = { __typename?: 'erp_Orders', OrderID: number, Entity?: string | null, InvoiceNumber?: string | null, City?: string | null, ShippingDate?: any | null, ActualShippingDate?: any | null, AcceptanceDate?: any | null, PaidAmount?: any | null, TotalAmount?: any | null, AwaitingDispatch: boolean, NeedAttention?: string | null, CreatingDate: any, ManagerID?: number | null, OrderStatusID: number, OrderStatus: { __typename?: 'erp_OrderStatus', Name: string, ID: number }, OrderItems: Array<{ __typename?: 'erp_OrderItems', Quantity: number, OrderItemID: number, Name: string, OrderID: number }>, User?: { __typename?: 'erp_Users', FirstName: string, LastName: string } | null, PaymentHistories: Array<{ __typename?: 'erp_PaymentHistory', ID: number, PaidAmount: any, Date: any }> };
 
 export type GetReclamationOrdersQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -6295,7 +7041,7 @@ export type UpdateTimeDeductionMutationResult = Apollo.MutationResult<UpdateTime
 export type UpdateTimeDeductionMutationOptions = Apollo.BaseMutationOptions<UpdateTimeDeductionMutation, UpdateTimeDeductionMutationVariables>;
 export const CommentsDocument = gql`
     subscription Comments($OrderID: Int!) {
-  erp_Comments(where: {OrderID: {_eq: $OrderID}}, order_by: {CommentID: desc}) {
+  erp_Comments(where: {OrderID: {_eq: $OrderID}}, order_by: {CommentID: asc}) {
     CommentID
     Text
     Timestamp

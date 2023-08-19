@@ -1,7 +1,10 @@
+/** @jsxImportSource @emotion/react */
 import moment from 'moment'
 import { TComment } from 'src/types/global'
 import { useDeleteCommentMutation, useUpdateCommentMutation } from 'src/types/graphql-shema'
 import sass from './index.module.sass'
+import MyAvatar from 'src/components/Avatar'
+import { Box, Button, Stack, css } from '@mui/material'
 
 interface ICommentProps {
   data: TComment
@@ -32,17 +35,36 @@ export default function Comment({ data, userID }: ICommentProps) {
     }
   }
 
-  function sender() {
-    return `${data.User.FirstName} ${data.User.LastName}`
-  }
-
   function actions() {
-    if (userID === data.User.UserID) return <div onClick={handleDelete}>Удалить</div>
+    if (userID === data.User.UserID)
+      return (
+        <Button
+          color="secondary"
+          onClick={handleDelete}
+          className="comment-delete-btn"
+          sx={{ opacity: 0, visibility: 'hidden' }}
+        >
+          Удалить
+        </Button>
+      )
   }
 
   function timestamp() {
     const date = moment(data.Timestamp)
-    return date.format('MMM D') + ' at ' + date.format('hh:mm')
+    return date.format('DD.MM.YY') + '  ' + date.format('hh:mm')
+  }
+
+  function messageHeader() {
+    return (
+      <Stack gap={1} direction="row" px={2}>
+        <b>{`${data.User.FirstName} ${data.User.LastName}`}</b>
+
+        <div className={sass.time}> {timestamp()} </div>
+        <Box ml="auto" className={sass.actions}>
+          {actions()}
+        </Box>
+      </Stack>
+    )
   }
 
   function getCommentContent() {
@@ -72,13 +94,23 @@ export default function Comment({ data, userID }: ICommentProps) {
   }
 
   return (
-    <div className={sass.commentUnit}>
-      <div className={sass.commentHeader}>
-        <div className={sass.sender}> {sender()} </div>
-        <div className={sass.actions}>{actions()}</div>
-        <div className={sass.time}> {timestamp()} </div>
-      </div>
-      {getCommentContent()}
-    </div>
+    <Stack
+      my={2}
+      direction="row"
+      css={css({
+        '&:hover': {
+          '.comment-delete-btn': {
+            opacity: 1,
+            visibility: 'visible'
+          }
+        }
+      })}
+    >
+      <MyAvatar firstname={data.User.FirstName} lastname={data.User.LastName} />
+      <Stack direction="column" display="flex" flexGrow={1}>
+        {messageHeader()}
+        {getCommentContent()}
+      </Stack>
+    </Stack>
   )
 }

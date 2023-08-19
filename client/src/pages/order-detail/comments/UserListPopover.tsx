@@ -1,7 +1,6 @@
 import { Menu, MenuItem } from '@mui/material'
-import sass from './index.module.sass'
-import placeCaretAtEnd from 'src/utils/placeCaretAtEnd'
 import { TUser } from 'src/types/global'
+import placeCaretAtEnd from 'src/utils/placeCaretAtEnd'
 
 interface IUserListPopoverProps {
   anchorEl: Element | null
@@ -32,7 +31,7 @@ export default function UserListPopover({
     inputRef.current.innerText = inputRef.current?.innerText.slice(0, -1)
 
     elem.innerHTML = '@' + [user.FirstName, user.LastName].join(' ') + ', '
-    elem.classList.add(sass.mentionedUserHiglight)
+    elem.attributes.setNamedItem(document.createAttribute('data-mentioned-user'))
     elem.dataset.mentionedUser = user.UserID.toString()
     elem.contentEditable = 'false'
     inputform?.appendChild(elem)

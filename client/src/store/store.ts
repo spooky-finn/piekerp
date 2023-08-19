@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx'
 import AuthService from '../services/AuthService'
 import axios from 'axios'
 import { API_URL } from '../api/axios'
-import { AppColorTheme, TUser } from 'src/types/global'
+import { AppColorMode, AppColorTheme, TUser } from 'src/types/global'
 import React from 'react'
 
 type UItheme = {
@@ -15,6 +15,7 @@ export default class Store {
   isLoading = false
 
   UItheme: UItheme | undefined = undefined
+  colorMode: AppColorMode | undefined = undefined
 
   inMemoryToken: string | undefined | null = undefined
 
@@ -36,6 +37,10 @@ export default class Store {
 
   setUItheme(state: UItheme['state'], dispatch: UItheme['dispatch']) {
     this.UItheme = { state, dispatch }
+  }
+
+  setAppColorMode(mode: AppColorMode) {
+    this.colorMode = mode
   }
 
   async login(email: string, password: string) {

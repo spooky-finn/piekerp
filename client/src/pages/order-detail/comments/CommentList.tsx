@@ -34,7 +34,7 @@ export default function CommentList({ user }: ICommentsListProps) {
     if (!orderId) throw Error('Null OrderId at the local store')
 
     const root = document.getElementById('Comments_InputForm')
-    const mentioned = root?.querySelectorAll<HTMLSpanElement>(`.${sass.mentionedUserHiglight}`)
+    const mentioned = root?.querySelectorAll<HTMLSpanElement>('span[data-mentioned-user]')
 
     insertOrderCommentMutation({
       variables: {
@@ -89,12 +89,12 @@ export default function CommentList({ user }: ICommentsListProps) {
 
   return (
     <div>
-      <InputForm insertComment={insertComment} inputRef={inputRef} />
-
       {!loading &&
         data?.erp_Comments?.map(comment => (
           <Comment data={comment} key={comment.CommentID} userID={user.UserID} />
         ))}
+
+      <InputForm insertComment={insertComment} inputRef={inputRef} />
     </div>
   )
 }
