@@ -15,16 +15,7 @@ jobs:
       - name: Checkout to the repository
         uses: actions/checkout@v3
 
-      - name: Install SSH key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: '${{ secrets.SSH_HEXCORE_KEY }}'
-          known_hosts: 'placeholder'
-
-      - name: Genetate auth known_hosts
-        run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
-
-      - run: rsync --archive --verbose --compress --progress . ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/
+      - run: rsync --progress . ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/
       # - name: Set up NodeJS environment
       #   uses: actions/setup-node@v2
       #   with:
