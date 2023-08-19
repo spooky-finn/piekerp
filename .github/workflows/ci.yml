@@ -31,7 +31,7 @@ jobs:
 
       - name: Copy to the remoye server using rsync
         run: |
-          rsync -avzr --delete -e "ssh -p 22" --exclude-from 'exclude.txt' . ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/temp/
+          rsync -avzr --delete -e "ssh -p 22" . ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/temp/
 
       # - name: Set up NodeJS environment
       #   uses: actions/setup-node@v2
