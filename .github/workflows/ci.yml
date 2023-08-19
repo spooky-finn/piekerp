@@ -25,6 +25,8 @@ jobs:
               User ${{ secrets.SSH_USER }}
               IdentityFile ~/.ssh/github-actions
               Port 22
+              ServerAliveInterval 30
+              ServerAliveCountMax 6
 
       - name: Adding Known Hosts
         run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
