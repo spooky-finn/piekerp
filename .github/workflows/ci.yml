@@ -10,8 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout to the repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       - name: send files to the remote server using scp
         uses: appleboy/scp-action@master
@@ -21,6 +20,8 @@ jobs:
           key: ${{ secrets.SSH_HEXCORE_KEY }}
           port: 22
           source: ./
+          debug: true
+          overwrite: true
           target: ~/temp/
       # - name: Install ssh key
       #   uses: shimataro/ssh-key-action@v2
