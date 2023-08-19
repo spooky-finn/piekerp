@@ -13,6 +13,16 @@ jobs:
       - name: Checkout to the repository
         uses: actions/checkout@v3
 
+      - name: Deploy to sandbox via rsync
+        uses: trendyminds/github-actions-rsync@master
+        with:
+          RSYNC_OPTIONS: -avzr --delete --exclude node_modules --exclude '.git*'
+          RSYNC_TARGET: /ttt
+          RSYNC_SOURCE: /client/
+        env:
+          SSH_PRIVATE_KEY: ${{secrets.SSH_HEXCORE_KEY}}
+          SSH_USERNAME: ${{secrets.SSH_USER}}
+          SSH_HOSTNAME: ${{secrets.SSH_HOST}}
       # - name: Install ssh key
       #   uses: shimataro/ssh-key-action@v2
       #   with:
