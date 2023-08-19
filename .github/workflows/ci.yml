@@ -15,6 +15,12 @@ jobs:
       - name: Checkout to the repository
         uses: actions/checkout@v3
 
+      - name: Install ssh key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_HEXCORE_KEY }}
+          known_hosts: 'FDSF'
+
       - run: rsync -avz . ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/tt --progress
       # - name: Set up NodeJS environment
       #   uses: actions/setup-node@v2
