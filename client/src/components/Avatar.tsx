@@ -13,12 +13,12 @@ function stringToHslColor(str: string, s: number, l: number) {
 }
 
 function stringAvatar(name: string, colorMode: AppColorMode) {
-  const sutaration = colorMode === 'light' ? 80 : 40
+  const sutaration = colorMode === 'light' ? 100 : 40
   const textColor = colorMode === 'light' ? 'black' : 'white'
-
+  const intessivity = colorMode === 'light' ? 65 : 30
   return {
     sx: {
-      bgcolor: stringToHslColor(name, sutaration, 30),
+      bgcolor: stringToHslColor(name, sutaration, intessivity),
       width: 32,
       height: 32,
       fontSize: 16,
