@@ -4,20 +4,38 @@ import { useDropzone } from 'react-dropzone'
 import { useLocation, useParams } from 'react-router-dom'
 import ReactTooltip from 'react-tooltip'
 
-import PaperL1 from 'src/components/wrappers/PaperL1'
+import { Box, Stack } from '@mui/system'
+import { apolloClient } from 'src/api'
+import Chat from 'src/features/chat/chat'
+import { ChatMessage, ChatUser } from 'src/features/chat/chatEntity'
+import { useAppContext } from 'src/hooks'
 import { useOrderDetailStore } from 'src/hooks/useOrderDetailStore'
-import { useGetManagersQuery, useGetOrderByPkQuery } from 'src/types/graphql-shema'
+import { useRootStore } from 'src/store/storeProvider'
+import {
+  DeleteCommentDocument,
+  DeleteCommentMutation,
+  DeleteCommentMutationVariables,
+  GetAllUsersDocument,
+  GetAllUsersQuery,
+  InsertCommentDocument,
+  InsertCommentMutation,
+  InsertCommentMutationVariables,
+  UpdateCommentDocument,
+  UpdateCommentMutation,
+  UpdateCommentMutationVariables,
+  useCommentsSubscription,
+  useGetManagersQuery,
+  useGetOrderByPkQuery
+} from 'src/types/graphql-shema'
 import FileService from '../../services/FileService'
-import CommentList from './comments/CommentList'
-import DialogAddEditOrderItem from './dialogs/AddEditOrderItemDialog'
-import Docs from './docs/Docs'
-import { isFileOnDropzone } from './utils.dropzone'
-import OrderItemList from './order-items/OrderItemList'
 import OrderHeader from './OrderHeader'
 import RightInfoPanel from './RightInfoPanel'
 import EditRightInfoPanel from './RightInfoPanel/EditRightInfoPanel'
+import DialogAddEditOrderItem from './dialogs/AddEditOrderItemDialog'
+import Docs from './docs/Docs'
+import OrderItemList from './order-items/OrderItemList'
 import './sass/index.sass'
-import { useAppContext } from 'src/hooks'
+import { isFileOnDropzone } from './utils.dropzone'
 
 export default function OrderDetail() {
   const { store } = useAppContext()
@@ -27,7 +45,7 @@ export default function OrderDetail() {
   const defaultEditMode = new URLSearchParams(useLocation().search).get('edit') ? true : false
   const queryParams = useParams<{ id: string }>()
   const orderId = parseInt(queryParams.id || '')
-
+  const chatState = useRootStore().chat
   if (!orderId) throw Error('Null OrderId at the local store')
 
   const { editMode, initialize } = useOrderDetailStore()
@@ -66,24 +84,100 @@ export default function OrderDetail() {
     noClick: true
   })
 
+  useEffect(() => {
+    // const res = apolloClient.subscribe<CommentsSubscriptionResult, CommentsSubscriptionVariables>({
+    //   query: CommentsDocument,
+    //   variables: {
+    //     OrderID: orderId
+    //   }
+    // })
+    // const appUsers = await apolloClient.query<GetAllUsersQuery>({
+    //   query: GetAllUsersDocument
+    // })
+
+    chatState.init({
+      deleteMessage: async message => {
+        apolloClient.mutate<DeleteCommentMutation, DeleteCommentMutationVariables>({
+          mutation: DeleteCommentDocument,
+          variables: {
+            CommentID: message.id
+          },
+          optimisticResponse: {
+            delete_erp_Comments_by_pk: {
+              __typename: 'erp_Comments',
+              CommentID: message.id
+            }
+          }
+        })
+      },
+      updateMessage: async message => {
+        apolloClient.mutate<UpdateCommentMutation, UpdateCommentMutationVariables>({
+          mutation: UpdateCommentDocument,
+          variables: {
+            CommentID: message.id,
+            Text: message.message
+          }
+        })
+      },
+      insertMessage: async message => {
+        apolloClient.mutate<InsertCommentMutation, InsertCommentMutationVariables>({
+          mutation: InsertCommentDocument,
+          variables: {
+            OrderID: orderId,
+            Text: message,
+            UserID: store.user?.UserID ?? 0
+          },
+          optimisticResponse: {
+            insert_erp_Comments_one: {
+              __typename: 'erp_Comments',
+              CommentID: 0,
+              Text: message,
+              Timestamp: new Date().toISOString(),
+              UserID: store.user?.UserID ?? 0,
+              OrderID: orderId
+            }
+          }
+        })
+      }
+    })
+  }, [])
+
+  useCommentsSubscription({
+    variables: { OrderID: orderId },
+    onData(options) {
+      const data = options.data.data?.erp_Comments
+
+      if (!data) return
+
+      const messages = data.map((comment): ChatMessage => {
+        const senser = new ChatUser(
+          comment.User.UserID,
+          comment.User.FirstName + ' ' + comment.User.LastName
+        )
+        return new ChatMessage(comment.CommentID, comment.Text, senser, comment.Timestamp)
+      })
+
+      chatState.addMessages(messages)
+    }
+  })
+
   if (!data?.erp_Orders || !store.user?.UserID) return null
 
   return (
-    <PaperL1>
+    <>
       <DialogAddEditOrderItem refetch={refetch} />
 
       {isFileOnDropzone(isDragActive)}
       {data.erp_Orders && users?.erp_Users ? (
         <>
-          <section className="OrderLayout" {...getRootProps()} id="dropzone">
-            <div className="LeftSideContent">
+          <Stack {...getRootProps()} id="dropzone" direction="row" height="100%">
+            <Stack direction="column" flexGrow={1}>
               <OrderHeader order={data.erp_Orders[0]} />
               <OrderItemList data={data.erp_Orders[0].OrderItems} refetch={refetch} />
-              <CommentList user={store.user} />
               <Docs data={data.erp_Orders[0].Docs} onUpload={onUploadFiles} refetch={refetch} />
-            </div>
+            </Stack>
 
-            <div className="Info">
+            <Box display="flex" flexGrow={1} width="40%">
               {editMode ? (
                 <EditRightInfoPanel
                   data={data.erp_Orders[0]}
@@ -93,10 +187,14 @@ export default function OrderDetail() {
               ) : (
                 <RightInfoPanel data={data.erp_Orders[0]} />
               )}
-            </div>
-          </section>
+            </Box>
+
+            <Box flexShrink={0} width="40%" borderLeft="var(--border)">
+              <Chat />
+            </Box>
+          </Stack>
         </>
       ) : null}
-    </PaperL1>
+    </>
   )
 }

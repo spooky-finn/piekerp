@@ -1,3 +1,4 @@
+import { Box } from '@mui/material'
 import { createTheme as createMuiTheme, ThemeProvider } from '@mui/material/styles'
 import { observer } from 'mobx-react-lite'
 import { useContext } from 'react'
@@ -8,6 +9,7 @@ import { useLocalStorageState } from './hooks'
 import { Context } from './index'
 import { customizedTheme } from './material/customizedTheme'
 import AppRouter from './routers/Router'
+import { RootStoreProvider } from './store/storeProvider'
 import { AppColorMode } from './types/global'
 import { SystemPreferTheme } from './utils/systemPreferTheme'
 
@@ -25,17 +27,25 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
-        <NetworkStatusMessage />
+      {/* <CssVarsPr> */}
+      <RootStoreProvider>
+        <div className="App">
+          <NetworkStatusMessage />
 
-        {/* <ReactTooltip className="reactTooltips" delayShow={300} /> */}
-        <ReactNotifications />
-        {store.inMemoryToken && <Sidebar />}
+          {/* <ReactTooltip className="reactTooltips" delayShow={300} /> */}
+          <ReactNotifications />
+          {store.inMemoryToken && <Sidebar />}
 
-        <div className="base-container">
-          <AppRouter />
+          <Box
+            sx={{
+              height: '100vh'
+            }}
+          >
+            <AppRouter />
+          </Box>
         </div>
-      </div>
+      </RootStoreProvider>
+      {/* </CssVarsPr> */}
     </ThemeProvider>
   )
 }

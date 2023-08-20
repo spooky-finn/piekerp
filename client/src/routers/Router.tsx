@@ -1,15 +1,15 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
+import RequireAuth from './PrivateRoute'
+import Attendance from 'src/pages/attendance/Attendance'
 import LoginForm from 'src/pages/login/LoginForm'
+import OrderDetail from 'src/pages/order-detail/OrderDetail'
 import Archive from 'src/pages/orders/archive/Archive'
 import Production from 'src/pages/orders/production/Production'
 import Recently from 'src/pages/orders/recently/Recently'
 import Registration from 'src/pages/orders/registration/Registration'
+import ReclamationContainer from 'src/pages/reclamation/ReclamationContainer'
+import Settings from 'src/pages/settings/Settings'
 import Report from 'src/pages/orders/report/Report'
-import Attendance from '../pages/attendance/Attendance'
-import OrderDetail from '../pages/order-detail/OrderDetail'
-import ReclamationContainer from '../pages/reclamation/ReclamationContainer'
-import Settings from '../pages/settings/Settings'
-import RequireAuth from './PrivateRoute'
 
 export enum AppRoutes {
   orders_production = '/orders/production',

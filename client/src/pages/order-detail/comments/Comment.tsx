@@ -106,7 +106,7 @@ export default function Comment({ data, userID }: ICommentProps) {
         }
       })}
     >
-      <MyAvatar firstname={data.User.FirstName} lastname={data.User.LastName} />
+      <MyAvatar name={data.User.FirstName + ' ' + data.User.LastName} />
       <Stack direction="column" display="flex" flexGrow={1}>
         {messageHeader()}
         {getCommentContent()}

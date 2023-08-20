@@ -29,12 +29,12 @@ function stringAvatar(name: string, colorMode: AppColorMode) {
   }
 }
 
-export default function MyAvatar({ firstname, lastname }: { firstname: string; lastname: string }) {
+export default function MyAvatar({ name }: { name: string }) {
   const { store } = useAppContext()
 
   if (!store.colorMode) {
     throw new Error('store.colorMode is undefined')
   }
 
-  return <Avatar {...stringAvatar(`${firstname} ${lastname}`, store.colorMode)} />
+  return <Avatar {...stringAvatar(name, store.colorMode)} />
 }
