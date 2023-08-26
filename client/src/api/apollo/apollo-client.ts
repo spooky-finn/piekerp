@@ -1,21 +1,8 @@
 import { ApolloClient, InMemoryCache, from } from '@apollo/client'
-import { split } from '@apollo/client'
-import { getMainDefinition } from '@apollo/client/utilities'
-import { wsRetryLink, wsErrorLink, webSocketLink } from './apollo-ws-links'
-import { httpErrorLink, httpAuthLink, httpLink } from './apollo-http-links'
-
-const splitLink = split(
-  ({ query }) => {
-    const definition = getMainDefinition(query)
-
-    return definition.kind === 'OperationDefinition' && definition.operation === 'subscription'
-  },
-  from([wsRetryLink, wsErrorLink, webSocketLink]),
-  from([httpErrorLink, httpAuthLink, httpLink])
-)
+import { webSocketLink, wsErrorLink, wsRetryLink } from './apollo-ws-links'
 
 export const apolloClient = new ApolloClient({
-  link: splitLink,
+  link: from([wsRetryLink, wsErrorLink, webSocketLink]),
   cache: new InMemoryCache({
     typePolicies: {
       erp_Orders: {
