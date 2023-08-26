@@ -1,13 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import moment from 'moment'
-import { TComment } from 'src/types/global'
+// import { TComment } from 'src/types/global'
 import { useDeleteCommentMutation, useUpdateCommentMutation } from 'src/types/graphql-shema'
 import sass from './index.module.sass'
 import MyAvatar from 'src/components/Avatar'
 import { Box, Button, Stack, css } from '@mui/material'
 
 interface ICommentProps {
-  data: TComment
+  data: any
   userID: number
 }
 

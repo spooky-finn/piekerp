@@ -54,7 +54,7 @@ class AuthService {
     const tokenFromDb = await tokenService.findToken(refreshToken)
 
     if (!tokenFromDb) {
-      throw ApiError.UnauthorizedError('sdf')
+      throw ApiError.UnauthorizedError('token dose not presented in db')
     }
 
     const user = this.formPayload(tokenFromDb.User)

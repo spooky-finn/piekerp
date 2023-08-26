@@ -1,14 +1,9 @@
 import { useEffect, useRef } from 'react'
 import { useOrderDetailStore } from 'src/hooks/useOrderDetailStore'
 import { TUser } from 'src/types/global'
-import {
-  useCommentsSubscription,
-  useInsertCommentMutation,
-  useInsertNotificationMutation
-} from 'src/types/graphql-shema'
-import Comment from './Comment'
-import sass from './index.module.sass'
+import { useInsertCommentMutation, useInsertNotificationMutation } from 'src/types/graphql-shema'
 import InputForm from './InputForm'
+import sass from './index.module.sass'
 
 interface ICommentsListProps {
   user: TUser
@@ -24,9 +19,9 @@ export default function CommentList({ user }: ICommentsListProps) {
 
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const { data, loading } = useCommentsSubscription({
-    variables: { OrderID: orderId }
-  })
+  // const { data, loading } = useCommentsSubscription({
+  //   variables: { OrderID: orderId }
+  // })
 
   function insertComment(): void {
     const text = inputRef.current?.innerHTML
@@ -85,14 +80,14 @@ export default function CommentList({ user }: ICommentsListProps) {
         each.removeEventListener('click', switchTodo, false)
       })
     }
-  }, [data])
+  }, [])
 
   return (
     <div>
-      {!loading &&
+      {/* {!loading &&
         data?.erp_Comments?.map(comment => (
           <Comment data={comment} key={comment.CommentID} userID={user.UserID} />
-        ))}
+        ))} */}
 
       <InputForm insertComment={insertComment} inputRef={inputRef} />
     </div>

@@ -1,5 +1,4 @@
 import {
-  CommentsSubscription,
   GetAllUsersQuery,
   GetEmployeeListQuery,
   GetNotificationsSubscription,
@@ -83,6 +82,6 @@ export type TOrderColumnData = OrderFragment
 
 export type TOrderDocument = GetOrderByPkQuery['erp_Orders'][number]['Docs'][number]
 export type TPaymentsHistory = GetOrderByPkQuery['erp_Orders'][number]['PaymentHistories'][number]
-export type TComment = CommentsSubscription['erp_Comments'][number]
+// export type TComment = CommentsSubscription['erp_Comments'][number]
 export type TUser = GetAllUsersQuery['erp_Users'][number]
 export type TNotification = GetNotificationsSubscription['erp_Notifications'][number]

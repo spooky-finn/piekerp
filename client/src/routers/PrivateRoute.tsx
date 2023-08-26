@@ -1,34 +1,37 @@
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace'
-import { useContext, useEffect, useState } from 'react'
+import { Box } from '@mui/material'
+import { observer } from 'mobx-react-lite'
 import { Navigate } from 'react-router-dom'
-
-import { Context } from '../index'
+import { useRootStore } from 'src/store/storeProvider'
 
 type IRequireAuthProps = {
   children: ReactJSXElement
 }
 
 const RequireAuth = (props: IRequireAuthProps) => {
-  const { store } = useContext(Context)
-  const [isLoaded, setisLoaded] = useState(false)
-  const [token, setToken] = useState(store.inMemoryToken)
+  const store = useRootStore()
 
-  async function getToken() {
-    store.checkAuth().then(res => {
-      setToken(res)
-      setisLoaded(true)
-    })
+  switch (store.app.authStatus) {
+    case 'ok':
+      if (store.initialized) {
+        return props.children
+      }
+      return null
+    case 'pending':
+      return (
+        <Box
+          display="flex"
+          justifyContent="center"
+          height="100vh"
+          width="100vw"
+          alignItems="center"
+        >
+          Starting the app
+        </Box>
+      )
+    default:
+      return <Navigate to="/login" />
   }
-
-  useEffect(() => {
-    if (token) setisLoaded(true)
-    else getToken()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  if (!isLoaded) return <>Authentication</>
-
-  return token ? props.children : <Navigate to="/login" />
 }
 
-export default RequireAuth
+export default observer(RequireAuth)

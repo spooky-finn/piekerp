@@ -1,5 +1,7 @@
-import { makeAutoObservable } from 'mobx'
+import { makeAutoObservable, reaction } from 'mobx'
 import { ChatState } from 'src/features/chat/chatState'
+import AppState from './appState'
+import Session from './session'
 
 export type AppUser = {
   FirstName: string
@@ -8,12 +10,32 @@ export type AppUser = {
 }
 
 export default class RootStore {
-  appUsers: AppUser[] = []
+  initialized = false
+  app: AppState
   chat: ChatState
+  session: Session
 
   constructor() {
     makeAutoObservable(this)
+    this.app = new AppState()
+    this.session = new Session(this)
+    this.chat = new ChatState(this)
 
-    this.chat = new ChatState(this.appUsers)
+    reaction(() => this.app.transport.ready, this.onTransportReady.bind(this))
+  }
+
+  private async onTransportReady() {
+    await this.session?.init()
+    this.chat?.ginit()
+
+    this.initialized = true
+  }
+
+  get apolloClient() {
+    return this.app?.transport?.apolloClient
+  }
+
+  get authenticated(): boolean {
+    return Boolean(this.app.authStatus === 'ok')
   }
 }

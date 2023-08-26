@@ -1,5 +1,5 @@
 import moment from 'moment'
-import { apolloClient } from 'src/api'
+import { getRootStore } from 'src/store/storeProvider'
 import { DeleteCommentDocument, UpdateCommentDocument } from 'src/types/graphql-shema'
 
 export class ChatUser {
@@ -18,6 +18,8 @@ export class ChatMessageGroup {
 }
 
 export class ChatMessage {
+  apolloClient = getRootStore().apolloClient
+
   constructor(
     public readonly id: number,
     public message: string,
@@ -27,7 +29,7 @@ export class ChatMessage {
 
   public async remove() {
     // remove message from server
-    await apolloClient.mutate({
+    await this.apolloClient.mutate({
       mutation: DeleteCommentDocument,
       variables: {
         id: this.id
@@ -38,7 +40,7 @@ export class ChatMessage {
   public async updateMessage(message: string) {
     this.message = message
 
-    await apolloClient.mutate({
+    await this.apolloClient.mutate({
       mutation: UpdateCommentDocument,
       variables: {
         id: this.id,

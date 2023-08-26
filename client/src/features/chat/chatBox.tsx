@@ -1,8 +1,6 @@
 import { Stack } from '@mui/material'
-import * as React from 'react'
 import { useRootStore } from 'src/store/storeProvider'
 import ChatCommandMenuContainer from './chatCommandMenuContainer'
-
 import ChatMessageInput from './chatMessageInput'
 import { ChatMessage, ChatMessageGroup } from './chatEntity'
 import ChatMessageView from './chatMessage'

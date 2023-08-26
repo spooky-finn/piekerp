@@ -5,7 +5,7 @@ import { useRootStore } from 'src/store/storeProvider'
 import { ChatMessage } from './chatEntity'
 
 export default function ChatMyMessageActions(props: { message: ChatMessage }) {
-  const state = useRootStore().chat
+  const state = useRootStore().chat!
 
   return (
     <Stack

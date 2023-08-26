@@ -4,8 +4,7 @@ import { Button, TextField } from '@mui/material'
 import axios from 'axios'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAppContext } from 'src/hooks'
-import AuthService from 'src/services/AuthService'
+import { useRootStore } from 'src/store/storeProvider'
 import { ServerErrorResponse } from 'src/types/global'
 
 const LoginForm = () => {
@@ -13,14 +12,12 @@ const LoginForm = () => {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
 
-  const { store } = useAppContext()
+  const app = useRootStore().app
   const navigate = useNavigate()
 
   const handleSubmit = async () => {
     try {
-      const res = await AuthService.login(email, password)
-      store.setInMemoryToken(res.data.accessToken)
-      store.setUser(res.data.user)
+      await app.login(email, password)
       navigate('/')
     } catch (e: any) {
       if (axios.isAxiosError(e)) {

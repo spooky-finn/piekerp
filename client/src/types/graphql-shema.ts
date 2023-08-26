@@ -1172,6 +1172,442 @@ export type Erp_AccessLevels_Variance_Fields = {
   AccessLevelID?: Maybe<Scalars['Float']>;
 };
 
+/** columns and relationships of "erp.Chat" */
+export type Erp_Chat = {
+  __typename?: 'erp_Chat';
+  id: Scalars['Int'];
+};
+
+/** columns and relationships of "erp.ChatMessage" */
+export type Erp_ChatMessage = {
+  __typename?: 'erp_ChatMessage';
+  chat_id: Scalars['Int'];
+  created_at: Scalars['timestamp'];
+  id: Scalars['Int'];
+  message: Scalars['String'];
+  sender_id: Scalars['Int'];
+};
+
+/** aggregated selection of "erp.ChatMessage" */
+export type Erp_ChatMessage_Aggregate = {
+  __typename?: 'erp_ChatMessage_aggregate';
+  aggregate?: Maybe<Erp_ChatMessage_Aggregate_Fields>;
+  nodes: Array<Erp_ChatMessage>;
+};
+
+/** aggregate fields of "erp.ChatMessage" */
+export type Erp_ChatMessage_Aggregate_Fields = {
+  __typename?: 'erp_ChatMessage_aggregate_fields';
+  avg?: Maybe<Erp_ChatMessage_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Erp_ChatMessage_Max_Fields>;
+  min?: Maybe<Erp_ChatMessage_Min_Fields>;
+  stddev?: Maybe<Erp_ChatMessage_Stddev_Fields>;
+  stddev_pop?: Maybe<Erp_ChatMessage_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Erp_ChatMessage_Stddev_Samp_Fields>;
+  sum?: Maybe<Erp_ChatMessage_Sum_Fields>;
+  var_pop?: Maybe<Erp_ChatMessage_Var_Pop_Fields>;
+  var_samp?: Maybe<Erp_ChatMessage_Var_Samp_Fields>;
+  variance?: Maybe<Erp_ChatMessage_Variance_Fields>;
+};
+
+
+/** aggregate fields of "erp.ChatMessage" */
+export type Erp_ChatMessage_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Erp_ChatMessage_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Erp_ChatMessage_Avg_Fields = {
+  __typename?: 'erp_ChatMessage_avg_fields';
+  chat_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  sender_id?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "erp.ChatMessage". All fields are combined with a logical 'AND'. */
+export type Erp_ChatMessage_Bool_Exp = {
+  _and?: InputMaybe<Array<Erp_ChatMessage_Bool_Exp>>;
+  _not?: InputMaybe<Erp_ChatMessage_Bool_Exp>;
+  _or?: InputMaybe<Array<Erp_ChatMessage_Bool_Exp>>;
+  chat_id?: InputMaybe<Int_Comparison_Exp>;
+  created_at?: InputMaybe<Timestamp_Comparison_Exp>;
+  id?: InputMaybe<Int_Comparison_Exp>;
+  message?: InputMaybe<String_Comparison_Exp>;
+  sender_id?: InputMaybe<Int_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "erp.ChatMessage" */
+export enum Erp_ChatMessage_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  ChatMessagePkey = 'ChatMessage_pkey'
+}
+
+/** input type for incrementing numeric columns in table "erp.ChatMessage" */
+export type Erp_ChatMessage_Inc_Input = {
+  chat_id?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
+  sender_id?: InputMaybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "erp.ChatMessage" */
+export type Erp_ChatMessage_Insert_Input = {
+  chat_id?: InputMaybe<Scalars['Int']>;
+  created_at?: InputMaybe<Scalars['timestamp']>;
+  id?: InputMaybe<Scalars['Int']>;
+  message?: InputMaybe<Scalars['String']>;
+  sender_id?: InputMaybe<Scalars['Int']>;
+};
+
+/** aggregate max on columns */
+export type Erp_ChatMessage_Max_Fields = {
+  __typename?: 'erp_ChatMessage_max_fields';
+  chat_id?: Maybe<Scalars['Int']>;
+  created_at?: Maybe<Scalars['timestamp']>;
+  id?: Maybe<Scalars['Int']>;
+  message?: Maybe<Scalars['String']>;
+  sender_id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate min on columns */
+export type Erp_ChatMessage_Min_Fields = {
+  __typename?: 'erp_ChatMessage_min_fields';
+  chat_id?: Maybe<Scalars['Int']>;
+  created_at?: Maybe<Scalars['timestamp']>;
+  id?: Maybe<Scalars['Int']>;
+  message?: Maybe<Scalars['String']>;
+  sender_id?: Maybe<Scalars['Int']>;
+};
+
+/** response of any mutation on the table "erp.ChatMessage" */
+export type Erp_ChatMessage_Mutation_Response = {
+  __typename?: 'erp_ChatMessage_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Erp_ChatMessage>;
+};
+
+/** on_conflict condition type for table "erp.ChatMessage" */
+export type Erp_ChatMessage_On_Conflict = {
+  constraint: Erp_ChatMessage_Constraint;
+  update_columns?: Array<Erp_ChatMessage_Update_Column>;
+  where?: InputMaybe<Erp_ChatMessage_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "erp.ChatMessage". */
+export type Erp_ChatMessage_Order_By = {
+  chat_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  message?: InputMaybe<Order_By>;
+  sender_id?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: erp.ChatMessage */
+export type Erp_ChatMessage_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "erp.ChatMessage" */
+export enum Erp_ChatMessage_Select_Column {
+  /** column name */
+  ChatId = 'chat_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Message = 'message',
+  /** column name */
+  SenderId = 'sender_id'
+}
+
+/** input type for updating data in table "erp.ChatMessage" */
+export type Erp_ChatMessage_Set_Input = {
+  chat_id?: InputMaybe<Scalars['Int']>;
+  created_at?: InputMaybe<Scalars['timestamp']>;
+  id?: InputMaybe<Scalars['Int']>;
+  message?: InputMaybe<Scalars['String']>;
+  sender_id?: InputMaybe<Scalars['Int']>;
+};
+
+/** aggregate stddev on columns */
+export type Erp_ChatMessage_Stddev_Fields = {
+  __typename?: 'erp_ChatMessage_stddev_fields';
+  chat_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  sender_id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Erp_ChatMessage_Stddev_Pop_Fields = {
+  __typename?: 'erp_ChatMessage_stddev_pop_fields';
+  chat_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  sender_id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Erp_ChatMessage_Stddev_Samp_Fields = {
+  __typename?: 'erp_ChatMessage_stddev_samp_fields';
+  chat_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  sender_id?: Maybe<Scalars['Float']>;
+};
+
+/** Streaming cursor of the table "erp_ChatMessage" */
+export type Erp_ChatMessage_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Erp_ChatMessage_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Erp_ChatMessage_Stream_Cursor_Value_Input = {
+  chat_id?: InputMaybe<Scalars['Int']>;
+  created_at?: InputMaybe<Scalars['timestamp']>;
+  id?: InputMaybe<Scalars['Int']>;
+  message?: InputMaybe<Scalars['String']>;
+  sender_id?: InputMaybe<Scalars['Int']>;
+};
+
+/** aggregate sum on columns */
+export type Erp_ChatMessage_Sum_Fields = {
+  __typename?: 'erp_ChatMessage_sum_fields';
+  chat_id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  sender_id?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "erp.ChatMessage" */
+export enum Erp_ChatMessage_Update_Column {
+  /** column name */
+  ChatId = 'chat_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Message = 'message',
+  /** column name */
+  SenderId = 'sender_id'
+}
+
+export type Erp_ChatMessage_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Erp_ChatMessage_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Erp_ChatMessage_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Erp_ChatMessage_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Erp_ChatMessage_Var_Pop_Fields = {
+  __typename?: 'erp_ChatMessage_var_pop_fields';
+  chat_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  sender_id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Erp_ChatMessage_Var_Samp_Fields = {
+  __typename?: 'erp_ChatMessage_var_samp_fields';
+  chat_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  sender_id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Erp_ChatMessage_Variance_Fields = {
+  __typename?: 'erp_ChatMessage_variance_fields';
+  chat_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  sender_id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregated selection of "erp.Chat" */
+export type Erp_Chat_Aggregate = {
+  __typename?: 'erp_Chat_aggregate';
+  aggregate?: Maybe<Erp_Chat_Aggregate_Fields>;
+  nodes: Array<Erp_Chat>;
+};
+
+/** aggregate fields of "erp.Chat" */
+export type Erp_Chat_Aggregate_Fields = {
+  __typename?: 'erp_Chat_aggregate_fields';
+  avg?: Maybe<Erp_Chat_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Erp_Chat_Max_Fields>;
+  min?: Maybe<Erp_Chat_Min_Fields>;
+  stddev?: Maybe<Erp_Chat_Stddev_Fields>;
+  stddev_pop?: Maybe<Erp_Chat_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Erp_Chat_Stddev_Samp_Fields>;
+  sum?: Maybe<Erp_Chat_Sum_Fields>;
+  var_pop?: Maybe<Erp_Chat_Var_Pop_Fields>;
+  var_samp?: Maybe<Erp_Chat_Var_Samp_Fields>;
+  variance?: Maybe<Erp_Chat_Variance_Fields>;
+};
+
+
+/** aggregate fields of "erp.Chat" */
+export type Erp_Chat_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Erp_Chat_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Erp_Chat_Avg_Fields = {
+  __typename?: 'erp_Chat_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "erp.Chat". All fields are combined with a logical 'AND'. */
+export type Erp_Chat_Bool_Exp = {
+  _and?: InputMaybe<Array<Erp_Chat_Bool_Exp>>;
+  _not?: InputMaybe<Erp_Chat_Bool_Exp>;
+  _or?: InputMaybe<Array<Erp_Chat_Bool_Exp>>;
+  id?: InputMaybe<Int_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "erp.Chat" */
+export enum Erp_Chat_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  ChatPkey = 'Chat_pkey'
+}
+
+/** input type for incrementing numeric columns in table "erp.Chat" */
+export type Erp_Chat_Inc_Input = {
+  id?: InputMaybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "erp.Chat" */
+export type Erp_Chat_Insert_Input = {
+  id?: InputMaybe<Scalars['Int']>;
+};
+
+/** aggregate max on columns */
+export type Erp_Chat_Max_Fields = {
+  __typename?: 'erp_Chat_max_fields';
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate min on columns */
+export type Erp_Chat_Min_Fields = {
+  __typename?: 'erp_Chat_min_fields';
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** response of any mutation on the table "erp.Chat" */
+export type Erp_Chat_Mutation_Response = {
+  __typename?: 'erp_Chat_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Erp_Chat>;
+};
+
+/** on_conflict condition type for table "erp.Chat" */
+export type Erp_Chat_On_Conflict = {
+  constraint: Erp_Chat_Constraint;
+  update_columns?: Array<Erp_Chat_Update_Column>;
+  where?: InputMaybe<Erp_Chat_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "erp.Chat". */
+export type Erp_Chat_Order_By = {
+  id?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: erp.Chat */
+export type Erp_Chat_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "erp.Chat" */
+export enum Erp_Chat_Select_Column {
+  /** column name */
+  Id = 'id'
+}
+
+/** input type for updating data in table "erp.Chat" */
+export type Erp_Chat_Set_Input = {
+  id?: InputMaybe<Scalars['Int']>;
+};
+
+/** aggregate stddev on columns */
+export type Erp_Chat_Stddev_Fields = {
+  __typename?: 'erp_Chat_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Erp_Chat_Stddev_Pop_Fields = {
+  __typename?: 'erp_Chat_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Erp_Chat_Stddev_Samp_Fields = {
+  __typename?: 'erp_Chat_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Streaming cursor of the table "erp_Chat" */
+export type Erp_Chat_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Erp_Chat_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Erp_Chat_Stream_Cursor_Value_Input = {
+  id?: InputMaybe<Scalars['Int']>;
+};
+
+/** aggregate sum on columns */
+export type Erp_Chat_Sum_Fields = {
+  __typename?: 'erp_Chat_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "erp.Chat" */
+export enum Erp_Chat_Update_Column {
+  /** column name */
+  Id = 'id'
+}
+
+export type Erp_Chat_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Erp_Chat_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Erp_Chat_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Erp_Chat_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Erp_Chat_Var_Pop_Fields = {
+  __typename?: 'erp_Chat_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Erp_Chat_Var_Samp_Fields = {
+  __typename?: 'erp_Chat_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Erp_Chat_Variance_Fields = {
+  __typename?: 'erp_Chat_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
 /** columns and relationships of "erp.Comments" */
 export type Erp_Comments = {
   __typename?: 'erp_Comments';
@@ -4946,6 +5382,14 @@ export type Mutation_Root = {
   delete_erp_AccessLevels?: Maybe<Erp_AccessLevels_Mutation_Response>;
   /** delete single row from the table: "erp.AccessLevels" */
   delete_erp_AccessLevels_by_pk?: Maybe<Erp_AccessLevels>;
+  /** delete data from the table: "erp.Chat" */
+  delete_erp_Chat?: Maybe<Erp_Chat_Mutation_Response>;
+  /** delete data from the table: "erp.ChatMessage" */
+  delete_erp_ChatMessage?: Maybe<Erp_ChatMessage_Mutation_Response>;
+  /** delete single row from the table: "erp.ChatMessage" */
+  delete_erp_ChatMessage_by_pk?: Maybe<Erp_ChatMessage>;
+  /** delete single row from the table: "erp.Chat" */
+  delete_erp_Chat_by_pk?: Maybe<Erp_Chat>;
   /** delete data from the table: "erp.Comments" */
   delete_erp_Comments?: Maybe<Erp_Comments_Mutation_Response>;
   /** delete single row from the table: "erp.Comments" */
@@ -4998,6 +5442,14 @@ export type Mutation_Root = {
   insert_erp_AccessLevels?: Maybe<Erp_AccessLevels_Mutation_Response>;
   /** insert a single row into the table: "erp.AccessLevels" */
   insert_erp_AccessLevels_one?: Maybe<Erp_AccessLevels>;
+  /** insert data into the table: "erp.Chat" */
+  insert_erp_Chat?: Maybe<Erp_Chat_Mutation_Response>;
+  /** insert data into the table: "erp.ChatMessage" */
+  insert_erp_ChatMessage?: Maybe<Erp_ChatMessage_Mutation_Response>;
+  /** insert a single row into the table: "erp.ChatMessage" */
+  insert_erp_ChatMessage_one?: Maybe<Erp_ChatMessage>;
+  /** insert a single row into the table: "erp.Chat" */
+  insert_erp_Chat_one?: Maybe<Erp_Chat>;
   /** insert data into the table: "erp.Comments" */
   insert_erp_Comments?: Maybe<Erp_Comments_Mutation_Response>;
   /** insert a single row into the table: "erp.Comments" */
@@ -5058,6 +5510,18 @@ export type Mutation_Root = {
   update_erp_AccessLevels_by_pk?: Maybe<Erp_AccessLevels>;
   /** update multiples rows of table: "erp.AccessLevels" */
   update_erp_AccessLevels_many?: Maybe<Array<Maybe<Erp_AccessLevels_Mutation_Response>>>;
+  /** update data of the table: "erp.Chat" */
+  update_erp_Chat?: Maybe<Erp_Chat_Mutation_Response>;
+  /** update data of the table: "erp.ChatMessage" */
+  update_erp_ChatMessage?: Maybe<Erp_ChatMessage_Mutation_Response>;
+  /** update single row of the table: "erp.ChatMessage" */
+  update_erp_ChatMessage_by_pk?: Maybe<Erp_ChatMessage>;
+  /** update multiples rows of table: "erp.ChatMessage" */
+  update_erp_ChatMessage_many?: Maybe<Array<Maybe<Erp_ChatMessage_Mutation_Response>>>;
+  /** update single row of the table: "erp.Chat" */
+  update_erp_Chat_by_pk?: Maybe<Erp_Chat>;
+  /** update multiples rows of table: "erp.Chat" */
+  update_erp_Chat_many?: Maybe<Array<Maybe<Erp_Chat_Mutation_Response>>>;
   /** update data of the table: "erp.Comments" */
   update_erp_Comments?: Maybe<Erp_Comments_Mutation_Response>;
   /** update single row of the table: "erp.Comments" */
@@ -5161,6 +5625,30 @@ export type Mutation_RootDelete_Erp_AccessLevelsArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Erp_AccessLevels_By_PkArgs = {
   AccessLevelID: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Erp_ChatArgs = {
+  where: Erp_Chat_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Erp_ChatMessageArgs = {
+  where: Erp_ChatMessage_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Erp_ChatMessage_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Erp_Chat_By_PkArgs = {
+  id: Scalars['Int'];
 };
 
 
@@ -5325,6 +5813,34 @@ export type Mutation_RootInsert_Erp_AccessLevelsArgs = {
 export type Mutation_RootInsert_Erp_AccessLevels_OneArgs = {
   object: Erp_AccessLevels_Insert_Input;
   on_conflict?: InputMaybe<Erp_AccessLevels_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Erp_ChatArgs = {
+  objects: Array<Erp_Chat_Insert_Input>;
+  on_conflict?: InputMaybe<Erp_Chat_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Erp_ChatMessageArgs = {
+  objects: Array<Erp_ChatMessage_Insert_Input>;
+  on_conflict?: InputMaybe<Erp_ChatMessage_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Erp_ChatMessage_OneArgs = {
+  object: Erp_ChatMessage_Insert_Input;
+  on_conflict?: InputMaybe<Erp_ChatMessage_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Erp_Chat_OneArgs = {
+  object: Erp_Chat_Insert_Input;
+  on_conflict?: InputMaybe<Erp_Chat_On_Conflict>;
 };
 
 
@@ -5539,6 +6055,50 @@ export type Mutation_RootUpdate_Erp_AccessLevels_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_Erp_AccessLevels_ManyArgs = {
   updates: Array<Erp_AccessLevels_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Erp_ChatArgs = {
+  _inc?: InputMaybe<Erp_Chat_Inc_Input>;
+  _set?: InputMaybe<Erp_Chat_Set_Input>;
+  where: Erp_Chat_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Erp_ChatMessageArgs = {
+  _inc?: InputMaybe<Erp_ChatMessage_Inc_Input>;
+  _set?: InputMaybe<Erp_ChatMessage_Set_Input>;
+  where: Erp_ChatMessage_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Erp_ChatMessage_By_PkArgs = {
+  _inc?: InputMaybe<Erp_ChatMessage_Inc_Input>;
+  _set?: InputMaybe<Erp_ChatMessage_Set_Input>;
+  pk_columns: Erp_ChatMessage_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Erp_ChatMessage_ManyArgs = {
+  updates: Array<Erp_ChatMessage_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Erp_Chat_By_PkArgs = {
+  _inc?: InputMaybe<Erp_Chat_Inc_Input>;
+  _set?: InputMaybe<Erp_Chat_Set_Input>;
+  pk_columns: Erp_Chat_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Erp_Chat_ManyArgs = {
+  updates: Array<Erp_Chat_Updates>;
 };
 
 
@@ -5794,6 +6354,18 @@ export type Query_Root = {
   erp_AccessLevels_aggregate: Erp_AccessLevels_Aggregate;
   /** fetch data from the table: "erp.AccessLevels" using primary key columns */
   erp_AccessLevels_by_pk?: Maybe<Erp_AccessLevels>;
+  /** fetch data from the table: "erp.Chat" */
+  erp_Chat: Array<Erp_Chat>;
+  /** fetch data from the table: "erp.ChatMessage" */
+  erp_ChatMessage: Array<Erp_ChatMessage>;
+  /** fetch aggregated fields from the table: "erp.ChatMessage" */
+  erp_ChatMessage_aggregate: Erp_ChatMessage_Aggregate;
+  /** fetch data from the table: "erp.ChatMessage" using primary key columns */
+  erp_ChatMessage_by_pk?: Maybe<Erp_ChatMessage>;
+  /** fetch aggregated fields from the table: "erp.Chat" */
+  erp_Chat_aggregate: Erp_Chat_Aggregate;
+  /** fetch data from the table: "erp.Chat" using primary key columns */
+  erp_Chat_by_pk?: Maybe<Erp_Chat>;
   /** fetch data from the table: "erp.Comments" */
   erp_Comments: Array<Erp_Comments>;
   /** fetch aggregated fields from the table: "erp.Comments" */
@@ -5941,6 +6513,52 @@ export type Query_RootErp_AccessLevels_AggregateArgs = {
 
 export type Query_RootErp_AccessLevels_By_PkArgs = {
   AccessLevelID: Scalars['Int'];
+};
+
+
+export type Query_RootErp_ChatArgs = {
+  distinct_on?: InputMaybe<Array<Erp_Chat_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Erp_Chat_Order_By>>;
+  where?: InputMaybe<Erp_Chat_Bool_Exp>;
+};
+
+
+export type Query_RootErp_ChatMessageArgs = {
+  distinct_on?: InputMaybe<Array<Erp_ChatMessage_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Erp_ChatMessage_Order_By>>;
+  where?: InputMaybe<Erp_ChatMessage_Bool_Exp>;
+};
+
+
+export type Query_RootErp_ChatMessage_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Erp_ChatMessage_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Erp_ChatMessage_Order_By>>;
+  where?: InputMaybe<Erp_ChatMessage_Bool_Exp>;
+};
+
+
+export type Query_RootErp_ChatMessage_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootErp_Chat_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Erp_Chat_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Erp_Chat_Order_By>>;
+  where?: InputMaybe<Erp_Chat_Bool_Exp>;
+};
+
+
+export type Query_RootErp_Chat_By_PkArgs = {
+  id: Scalars['Int'];
 };
 
 
@@ -6184,6 +6802,22 @@ export type Subscription_Root = {
   erp_AccessLevels_by_pk?: Maybe<Erp_AccessLevels>;
   /** fetch data from the table in a streaming manner: "erp.AccessLevels" */
   erp_AccessLevels_stream: Array<Erp_AccessLevels>;
+  /** fetch data from the table: "erp.Chat" */
+  erp_Chat: Array<Erp_Chat>;
+  /** fetch data from the table: "erp.ChatMessage" */
+  erp_ChatMessage: Array<Erp_ChatMessage>;
+  /** fetch aggregated fields from the table: "erp.ChatMessage" */
+  erp_ChatMessage_aggregate: Erp_ChatMessage_Aggregate;
+  /** fetch data from the table: "erp.ChatMessage" using primary key columns */
+  erp_ChatMessage_by_pk?: Maybe<Erp_ChatMessage>;
+  /** fetch data from the table in a streaming manner: "erp.ChatMessage" */
+  erp_ChatMessage_stream: Array<Erp_ChatMessage>;
+  /** fetch aggregated fields from the table: "erp.Chat" */
+  erp_Chat_aggregate: Erp_Chat_Aggregate;
+  /** fetch data from the table: "erp.Chat" using primary key columns */
+  erp_Chat_by_pk?: Maybe<Erp_Chat>;
+  /** fetch data from the table in a streaming manner: "erp.Chat" */
+  erp_Chat_stream: Array<Erp_Chat>;
   /** fetch data from the table: "erp.Comments" */
   erp_Comments: Array<Erp_Comments>;
   /** fetch aggregated fields from the table: "erp.Comments" */
@@ -6377,6 +7011,66 @@ export type Subscription_RootErp_AccessLevels_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<Erp_AccessLevels_Stream_Cursor_Input>>;
   where?: InputMaybe<Erp_AccessLevels_Bool_Exp>;
+};
+
+
+export type Subscription_RootErp_ChatArgs = {
+  distinct_on?: InputMaybe<Array<Erp_Chat_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Erp_Chat_Order_By>>;
+  where?: InputMaybe<Erp_Chat_Bool_Exp>;
+};
+
+
+export type Subscription_RootErp_ChatMessageArgs = {
+  distinct_on?: InputMaybe<Array<Erp_ChatMessage_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Erp_ChatMessage_Order_By>>;
+  where?: InputMaybe<Erp_ChatMessage_Bool_Exp>;
+};
+
+
+export type Subscription_RootErp_ChatMessage_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Erp_ChatMessage_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Erp_ChatMessage_Order_By>>;
+  where?: InputMaybe<Erp_ChatMessage_Bool_Exp>;
+};
+
+
+export type Subscription_RootErp_ChatMessage_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootErp_ChatMessage_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Erp_ChatMessage_Stream_Cursor_Input>>;
+  where?: InputMaybe<Erp_ChatMessage_Bool_Exp>;
+};
+
+
+export type Subscription_RootErp_Chat_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Erp_Chat_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Erp_Chat_Order_By>>;
+  where?: InputMaybe<Erp_Chat_Bool_Exp>;
+};
+
+
+export type Subscription_RootErp_Chat_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootErp_Chat_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Erp_Chat_Stream_Cursor_Input>>;
+  where?: InputMaybe<Erp_Chat_Bool_Exp>;
 };
 
 
@@ -6691,12 +7385,12 @@ export type UpdateTimeDeductionMutationVariables = Exact<{
 
 export type UpdateTimeDeductionMutation = { __typename?: 'mutation_root', update_attendance_config_by_pk?: { __typename?: 'attendance_config', TimeDeduction: any, ID: number } | null };
 
-export type CommentsSubscriptionVariables = Exact<{
+export type CommentsQueryVariables = Exact<{
   OrderID: Scalars['Int'];
 }>;
 
 
-export type CommentsSubscription = { __typename?: 'subscription_root', erp_Comments: Array<{ __typename?: 'erp_Comments', CommentID: number, Text: string, Timestamp: any, User: { __typename?: 'erp_Users', UserID: number, FirstName: string, LastName: string } }> };
+export type CommentsQuery = { __typename?: 'query_root', erp_Comments: Array<{ __typename?: 'erp_Comments', CommentID: number, Text: string, Timestamp: any, User: { __typename?: 'erp_Users', UserID: number, FirstName: string, LastName: string } }> };
 
 export type InsertCommentMutationVariables = Exact<{
   OrderID: Scalars['Int'];
@@ -7040,7 +7734,7 @@ export type UpdateTimeDeductionMutationHookResult = ReturnType<typeof useUpdateT
 export type UpdateTimeDeductionMutationResult = Apollo.MutationResult<UpdateTimeDeductionMutation>;
 export type UpdateTimeDeductionMutationOptions = Apollo.BaseMutationOptions<UpdateTimeDeductionMutation, UpdateTimeDeductionMutationVariables>;
 export const CommentsDocument = gql`
-    subscription Comments($OrderID: Int!) {
+    query Comments($OrderID: Int!) {
   erp_Comments(where: {OrderID: {_eq: $OrderID}}, order_by: {CommentID: asc}) {
     CommentID
     Text
@@ -7055,27 +7749,32 @@ export const CommentsDocument = gql`
     `;
 
 /**
- * __useCommentsSubscription__
+ * __useCommentsQuery__
  *
- * To run a query within a React component, call `useCommentsSubscription` and pass it any options that fit your needs.
- * When your component renders, `useCommentsSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useCommentsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCommentsQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
- * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useCommentsSubscription({
+ * const { data, loading, error } = useCommentsQuery({
  *   variables: {
  *      OrderID: // value for 'OrderID'
  *   },
  * });
  */
-export function useCommentsSubscription(baseOptions: Apollo.SubscriptionHookOptions<CommentsSubscription, CommentsSubscriptionVariables>) {
+export function useCommentsQuery(baseOptions: Apollo.QueryHookOptions<CommentsQuery, CommentsQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useSubscription<CommentsSubscription, CommentsSubscriptionVariables>(CommentsDocument, options);
+        return Apollo.useQuery<CommentsQuery, CommentsQueryVariables>(CommentsDocument, options);
       }
-export type CommentsSubscriptionHookResult = ReturnType<typeof useCommentsSubscription>;
-export type CommentsSubscriptionResult = Apollo.SubscriptionResult<CommentsSubscription>;
+export function useCommentsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CommentsQuery, CommentsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CommentsQuery, CommentsQueryVariables>(CommentsDocument, options);
+        }
+export type CommentsQueryHookResult = ReturnType<typeof useCommentsQuery>;
+export type CommentsLazyQueryHookResult = ReturnType<typeof useCommentsLazyQuery>;
+export type CommentsQueryResult = Apollo.QueryResult<CommentsQuery, CommentsQueryVariables>;
 export const InsertCommentDocument = gql`
     mutation InsertComment($OrderID: Int!, $Text: String!, $UserID: Int!) {
   insert_erp_Comments_one(

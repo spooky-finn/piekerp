@@ -1,10 +1,11 @@
 import { makeAutoObservable, toJS } from 'mobx'
 import { ChatCommand, ChatMessage, ChatUser } from 'src/features/chat/chatEntity'
 
-import PersonAddAltRoundedIcon from '@mui/icons-material/PersonAddAltRounded'
 import ChecklistRoundedIcon from '@mui/icons-material/ChecklistRounded'
+import PersonAddAltRoundedIcon from '@mui/icons-material/PersonAddAltRounded'
+import RootStore from 'src/store/rootStore'
 import placeCaretAtEnd from 'src/utils/placeCaretAtEnd'
-import { AppUser } from 'src/store/rootStore'
+import { CommentsDocument, CommentsQuery, CommentsQueryVariables } from 'src/types/graphql-shema'
 
 export type MessageOperations = {
   insertMessage: (message: string) => Promise<void>
@@ -22,8 +23,17 @@ export class ChatState {
   public commandMenuOpen = false
   public users: ChatUser[] = []
 
-  public topLevelCommands = (): ChatCommand[] => {
-    const users = this.users
+  constructor(private readonly rootStore: RootStore) {
+    makeAutoObservable(this)
+  }
+
+  public ginit() {
+    this.commands = this.topLevelCommands()
+  }
+
+  public topLevelCommands(): ChatCommand[] {
+    const users = this.rootStore.session!.users
+    const me = this.rootStore.app.me!
     return [
       {
         name: 'Чеклист',
@@ -37,29 +47,39 @@ export class ChatState {
         name: 'Упомянуть',
         onClick: (command: ChatCommand) => {
           this.setCommands(command.subCommands || [])
-          console.log(toJS(command))
         },
         icon: PersonAddAltRoundedIcon,
-        subCommands: users.map(each => ({
-          name: each.name,
-          onClick: () => {
-            this.forceInputUpdate(`@${each.name} `)
-            this.commandMenuOpen = false
-          }
-        }))
+        subCommands: users
+          .filter(each => each.UserID !== me.UserID)
+          .map(each => ({
+            name: `${each.FirstName} ${each.LastName}`,
+            onClick: () => {
+              this.forceInputUpdate(`@${each.FirstName} ${each.LastName}`)
+              this.commandMenuOpen = false
+            }
+          }))
       }
     ]
   }
 
-  constructor(appUsers: AppUser[]) {
-    makeAutoObservable(this)
-    this.users = appUsers.map(
-      each => new ChatUser(each.UserID, each.FirstName + ' ' + each.LastName)
-    )
-    this.commands = this.topLevelCommands()
-  }
+  public async open(chatId: number, messageOperations: MessageOperations) {
+    const data = await this.rootStore.apolloClient.query<CommentsQuery, CommentsQueryVariables>({
+      query: CommentsDocument,
+      variables: {
+        OrderID: chatId
+      }
+    })
 
-  public init(messageOperations: MessageOperations) {
+    const messages = data.data.erp_Comments.map((comment): ChatMessage => {
+      const senser = new ChatUser(
+        comment.User.UserID,
+        comment.User.FirstName + ' ' + comment.User.LastName
+      )
+      return new ChatMessage(comment.CommentID, comment.Text, senser, comment.Timestamp)
+    })
+
+    this.addMessages(messages)
+
     this.messageOperations = messageOperations
   }
 
@@ -119,6 +139,7 @@ export class ChatState {
 
     this.setCommandMunuOpen(false)
     await this.messageOperations?.insertMessage(this.inputRef.innerHTML)
+    // this.addMessages(new ChatMessage(0, this.inputRef.innerHTML))
     this.inputRef.innerText = ''
   }
 
@@ -128,21 +149,6 @@ export class ChatState {
 
   public handleDeleteMessage(message: ChatMessage) {
     this.messageOperations?.deleteMessage(message)
+    this.messages = this.messages.filter(each => each.id !== message.id)
   }
-
-  // public async openChat(chatId: number) {
-  //   const df = apolloClient.subscribe<CommentsSubscription, CommentsSubscriptionVariables>({
-  //     query: CommentsDocument,
-  //     variables: {
-  //       OrderID: chatId
-  //     }
-  //   })
-
-  // data.subscribe(({ data }) => {
-  //   this.messages = data?.data?.erp_Comments.map(each => {
-  //     const sender = new Sender(each.User.UserID, each.User.FirstName + ' ' + each.User.LastName)
-
-  //     return new ChatMessage(each.CommentID, each.Text, sender, each.Timestamp)
-  //   })
-  // })
 }

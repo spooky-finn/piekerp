@@ -1,5 +1,5 @@
 import Avatar from '@mui/material/Avatar'
-import { useAppContext } from 'src/hooks'
+import { useRootStore } from 'src/store/storeProvider'
 import { AppColorMode } from 'src/types/global'
 
 function stringToHslColor(str: string, s: number, l: number) {
@@ -30,11 +30,11 @@ function stringAvatar(name: string, colorMode: AppColorMode) {
 }
 
 export default function MyAvatar({ name }: { name: string }) {
-  const { store } = useAppContext()
+  const app = useRootStore().app
 
-  if (!store.colorMode) {
+  if (!app.colorMode) {
     throw new Error('store.colorMode is undefined')
   }
 
-  return <Avatar {...stringAvatar(name, store.colorMode)} />
+  return <Avatar {...stringAvatar(name, app.colorMode)} />
 }

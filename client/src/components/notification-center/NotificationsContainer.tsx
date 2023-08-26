@@ -2,20 +2,21 @@ import { UilBell } from '@iconscout/react-unicons'
 import { Drawer, Typography } from '@mui/material'
 import Badge from '@mui/material/Badge'
 import Box from '@mui/material/Box'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { TNotification } from 'src/types/global'
 import { useGetNotificationsSubscription } from 'src/types/graphql-shema'
-import { Context } from '../..'
-
+import { useRootStore } from 'src/store/storeProvider'
 import Notification from './Notification'
 
 export default function NotificationsContainer() {
-  const { store }: any = useContext(Context)
+  const app = useRootStore().app
   const [notifications, setNotifications] = useState<{
     unviewed: TNotification[]
     viewed: TNotification[]
   }>({ unviewed: [], viewed: [] })
   const [state, setState] = useState(false)
+
+  if (!app.me) throw Error('user is undefined')
 
   const { data, loading } = useGetNotificationsSubscription({
     onData(options) {
@@ -29,7 +30,7 @@ export default function NotificationsContainer() {
       })
     },
     variables: {
-      _eq: store.user.UserID,
+      _eq: app.me.UserID,
       limit: 100
     }
   })

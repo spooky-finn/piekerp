@@ -5,25 +5,21 @@ import { useLocation, useParams } from 'react-router-dom'
 import ReactTooltip from 'react-tooltip'
 
 import { Box, Stack } from '@mui/system'
-import { apolloClient } from 'src/api'
+
 import Chat from 'src/features/chat/chat'
-import { ChatMessage, ChatUser } from 'src/features/chat/chatEntity'
-import { useAppContext } from 'src/hooks'
+import { ChatMessage } from 'src/features/chat/chatEntity'
 import { useOrderDetailStore } from 'src/hooks/useOrderDetailStore'
 import { useRootStore } from 'src/store/storeProvider'
 import {
   DeleteCommentDocument,
   DeleteCommentMutation,
   DeleteCommentMutationVariables,
-  GetAllUsersDocument,
-  GetAllUsersQuery,
   InsertCommentDocument,
   InsertCommentMutation,
   InsertCommentMutationVariables,
   UpdateCommentDocument,
   UpdateCommentMutation,
   UpdateCommentMutationVariables,
-  useCommentsSubscription,
   useGetManagersQuery,
   useGetOrderByPkQuery
 } from 'src/types/graphql-shema'
@@ -38,14 +34,15 @@ import './sass/index.sass'
 import { isFileOnDropzone } from './utils.dropzone'
 
 export default function OrderDetail() {
-  const { store } = useAppContext()
+  const app = useRootStore().app
   // files that now in uploading
   const [onUploadFiles, setOnUploadFiles] = useState<File[]>([])
+  const apolloClient = useRootStore().apolloClient
 
   const defaultEditMode = new URLSearchParams(useLocation().search).get('edit') ? true : false
   const queryParams = useParams<{ id: string }>()
   const orderId = parseInt(queryParams.id || '')
-  const chatState = useRootStore().chat
+  const chatState = useRootStore().chat!
   if (!orderId) throw Error('Null OrderId at the local store')
 
   const { editMode, initialize } = useOrderDetailStore()
@@ -95,8 +92,8 @@ export default function OrderDetail() {
     //   query: GetAllUsersDocument
     // })
 
-    chatState.init({
-      deleteMessage: async message => {
+    chatState?.open(orderId, {
+      deleteMessage: async (message: ChatMessage) => {
         apolloClient.mutate<DeleteCommentMutation, DeleteCommentMutationVariables>({
           mutation: DeleteCommentDocument,
           variables: {
@@ -110,7 +107,7 @@ export default function OrderDetail() {
           }
         })
       },
-      updateMessage: async message => {
+      updateMessage: async (message: ChatMessage) => {
         apolloClient.mutate<UpdateCommentMutation, UpdateCommentMutationVariables>({
           mutation: UpdateCommentDocument,
           variables: {
@@ -119,21 +116,22 @@ export default function OrderDetail() {
           }
         })
       },
-      insertMessage: async message => {
+      insertMessage: async (message: string) => {
         apolloClient.mutate<InsertCommentMutation, InsertCommentMutationVariables>({
           mutation: InsertCommentDocument,
           variables: {
             OrderID: orderId,
             Text: message,
-            UserID: store.user?.UserID ?? 0
+            UserID: app.me?.UserID ?? 0
           },
+
           optimisticResponse: {
             insert_erp_Comments_one: {
               __typename: 'erp_Comments',
               CommentID: 0,
               Text: message,
               Timestamp: new Date().toISOString(),
-              UserID: store.user?.UserID ?? 0,
+              UserID: app.me?.UserID ?? 0,
               OrderID: orderId
             }
           }
@@ -142,26 +140,30 @@ export default function OrderDetail() {
     })
   }, [])
 
-  useCommentsSubscription({
-    variables: { OrderID: orderId },
-    onData(options) {
-      const data = options.data.data?.erp_Comments
+  // const res = useCommentsSubscription({
+  //   variables: { OrderID: orderId },
+  //   fetchPolicy: 'cache-first'
+  //   // onData(options) {
+  //   //   const data = options.data.data?.erp_Comments
 
-      if (!data) return
+  //   //   if (!data) return
 
-      const messages = data.map((comment): ChatMessage => {
-        const senser = new ChatUser(
-          comment.User.UserID,
-          comment.User.FirstName + ' ' + comment.User.LastName
-        )
-        return new ChatMessage(comment.CommentID, comment.Text, senser, comment.Timestamp)
-      })
+  // const messages = data.map((comment): ChatMessage => {
+  //   const senser = new ChatUser(
+  //     comment.User.UserID,
+  //     comment.User.FirstName + ' ' + comment.User.LastName
+  //   )
+  //   return new ChatMessage(comment.CommentID, comment.Text, senser, comment.Timestamp)
+  // })
 
-      chatState.addMessages(messages)
-    }
-  })
+  //   chatState.addMessages(messages)
+  // }
+  // })
 
-  if (!data?.erp_Orders || !store.user?.UserID) return null
+  // chatState.addMessages()
+  // console.log('ff', res.data?.erp_Comments)
+
+  if (!data?.erp_Orders || !app.me?.UserID) return null
 
   return (
     <>

@@ -4,7 +4,7 @@ import React from 'react'
 import { useRootStore } from 'src/store/storeProvider'
 
 function ChatMessageInput() {
-  const state = useRootStore().chat
+  const state = useRootStore().chat!
 
   function handleEnterPress(e: React.KeyboardEvent<HTMLDivElement>) {
     if (e.key === 'Enter' && !e.shiftKey) {

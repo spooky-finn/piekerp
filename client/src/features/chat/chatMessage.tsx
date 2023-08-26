@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { Box, Stack, css } from '@mui/material'
-import MyAvatar from 'src/components/Avatar'
-import { ChatMessage, ChatMessageGroup } from './chatEntity'
 import { observer } from 'mobx-react-lite'
-import { useAppContext } from 'src/hooks'
+import MyAvatar from 'src/components/Avatar'
+import { useRootStore } from 'src/store/storeProvider'
+import { ChatMessage, ChatMessageGroup } from './chatEntity'
 import ChatMyMessageActions from './chatMyMessageActions'
 
 export interface IChatMessageProps {
@@ -26,7 +26,7 @@ function MesageMetainfo(props: { message: ChatMessage }) {
 }
 
 function MessageContent(props: { message: ChatMessage }) {
-  const rootStore = useAppContext()
+  const app = useRootStore().app
 
   return (
     <Box
@@ -59,7 +59,7 @@ function MessageContent(props: { message: ChatMessage }) {
           }
         })}
       />
-      {props.message.isMine(rootStore.store.user?.UserID ?? 0) && (
+      {props.message.isMine(app.me?.UserID ?? 0) && (
         <ChatMyMessageActions message={props.message} />
       )}
     </Box>

@@ -1,11 +1,11 @@
 import { MockedProvider } from '@apollo/client/testing'
-import { fireEvent, render, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { GetOrderPaymentsDocument, InsertPaymentDocument } from 'src/types/graphql-shema'
 import PaymnetHistory, { NO_TOTAL_AMOUNT_MESSAGE } from './Payments'
 
-jest.mock('src/hooks/useAppContext', () => ({
-  useAppContext: () => ({
-    store: {
+jest.mock('src/hooks/useRootStore', () => ({
+  useRootStore: () => ({
+    app: {
       user: {
         AccessLevelID: 1
       }

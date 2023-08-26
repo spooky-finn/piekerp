@@ -4,7 +4,7 @@ import { Box, Button, Stack, TextField, Typography } from '@mui/material'
 import Popover from '@mui/material/Popover'
 import moment from 'moment'
 import * as React from 'react'
-import { useAppContext } from 'src/hooks/useAppContext'
+import { useRootStore } from 'src/store/storeProvider'
 import { TOrder, UserStatus } from 'src/types/global'
 import {
   useDeletePaymentMutation,
@@ -12,9 +12,9 @@ import {
   useInsertPaymentMutation
 } from 'src/types/graphql-shema'
 import { formatOnlyDate } from 'src/utils/date'
+import * as formatter from 'src/utils/formatting'
 import { OrderInfoCard } from '.'
 import { DateFormatCustom, MoneyFormatCustom } from './CutomFormattedInputs'
-import * as formatter from 'src/utils/formatting'
 
 type Order = Pick<TOrder, 'TotalAmount' | 'OrderID'>
 
@@ -26,9 +26,8 @@ export const NO_TOTAL_AMOUNT_MESSAGE = 'Не задана сумма заказ�
 
 export default function PaymnetHistory({ data }: IPaymnetHistoryProps) {
   const [deletePayment] = useDeletePaymentMutation()
-  // const  = useGetOrderPaymentsLazyQuery({ variables: { _eq: data.OrderID } })
   const { data: payments, refetch } = useGetOrderPaymentsQuery({ variables: { _eq: data.OrderID } })
-  const { store }: any = useAppContext()
+  const app = useRootStore().app
 
   async function handleDelete(ID: number) {
     await deletePayment({
@@ -40,11 +39,13 @@ export default function PaymnetHistory({ data }: IPaymnetHistoryProps) {
     refetch()
   }
 
+  if (!app.me) throw Error('user is not exist in app')
+
   const isHaveFullRight = [
     UserStatus.general,
     UserStatus.management,
     UserStatus.bookkeeping
-  ].includes(store?.user?.AccessLevelID)
+  ].includes(app.me.AccessLevelID)
 
   return (
     <OrderInfoCard heading="История оплаты">

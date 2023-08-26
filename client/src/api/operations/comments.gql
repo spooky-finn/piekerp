@@ -1,5 +1,5 @@
 # COMMENTS
-subscription Comments($OrderID: Int!) {
+query Comments($OrderID: Int!) {
   erp_Comments(where: { OrderID: { _eq: $OrderID } }, order_by: { CommentID: asc }) {
     CommentID
     Text

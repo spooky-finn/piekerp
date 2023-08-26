@@ -9,7 +9,7 @@ import {
 } from '@iconscout/react-unicons'
 import { Box, Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
-import { useAppContext } from 'src/hooks'
+
 import { useOrderDetailStore } from 'src/hooks/useOrderDetailStore'
 import { OrderStatus, TOrder, UserStatus } from 'src/types/global'
 import {
@@ -22,6 +22,7 @@ import { notif } from 'src/utils/notification'
 import DeleteOrderDialog from '../dialogs/DeleteOrderDialog'
 import TransferOrderDialog from '../dialogs/TransferOrderDialog'
 import StatusButtons from './OrderStatusIndicator'
+import { useRootStore } from 'src/store/storeProvider'
 
 export type ActionButton = {
   tip: string
@@ -65,16 +66,19 @@ function actionButtonsRender(arrayOfBtns: ActionButton[]) {
 }
 
 export default function OrderActions({ order }: { order: TOrder }) {
-  // const orderId = order.OrderID
-  const { store }: any = useAppContext()
+  const app = useRootStore().app
   const { orderId, editMode, setEditMode, setAddOrderItemDialog, setEditedOrderItem } =
     useOrderDetailStore()
+
+  if (!app.me) {
+    throw new Error('app.user is null')
+  }
 
   const isHaveFullRight = [
     UserStatus.general,
     UserStatus.management,
     UserStatus.bookkeeping
-  ].includes(store.user.AccessLevelID)
+  ].includes(app.me.AccessLevelID)
 
   const [mutationMoveOrderToArchive] = useMoveOrderToArchiveMutation()
   const [mutationMoveOrderToPriority] = useMoveOrderToPriorityMutation()

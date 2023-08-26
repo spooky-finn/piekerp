@@ -6,20 +6,20 @@ import Button from '@mui/material/Button'
 import { Box } from '@mui/system'
 import { ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAppContext } from 'src/hooks'
+
 import { AppColorTheme } from 'src/types/global'
 import { SystemPreferTheme } from '../../utils/systemPreferTheme'
+import { useRootStore } from 'src/store/storeProvider'
 
 export default function Settings() {
-  const { store } = useAppContext()
-  if (!store.UItheme?.state || !store.UItheme?.dispatch)
-    throw Error('theme dispatch dont exist in store')
+  const app = useRootStore().app
+  if (!app.UItheme?.state || !app.UItheme?.dispatch) throw Error('theme dispatch dont exist in app')
 
-  const { changeTheme } = SystemPreferTheme(store.UItheme.state, store.UItheme?.dispatch)
+  const { changeTheme } = SystemPreferTheme(app.UItheme.state, app.UItheme?.dispatch)
   const navigate = useNavigate()
 
   async function handleLogout() {
-    await store.logout()
+    await app.logout()
     navigate('/login')
   }
 
@@ -70,10 +70,10 @@ export default function Settings() {
     <div css={styles}>
       <GridCard title="Аккаунт">
         <div>
-          {store.user?.FirstName} {store.user?.LastName}
+          {app.me?.FirstName} {app.me?.LastName}
         </div>
-        <div> Уровень доступа: {(store.user as any).AccessLevelID}</div>
-        <div> Email: {(store.user as any).Email}</div>
+        <div> Уровень доступа: {(app.me as any).AccessLevelID}</div>
+        <div> Email: {(app.me as any).Email}</div>
         <Button variant="contained" onClick={handleLogout} sx={{ mt: '10px' }}>
           Выйти
         </Button>
@@ -85,7 +85,7 @@ export default function Settings() {
           <FormControl fullWidth>
             <InputLabel>Тема</InputLabel>
             <Select
-              defaultValue={store.UItheme?.state}
+              defaultValue={app.UItheme?.state}
               onChange={e => changeTheme(e.target.value as AppColorTheme)}
             >
               {themeVariants.map(each => (
