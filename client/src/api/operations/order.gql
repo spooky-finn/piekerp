@@ -13,7 +13,7 @@ query getOrdersArchivedBySearchKeyword($keyword: String!, $OrderStatus: Int!) {
     where: {
       _or: [
         { Entity: { _ilike: $keyword } }
-        { InvoiceNumber: { _ilike: $keyword, _is_null: true } }
+        { InvoiceNumber: { _ilike: $keyword, _is_null: false } }
         # { OrderItems: {_and: [{SerialStarts: {_lte: $keyword}}, {SerialEnds: {_gte: $keyword }}] } },
       ]
       # ManagerID: { _eq: $ManagerID }

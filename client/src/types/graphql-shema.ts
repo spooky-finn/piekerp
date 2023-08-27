@@ -8570,7 +8570,7 @@ export const GetOrdersArchivedBySearchKeywordDocument = gql`
     query getOrdersArchivedBySearchKeyword($keyword: String!, $OrderStatus: Int!) {
   erp_Orders(
     order_by: {ActualShippingDate: desc_nulls_last}
-    where: {_or: [{Entity: {_ilike: $keyword}}, {InvoiceNumber: {_ilike: $keyword, _is_null: true}}], OrderStatusID: {_eq: $OrderStatus}}
+    where: {_or: [{Entity: {_ilike: $keyword}}, {InvoiceNumber: {_ilike: $keyword, _is_null: false}}], OrderStatusID: {_eq: $OrderStatus}}
   ) {
     ...Order
   }
